@@ -1,0 +1,37 @@
+Rank,Raidboss,raid_move1,raid_move2,defender_name,defender_move1,defender_move2,estimator,effective_deaths,effective_combat_time
+20,Ampharos Mega,Volt switch,Zap cannon,Kyurem,Dragon Breath,Blizzard,2.6710541,27.188244787705386,759933
+22,Ampharos Mega,Charge beam,Zap cannon,Kyurem,Dragon Breath,Draco Meteor,2.6469848,26.78607869604322,753086
+20,Salamence Mega,Bite,Fire blast,Kyurem,Dragon Breath,Blizzard,2.7724717,32.00409319111853,777034
+25,Salamence Mega,Dragon tail,Fire blast,Kyurem,Dragon Breath,Blizzard,2.8505828,40.93860466265147,770331
+19,Salamence Mega,Fire fang,Fire blast,Kyurem,Dragon Breath,Blizzard,2.6796236,31.155406173453585,752129
+9,Salamence Mega,Fire fang,Hydro pump,Kyurem,Dragon Breath,Blizzard,2.3818505,24.859020097501663,677848
+19,Salamence Mega,Dragon tail,Hydro pump,Kyurem,Dragon Breath,Blizzard,2.6568203,33.999166177397086,718595
+15,Salamence Mega,Bite,Hydro pump,Kyurem,Dragon Breath,Blizzard,2.4502807,23.819652935803912,696834
+26,Salamence Mega,Random,Random,Kyurem,Dragon Breath,Blizzard,2.9308627,40.47397866512299,799684
+16,Rayquaza Mega,Dragon tail,Ancient power,Kyurem,Dragon Breath,Blizzard,2.298047,41.89682445472169,602990
+17,Rayquaza Mega,Air slash,Ancient power,Kyurem,Dragon Breath,Blizzard,2.2855499,37.372512026651556,613543
+25,Rayquaza Mega,Air slash,Aerial ace,Kyurem,Dragon Breath,Blizzard,2.33022,31.873140895578008,629799
+21,Rayquaza Mega,Dragon tail,Aerial ace,Kyurem,Dragon Breath,Blizzard,2.304707,37.9492530064982,622586
+29,Charizard Mega X,Air slash,Dragon claw,Kyurem,Dragon Breath,Dragon Claw,2.8857546,41.32108021115811,780121
+30,Charizard Mega X,Fire spin,Dragon claw,Kyurem,Dragon Breath,Dragon Claw,2.8690195,43.30348271500839,774417
+28,Charizard Mega X,Fire spin,Overheat,Kyurem,Dragon Breath,Dragon Claw,2.9239113,42.716707606354355,790278
+27,Charizard Mega X,Fire spin,Fire blast,Kyurem,Dragon Breath,Dragon Claw,2.8395705,34.80617594345807,779679
+28,Charizard Mega X,Air slash,Overheat,Kyurem,Dragon Breath,Dragon Claw,2.9001422,37.945096483050264,783969
+23,Charizard Mega X,Air slash,Fire blast,Kyurem,Dragon Breath,Dragon Claw,2.8051543,32.88637869031069,784103
+27,Charizard Mega X,Random,Random,Kyurem,Dragon Breath,Dragon Claw,2.8394196,35.526012353242336,781178
+19,Garchomp Mega,Mud shot,Fire blast,Kyurem,Dragon Breath,Blizzard,2.4575875,29.022647743463466,685263
+18,Garchomp Mega,Mud shot,Earthquake,Kyurem,Dragon Breath,Blizzard,2.4801993,31.288743090766793,676463
+15,Garchomp Mega,Dragon tail,Fire blast,Kyurem,Dragon Breath,Blizzard,2.3921804,39.06459506136921,646785
+29,Garchomp Mega,Dragon tail,Earthquake,Kyurem,Dragon Breath,Blizzard,2.7195873,52.158618862802534,706172
+30,Garchomp Mega,Dragon tail,Outrage,Kyurem,Dragon Breath,Blizzard,2.8980114,67.27500667226606,726712
+24,Garchomp Mega,Dragon tail,Sand tomb,Kyurem,Dragon Breath,Blizzard,2.3373165,29.71052084671301,631774
+26,Garchomp Mega,Mud shot,Sand tomb,Kyurem,Dragon Breath,Blizzard,2.2712655,25.294600321435606,640040
+22,Garchomp Mega,Random,Random,Kyurem,Dragon Breath,Blizzard,2.5274918,39.92258639184996,676093
+28,Sceptile Mega,Bullet seed,Earthquake,Kyurem,Dragon Breath,Blizzard,2.0757666,24.56563059522541,578107
+16,Sceptile Mega,Fury cutter,Leaf blade,Kyurem,Dragon Breath,Blizzard,1.8473239,17.012861903872114,525583
+17,Sceptile Mega,Bullet seed,Leaf blade,Kyurem,Dragon Breath,Blizzard,1.8318992,16.464267270836334,521193
+21,Sceptile Mega,Fury cutter,Aerial ace,Kyurem,Dragon Breath,Blizzard,1.8704822,18.989901175305082,531899
+22,Sceptile Mega,Fury cutter,Dragon claw,Kyurem,Dragon Breath,Blizzard,1.9565673,29.239723254365853,527847
+23,Sceptile Mega,Bullet seed,Dragon claw,Kyurem,Dragon Breath,Blizzard,1.9486489,27.522344469474092,527132
+21,Sceptile Mega,Bullet seed,Aerial ace,Kyurem,Dragon Breath,Blizzard,1.8758616,17.813900951609376,533400
+24,Sceptile Mega,Random,Random,Kyurem,Dragon Breath,Blizzard,1.9340626,21.073046967540552,541525

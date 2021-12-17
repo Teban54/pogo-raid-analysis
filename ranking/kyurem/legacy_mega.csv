@@ -1,0 +1,10 @@
+Rank,Raidboss,raid_move1,raid_move2,defender_name,defender_move1,defender_move2,estimator,effective_deaths,effective_combat_time
+20,Ampharos Mega,Volt switch,Zap cannon,Kyurem,Dragon Breath,Blizzard,2.6710541,27.188244787705386,759933
+22,Ampharos Mega,Charge beam,Zap cannon,Kyurem,Dragon Breath,Draco Meteor,2.6469848,26.78607869604322,753086
+29,Charizard Mega X,Air slash,Dragon claw,Kyurem,Dragon Breath,Dragon Claw,2.8857546,41.32108021115811,780121
+30,Charizard Mega X,Fire spin,Dragon claw,Kyurem,Dragon Breath,Dragon Claw,2.8690195,43.30348271500839,774417
+28,Charizard Mega X,Fire spin,Overheat,Kyurem,Dragon Breath,Dragon Claw,2.9239113,42.716707606354355,790278
+27,Charizard Mega X,Fire spin,Fire blast,Kyurem,Dragon Breath,Dragon Claw,2.8395705,34.80617594345807,779679
+28,Charizard Mega X,Air slash,Overheat,Kyurem,Dragon Breath,Dragon Claw,2.9001422,37.945096483050264,783969
+23,Charizard Mega X,Air slash,Fire blast,Kyurem,Dragon Breath,Dragon Claw,2.8051543,32.88637869031069,784103
+27,Charizard Mega X,Random,Random,Kyurem,Dragon Breath,Dragon Claw,2.8394196,35.526012353242336,781178

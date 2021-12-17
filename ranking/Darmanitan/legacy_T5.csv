@@ -1,0 +1,115 @@
+Rank,Raidboss,raid_move1,raid_move2,defender_name,defender_move1,defender_move2,estimator,effective_deaths,effective_combat_time
+13,Landorus Therian Form,Extrasensory,Earthquake,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,1.9047579,40.43095825583403,487211
+24,Landorus Therian Form,Mud shot,Earthquake,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.0890467,45.78769240066173,531113
+3,Landorus Therian Form,Mud shot,Super power,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,1.5286865,27.83780514914295,400770
+5,Landorus Therian Form,Extrasensory,Super power,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,1.6001229,30.618422891176518,413719
+30,Landorus Therian Form,Mud shot,Stone edge,Darmanitan Galarian Standard Form,Ice Fang,Ice Punch,2.3661234,59.81250820861657,582219
+29,Landorus Therian Form,Extrasensory,Stone edge,Darmanitan Galarian Standard Form,Ice Fang,Ice Punch,2.1797478,53.58539843801142,540832
+5,Landorus Therian Form,Mud shot,Bulldoze,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,1.5030072,24.705388530317915,402261
+3,Landorus Therian Form,Extrasensory,Bulldoze,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,1.4498105,23.5005624215599,388690
+12,Landorus Therian Form,Random,Random,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,1.8715247,39.35654735692353,478393
+29,Thundurus Therian Form,Bite,Focus blast,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.9114861,61.466490244776104,746076
+12,Thundurus Therian Form,Volt switch,Focus blast,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.5164838,51.39352519517687,647755
+10,Thundurus Therian Form,Bite,Thunderbolt,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.2101471,41.24924454956262,578231
+6,Thundurus Therian Form,Volt switch,Thunder,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.030283,35.60526358233172,540083
+10,Thundurus Therian Form,Volt switch,Thunderbolt,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.1562579,39.193926011937975,567320
+6,Thundurus Therian Form,Bite,Thunder,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.023136,30.209270256773298,546636
+8,Thundurus Therian Form,Bite,Sludge wave,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.0209782,26.85482368911156,546249
+9,Thundurus Therian Form,Volt switch,Sludge wave,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.0356536,33.82216834764644,550322
+8,Thundurus Therian Form,Random,Random,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.2198472,39.64742642132447,586577
+21,Zapdos,Charge beam,Zap cannon,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.7944453,54.48664350695734,723507
+10,Zapdos,Charge beam,Thunderbolt,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.4838781,43.669438565269104,655454
+9,Zapdos,Charge beam,Ancient power,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.4135592,38.27249594224586,647992
+6,Zapdos,Charge beam,Thunder,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.2584631,30.64728887615252,611306
+6,Zapdos,Charge beam,Drill peck,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.2447393,31.100600083918636,607128
+9,Zapdos,Random,Random,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.4017296,37.65218457001442,644116
+29,Tornadus Therian Form,Gust,Focus blast,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.862195,56.45987763450251,742821
+17,Tornadus Therian Form,Astonish,Psychic,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.3736718,33.00873423345521,642427
+16,Tornadus Therian Form,Gust,Hurricane,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.3088522,38.03715723399639,624049
+28,Tornadus Therian Form,Gust,Heat wave,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.7027678,50.6498768272406,703800
+23,Tornadus Therian Form,Astonish,Heat wave,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.415024,32.60183074807218,653009
+19,Tornadus Therian Form,Astonish,Hurricane,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.3623524,30.7035773278711,644283
+18,Tornadus Therian Form,Gust,Psychic,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.3596623,38.397247081532555,635735
+25,Tornadus Therian Form,Random,Random,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.5823717,43.615283654562454,685315
+7,Thundurus,Thunder shock,Thunder,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.059265,28.98966309831837,557314
+7,Thundurus,Astonish,Thunder,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.0386624,27.20512813260396,553066
+7,Thundurus,Thunder shock,Brick break,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.0358214,30.487250237351113,549032
+7,Thundurus,Astonish,Brick break,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.0261228,28.58571410569274,548248
+5,Thundurus,Thunder shock,Crunch,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,1.9788306,24.748011582188955,542782
+8,Thundurus,Astonish,Thunder punch,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,1.9844252,25.105958879873505,543769
+8,Thundurus,Thunder shock,Thunder punch,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.0320456,25.952184507820323,553651
+5,Thundurus,Astonish,Crunch,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,1.961575,23.966345722846782,541782
+7,Thundurus,Random,Random,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.002827,25.8974871764602,550231
+30,Tornadus,Air slash,Hyper beam,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.4229705,46.19744658364149,629020
+27,Tornadus,Bite,Grass knot,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.316699,42.66396596597256,607182
+18,Tornadus,Bite,Hyper beam,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.1636407,31.561380516529166,584665
+21,Tornadus,Air slash,Grass knot,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.2262893,39.41600437172959,587724
+20,Tornadus,Air slash,Dark pulse,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.1374412,34.57104184076938,574410
+17,Tornadus,Bite,Dark pulse,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.0892646,30.366885049496815,564599
+22,Tornadus,Air slash,Hurricane,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.1606898,38.80333573689531,566766
+17,Tornadus,Bite,Hurricane,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.0788438,30.231240850101866,561658
+20,Tornadus,Random,Random,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.1503816,34.07515846997907,576309
+6,Rayquaza,Dragon tail,Outrage,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,1.5389621,29.97270537385977,396550
+3,Rayquaza,Air slash,Outrage,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,1.4008789,24.64150940685739,372493
+5,Rayquaza,Air slash,Ancient power,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,1.3961978,23.783784242270325,372801
+5,Rayquaza,Dragon tail,Ancient power,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,1.394302,23.987328742191075,371550
+3,Rayquaza,Air slash,Aerial ace,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,1.3276198,19.528360684723513,358682
+3,Rayquaza,Dragon tail,Aerial ace,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,1.3404542,21.585456386595244,361902
+5,Rayquaza,Random,Random,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,1.3850985,22.517043013815588,369909
+19,Latias,Charm,Outrage,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,3.0157297,48.304437163699625,812310
+23,Latias,Dragon breath,Outrage,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,3.0584881,48.79089394610504,822520
+21,Latias,Zen headbutt,Outrage,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,3.0346296,48.47350642211536,817363
+25,Latias,Charm,Thunder,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.9539635,38.580726628771764,801088
+28,Latias,Dragon breath,Thunder,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,3.0256858,39.86344457259272,822879
+26,Latias,Zen headbutt,Thunder,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.963739,38.112613809677576,806943
+27,Latias,Random,Random,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,3.0005279,43.91879892670925,816772
+12,Zekrom,Charge beam,Outrage,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.640638,42.217377693744886,711045
+11,Zekrom,Dragon breath,Outrage,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.6427603,43.74601192207958,709429
+28,Zekrom,Charge beam,Wild charge,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.7755005,48.935615789801886,733737
+30,Zekrom,Dragon breath,Wild charge,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.8234932,52.05886335941642,740009
+30,Zekrom,Charge beam,Flash cannon,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,3.0899305,65.30788618010104,794262
+17,Zekrom,Charge beam,Crunch,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.493595,31.39625617829766,681435
+20,Zekrom,Dragon breath,Crunch,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.507385,32.2781856395126,680157
+24,Zekrom,Random,Random,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.716807,44.709850815099045,726395
+19,Latios,Dragon breath,Dragon claw,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.5745287,38.45560687464275,694917
+24,Latios,Zen headbutt,Dragon claw,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.6313345,39.777799825513576,710197
+27,Giratina Origin Form,Dragon tail,Ominous wind,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.2792954,28.61195633056543,620547
+27,Giratina Origin Form,Shadow claw,Ominous wind,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.2452972,27.052351830207773,620550
+30,Giratina Origin Form,Random,Random,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.4239101,37.412768486802,651753
+25,Giratina,Dragon breath,Ancient power,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.6845217,34.28118730175074,728689
+27,Giratina,Shadow claw,Ancient power,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.713044,36.04322992647715,734740
+16,Giratina,Dragon breath,Dragon claw,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.5816782,29.12374590256344,728548
+15,Giratina,Shadow claw,Dragon claw,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.5616274,29.757117805817153,717954
+22,Giratina,Dragon breath,Shadow sneak,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.5570607,24.357539151709357,727228
+21,Giratina,Shadow claw,Shadow sneak,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.5619943,25.448947883562706,728859
+22,Giratina,Random,Random,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.5880148,28.154628399507292,724506
+6,Landorus,Rock throw,Focus blast,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,1.822577,37.61418232240337,468489
+14,Landorus,Mud shot,Focus blast,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.041133,43.331272590763525,522669
+3,Landorus,Mud shot,Earth power,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,1.4675943,23.843733583319334,393443
+3,Landorus,Mud shot,Outrage,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,1.4955292,23.58697920361533,402145
+3,Landorus,Rock throw,Outrage,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,1.4733292,25.034229095639883,394639
+3,Landorus,Rock throw,Earth power,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,1.4696022,25.568256207150668,391101
+5,Landorus,Rock throw,Rock slide,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,1.5914482,32.328346641288384,408684
+5,Landorus,Mud shot,Rock slide,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,1.5428003,27.83526587369886,405804
+4,Landorus,Random,Random,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,1.5826031,27.82420949828099,418608
+25,Lugia,Extrasensory,Hydro pump,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,3.7105134,45.9471599541835,1019369
+28,Lugia,Extrasensory,Futuresight,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,3.699419,47.128626323214505,1007290
+21,Lugia,Dragon tail,Hydro pump,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,3.6764524,46.15731133900724,1003394
+28,Lugia,Dragon tail,Futuresight,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,3.740341,50.17695094602053,1011522
+25,Lugia,Dragon tail,Sky attack,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,3.7431564,57.08716393117427,1011769
+26,Lugia,Extrasensory,Sky attack,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,3.7668426,54.43468257457509,1018838
+23,Lugia,Random,Random,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,3.657329,46.0713221193832,1004653
+27,Yveltal,Gust,Focus blast,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.7742386,54.36531753511078,720782
+26,Yveltal,Gust,Hyper beam,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.5970974,45.837671997836516,684789
+25,Yveltal,Sucker punch,Dark pulse,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.5087698,43.55918437055733,664372
+24,Yveltal,Snarl,Hyper beam,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.4584284,41.796142748319795,662736
+18,Yveltal,Gust,Dark pulse,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.391068,40.26397964887453,637977
+18,Yveltal,Sucker punch,Hyper beam,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.3409803,32.72968018716421,632402
+21,Yveltal,Snarl,Dark pulse,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.4457471,41.635301860916286,651008
+19,Yveltal,Sucker punch,Psychic,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.4038525,40.436535761048454,640713
+19,Yveltal,Snarl,Psychic,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.3623743,38.92321257655862,632593
+15,Yveltal,Gust,Psychic,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.2865975,37.20787260948903,616073
+28,Yveltal,Gust,Hurricane,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.579145,49.26086203219639,669747
+17,Yveltal,Snarl,Hurricane,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.3048275,37.59427019461089,623200
+17,Yveltal,Sucker punch,Hurricane,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.27188,32.3975616085581,613823
+25,Yveltal,Random,Random,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.4906912,42.01648660179068,663383

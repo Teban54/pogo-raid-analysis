@@ -1,0 +1,33 @@
+Rank,Raidboss,raid_move1,raid_move2,defender_name,defender_move1,defender_move2,estimator,effective_deaths,effective_combat_time
+26,Kyurem,Dragon breath,Blizzard,Kyurem,Dragon Breath,Dragon Claw,2.3345907,31.227019728631586,633334
+23,Kyurem,Steel wing,Blizzard,Kyurem,Dragon Breath,Dragon Claw,2.3156223,30.642857846658558,627514
+26,Reshiram,Dragon breath,Stone edge,Kyurem,Dragon Breath,Dragon Claw,2.8372679,42.09980843110034,767157
+28,Reshiram,Fire fang,Stone edge,Kyurem,Dragon Breath,Dragon Claw,2.8624332,41.163138038262986,773760
+26,Reshiram,Fire fang,Overheat,Kyurem,Dragon Breath,Dragon Claw,2.8574185,38.77626528885738,771878
+25,Reshiram,Dragon breath,Overheat,Kyurem,Dragon Breath,Dragon Claw,2.8549488,38.436046111115346,771169
+22,Reshiram,Fire fang,Crunch,Kyurem,Dragon Breath,Draco Meteor,2.6588895,27.464264828623804,756585
+25,Reshiram,Dragon breath,Crunch,Kyurem,Dragon Breath,Dragon Claw,2.7123253,29.088093282246117,771688
+26,Palkia,Dragon tail,Draco meteor,Kyurem,Dragon Breath,Dragon Claw,3.368372,65.09893854096619,876990
+16,Palkia,Dragon tail,Hydro pump,Kyurem,Dragon Breath,Dragon Claw,2.844354,35.99922137237084,770142
+16,Palkia,Dragon breath,Hydro pump,Kyurem,Dragon Breath,Dragon Claw,2.7841332,32.65059775138742,782619
+22,Palkia,Dragon tail,Fire blast,Kyurem,Dragon Breath,Dragon Claw,2.8600063,36.97536315838548,773761
+22,Palkia,Dragon breath,Fire blast,Kyurem,Dragon Breath,Dragon Claw,2.8255212,33.32155053471053,789046
+19,Palkia,Dragon breath,Aqua tail,Kyurem,Dragon Breath,Draco Meteor,2.729021,22.3067838185558,775508
+13,Palkia,Dragon tail,Aqua tail,Kyurem,Dragon Breath,Draco Meteor,2.5780118,25.99707879593736,733582
+21,Palkia,Random,Random,Kyurem,Dragon Breath,Dragon Claw,2.940753,38.75939348117397,807261
+28,Rayquaza,Dragon tail,Outrage,Kyurem,Dragon Breath,Blizzard,1.9924358,38.828576011516226,513430
+20,Rayquaza,Air slash,Outrage,Kyurem,Dragon Breath,Blizzard,1.8647763,32.750192688641484,496432
+25,Rayquaza,Air slash,Ancient power,Kyurem,Dragon Breath,Blizzard,1.9272466,26.170314552329373,521936
+22,Rayquaza,Dragon tail,Ancient power,Kyurem,Dragon Breath,Blizzard,1.8456117,29.125416923661195,498705
+16,Rayquaza,Air slash,Aerial ace,Kyurem,Dragon Breath,Blizzard,1.6541928,18.225425273292228,469089
+23,Rayquaza,Dragon tail,Aerial ace,Kyurem,Dragon Breath,Blizzard,1.8164804,22.712315232466832,493279
+20,Rayquaza,Random,Random,Kyurem,Dragon Breath,Blizzard,1.8041388,25.421136612006677,491265
+26,Zekrom,Charge beam,Outrage,Kyurem,Dragon Breath,Dragon Claw,2.853775,43.497042737523024,768836
+25,Zekrom,Dragon breath,Outrage,Kyurem,Dragon Breath,Draco Meteor,2.8801455,50.815433680566436,765765
+25,Zekrom,Charge beam,Wild charge,Kyurem,Dragon Breath,Draco Meteor,2.7135236,25.538523877234137,771543
+21,Zekrom,Dragon breath,Wild charge,Kyurem,Dragon Breath,Blizzard,2.6748142,29.75887164633456,759282
+26,Zekrom,Dragon breath,Flash cannon,Kyurem,Dragon Breath,Dragon Claw,2.8627408,38.414369158695216,774385
+27,Zekrom,Charge beam,Flash cannon,Kyurem,Dragon Breath,Dragon Claw,2.87785,35.809597306139516,790860
+29,Zekrom,Charge beam,Crunch,Kyurem,Dragon Breath,Draco Meteor,2.7218482,24.267611773061752,773838
+27,Zekrom,Dragon breath,Crunch,Kyurem,Dragon Breath,Blizzard,2.708541,29.056871235515178,770637
+25,Zekrom,Random,Random,Kyurem,Dragon Breath,Dragon Claw,2.7809448,32.27287364125048,774605

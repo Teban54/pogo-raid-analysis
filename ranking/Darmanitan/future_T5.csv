@@ -1,0 +1,38 @@
+Rank,Raidboss,raid_move1,raid_move2,defender_name,defender_move1,defender_move2,estimator,effective_deaths,effective_combat_time
+20,Arceus Flying Form,Shadow claw,Outrage,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,3.0375168,47.412756476030125,818034
+30,Arceus Flying Form,Iron tail,Hyper beam,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,3.4298186,63.89724678294073,895943
+19,Arceus Flying Form,Iron tail,Outrage,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,3.0278895,50.41280246834581,813609
+16,Arceus Flying Form,Iron tail,Futuresight,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.9330413,47.611598720089134,792899
+15,Arceus Flying Form,Shadow claw,Futuresight,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.8732755,37.453835828493496,780809
+17,Arceus Flying Form,Shadow claw,Hyper beam,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.947031,37.452486391548995,798417
+21,Arceus Flying Form,Random,Random,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,3.0425577,47.25294308648043,816774
+13,Arceus Dragon Form,Shadow claw,Outrage,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.9558475,46.61361337262102,795551
+21,Arceus Dragon Form,Iron tail,Outrage,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,3.114414,55.37775736177326,826139
+30,Arceus Dragon Form,Iron tail,Hyper beam,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,3.4569354,64.39164852019773,900707
+19,Arceus Dragon Form,Shadow claw,Futuresight,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.866564,37.00862777981072,779633
+19,Arceus Dragon Form,Iron tail,Futuresight,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.930383,47.47615775515274,791752
+19,Arceus Dragon Form,Shadow claw,Hyper beam,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.9422143,37.43673005170291,797713
+20,Arceus Dragon Form,Random,Random,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,3.0369248,47.780747490929826,814080
+30,Arceus Ground Form,Iron tail,Hyper beam,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,3.4262183,63.629675630264664,895076
+18,Arceus Ground Form,Iron tail,Outrage,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,3.0264657,50.45697412558754,813160
+20,Arceus Ground Form,Shadow claw,Outrage,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,3.038974,47.569927937032446,818250
+16,Arceus Ground Form,Shadow claw,Hyper beam,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.9479718,37.34120258034978,799328
+12,Arceus Ground Form,Shadow claw,Futuresight,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.862525,37.01937833976617,778741
+16,Arceus Ground Form,Iron tail,Futuresight,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.9362333,47.74811503157102,793358
+20,Arceus Ground Form,Random,Random,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,3.0417438,47.055083784372016,818690
+29,Shaymin,Hidden power fighting,Energy ball,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.5833633,37.57894644201807,698141
+29,Shaymin,Hidden power fighting,Grass knot,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.6151476,43.80829891805708,699736
+30,Shaymin,Zen headbutt,Energy ball,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.628455,37.62126997779795,711589
+21,Arceus Grass Form,Shadow claw,Futuresight,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.8583605,36.52805478573421,777881
+30,Arceus Grass Form,Shadow claw,Outrage,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,3.0394251,47.586885960030216,818376
+26,Arceus Grass Form,Iron tail,Futuresight,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.9411929,47.65410485793904,795197
+25,Arceus Grass Form,Shadow claw,Hyper beam,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,2.939487,37.18858638254382,797350
+27,Arceus Grass Form,Iron tail,Outrage,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,3.0266159,50.45580572543914,813138
+29,Arceus Grass Form,Random,Random,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,3.0402677,46.831520419894844,817758
+12,Shaymin Sky Form,Zen headbutt,Solar beam,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,1.7884341,36.53859315921883,461046
+9,Shaymin Sky Form,Hidden power fighting,Solar beam,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,1.6394904,33.40125699062799,423828
+3,Shaymin Sky Form,Hidden power fighting,Grass knot,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,1.3845042,25.38292402432452,365559
+1,Shaymin Sky Form,Hidden power fighting,Energy ball,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,1.343453,21.519851404876054,361496
+3,Shaymin Sky Form,Zen headbutt,Grass knot,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,1.3910981,24.56069186975745,367373
+3,Shaymin Sky Form,Zen headbutt,Energy ball,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,1.3351347,20.439877995715825,359488
+3,Shaymin Sky Form,Random,Random,Darmanitan Galarian Standard Form,Ice Fang,Avalanche,1.4780115,26.687171403281983,389164

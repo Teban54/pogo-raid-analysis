@@ -1,0 +1,15 @@
+Rank,Raidboss,raid_move1,raid_move2,defender_name,defender_move1,defender_move2,estimator,effective_deaths,effective_combat_time
+24,Arceus Dragon Form,Shadow claw,Outrage,Kyurem,Dragon Breath,Draco Meteor,3.2628436,50.92408537026319,878762
+26,Arceus Dragon Form,Iron tail,Outrage,Kyurem,Dragon Breath,Dragon Claw,3.262243,54.36761904750989,876486
+25,Arceus Dragon Form,Iron tail,Hyper beam,Kyurem,Dragon Breath,Dragon Claw,3.2129984,38.810014486817515,887396
+23,Arceus Dragon Form,Shadow claw,Futuresight,Kyurem,Dragon Breath,Blizzard,3.0259674,32.993626221035804,861019
+27,Arceus Dragon Form,Iron tail,Futuresight,Kyurem,Dragon Breath,Dragon Claw,3.1820707,39.227789012987785,872666
+29,Arceus Dragon Form,Shadow claw,Hyper beam,Kyurem,Dragon Breath,Dragon Claw,3.1966388,35.34848165688443,905095
+27,Arceus Dragon Form,Random,Random,Kyurem,Dragon Breath,Dragon Claw,3.200444,42.094140260827814,884337
+17,Kyurem White Form,Dragon breath,Blizzard,Kyurem,Dragon Breath,Dragon Claw,2.4543731,33.99898284620842,663019
+18,Kyurem White Form,Steel wing,Blizzard,Kyurem,Dragon Breath,Dragon Claw,2.4640708,36.830711512494865,665882
+23,Kyurem Black Form,Dragon tail,Blizzard,Kyurem,Dragon Breath,Dragon Claw,2.5280175,44.96651226692397,668205
+30,Kyurem Black Form,Shadow claw,Outrage,Kyurem,Dragon Breath,Dragon Claw,2.6071436,47.65887486491615,680927
+20,Kyurem Black Form,Shadow claw,Blizzard,Kyurem,Dragon Breath,Dragon Claw,2.4682326,31.873701117850953,671220
+30,Kyurem Black Form,Dragon tail,Stone edge,Kyurem,Dragon Breath,Dragon Claw,2.5466208,48.26087751044738,657201
+28,Kyurem Black Form,Random,Random,Kyurem,Dragon Breath,Dragon Claw,2.5738242,44.85212522338397,678375
