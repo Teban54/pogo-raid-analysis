@@ -4,6 +4,33 @@ import csv
 import os
 
 # from regis.utilities import *
+"""
+Pokemon names:
+Too lazy to write fuzzy match... So here are some pokemon name examples:
+- None shadow none mega pokemon: "Lucario", "Entei";
+- Shadow pokemon: "Arcanine Shadow Form", "Machamp Shadow Form",
+- Mega pokemon: "Houndoom Mega", "Charizard Mega Y"
+- Random notes: 
+    - Ho-oh - "Ho Oh"/"Ho Oh Shadow Form" (I replaced "_" with " " D: )
+    - Darmanitan - "Darmanitan Galarian Standard Form" (Not sure about other form lol)
+
+Random functions:
+1. Download data:
+download_data(raid_level="MEGA", pkm_level=40, raid_type="RAID_LEVEL_MEGA_LEGACY")
+raid_type: RAID_LEVEL_X_LEGACY, RAID_LEVEL_X, RAID_X_FUTURE (X could be: 1, 3, 5, MEGA)
+
+2. Pokebattler json to csv: 
+Example: (./example/Registeel.csv)
+pokebattler_file_to_csv(filename='./level_40/legacy_T5_raid/REGISTEEL_no_weather.json')
+
+3. Pokemon ranking in raids:
+Example: 
+Export Rhyperior, Rampardos, Tyranitar Shadow Form in all raids (./example/rock_type_pokemon.csv)
+```
+pokemon_names = ["Rhyperior", "Rampardos", "Tyranitar Shadow Form"]
+output_pokemons_ranking_as_csv(pokemon_names=pokemon_names, filename="rock_type_pokemon.csv")
+```
+"""
 
 def parse_friendship(friendship_str):
     raid_friends = {
@@ -21,7 +48,7 @@ def get_pokemon_data(raid_boss, raid_level=5, pkm_level=35,
                      friendship='0', weather='NO_WEATHER'):
     """
     :param str raid_boss: 
-    :param int raid_level: raid boss level, 6 for mega raids.
+    :param int raid_level: raid boss level, 6 or MEGA for mega raids.
     :param int pkm_level: pokemon level.
     :param int friendship: friendship level, default is 4 for best friend,
     :param str weather: weather, default is NO_WEATHER
@@ -252,17 +279,22 @@ def format_print(result):
         print(f"{pkm['name']} | {pkm['move1']} | {pkm['move2']} | {pkm['estimator']} | {pkm['effectiveCombatTime']/1000}")
 
 def load_raid_info(filename='raids.json', raid_type="RAID_LEVEL_5_LEGACY"):
+    """
+    A function for processing pokemon names in raids.json. 
+    Probably for downloading pokebattler sim data.
+    :param filename: Filename of raids information
+    :param raid_type: Raid types
+        Future raid: "RAID_LEVEL_5_FUTURE" / "RAID_LEVEL_MEGA_FUTURE"
+        Legacy raid: "RAID_LEVEL_5_LEGACY" / "RAID_LEVEL_MEGA_LEGACY"
+        Current raid: "RAID_LEVEL_5" / "RAID_LEVEL_MEGA"
+    """
     with open(filename, 'r') as fin:
         data = json.load(fin)
     # data:
     result = []
     for tier in data['tiers']:
         if tier['tier'] == raid_type:
-            # Future raid: "RAID_LEVEL_5_FUTURE"
-            # Legacy raid: "RAID_LEVEL_5_LEGACY"
-            # Current raid: "RAID_LEVEL_5"
             raids = tier['raids']
-
     for raid in raids:
         result.append(raid['pokemon'])
     return result
@@ -282,20 +314,35 @@ def download_data(raid_level=5, pkm_level=40, raid_type='RAID_LEVEL_5'):
             with open(filename, 'w') as fout:
                 json.dump(data, fout)
 
-def pkm_ranking_in_all_raids(pokemon_name):
+def output_pokemons_ranking_as_csv(pokemon_names, filename="raid.csv"):
     keywords = ['future_mega', 'legacy_mega', 'future_T5', 'legacy_T5']
     for keyword in keywords:
         find_pokemon_ranking(dir_path=f"level_40/{keyword}_raid/",
                         export_data_by_move=False,
-                        filename=f'{keyword}.csv',
-                        highlight_pkm=[pokemon_name])
+                        filename=filename,
+                        highlight_pkm=pokemon_names)
+
+def pokebattler_file_to_csv(filename, shadow=True, mega=True,
+                            fout='filename.csv',
+                            export_data_by_move=False):
+    """
+    json to csv with some random filters like shadow and mega.
+    :param shadow:
+    :param mega:
+    :param fout: Output file name
+    :param export_data_by_move: 
+    """
+    with open(filename, 'r') as fin:
+        data = json.load(fin)
+    export_as_csv(data, shadow=shadow, mega=mega,
+                      filename=fout,
+                      export_data_by_move=export_data_by_move,
+                      highlight_pkm=[])
 
 if (__name__ == "__main__"):
-    # Download data:
-    # download_data(raid_level="MEGA", pkm_level=40, raid_type="RAID_LEVEL_MEGA")
-    # download_data(raid_level="MEGA", pkm_level=40, raid_type="RAID_LEVEL_MEGA_LEGACY")
-    # download_data(raid_level="MEGA", pkm_level=40, raid_type="RAID_LEVEL_MEGA_FUTURE")
-    pkm_ranking_in_all_raids("Kyurem")
+    pokemon_names = ["Rhyperior", "Rampardos", "Tyranitar Shadow Form"]
+    output_pokemons_ranking_as_csv(pokemon_names=pokemon_names, filename="rock_type_pokemon.csv")
+
     """
     data = get_pokemon_data("RAYQUAZA", raid_level=5, pkm_level=35, 
                         friendship='0', weather='NO_WEATHER')
