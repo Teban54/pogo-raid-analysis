@@ -1,0 +1,1198 @@
+Rank,Raidboss,raid_move1,raid_move2,defender_name,defender_move1,defender_move2,estimator,effective_deaths,effective_combat_time
+7,Pidgeot Mega,Steel wing,Brave bird,Rhyperior,Smack Down,Rock Wrecker,2.1062858,24.534541536929904,593343
+8,Pidgeot Mega,Steel wing,Brave bird,Rampardos,Smack Down,Rock Slide,2.1080308,37.89169788953459,554210
+10,Pidgeot Mega,Steel wing,Brave bird,Tyranitar Shadow Form,Smack Down,Stone Edge,2.1484354,29.939410019422585,580678
+7,Pidgeot Mega,Air slash,Brave bird,Rampardos,Smack Down,Rock Slide,2.0044985,29.191377071603338,541612
+10,Pidgeot Mega,Air slash,Brave bird,Rhyperior,Smack Down,Rock Wrecker,2.1256058,20.479529610380695,604567
+11,Pidgeot Mega,Air slash,Brave bird,Tyranitar Shadow Form,Smack Down,Stone Edge,2.1426535,26.29114338273338,588410
+6,Pidgeot Mega,Air slash,Hurricane,Tyranitar Shadow Form,Smack Down,Stone Edge,1.9632006,19.299505908591986,558561
+8,Pidgeot Mega,Air slash,Hurricane,Rampardos,Smack Down,Rock Slide,2.0288663,26.94650477862802,549823
+12,Pidgeot Mega,Air slash,Hurricane,Rhyperior,Smack Down,Rock Wrecker,2.162512,18.79615285431519,614992
+6,Pidgeot Mega,Steel wing,Hurricane,Rampardos,Smack Down,Rock Slide,2.0083897,31.481274117394545,542820
+10,Pidgeot Mega,Steel wing,Hurricane,Rhyperior,Smack Down,Rock Wrecker,2.1388314,22.308991614898368,608379
+14,Pidgeot Mega,Steel wing,Hurricane,Tyranitar Shadow Form,Smack Down,Stone Edge,2.1757822,27.055112780458607,593451
+6,Pidgeot Mega,Air slash,Aerial ace,Rampardos,Smack Down,Rock Slide,1.903383,21.8368687879759,536298
+10,Pidgeot Mega,Air slash,Aerial ace,Tyranitar Shadow Form,Smack Down,Stone Edge,1.988464,15.348865269058237,565696
+17,Pidgeot Mega,Air slash,Aerial ace,Rhyperior,Smack Down,Rock Wrecker,2.1413085,13.728225769896197,611604
+6,Pidgeot Mega,Steel wing,Aerial ace,Tyranitar Shadow Form,Smack Down,Stone Edge,1.9350662,18.449824606804945,550614
+10,Pidgeot Mega,Steel wing,Aerial ace,Rampardos,Smack Down,Rock Slide,2.0169616,27.12613014382703,544570
+14,Pidgeot Mega,Steel wing,Aerial ace,Rhyperior,Smack Down,Rock Wrecker,2.1158464,16.200058056940346,601785
+9,Pidgeot Mega,Steel wing,Feather dance,Rampardos,Smack Down,Rock Slide,1.9314572,19.414096534633615,549603
+12,Pidgeot Mega,Steel wing,Feather dance,Tyranitar Shadow Form,Smack Down,Stone Edge,1.9882305,13.673316601949644,565620
+18,Pidgeot Mega,Steel wing,Feather dance,Rhyperior,Smack Down,Rock Wrecker,2.0684354,12.02460324370564,615736
+8,Pidgeot Mega,Air slash,Feather dance,Tyranitar Shadow Form,Smack Down,Stone Edge,1.8837273,10.702333703536556,560992
+9,Pidgeot Mega,Air slash,Feather dance,Rampardos,Smack Down,Rock Slide,1.9210784,15.623579967934456,546611
+16,Pidgeot Mega,Air slash,Feather dance,Rhyperior,Smack Down,Rock Wrecker,2.0494711,9.509145186027382,610742
+7,Pidgeot Mega,Random,Random,Rampardos,Smack Down,Rock Slide,1.9805558,25.59420163813005,544548
+9,Pidgeot Mega,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,2.0147178,19.289221359180676,567831
+12,Pidgeot Mega,Random,Random,Rhyperior,Smack Down,Rock Wrecker,2.1202393,16.595632684938742,608796
+18,Blaziken Mega,Fire spin,Brave bird,Rhyperior,Mud Slap,Earthquake,2.188674,21.72943664611944,622505
+28,Diancie Mega,Smack down,Stone edge,Tyranitar Shadow Form,Iron Tail,Stone Edge,2.633165,44.05062838903093,710076
+27,Diancie Mega,Tackle,Stone edge,Tyranitar Shadow Form,Iron Tail,Stone Edge,2.5911422,36.54003783658799,701733
+30,Diancie Mega,Smack down,Ancient power,Tyranitar Shadow Form,Iron Tail,Stone Edge,2.5862038,35.96866363352782,698781
+24,Diancie Mega,Tackle,Ancient power,Tyranitar Shadow Form,Iron Tail,Stone Edge,2.4771302,29.77723389848954,689224
+27,Diancie Mega,Random,Random,Tyranitar Shadow Form,Iron Tail,Stone Edge,2.661174,42.82674202006565,711582
+1,Charizard Mega Y,Fire spin,Overheat,Tyranitar Shadow Form,Smack Down,Stone Edge,1.58877,19.957495527461624,435673
+2,Charizard Mega Y,Fire spin,Overheat,Rhyperior,Smack Down,Rock Wrecker,1.6862117,19.899093693300234,469679
+5,Charizard Mega Y,Fire spin,Overheat,Rampardos,Smack Down,Rock Slide,1.7716322,34.10677397474526,457890
+1,Charizard Mega Y,Air slash,Overheat,Tyranitar Shadow Form,Smack Down,Stone Edge,1.5844368,19.778740689877754,434965
+2,Charizard Mega Y,Air slash,Overheat,Rhyperior,Smack Down,Rock Wrecker,1.6746624,19.472513389922355,467058
+4,Charizard Mega Y,Air slash,Overheat,Rampardos,Smack Down,Rock Slide,1.7429016,33.06108911197106,451417
+1,Charizard Mega Y,Fire spin,Fire blast,Tyranitar Shadow Form,Smack Down,Stone Edge,1.5772928,18.777397243281754,438630
+2,Charizard Mega Y,Fire spin,Fire blast,Rampardos,Smack Down,Rock Slide,1.5904089,26.278253616334485,429798
+3,Charizard Mega Y,Fire spin,Fire blast,Rhyperior,Smack Down,Rock Wrecker,1.6048999,15.686767969483718,456207
+1,Charizard Mega Y,Air slash,Fire blast,Tyranitar Shadow Form,Smack Down,Stone Edge,1.5823358,18.784579991355816,439804
+2,Charizard Mega Y,Air slash,Fire blast,Rampardos,Smack Down,Rock Slide,1.5928082,25.965849085492955,430777
+3,Charizard Mega Y,Air slash,Fire blast,Rhyperior,Smack Down,Rock Wrecker,1.6049548,15.442301648218168,456233
+1,Charizard Mega Y,Air slash,Dragon claw,Tyranitar Shadow Form,Smack Down,Stone Edge,1.49871,16.410834937784006,423720
+2,Charizard Mega Y,Air slash,Dragon claw,Rampardos,Smack Down,Rock Slide,1.5068508,22.58235839446474,406618
+3,Charizard Mega Y,Air slash,Dragon claw,Rhyperior,Smack Down,Rock Wrecker,1.5622575,13.973010232317037,444134
+1,Charizard Mega Y,Fire spin,Dragon claw,Tyranitar Shadow Form,Smack Down,Stone Edge,1.49824,16.640049824439522,423145
+2,Charizard Mega Y,Fire spin,Dragon claw,Rampardos,Smack Down,Rock Slide,1.5152054,23.018609119034664,408749
+3,Charizard Mega Y,Fire spin,Dragon claw,Rhyperior,Smack Down,Rock Wrecker,1.5612481,14.186836382346762,443854
+1,Charizard Mega Y,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,1.5360037,16.542055685058486,430049
+2,Charizard Mega Y,Random,Random,Rampardos,Smack Down,Rock Slide,1.5771124,24.757732817253583,425903
+3,Charizard Mega Y,Random,Random,Rhyperior,Smack Down,Rock Wrecker,1.6010692,14.745017089833873,455175
+2,Banette Mega,Shadow claw,Shadow ball,Tyranitar Shadow Form,Bite,Crunch,1.900654,23.128484197669124,526117
+2,Banette Mega,Hex,Shadow ball,Tyranitar Shadow Form,Bite,Crunch,1.8611988,21.763758553102253,520497
+4,Banette Mega,Shadow claw,Dazzling gleam,Tyranitar Shadow Form,Bite,Crunch,1.9936513,33.11638903005238,533625
+4,Banette Mega,Hex,Dazzling gleam,Tyranitar Shadow Form,Bite,Crunch,1.9583147,31.075581753113696,525824
+6,Banette Mega,Hex,Thunder,Tyranitar Shadow Form,Bite,Crunch,2.0005178,26.13312064142867,546065
+8,Banette Mega,Shadow claw,Thunder,Tyranitar Shadow Form,Bite,Crunch,2.0228033,27.793507790966142,547665
+3,Banette Mega,Random,Random,Tyranitar Shadow Form,Bite,Crunch,1.9390184,23.753202714575128,533011
+2,Manectric Mega,Snarl,Overheat,Rhyperior,Mud Slap,Earthquake,2.3598065,20.79029926214089,670826
+2,Manectric Mega,Thunder fang,Overheat,Rhyperior,Mud Slap,Earthquake,2.3595262,18.33051168369642,671003
+3,Manectric Mega,Charge beam,Overheat,Rhyperior,Mud Slap,Earthquake,2.3782225,18.58160605787733,676271
+5,Manectric Mega,Snarl,Flame burst,Rhyperior,Mud Slap,Earthquake,2.411016,16.930681364503034,685319
+3,Manectric Mega,Charge beam,Flame burst,Rhyperior,Mud Slap,Earthquake,2.2947805,13.985508898570059,665148
+6,Manectric Mega,Thunder fang,Flame burst,Rhyperior,Mud Slap,Earthquake,2.3498194,14.702407458656374,675612
+5,Manectric Mega,Snarl,Wild charge,Rhyperior,Mud Slap,Earthquake,2.347219,15.419162535647402,668138
+5,Manectric Mega,Thunder fang,Wild charge,Rhyperior,Mud Slap,Earthquake,2.2618127,13.61084469223179,658330
+6,Manectric Mega,Charge beam,Wild charge,Rhyperior,Mud Slap,Earthquake,2.2554483,12.976447908050908,664524
+6,Manectric Mega,Thunder fang,Thunder,Rhyperior,Mud Slap,Earthquake,2.234662,12.578637001748502,662041
+6,Manectric Mega,Snarl,Thunder,Rhyperior,Mud Slap,Earthquake,2.3180776,14.972102557500637,660325
+6,Manectric Mega,Charge beam,Thunder,Rhyperior,Mud Slap,Earthquake,2.2060642,11.250598190284546,657353
+3,Manectric Mega,Random,Random,Rhyperior,Mud Slap,Earthquake,2.3045878,14.673611582804737,667257
+5,Metagross Mega,Zen headbutt,Psychic,Tyranitar Shadow Form,Bite,Crunch,3.1023486,22.68912935905988,881184
+3,Metagross Mega,Bullet punch,Psychic,Tyranitar Shadow Form,Bite,Crunch,3.0905032,29.363553521134452,878887
+27,Metagross Mega,Zen headbutt,Earthquake,Tyranitar Shadow Form,Bite,Crunch,3.9005866,75.45244115717917,1013247
+28,Metagross Mega,Bullet punch,Earthquake,Tyranitar Shadow Form,Bite,Crunch,3.9989808,77.03901281105166,1039638
+18,Metagross Mega,Zen headbutt,Flash cannon,Tyranitar Shadow Form,Bite,Crunch,3.3832111,48.05356779611422,914206
+30,Metagross Mega,Bullet punch,Flash cannon,Tyranitar Shadow Form,Bite,Crunch,3.8173974,79.8281644749051,980258
+13,Metagross Mega,Random,Random,Tyranitar Shadow Form,Bite,Crunch,3.42442,47.305601841804574,932028
+18,Audino Mega,Zen headbutt,Hyper beam,Tyranitar Shadow Form,Iron Tail,Return,3.1554656,18.17880239782783,934312
+18,Audino Mega,Pound,Hyper beam,Tyranitar Shadow Form,Iron Tail,Stone Edge,3.2046456,19.256965488422118,929430
+27,Audino Mega,Pound,Dazzling gleam,Tyranitar Shadow Form,Iron Tail,Return,3.3834772,40.1470816924695,942269
+25,Audino Mega,Zen headbutt,Dazzling gleam,Tyranitar Shadow Form,Iron Tail,Return,3.3449454,38.08707471591081,940408
+27,Audino Mega,Pound,Disarming voice,Tyranitar Shadow Form,Iron Tail,Return,3.3033793,31.72499732100008,939691
+26,Audino Mega,Zen headbutt,Disarming voice,Tyranitar Shadow Form,Iron Tail,Return,3.302783,29.974906700632417,939217
+22,Audino Mega,Random,Random,Tyranitar Shadow Form,Iron Tail,Return,3.2461534,25.39135287450323,937149
+28,Camerupt Mega,Ember,Earthquake,Rhyperior,Mud Slap,Surf,2.0984945,26.038458243526605,574993
+13,Ampharos Mega,Volt switch,Zap cannon,Rhyperior,Mud Slap,Earthquake,2.481271,14.25557934572312,730754
+18,Ampharos Mega,Charge beam,Zap cannon,Rhyperior,Mud Slap,Earthquake,2.5264251,14.615451903387102,741485
+23,Ampharos Mega,Volt switch,Power gem,Rhyperior,Mud Slap,Earthquake,2.632567,16.89474388014807,754286
+19,Ampharos Mega,Charge beam,Power gem,Rhyperior,Mud Slap,Earthquake,2.5797286,16.378718629241018,739697
+23,Ampharos Mega,Charge beam,Thunder,Rhyperior,Mud Slap,Earthquake,2.5006833,13.20558576507491,745053
+19,Ampharos Mega,Volt switch,Thunder,Rhyperior,Mud Slap,Earthquake,2.4816446,13.13017545923087,738107
+20,Ampharos Mega,Volt switch,Thunder punch,Rhyperior,Mud Slap,Earthquake,2.453643,9.588045853067825,731185
+20,Ampharos Mega,Charge beam,Thunder punch,Rhyperior,Mud Slap,Earthquake,2.4333053,9.16185346004206,725124
+20,Ampharos Mega,Random,Random,Rhyperior,Mud Slap,Earthquake,2.5702808,16.39519222563789,749717
+14,Aerodactyl Mega,Bite,Earth power,Tyranitar Shadow Form,Smack Down,Stone Edge,2.5535247,41.97509579762924,683403
+14,Aerodactyl Mega,Rock throw,Earth power,Tyranitar Shadow Form,Smack Down,Stone Edge,2.5615788,42.87454171097666,686769
+10,Aerodactyl Mega,Bite,Rock slide,Tyranitar Shadow Form,Smack Down,Stone Edge,2.4898608,32.32175552560148,679370
+11,Aerodactyl Mega,Bite,Rock slide,Rhyperior,Smack Down,Rock Wrecker,2.4909878,21.2223505933236,707985
+21,Aerodactyl Mega,Bite,Rock slide,Rampardos,Smack Down,Rock Slide,2.6191165,48.06655740759701,687028
+9,Aerodactyl Mega,Rock throw,Hyper beam,Rampardos,Smack Down,Rock Slide,2.4542837,37.29682970914307,663483
+11,Aerodactyl Mega,Rock throw,Hyper beam,Tyranitar Shadow Form,Smack Down,Stone Edge,2.4871986,28.724584896736015,698100
+13,Aerodactyl Mega,Rock throw,Hyper beam,Rhyperior,Smack Down,Rock Wrecker,2.5208411,20.208036798051886,716414
+9,Aerodactyl Mega,Bite,Hyper beam,Tyranitar Shadow Form,Smack Down,Stone Edge,2.3271804,20.36095315650869,661593
+10,Aerodactyl Mega,Bite,Hyper beam,Rampardos,Smack Down,Rock Slide,2.3613315,28.38248544881867,654952
+15,Aerodactyl Mega,Bite,Hyper beam,Rhyperior,Smack Down,Rock Wrecker,2.5203137,20.309562857114532,716285
+12,Aerodactyl Mega,Steel wing,Rock slide,Rhyperior,Smack Down,Rock Wrecker,2.5036373,24.27800073740716,712079
+14,Aerodactyl Mega,Steel wing,Rock slide,Tyranitar Shadow Form,Smack Down,Stone Edge,2.5377858,39.88099330067009,686071
+20,Aerodactyl Mega,Steel wing,Rock slide,Rampardos,Smack Down,Rock Slide,2.6041758,53.42229962641262,667426
+10,Aerodactyl Mega,Steel wing,Hyper beam,Rampardos,Smack Down,Rock Slide,2.4240448,37.56290991595484,655439
+12,Aerodactyl Mega,Steel wing,Hyper beam,Tyranitar Shadow Form,Smack Down,Stone Edge,2.4787228,29.477237813276687,690980
+14,Aerodactyl Mega,Steel wing,Hyper beam,Rhyperior,Smack Down,Rock Wrecker,2.5034828,26.470449108114284,712465
+14,Aerodactyl Mega,Steel wing,Earth power,Tyranitar Shadow Form,Smack Down,Stone Edge,2.5635412,44.82441885730889,681442
+11,Aerodactyl Mega,Rock throw,Rock slide,Rhyperior,Smack Down,Rock Wrecker,2.4742768,20.644607423205116,703251
+18,Aerodactyl Mega,Rock throw,Rock slide,Tyranitar Shadow Form,Smack Down,Stone Edge,2.5847723,37.27244864389169,698606
+20,Aerodactyl Mega,Rock throw,Rock slide,Rampardos,Smack Down,Rock Slide,2.6201818,49.92274037957713,680866
+11,Aerodactyl Mega,Bite,Ancient power,Tyranitar Shadow Form,Smack Down,Stone Edge,2.449554,28.736333144818378,684394
+16,Aerodactyl Mega,Bite,Ancient power,Rhyperior,Smack Down,Rock Wrecker,2.514861,17.796847201663937,714911
+18,Aerodactyl Mega,Bite,Ancient power,Rampardos,Smack Down,Rock Slide,2.5257032,42.20829710021429,675138
+14,Aerodactyl Mega,Steel wing,Ancient power,Rhyperior,Smack Down,Rock Wrecker,2.4906821,20.298614888289613,707869
+18,Aerodactyl Mega,Steel wing,Ancient power,Rampardos,Smack Down,Rock Slide,2.5271206,44.67134031242592,669676
+20,Aerodactyl Mega,Steel wing,Ancient power,Tyranitar Shadow Form,Smack Down,Stone Edge,2.5605795,32.06132288041142,697686
+12,Aerodactyl Mega,Rock throw,Ancient power,Tyranitar Shadow Form,Smack Down,Stone Edge,2.4450743,29.4462362235585,678948
+14,Aerodactyl Mega,Rock throw,Ancient power,Rampardos,Smack Down,Rock Slide,2.4551907,41.52789432957537,657047
+17,Aerodactyl Mega,Rock throw,Ancient power,Rhyperior,Smack Down,Rock Wrecker,2.4927132,17.27476920927582,708572
+20,Aerodactyl Mega,Bite,Iron head,Tyranitar Shadow Form,Smack Down,Stone Edge,2.4923773,35.95323582248262,674241
+28,Aerodactyl Mega,Bite,Iron head,Rampardos,Smack Down,Rock Slide,2.6658208,53.90762912699263,688424
+29,Aerodactyl Mega,Bite,Iron head,Rhyperior,Smack Down,Rock Wrecker,2.6778142,37.95245189079028,725970
+22,Aerodactyl Mega,Steel wing,Iron head,Tyranitar Shadow Form,Smack Down,Stone Edge,2.5321665,43.58633958858799,673637
+26,Aerodactyl Mega,Steel wing,Iron head,Rhyperior,Smack Down,Rock Wrecker,2.6520517,38.89313733084464,716374
+28,Aerodactyl Mega,Steel wing,Iron head,Rampardos,Smack Down,Rock Slide,2.6875722,60.64178936088283,681535
+24,Aerodactyl Mega,Rock throw,Iron head,Tyranitar Shadow Form,Smack Down,Stone Edge,2.546702,40.77931102290441,686908
+26,Aerodactyl Mega,Rock throw,Iron head,Rhyperior,Smack Down,Rock Wrecker,2.6492045,36.104527484482304,720798
+28,Aerodactyl Mega,Rock throw,Iron head,Rampardos,Smack Down,Rock Slide,2.6787663,56.04350535607061,686241
+12,Aerodactyl Mega,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,2.4700568,32.301030811283766,680068
+17,Aerodactyl Mega,Random,Random,Rhyperior,Smack Down,Rock Wrecker,2.5852883,27.19416603735219,724020
+30,Aerodactyl Mega,Random,Random,Rampardos,Smack Down,Rock Slide,2.7866852,56.382499483527845,721130
+3,Gengar Mega,Sucker punch,Shadow ball,Tyranitar Shadow Form,Bite,Crunch,2.2943914,27.94178771258156,634295
+4,Gengar Mega,Shadow claw,Shadow ball,Tyranitar Shadow Form,Bite,Crunch,2.3128664,28.988141099650512,634487
+3,Gengar Mega,Hex,Shadow ball,Tyranitar Shadow Form,Bite,Crunch,2.2953353,27.56320190576539,638473
+6,Gengar Mega,Sucker punch,Sludge bomb,Tyranitar Shadow Form,Bite,Crunch,2.325171,28.897362238182396,637971
+6,Gengar Mega,Shadow claw,Sludge bomb,Tyranitar Shadow Form,Bite,Crunch,2.3313982,29.00143216146816,639672
+6,Gengar Mega,Hex,Sludge bomb,Tyranitar Shadow Form,Bite,Crunch,2.2936234,27.25802283451401,637807
+6,Gengar Mega,Random,Random,Tyranitar Shadow Form,Bite,Crunch,2.4636886,33.808525735555534,668720
+15,Salamence Mega,Bite,Fire blast,Tyranitar Shadow Form,Smack Down,Stone Edge,2.7195795,23.23673462940902,772806
+24,Salamence Mega,Bite,Fire blast,Rampardos,Smack Down,Rock Slide,2.8043356,33.137008904901265,783758
+27,Salamence Mega,Bite,Draco meteor,Tyranitar Shadow Form,Smack Down,Stone Edge,3.0062094,36.443991481583296,826731
+21,Salamence Mega,Dragon tail,Fire blast,Tyranitar Shadow Form,Smack Down,Stone Edge,2.797654,32.30668358036793,789790
+23,Salamence Mega,Fire fang,Fire blast,Tyranitar Shadow Form,Smack Down,Stone Edge,2.7379827,27.34610148845791,778868
+27,Salamence Mega,Fire fang,Fire blast,Rampardos,Smack Down,Rock Slide,2.8056083,33.43783202830577,781705
+19,Rayquaza Mega,Dragon tail,Outrage,Tyranitar Shadow Form,Smack Down,Stone Edge,2.6065586,46.20125764305638,691992
+19,Rayquaza Mega,Air slash,Outrage,Tyranitar Shadow Form,Smack Down,Stone Edge,2.5988703,42.77600035495456,698886
+23,Rayquaza Mega,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,2.4830627,32.26369315451485,684165
+2,Pinsir Mega,Bug bite,Super power,Rhyperior,Smack Down,Rock Wrecker,2.0324938,35.67758394448748,537083
+14,Pinsir Mega,Bug bite,Super power,Rampardos,Smack Down,Rock Slide,2.3621168,62.30908023818166,575672
+2,Pinsir Mega,Bug bite,Close combat,Rhyperior,Smack Down,Rock Wrecker,1.8656284,26.060294377630584,504748
+26,Pinsir Mega,Bug bite,Close combat,Rampardos,Smack Down,Rock Slide,2.6003659,64.71453513241846,644058
+29,Pinsir Mega,Bug bite,Close combat,Tyranitar Shadow Form,Smack Down,Stone Edge,2.6854694,66.79340339727594,664482
+2,Pinsir Mega,Fury cutter,Close combat,Rhyperior,Smack Down,Rock Wrecker,1.8902354,26.782799952471354,511146
+29,Pinsir Mega,Fury cutter,Close combat,Rampardos,Smack Down,Rock Slide,2.7181776,68.847121826775,669462
+30,Pinsir Mega,Fury cutter,Close combat,Tyranitar Shadow Form,Smack Down,Return,2.7682617,70.53531708387501,681318
+2,Pinsir Mega,Fury cutter,Super power,Rampardos,Smack Down,Rock Slide,2.0341215,47.278340869062724,513121
+7,Pinsir Mega,Fury cutter,Super power,Rhyperior,Smack Down,Rock Wrecker,2.0690463,36.63629039977273,546302
+2,Pinsir Mega,Rock smash,Super power,Rhyperior,Smack Down,Rock Wrecker,1.9395641,32.51602916866489,517733
+13,Pinsir Mega,Rock smash,Super power,Rampardos,Smack Down,Rock Slide,2.2547905,56.47781410254688,557575
+30,Pinsir Mega,Rock smash,Super power,Tyranitar Shadow Form,Smack Down,Stone Edge,2.9388003,88.51323951681796,692046
+1,Pinsir Mega,Rock smash,Close combat,Rhyperior,Smack Down,Rock Wrecker,1.8039626,26.86598615690406,487467
+11,Pinsir Mega,Rock smash,Close combat,Rampardos,Smack Down,Rock Slide,2.2625337,54.4515611052799,564125
+15,Pinsir Mega,Rock smash,Close combat,Tyranitar Shadow Form,Smack Down,Stone Edge,2.4507954,59.30215081289703,610859
+2,Pinsir Mega,Fury cutter,X scissor,Rampardos,Smack Down,Rock Slide,1.6873062,25.724385671338226,454496
+3,Pinsir Mega,Fury cutter,X scissor,Rhyperior,Smack Down,Rock Wrecker,1.710718,16.319788628944565,485916
+4,Pinsir Mega,Fury cutter,X scissor,Tyranitar Shadow Form,Smack Down,Stone Edge,1.7122654,26.265843269515347,461087
+1,Pinsir Mega,Rock smash,X scissor,Rampardos,Smack Down,Rock Slide,1.7161487,31.22763849086367,449274
+2,Pinsir Mega,Rock smash,X scissor,Rhyperior,Smack Down,Rock Wrecker,1.7278346,19.565852983501667,489005
+5,Pinsir Mega,Rock smash,X scissor,Tyranitar Shadow Form,Smack Down,Stone Edge,1.7685126,32.16764538748035,463100
+1,Pinsir Mega,Bug bite,X scissor,Rampardos,Smack Down,Rock Slide,1.6629891,25.900964053312073,447618
+3,Pinsir Mega,Bug bite,X scissor,Rhyperior,Smack Down,Rock Wrecker,1.7019097,16.535744834281278,483469
+5,Pinsir Mega,Bug bite,X scissor,Tyranitar Shadow Form,Smack Down,Stone Edge,1.7626911,28.188666676842587,474240
+1,Pinsir Mega,Fury cutter,Vice grip,Tyranitar Shadow Form,Smack Down,Stone Edge,1.5247512,8.69306001492037,452360
+2,Pinsir Mega,Fury cutter,Vice grip,Rampardos,Smack Down,Rock Slide,1.5772415,12.357102314152458,448360
+3,Pinsir Mega,Fury cutter,Vice grip,Rhyperior,Smack Down,Rock Wrecker,1.6685411,7.617353134703411,497225
+1,Pinsir Mega,Bug bite,Vice grip,Tyranitar Shadow Form,Smack Down,Stone Edge,1.5583625,9.768978996619092,443208
+2,Pinsir Mega,Bug bite,Vice grip,Rampardos,Smack Down,Rock Slide,1.5655175,13.174903710036048,445042
+4,Pinsir Mega,Bug bite,Vice grip,Rhyperior,Smack Down,Rock Wrecker,1.6597354,8.169262470625684,494601
+1,Pinsir Mega,Rock smash,Vice grip,Tyranitar Shadow Form,Smack Down,Stone Edge,1.5596292,16.661283990533864,443253
+2,Pinsir Mega,Rock smash,Vice grip,Rampardos,Smack Down,Rock Slide,1.5740433,18.320156294204526,446609
+4,Pinsir Mega,Rock smash,Vice grip,Rhyperior,Smack Down,Rock Wrecker,1.7099283,11.350980725297767,485915
+2,Pinsir Mega,Random,Random,Rhyperior,Smack Down,Rock Wrecker,1.7897844,19.902256455868102,500216
+4,Pinsir Mega,Random,Random,Rampardos,Smack Down,Rock Slide,1.9057966,35.388524742966126,500809
+11,Pinsir Mega,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,2.1489074,44.554984505036394,551747
+3,Charizard Mega X,Air slash,Dragon claw,Tyranitar Shadow Form,Smack Down,Stone Edge,2.3916252,25.59047977038404,676911
+4,Charizard Mega X,Air slash,Dragon claw,Rampardos,Smack Down,Rock Slide,2.427198,36.14493738082945,655373
+6,Charizard Mega X,Air slash,Dragon claw,Rhyperior,Smack Down,Rock Wrecker,2.4788756,22.285903524804503,704722
+3,Charizard Mega X,Fire spin,Dragon claw,Tyranitar Shadow Form,Smack Down,Stone Edge,2.381949,26.42634059161463,673139
+4,Charizard Mega X,Fire spin,Dragon claw,Rampardos,Smack Down,Rock Slide,2.4308307,36.75131753772506,656014
+5,Charizard Mega X,Fire spin,Dragon claw,Rhyperior,Mud Slap,Rock Wrecker,2.4638338,23.092431696912872,700555
+10,Charizard Mega X,Fire spin,Overheat,Tyranitar Shadow Form,Smack Down,Stone Edge,2.5014977,29.505011133599346,698251
+11,Charizard Mega X,Fire spin,Overheat,Rhyperior,Mud Slap,Rock Wrecker,2.513416,25.029225975514038,715066
+12,Charizard Mega X,Fire spin,Overheat,Rampardos,Smack Down,Rock Slide,2.528438,36.945777689416374,683343
+9,Charizard Mega X,Fire spin,Fire blast,Tyranitar Shadow Form,Smack Down,Stone Edge,2.4272888,27.456662220997664,685075
+12,Charizard Mega X,Fire spin,Fire blast,Rampardos,Smack Down,Rock Slide,2.4626293,31.81680941793655,666410
+13,Charizard Mega X,Fire spin,Fire blast,Rhyperior,Mud Slap,Rock Wrecker,2.5141995,20.757461432716035,714544
+9,Charizard Mega X,Air slash,Overheat,Rhyperior,Mud Slap,Rock Wrecker,2.4861705,22.83566897510965,706746
+11,Charizard Mega X,Air slash,Overheat,Tyranitar Shadow Form,Smack Down,Stone Edge,2.508421,29.028657826947377,702116
+14,Charizard Mega X,Air slash,Overheat,Rampardos,Smack Down,Rock Slide,2.5251327,36.34033693961298,682295
+4,Charizard Mega X,Air slash,Fire blast,Tyranitar Shadow Form,Smack Down,Stone Edge,2.3361387,24.3468958509236,664722
+10,Charizard Mega X,Air slash,Fire blast,Rampardos,Smack Down,Rock Slide,2.4351892,29.658753391897722,670007
+13,Charizard Mega X,Air slash,Fire blast,Rhyperior,Mud Slap,Rock Wrecker,2.5041645,19.621503528241,711704
+5,Charizard Mega X,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,2.3942366,24.080558824793258,677106
+7,Charizard Mega X,Random,Random,Rampardos,Smack Down,Rock Slide,2.4287367,31.37510915105405,665402
+10,Charizard Mega X,Random,Random,Rhyperior,Mud Slap,Rock Wrecker,2.4723303,20.062990489398196,710946
+24,Mawile Mega,Bite,Play rough,Rhyperior,Mud Slap,Earthquake,2.7902448,26.852116110868646,793649
+25,Mawile Mega,Ice fang,Play rough,Rhyperior,Mud Slap,Earthquake,2.7702503,26.181239931778382,787895
+25,Mawile Mega,Astonish,Play rough,Rhyperior,Mud Slap,Earthquake,2.7681077,24.966726356865784,787054
+25,Mawile Mega,Fire fang,Play rough,Rhyperior,Mud Slap,Earthquake,2.7697387,25.45860785856894,787571
+29,Mawile Mega,Ice fang,Power up punch,Rhyperior,Mud Slap,Earthquake,2.7577932,23.583681249316907,783835
+21,Mawile Mega,Ice fang,Vice grip,Rhyperior,Mud Slap,Earthquake,2.5197263,9.99317253520918,750878
+29,Mawile Mega,Bite,Power up punch,Rhyperior,Mud Slap,Earthquake,2.7410805,22.839225852547123,779015
+29,Mawile Mega,Fire fang,Power up punch,Rhyperior,Mud Slap,Earthquake,2.7464447,22.115937086083967,780403
+22,Mawile Mega,Astonish,Vice grip,Rhyperior,Mud Slap,Earthquake,2.5589013,7.628535862195476,762552
+29,Mawile Mega,Astonish,Power up punch,Rhyperior,Mud Slap,Earthquake,2.739812,21.466592637361313,778476
+22,Mawile Mega,Fire fang,Vice grip,Rhyperior,Mud Slap,Earthquake,2.5602791,7.857970159254654,762963
+22,Mawile Mega,Bite,Vice grip,Rhyperior,Mud Slap,Earthquake,2.5473847,7.749582095283755,759120
+26,Mawile Mega,Random,Random,Rhyperior,Mud Slap,Earthquake,2.711221,19.728226080236276,784076
+8,Beedrill Mega,Poison jab,Sludge bomb,Tyranitar Shadow Form,Smack Down,Stone Edge,1.6919191,18.627682232549574,478881
+13,Beedrill Mega,Poison jab,Sludge bomb,Rampardos,Smack Down,Rock Slide,1.7613432,27.183610566144576,475996
+13,Beedrill Mega,Infestation,Sludge bomb,Rampardos,Smack Down,Rock Slide,1.7625374,28.449986785162693,474951
+18,Beedrill Mega,Infestation,Sludge bomb,Tyranitar Shadow Form,Smack Down,Stone Edge,1.8064377,22.76314392605497,491204
+23,Beedrill Mega,Poison jab,Fell stinger,Rampardos,Smack Down,Rock Slide,1.7610466,27.375700857894575,475853
+29,Beedrill Mega,Poison jab,Fell stinger,Tyranitar Shadow Form,Smack Down,Stone Edge,1.8443396,26.91758943806792,498392
+25,Beedrill Mega,Infestation,Fell stinger,Rampardos,Smack Down,Rock Slide,1.7536563,28.48175420143748,471950
+29,Beedrill Mega,Infestation,Fell stinger,Tyranitar Shadow Form,Smack Down,Stone Edge,1.8140879,29.45534201224924,488225
+27,Beedrill Mega,Infestation,X scissor,Rampardos,Smack Down,Rock Slide,1.7883645,29.13085549907428,480480
+28,Beedrill Mega,Infestation,X scissor,Tyranitar Shadow Form,Smack Down,Stone Edge,1.8148535,29.713993054673583,487736
+24,Beedrill Mega,Poison jab,X scissor,Rampardos,Smack Down,Rock Slide,1.7475533,26.810750410590895,470888
+28,Beedrill Mega,Poison jab,X scissor,Tyranitar Shadow Form,Smack Down,Stone Edge,1.7843455,26.603361377685378,481385
+13,Beedrill Mega,Infestation,Aerial ace,Tyranitar Shadow Form,Smack Down,Stone Edge,1.6584058,14.60674286952096,472040
+14,Beedrill Mega,Infestation,Aerial ace,Rampardos,Smack Down,Rock Slide,1.6623964,18.720056329923082,472448
+12,Beedrill Mega,Poison jab,Aerial ace,Rampardos,Smack Down,Rock Slide,1.659142,17.879149894737882,471984
+14,Beedrill Mega,Poison jab,Aerial ace,Tyranitar Shadow Form,Smack Down,Stone Edge,1.6880153,12.158475798348181,480544
+14,Beedrill Mega,Random,Random,Rampardos,Smack Down,Rock Slide,1.7188,24.04771185089373,472731
+19,Beedrill Mega,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,1.7437052,20.900469759269175,482826
+8,Glalie Mega,Frost breath,Shadow ball,Tyranitar Shadow Form,Smack Down,Stone Edge,1.902268,18.07302584976935,541338
+11,Glalie Mega,Frost breath,Shadow ball,Rampardos,Smack Down,Rock Slide,2.030813,35.29666626024491,538623
+21,Glalie Mega,Frost breath,Shadow ball,Rhyperior,Smack Down,Rock Wrecker,2.1437464,25.90443757971176,593895
+8,Glalie Mega,Ice shard,Shadow ball,Tyranitar Shadow Form,Smack Down,Stone Edge,1.9011371,18.028494813942597,541022
+12,Glalie Mega,Ice shard,Shadow ball,Rampardos,Smack Down,Rock Slide,2.0362644,35.23257237834891,542205
+19,Glalie Mega,Ice shard,Shadow ball,Rhyperior,Smack Down,Rock Wrecker,2.1105552,24.871172534289343,589636
+21,Glalie Mega,Frost breath,Avalanche,Rampardos,Smack Down,Rock Slide,2.0730352,37.40168727968718,546060
+22,Glalie Mega,Frost breath,Avalanche,Tyranitar Shadow Form,Smack Down,Stone Edge,2.0779455,28.086574300788776,562186
+20,Glalie Mega,Ice shard,Avalanche,Rampardos,Smack Down,Rock Slide,2.0801916,37.15461582014992,548469
+23,Glalie Mega,Ice shard,Avalanche,Tyranitar Shadow Form,Smack Down,Stone Edge,2.1102133,29.294999964642948,571102
+24,Glalie Mega,Ice shard,Gyro ball,Tyranitar Shadow Form,Smack Down,Stone Edge,2.0713782,31.202245273962422,559300
+26,Glalie Mega,Ice shard,Gyro ball,Rampardos,Smack Down,Rock Slide,2.0865397,38.30239929700028,545722
+30,Glalie Mega,Ice shard,Gyro ball,Rhyperior,Smack Down,Rock Wrecker,2.1685948,28.01823487960954,589250
+22,Glalie Mega,Frost breath,Gyro ball,Rampardos,Smack Down,Rock Slide,2.052928,36.54591930722731,542580
+24,Glalie Mega,Frost breath,Gyro ball,Tyranitar Shadow Form,Smack Down,Stone Edge,2.0649164,32.07469636172975,556816
+29,Glalie Mega,Frost breath,Gyro ball,Rhyperior,Smack Down,Rock Wrecker,2.1233268,26.729807914069003,579274
+14,Glalie Mega,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,1.9835101,22.73754900823568,549870
+18,Glalie Mega,Random,Random,Rampardos,Smack Down,Rock Slide,2.0006392,31.98282048036607,538409
+30,Glalie Mega,Random,Random,Rhyperior,Smack Down,Rock Wrecker,2.1814237,27.156134253410766,598860
+22,Aggron Mega,Iron tail,Stone edge,Rhyperior,Mud Slap,Earthquake,4.083667,39.37220474670483,1161687
+18,Aggron Mega,Smack down,Stone edge,Rhyperior,Mud Slap,Earthquake,4.057046,24.983712162240316,1161084
+23,Mewtwo Mega Y,Confusion,Focus blast,Tyranitar Shadow Form,Bite,Crunch,3.3019366,62.51654555930739,863474
+3,Mewtwo Mega Y,Confusion,Psychic,Tyranitar Shadow Form,Bite,Crunch,2.5744567,26.864038013239245,732331
+13,Mewtwo Mega Y,Psycho cut,Thunderbolt,Tyranitar Shadow Form,Bite,Crunch,3.09062,56.857050048662884,810375
+10,Mewtwo Mega Y,Confusion,Thunderbolt,Tyranitar Shadow Form,Bite,Crunch,2.961306,49.8579275623821,787560
+4,Mewtwo Mega Y,Psycho cut,Psychic,Tyranitar Shadow Form,Bite,Crunch,2.5643215,24.85656155171949,729255
+7,Mewtwo Mega Y,Psycho cut,Ice beam,Tyranitar Shadow Form,Bite,Crunch,2.8543143,48.35042417001623,760134
+4,Mewtwo Mega Y,Confusion,Flamethrower,Tyranitar Shadow Form,Bite,Crunch,2.5833678,29.0731295924332,729445
+6,Mewtwo Mega Y,Confusion,Ice beam,Tyranitar Shadow Form,Bite,Crunch,2.8029118,43.945194712417894,752987
+4,Mewtwo Mega Y,Psycho cut,Flamethrower,Tyranitar Shadow Form,Bite,Crunch,2.5595624,26.984872887313806,725515
+24,Mewtwo Mega Y,Psycho cut,Focus blast,Tyranitar Shadow Form,Bite,Crunch,3.4698038,69.73367782924873,893757
+4,Mewtwo Mega Y,Random,Random,Tyranitar Shadow Form,Bite,Crunch,2.8431928,41.24112722905791,772979
+5,Houndoom Mega,Snarl,Fire blast,Rhyperior,Mud Slap,Rock Wrecker,2.2858317,22.382985770353983,650000
+7,Houndoom Mega,Snarl,Fire blast,Rampardos,Smack Down,Rock Slide,2.2914903,32.95290566895435,619154
+9,Houndoom Mega,Snarl,Fire blast,Tyranitar Shadow Form,Smack Down,Stone Edge,2.309418,26.456069032108566,646933
+5,Houndoom Mega,Fire fang,Fire blast,Rampardos,Smack Down,Rock Slide,2.2725866,30.091324792083498,613940
+6,Houndoom Mega,Fire fang,Fire blast,Rhyperior,Mud Slap,Rock Wrecker,2.2759137,19.313791933117084,647085
+9,Houndoom Mega,Fire fang,Fire blast,Tyranitar Shadow Form,Smack Down,Stone Edge,2.3151622,26.950592757290302,647613
+5,Houndoom Mega,Snarl,Flamethrower,Tyranitar Shadow Form,Smack Down,Stone Edge,2.1692672,21.221437515000986,616921
+6,Houndoom Mega,Snarl,Flamethrower,Rhyperior,Mud Slap,Rock Wrecker,2.258451,19.503883262870467,642147
+11,Houndoom Mega,Snarl,Flamethrower,Rampardos,Smack Down,Rock Slide,2.3321476,35.31284303664018,630383
+5,Houndoom Mega,Fire fang,Flamethrower,Tyranitar Shadow Form,Smack Down,Stone Edge,2.159628,21.732540980528093,614083
+8,Houndoom Mega,Fire fang,Flamethrower,Rhyperior,Mud Slap,Rock Wrecker,2.2504222,18.09520270150289,639875
+9,Houndoom Mega,Fire fang,Flamethrower,Rampardos,Smack Down,Rock Slide,2.261744,31.40433978715247,611560
+6,Houndoom Mega,Snarl,Crunch,Tyranitar Shadow Form,Smack Down,Stone Edge,2.1522145,18.556591342095608,612063
+10,Houndoom Mega,Snarl,Crunch,Rhyperior,Mud Slap,Rock Wrecker,2.2886343,25.241740165989025,648341
+12,Houndoom Mega,Snarl,Crunch,Rampardos,Smack Down,Rock Slide,2.3359895,40.37325415541748,622444
+7,Houndoom Mega,Snarl,Foul play,Tyranitar Shadow Form,Smack Down,Stone Edge,2.174575,21.890299121226786,618140
+11,Houndoom Mega,Snarl,Foul play,Rhyperior,Mud Slap,Rock Wrecker,2.3388314,29.045518107690913,642743
+17,Houndoom Mega,Snarl,Foul play,Rampardos,Smack Down,Rock Slide,2.481619,48.217482275132376,644061
+6,Houndoom Mega,Fire fang,Crunch,Tyranitar Shadow Form,Smack Down,Stone Edge,2.1498816,18.986864983510657,611417
+10,Houndoom Mega,Fire fang,Crunch,Rhyperior,Mud Slap,Rock Wrecker,2.2871125,24.289977363086788,650708
+16,Houndoom Mega,Fire fang,Crunch,Rampardos,Smack Down,Rock Slide,2.4151978,41.08231004604187,643597
+7,Houndoom Mega,Fire fang,Foul play,Tyranitar Shadow Form,Smack Down,Stone Edge,2.1843967,22.616125079775287,620893
+10,Houndoom Mega,Fire fang,Foul play,Rhyperior,Mud Slap,Rock Wrecker,2.3468702,28.336173373171558,649490
+14,Houndoom Mega,Fire fang,Foul play,Rampardos,Smack Down,Rock Slide,2.442851,46.92013363454257,636021
+5,Houndoom Mega,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,2.1888497,20.636563663038995,621097
+8,Houndoom Mega,Random,Random,Rhyperior,Mud Slap,Rock Wrecker,2.2845438,21.29206162669021,648223
+12,Houndoom Mega,Random,Random,Rampardos,Smack Down,Rock Slide,2.3278606,35.689036104198884,627041
+2,Alakazam Mega,Psycho cut,Shadow ball,Tyranitar Shadow Form,Bite,Crunch,2.413641,29.412078376146994,667402
+2,Alakazam Mega,Confusion,Shadow ball,Tyranitar Shadow Form,Bite,Crunch,2.363661,27.32232930174302,662054
+24,Alakazam Mega,Confusion,Focus blast,Tyranitar Shadow Form,Bite,Crunch,3.0352736,59.67159824329809,787053
+2,Alakazam Mega,Psycho cut,Futuresight,Tyranitar Shadow Form,Bite,Crunch,2.3360026,21.949282906422745,664228
+27,Alakazam Mega,Psycho cut,Focus blast,Tyranitar Shadow Form,Bite,Crunch,3.122698,63.90589035341977,803482
+3,Alakazam Mega,Psycho cut,Fire punch,Tyranitar Shadow Form,Bite,Crunch,2.3105912,18.67548954031478,656898
+2,Alakazam Mega,Confusion,Futuresight,Tyranitar Shadow Form,Bite,Crunch,2.3092256,20.22539915659433,656501
+3,Alakazam Mega,Confusion,Fire punch,Tyranitar Shadow Form,Bite,Crunch,2.3189447,18.969981375226244,659262
+3,Alakazam Mega,Random,Random,Tyranitar Shadow Form,Bite,Crunch,2.4754407,28.99210842145387,686321
+13,Slowbro Mega,Confusion,Psychic,Tyranitar Shadow Form,Bite,Crunch,2.8534024,17.36318785146244,825227
+14,Slowbro Mega,Water gun,Psychic,Tyranitar Shadow Form,Bite,Crunch,2.8971543,19.913832529149282,822906
+16,Slowbro Mega,Confusion,Water pulse,Tyranitar Shadow Form,Bite,Crunch,2.9726293,37.457818195432914,813912
+20,Slowbro Mega,Water gun,Water pulse,Tyranitar Shadow Form,Bite,Crunch,3.0092247,42.534606414496956,813515
+11,Slowbro Mega,Water gun,Ice beam,Tyranitar Shadow Form,Bite,Crunch,2.9185429,33.37408811307577,821923
+12,Slowbro Mega,Confusion,Ice beam,Tyranitar Shadow Form,Bite,Crunch,2.8983572,29.593745425038055,823875
+13,Slowbro Mega,Random,Random,Tyranitar Shadow Form,Bite,Crunch,2.9030564,26.6862649447365,822219
+9,Latias Mega,Charm,Outrage,Tyranitar Shadow Form,Bite,Crunch,3.5615013,61.20509899353909,952438
+14,Latias Mega,Zen headbutt,Outrage,Tyranitar Shadow Form,Bite,Crunch,3.6336813,54.95427071913907,980148
+12,Latias Mega,Dragon breath,Outrage,Tyranitar Shadow Form,Bite,Crunch,3.6278362,57.63090763954772,976260
+12,Latias Mega,Zen headbutt,Psychic,Tyranitar Shadow Form,Bite,Crunch,3.3210218,23.738738370926825,943367
+9,Latias Mega,Dragon breath,Psychic,Tyranitar Shadow Form,Bite,Crunch,3.3189576,25.906867198890385,943195
+7,Latias Mega,Charm,Psychic,Tyranitar Shadow Form,Bite,Crunch,3.288144,34.45545873027318,935674
+26,Latias Mega,Charm,Thunder,Tyranitar Shadow Form,Bite,Crunch,3.5296562,54.89866709464072,954530
+24,Latias Mega,Dragon breath,Thunder,Tyranitar Shadow Form,Bite,Crunch,3.5090308,43.16526147324993,964404
+18,Latias Mega,Zen headbutt,Thunder,Tyranitar Shadow Form,Bite,Crunch,3.3629138,37.486677054234185,954791
+11,Latias Mega,Random,Random,Tyranitar Shadow Form,Bite,Crunch,3.4174786,39.5007690094858,953167
+6,Latios Mega,Dragon breath,Psychic,Tyranitar Shadow Form,Bite,Crunch,2.647963,23.290603556632224,752628
+7,Latios Mega,Zen headbutt,Psychic,Tyranitar Shadow Form,Bite,Crunch,2.6585112,21.322120692472403,755393
+8,Latios Mega,Zen headbutt,Dragon claw,Tyranitar Shadow Form,Bite,Crunch,2.7285774,33.36068635528088,753167
+8,Latios Mega,Dragon breath,Dragon claw,Tyranitar Shadow Form,Bite,Crunch,2.7597942,36.30262016299835,749021
+14,Latios Mega,Random,Random,Tyranitar Shadow Form,Bite,Crunch,2.8759453,36.147955717134735,787628
+19,Gardevoir Mega,Charge beam,Psychic,Tyranitar Shadow Form,Iron Tail,Stone Edge,3.2840714,26.81253937282297,933392
+17,Gardevoir Mega,Confusion,Shadow ball,Tyranitar Shadow Form,Iron Tail,Return,3.325964,35.110336760640884,943771
+27,Gardevoir Mega,Charm,Shadow ball,Tyranitar Shadow Form,Iron Tail,Return,3.5090756,48.15768458339744,947947
+25,Gardevoir Mega,Charm,Psychic,Tyranitar Shadow Form,Iron Tail,Return,3.4664166,42.12164541762904,943246
+20,Gardevoir Mega,Confusion,Psychic,Tyranitar Shadow Form,Iron Tail,Stone Edge,3.2680635,26.239455658779757,928817
+7,Pidgeot Mega,Steel wing,Brave bird,Rhyperior,Smack Down,Rock Wrecker,2.1062858,24.534541536929904,593343
+8,Pidgeot Mega,Steel wing,Brave bird,Rampardos,Smack Down,Rock Slide,2.1080308,37.89169788953459,554210
+10,Pidgeot Mega,Steel wing,Brave bird,Tyranitar Shadow Form,Smack Down,Stone Edge,2.1484354,29.939410019422585,580678
+7,Pidgeot Mega,Air slash,Brave bird,Rampardos,Smack Down,Rock Slide,2.0044985,29.191377071603338,541612
+10,Pidgeot Mega,Air slash,Brave bird,Rhyperior,Smack Down,Rock Wrecker,2.1256058,20.479529610380695,604567
+11,Pidgeot Mega,Air slash,Brave bird,Tyranitar Shadow Form,Smack Down,Stone Edge,2.1426535,26.29114338273338,588410
+6,Pidgeot Mega,Air slash,Hurricane,Tyranitar Shadow Form,Smack Down,Stone Edge,1.9632006,19.299505908591986,558561
+8,Pidgeot Mega,Air slash,Hurricane,Rampardos,Smack Down,Rock Slide,2.0288663,26.94650477862802,549823
+12,Pidgeot Mega,Air slash,Hurricane,Rhyperior,Smack Down,Rock Wrecker,2.162512,18.79615285431519,614992
+6,Pidgeot Mega,Steel wing,Hurricane,Rampardos,Smack Down,Rock Slide,2.0083897,31.481274117394545,542820
+10,Pidgeot Mega,Steel wing,Hurricane,Rhyperior,Smack Down,Rock Wrecker,2.1388314,22.308991614898368,608379
+14,Pidgeot Mega,Steel wing,Hurricane,Tyranitar Shadow Form,Smack Down,Stone Edge,2.1757822,27.055112780458607,593451
+6,Pidgeot Mega,Air slash,Aerial ace,Rampardos,Smack Down,Rock Slide,1.903383,21.8368687879759,536298
+10,Pidgeot Mega,Air slash,Aerial ace,Tyranitar Shadow Form,Smack Down,Stone Edge,1.988464,15.348865269058237,565696
+17,Pidgeot Mega,Air slash,Aerial ace,Rhyperior,Smack Down,Rock Wrecker,2.1413085,13.728225769896197,611604
+6,Pidgeot Mega,Steel wing,Aerial ace,Tyranitar Shadow Form,Smack Down,Stone Edge,1.9350662,18.449824606804945,550614
+10,Pidgeot Mega,Steel wing,Aerial ace,Rampardos,Smack Down,Rock Slide,2.0169616,27.12613014382703,544570
+14,Pidgeot Mega,Steel wing,Aerial ace,Rhyperior,Smack Down,Rock Wrecker,2.1158464,16.200058056940346,601785
+9,Pidgeot Mega,Steel wing,Feather dance,Rampardos,Smack Down,Rock Slide,1.9314572,19.414096534633615,549603
+12,Pidgeot Mega,Steel wing,Feather dance,Tyranitar Shadow Form,Smack Down,Stone Edge,1.9882305,13.673316601949644,565620
+18,Pidgeot Mega,Steel wing,Feather dance,Rhyperior,Smack Down,Rock Wrecker,2.0684354,12.02460324370564,615736
+8,Pidgeot Mega,Air slash,Feather dance,Tyranitar Shadow Form,Smack Down,Stone Edge,1.8837273,10.702333703536556,560992
+9,Pidgeot Mega,Air slash,Feather dance,Rampardos,Smack Down,Rock Slide,1.9210784,15.623579967934456,546611
+16,Pidgeot Mega,Air slash,Feather dance,Rhyperior,Smack Down,Rock Wrecker,2.0494711,9.509145186027382,610742
+7,Pidgeot Mega,Random,Random,Rampardos,Smack Down,Rock Slide,1.9805558,25.59420163813005,544548
+9,Pidgeot Mega,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,2.0147178,19.289221359180676,567831
+12,Pidgeot Mega,Random,Random,Rhyperior,Smack Down,Rock Wrecker,2.1202393,16.595632684938742,608796
+1,Charizard Mega Y,Fire spin,Overheat,Tyranitar Shadow Form,Smack Down,Stone Edge,1.58877,19.957495527461624,435673
+2,Charizard Mega Y,Fire spin,Overheat,Rhyperior,Smack Down,Rock Wrecker,1.6862117,19.899093693300234,469679
+5,Charizard Mega Y,Fire spin,Overheat,Rampardos,Smack Down,Rock Slide,1.7716322,34.10677397474526,457890
+1,Charizard Mega Y,Air slash,Overheat,Tyranitar Shadow Form,Smack Down,Stone Edge,1.5844368,19.778740689877754,434965
+2,Charizard Mega Y,Air slash,Overheat,Rhyperior,Smack Down,Rock Wrecker,1.6746624,19.472513389922355,467058
+4,Charizard Mega Y,Air slash,Overheat,Rampardos,Smack Down,Rock Slide,1.7429016,33.06108911197106,451417
+1,Charizard Mega Y,Fire spin,Fire blast,Tyranitar Shadow Form,Smack Down,Stone Edge,1.5772928,18.777397243281754,438630
+2,Charizard Mega Y,Fire spin,Fire blast,Rampardos,Smack Down,Rock Slide,1.5904089,26.278253616334485,429798
+3,Charizard Mega Y,Fire spin,Fire blast,Rhyperior,Smack Down,Rock Wrecker,1.6048999,15.686767969483718,456207
+1,Charizard Mega Y,Air slash,Fire blast,Tyranitar Shadow Form,Smack Down,Stone Edge,1.5823358,18.784579991355816,439804
+2,Charizard Mega Y,Air slash,Fire blast,Rampardos,Smack Down,Rock Slide,1.5928082,25.965849085492955,430777
+3,Charizard Mega Y,Air slash,Fire blast,Rhyperior,Smack Down,Rock Wrecker,1.6049548,15.442301648218168,456233
+1,Charizard Mega Y,Air slash,Dragon claw,Tyranitar Shadow Form,Smack Down,Stone Edge,1.49871,16.410834937784006,423720
+2,Charizard Mega Y,Air slash,Dragon claw,Rampardos,Smack Down,Rock Slide,1.5068508,22.58235839446474,406618
+3,Charizard Mega Y,Air slash,Dragon claw,Rhyperior,Smack Down,Rock Wrecker,1.5622575,13.973010232317037,444134
+1,Charizard Mega Y,Fire spin,Dragon claw,Tyranitar Shadow Form,Smack Down,Stone Edge,1.49824,16.640049824439522,423145
+2,Charizard Mega Y,Fire spin,Dragon claw,Rampardos,Smack Down,Rock Slide,1.5152054,23.018609119034664,408749
+3,Charizard Mega Y,Fire spin,Dragon claw,Rhyperior,Smack Down,Rock Wrecker,1.5612481,14.186836382346762,443854
+1,Charizard Mega Y,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,1.5360037,16.542055685058486,430049
+2,Charizard Mega Y,Random,Random,Rampardos,Smack Down,Rock Slide,1.5771124,24.757732817253583,425903
+3,Charizard Mega Y,Random,Random,Rhyperior,Smack Down,Rock Wrecker,1.6010692,14.745017089833873,455175
+2,Manectric Mega,Snarl,Overheat,Rhyperior,Mud Slap,Earthquake,2.3598065,20.79029926214089,670826
+2,Manectric Mega,Thunder fang,Overheat,Rhyperior,Mud Slap,Earthquake,2.3595262,18.33051168369642,671003
+3,Manectric Mega,Charge beam,Overheat,Rhyperior,Mud Slap,Earthquake,2.3782225,18.58160605787733,676271
+5,Manectric Mega,Snarl,Flame burst,Rhyperior,Mud Slap,Earthquake,2.411016,16.930681364503034,685319
+3,Manectric Mega,Charge beam,Flame burst,Rhyperior,Mud Slap,Earthquake,2.2947805,13.985508898570059,665148
+6,Manectric Mega,Thunder fang,Flame burst,Rhyperior,Mud Slap,Earthquake,2.3498194,14.702407458656374,675612
+5,Manectric Mega,Snarl,Wild charge,Rhyperior,Mud Slap,Earthquake,2.347219,15.419162535647402,668138
+5,Manectric Mega,Thunder fang,Wild charge,Rhyperior,Mud Slap,Earthquake,2.2618127,13.61084469223179,658330
+6,Manectric Mega,Charge beam,Wild charge,Rhyperior,Mud Slap,Earthquake,2.2554483,12.976447908050908,664524
+6,Manectric Mega,Thunder fang,Thunder,Rhyperior,Mud Slap,Earthquake,2.234662,12.578637001748502,662041
+6,Manectric Mega,Snarl,Thunder,Rhyperior,Mud Slap,Earthquake,2.3180776,14.972102557500637,660325
+6,Manectric Mega,Charge beam,Thunder,Rhyperior,Mud Slap,Earthquake,2.2060642,11.250598190284546,657353
+3,Manectric Mega,Random,Random,Rhyperior,Mud Slap,Earthquake,2.3045878,14.673611582804737,667257
+13,Ampharos Mega,Volt switch,Zap cannon,Rhyperior,Mud Slap,Earthquake,2.481271,14.25557934572312,730754
+18,Ampharos Mega,Charge beam,Zap cannon,Rhyperior,Mud Slap,Earthquake,2.5264251,14.615451903387102,741485
+23,Ampharos Mega,Volt switch,Power gem,Rhyperior,Mud Slap,Earthquake,2.632567,16.89474388014807,754286
+19,Ampharos Mega,Charge beam,Power gem,Rhyperior,Mud Slap,Earthquake,2.5797286,16.378718629241018,739697
+23,Ampharos Mega,Charge beam,Thunder,Rhyperior,Mud Slap,Earthquake,2.5006833,13.20558576507491,745053
+19,Ampharos Mega,Volt switch,Thunder,Rhyperior,Mud Slap,Earthquake,2.4816446,13.13017545923087,738107
+20,Ampharos Mega,Volt switch,Thunder punch,Rhyperior,Mud Slap,Earthquake,2.453643,9.588045853067825,731185
+20,Ampharos Mega,Charge beam,Thunder punch,Rhyperior,Mud Slap,Earthquake,2.4333053,9.16185346004206,725124
+20,Ampharos Mega,Random,Random,Rhyperior,Mud Slap,Earthquake,2.5702808,16.39519222563789,749717
+3,Gengar Mega,Sucker punch,Shadow ball,Tyranitar Shadow Form,Bite,Crunch,2.2943914,27.94178771258156,634295
+4,Gengar Mega,Shadow claw,Shadow ball,Tyranitar Shadow Form,Bite,Crunch,2.3128664,28.988141099650512,634487
+3,Gengar Mega,Hex,Shadow ball,Tyranitar Shadow Form,Bite,Crunch,2.2953353,27.56320190576539,638473
+6,Gengar Mega,Sucker punch,Sludge bomb,Tyranitar Shadow Form,Bite,Crunch,2.325171,28.897362238182396,637971
+6,Gengar Mega,Shadow claw,Sludge bomb,Tyranitar Shadow Form,Bite,Crunch,2.3313982,29.00143216146816,639672
+6,Gengar Mega,Hex,Sludge bomb,Tyranitar Shadow Form,Bite,Crunch,2.2936234,27.25802283451401,637807
+6,Gengar Mega,Random,Random,Tyranitar Shadow Form,Bite,Crunch,2.4636886,33.808525735555534,668720
+3,Charizard Mega X,Air slash,Dragon claw,Tyranitar Shadow Form,Smack Down,Stone Edge,2.3916252,25.59047977038404,676911
+4,Charizard Mega X,Air slash,Dragon claw,Rampardos,Smack Down,Rock Slide,2.427198,36.14493738082945,655373
+6,Charizard Mega X,Air slash,Dragon claw,Rhyperior,Smack Down,Rock Wrecker,2.4788756,22.285903524804503,704722
+3,Charizard Mega X,Fire spin,Dragon claw,Tyranitar Shadow Form,Smack Down,Stone Edge,2.381949,26.42634059161463,673139
+4,Charizard Mega X,Fire spin,Dragon claw,Rampardos,Smack Down,Rock Slide,2.4308307,36.75131753772506,656014
+5,Charizard Mega X,Fire spin,Dragon claw,Rhyperior,Mud Slap,Rock Wrecker,2.4638338,23.092431696912872,700555
+10,Charizard Mega X,Fire spin,Overheat,Tyranitar Shadow Form,Smack Down,Stone Edge,2.5014977,29.505011133599346,698251
+11,Charizard Mega X,Fire spin,Overheat,Rhyperior,Mud Slap,Rock Wrecker,2.513416,25.029225975514038,715066
+12,Charizard Mega X,Fire spin,Overheat,Rampardos,Smack Down,Rock Slide,2.528438,36.945777689416374,683343
+9,Charizard Mega X,Fire spin,Fire blast,Tyranitar Shadow Form,Smack Down,Stone Edge,2.4272888,27.456662220997664,685075
+12,Charizard Mega X,Fire spin,Fire blast,Rampardos,Smack Down,Rock Slide,2.4626293,31.81680941793655,666410
+13,Charizard Mega X,Fire spin,Fire blast,Rhyperior,Mud Slap,Rock Wrecker,2.5141995,20.757461432716035,714544
+9,Charizard Mega X,Air slash,Overheat,Rhyperior,Mud Slap,Rock Wrecker,2.4861705,22.83566897510965,706746
+11,Charizard Mega X,Air slash,Overheat,Tyranitar Shadow Form,Smack Down,Stone Edge,2.508421,29.028657826947377,702116
+14,Charizard Mega X,Air slash,Overheat,Rampardos,Smack Down,Rock Slide,2.5251327,36.34033693961298,682295
+4,Charizard Mega X,Air slash,Fire blast,Tyranitar Shadow Form,Smack Down,Stone Edge,2.3361387,24.3468958509236,664722
+10,Charizard Mega X,Air slash,Fire blast,Rampardos,Smack Down,Rock Slide,2.4351892,29.658753391897722,670007
+13,Charizard Mega X,Air slash,Fire blast,Rhyperior,Mud Slap,Rock Wrecker,2.5041645,19.621503528241,711704
+5,Charizard Mega X,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,2.3942366,24.080558824793258,677106
+7,Charizard Mega X,Random,Random,Rampardos,Smack Down,Rock Slide,2.4287367,31.37510915105405,665402
+10,Charizard Mega X,Random,Random,Rhyperior,Mud Slap,Rock Wrecker,2.4723303,20.062990489398196,710946
+8,Beedrill Mega,Poison jab,Sludge bomb,Tyranitar Shadow Form,Smack Down,Stone Edge,1.6919191,18.627682232549574,478881
+13,Beedrill Mega,Poison jab,Sludge bomb,Rampardos,Smack Down,Rock Slide,1.7613432,27.183610566144576,475996
+13,Beedrill Mega,Infestation,Sludge bomb,Rampardos,Smack Down,Rock Slide,1.7625374,28.449986785162693,474951
+18,Beedrill Mega,Infestation,Sludge bomb,Tyranitar Shadow Form,Smack Down,Stone Edge,1.8064377,22.76314392605497,491204
+23,Beedrill Mega,Poison jab,Fell stinger,Rampardos,Smack Down,Rock Slide,1.7610466,27.375700857894575,475853
+29,Beedrill Mega,Poison jab,Fell stinger,Tyranitar Shadow Form,Smack Down,Stone Edge,1.8443396,26.91758943806792,498392
+25,Beedrill Mega,Infestation,Fell stinger,Rampardos,Smack Down,Rock Slide,1.7536563,28.48175420143748,471950
+29,Beedrill Mega,Infestation,Fell stinger,Tyranitar Shadow Form,Smack Down,Stone Edge,1.8140879,29.45534201224924,488225
+27,Beedrill Mega,Infestation,X scissor,Rampardos,Smack Down,Rock Slide,1.7883645,29.13085549907428,480480
+28,Beedrill Mega,Infestation,X scissor,Tyranitar Shadow Form,Smack Down,Stone Edge,1.8148535,29.713993054673583,487736
+24,Beedrill Mega,Poison jab,X scissor,Rampardos,Smack Down,Rock Slide,1.7475533,26.810750410590895,470888
+28,Beedrill Mega,Poison jab,X scissor,Tyranitar Shadow Form,Smack Down,Stone Edge,1.7843455,26.603361377685378,481385
+13,Beedrill Mega,Infestation,Aerial ace,Tyranitar Shadow Form,Smack Down,Stone Edge,1.6584058,14.60674286952096,472040
+14,Beedrill Mega,Infestation,Aerial ace,Rampardos,Smack Down,Rock Slide,1.6623964,18.720056329923082,472448
+12,Beedrill Mega,Poison jab,Aerial ace,Rampardos,Smack Down,Rock Slide,1.659142,17.879149894737882,471984
+14,Beedrill Mega,Poison jab,Aerial ace,Tyranitar Shadow Form,Smack Down,Stone Edge,1.6880153,12.158475798348181,480544
+14,Beedrill Mega,Random,Random,Rampardos,Smack Down,Rock Slide,1.7188,24.04771185089373,472731
+19,Beedrill Mega,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,1.7437052,20.900469759269175,482826
+5,Houndoom Mega,Snarl,Fire blast,Rhyperior,Mud Slap,Rock Wrecker,2.2858317,22.382985770353983,650000
+7,Houndoom Mega,Snarl,Fire blast,Rampardos,Smack Down,Rock Slide,2.2914903,32.95290566895435,619154
+9,Houndoom Mega,Snarl,Fire blast,Tyranitar Shadow Form,Smack Down,Stone Edge,2.309418,26.456069032108566,646933
+5,Houndoom Mega,Fire fang,Fire blast,Rampardos,Smack Down,Rock Slide,2.2725866,30.091324792083498,613940
+6,Houndoom Mega,Fire fang,Fire blast,Rhyperior,Mud Slap,Rock Wrecker,2.2759137,19.313791933117084,647085
+9,Houndoom Mega,Fire fang,Fire blast,Tyranitar Shadow Form,Smack Down,Stone Edge,2.3151622,26.950592757290302,647613
+5,Houndoom Mega,Snarl,Flamethrower,Tyranitar Shadow Form,Smack Down,Stone Edge,2.1692672,21.221437515000986,616921
+6,Houndoom Mega,Snarl,Flamethrower,Rhyperior,Mud Slap,Rock Wrecker,2.258451,19.503883262870467,642147
+11,Houndoom Mega,Snarl,Flamethrower,Rampardos,Smack Down,Rock Slide,2.3321476,35.31284303664018,630383
+5,Houndoom Mega,Fire fang,Flamethrower,Tyranitar Shadow Form,Smack Down,Stone Edge,2.159628,21.732540980528093,614083
+8,Houndoom Mega,Fire fang,Flamethrower,Rhyperior,Mud Slap,Rock Wrecker,2.2504222,18.09520270150289,639875
+9,Houndoom Mega,Fire fang,Flamethrower,Rampardos,Smack Down,Rock Slide,2.261744,31.40433978715247,611560
+6,Houndoom Mega,Snarl,Crunch,Tyranitar Shadow Form,Smack Down,Stone Edge,2.1522145,18.556591342095608,612063
+10,Houndoom Mega,Snarl,Crunch,Rhyperior,Mud Slap,Rock Wrecker,2.2886343,25.241740165989025,648341
+12,Houndoom Mega,Snarl,Crunch,Rampardos,Smack Down,Rock Slide,2.3359895,40.37325415541748,622444
+7,Houndoom Mega,Snarl,Foul play,Tyranitar Shadow Form,Smack Down,Stone Edge,2.174575,21.890299121226786,618140
+11,Houndoom Mega,Snarl,Foul play,Rhyperior,Mud Slap,Rock Wrecker,2.3388314,29.045518107690913,642743
+17,Houndoom Mega,Snarl,Foul play,Rampardos,Smack Down,Rock Slide,2.481619,48.217482275132376,644061
+6,Houndoom Mega,Fire fang,Crunch,Tyranitar Shadow Form,Smack Down,Stone Edge,2.1498816,18.986864983510657,611417
+10,Houndoom Mega,Fire fang,Crunch,Rhyperior,Mud Slap,Rock Wrecker,2.2871125,24.289977363086788,650708
+16,Houndoom Mega,Fire fang,Crunch,Rampardos,Smack Down,Rock Slide,2.4151978,41.08231004604187,643597
+7,Houndoom Mega,Fire fang,Foul play,Tyranitar Shadow Form,Smack Down,Stone Edge,2.1843967,22.616125079775287,620893
+10,Houndoom Mega,Fire fang,Foul play,Rhyperior,Mud Slap,Rock Wrecker,2.3468702,28.336173373171558,649490
+14,Houndoom Mega,Fire fang,Foul play,Rampardos,Smack Down,Rock Slide,2.442851,46.92013363454257,636021
+5,Houndoom Mega,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,2.1888497,20.636563663038995,621097
+8,Houndoom Mega,Random,Random,Rhyperior,Mud Slap,Rock Wrecker,2.2845438,21.29206162669021,648223
+12,Houndoom Mega,Random,Random,Rampardos,Smack Down,Rock Slide,2.3278606,35.689036104198884,627041
+13,Slowbro Mega,Confusion,Psychic,Tyranitar Shadow Form,Bite,Crunch,2.8534024,17.36318785146244,825227
+14,Slowbro Mega,Water gun,Psychic,Tyranitar Shadow Form,Bite,Crunch,2.8971543,19.913832529149282,822906
+16,Slowbro Mega,Confusion,Water pulse,Tyranitar Shadow Form,Bite,Crunch,2.9726293,37.457818195432914,813912
+20,Slowbro Mega,Water gun,Water pulse,Tyranitar Shadow Form,Bite,Crunch,3.0092247,42.534606414496956,813515
+11,Slowbro Mega,Water gun,Ice beam,Tyranitar Shadow Form,Bite,Crunch,2.9185429,33.37408811307577,821923
+12,Slowbro Mega,Confusion,Ice beam,Tyranitar Shadow Form,Bite,Crunch,2.8983572,29.593745425038055,823875
+13,Slowbro Mega,Random,Random,Tyranitar Shadow Form,Bite,Crunch,2.9030564,26.6862649447365,822219
+27,Arceus Steel Form,Iron tail,Hyper beam,Rhyperior,Mud Slap,Earthquake,3.0092852,27.98989959234872,855647
+26,Arceus Steel Form,Shadow claw,Futuresight,Rhyperior,Mud Slap,Earthquake,3.0305815,27.405532140672875,861679
+26,Zacian Hero Form,Snarl,Wild charge,Tyranitar Shadow Form,Iron Tail,Return,3.4558442,42.337465415559066,956705
+27,Zacian Hero Form,Metal claw,Wild charge,Tyranitar Shadow Form,Iron Tail,Return,3.5120294,46.13434073200745,954241
+26,Zacian Hero Form,Quick attack,Wild charge,Tyranitar Shadow Form,Iron Tail,Return,3.4754517,43.35486730086648,958605
+25,Zacian Hero Form,Fire fang,Wild charge,Tyranitar Shadow Form,Iron Tail,Return,3.4604354,42.838400900962476,955805
+4,Arceus Fire Form,Iron tail,Outrage,Tyranitar Shadow Form,Smack Down,Stone Edge,2.7803466,34.60726832139371,758355
+6,Arceus Fire Form,Iron tail,Outrage,Rhyperior,Mud Slap,Rock Wrecker,2.8397067,31.993571394569255,805865
+10,Arceus Fire Form,Iron tail,Outrage,Rampardos,Smack Down,Rock Slide,2.9091275,51.67789289950899,771856
+4,Arceus Fire Form,Iron tail,Hyper beam,Tyranitar Shadow Form,Smack Down,Stone Edge,2.655625,29.035720210345062,755817
+5,Arceus Fire Form,Iron tail,Hyper beam,Rampardos,Smack Down,Rock Slide,2.7221966,40.14117579044767,735728
+7,Arceus Fire Form,Iron tail,Hyper beam,Rhyperior,Mud Slap,Rock Wrecker,2.7698426,24.218496616121612,787455
+4,Arceus Fire Form,Shadow claw,Outrage,Tyranitar Shadow Form,Smack Down,Stone Edge,2.6674905,29.534597374320356,752882
+6,Arceus Fire Form,Shadow claw,Outrage,Rampardos,Smack Down,Rock Slide,2.8333254,44.766744555402425,762239
+7,Arceus Fire Form,Shadow claw,Outrage,Rhyperior,Mud Slap,Rock Wrecker,2.8537967,30.8403948057349,809227
+3,Arceus Fire Form,Shadow claw,Hyper beam,Tyranitar Shadow Form,Smack Down,Stone Edge,2.5926888,20.116272695549902,736835
+5,Arceus Fire Form,Shadow claw,Hyper beam,Rampardos,Smack Down,Rock Slide,2.6750457,31.280873748929025,747596
+7,Arceus Fire Form,Shadow claw,Hyper beam,Rhyperior,Mud Slap,Rock Wrecker,2.7992938,20.845790548191577,795201
+4,Arceus Fire Form,Iron tail,Futuresight,Tyranitar Shadow Form,Smack Down,Stone Edge,2.5767815,22.23832995914828,732229
+6,Arceus Fire Form,Iron tail,Futuresight,Rhyperior,Mud Slap,Rock Wrecker,2.7922683,32.88144787746849,781026
+9,Arceus Fire Form,Iron tail,Futuresight,Rampardos,Smack Down,Rock Slide,2.8633616,51.754402296009914,750150
+3,Arceus Fire Form,Shadow claw,Futuresight,Tyranitar Shadow Form,Smack Down,Stone Edge,2.4807568,14.24312554454754,733803
+5,Arceus Fire Form,Shadow claw,Futuresight,Rampardos,Smack Down,Rock Slide,2.718347,37.42601553728833,734640
+7,Arceus Fire Form,Shadow claw,Futuresight,Rhyperior,Mud Slap,Rock Wrecker,2.7889402,26.205001435577106,793209
+4,Arceus Fire Form,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,2.6262941,25.008591271531117,745652
+5,Arceus Fire Form,Random,Random,Rampardos,Smack Down,Rock Slide,2.786754,42.654719898508944,750739
+7,Arceus Fire Form,Random,Random,Rhyperior,Mud Slap,Rock Wrecker,2.7990549,27.74484109128014,792646
+24,Zamazenta Crowned Shield Form,Snarl,Moonblast,Rhyperior,Mud Slap,Earthquake,3.6302767,33.377020577384144,1032378
+28,Zamazenta Crowned Shield Form,Quick attack,Moonblast,Rhyperior,Mud Slap,Earthquake,3.6486306,28.754445968738548,1036852
+13,Arceus Fairy Form,Shadow claw,Futuresight,Tyranitar Shadow Form,Iron Tail,Stone Edge,3.135871,17.229407326188902,933863
+15,Arceus Fairy Form,Iron tail,Futuresight,Tyranitar Shadow Form,Iron Tail,Return,3.2836683,28.17150632755448,933278
+19,Arceus Fairy Form,Iron tail,Hyper beam,Tyranitar Shadow Form,Iron Tail,Return,3.3069403,35.66175060598645,941094
+21,Arceus Fairy Form,Shadow claw,Hyper beam,Tyranitar Shadow Form,Iron Tail,Return,3.30965,24.035458401236802,940110
+24,Arceus Fairy Form,Iron tail,Outrage,Tyranitar Shadow Form,Iron Tail,Return,3.4720728,43.24325666706689,947517
+21,Arceus Fairy Form,Shadow claw,Outrage,Tyranitar Shadow Form,Iron Tail,Return,3.3481007,36.92916907315236,945520
+15,Arceus Fairy Form,Random,Random,Tyranitar Shadow Form,Iron Tail,Return,3.312594,31.120442114015894,940921
+6,Arceus Flying Form,Shadow claw,Outrage,Tyranitar Shadow Form,Smack Down,Stone Edge,2.6679983,29.445850840398045,753000
+9,Arceus Flying Form,Shadow claw,Outrage,Rampardos,Smack Down,Rock Slide,2.837752,44.82516228591764,763357
+11,Arceus Flying Form,Shadow claw,Outrage,Rhyperior,Smack Down,Rock Wrecker,2.8834014,31.112249760431432,817623
+7,Arceus Flying Form,Iron tail,Hyper beam,Tyranitar Shadow Form,Smack Down,Stone Edge,2.6584666,28.91777725989661,756549
+10,Arceus Flying Form,Iron tail,Hyper beam,Rampardos,Smack Down,Rock Slide,2.7214792,40.1198632291587,735526
+12,Arceus Flying Form,Iron tail,Hyper beam,Rhyperior,Smack Down,Rock Wrecker,2.7830374,24.194365318220772,791184
+7,Arceus Flying Form,Iron tail,Outrage,Tyranitar Shadow Form,Smack Down,Stone Edge,2.7814574,34.62419289942048,758652
+9,Arceus Flying Form,Iron tail,Outrage,Rhyperior,Smack Down,Rock Wrecker,2.8485787,32.106080362387935,808337
+11,Arceus Flying Form,Iron tail,Outrage,Rampardos,Smack Down,Rock Slide,2.9075158,51.65385758338425,771476
+5,Arceus Flying Form,Iron tail,Futuresight,Tyranitar Shadow Form,Smack Down,Stone Edge,2.5777776,22.21250174991617,732510
+13,Arceus Flying Form,Iron tail,Futuresight,Rhyperior,Smack Down,Rock Wrecker,2.858501,33.59758027023619,799278
+14,Arceus Flying Form,Iron tail,Futuresight,Rampardos,Smack Down,Rock Slide,2.8747962,51.92922945349635,752648
+2,Arceus Flying Form,Shadow claw,Futuresight,Tyranitar Shadow Form,Smack Down,Stone Edge,2.4716835,14.060646948754743,732357
+11,Arceus Flying Form,Shadow claw,Futuresight,Rampardos,Smack Down,Rock Slide,2.7112198,37.10112972544577,732469
+14,Arceus Flying Form,Shadow claw,Futuresight,Rhyperior,Smack Down,Rock Wrecker,2.8144066,26.587943495198324,800456
+7,Arceus Flying Form,Shadow claw,Hyper beam,Tyranitar Shadow Form,Smack Down,Stone Edge,2.5903437,20.01347713386188,736062
+8,Arceus Flying Form,Shadow claw,Hyper beam,Rampardos,Smack Down,Rock Slide,2.6527429,30.69118721393982,744721
+15,Arceus Flying Form,Shadow claw,Hyper beam,Rhyperior,Smack Down,Rock Wrecker,2.8759449,21.559381545656667,816937
+6,Arceus Flying Form,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,2.6207366,24.80552265113941,744468
+12,Arceus Flying Form,Random,Random,Rampardos,Smack Down,Rock Slide,2.7869375,42.78763745715333,750735
+13,Arceus Flying Form,Random,Random,Rhyperior,Smack Down,Rock Wrecker,2.8334417,28.112301720637063,802195
+4,Arceus Electric Form,Iron tail,Outrage,Rhyperior,Mud Slap,Earthquake,3.12567,35.25345564227116,887643
+7,Arceus Electric Form,Shadow claw,Outrage,Rhyperior,Mud Slap,Earthquake,3.272379,35.3208110234871,928180
+7,Arceus Electric Form,Shadow claw,Hyper beam,Rhyperior,Mud Slap,Earthquake,3.090659,22.717925565400787,877858
+5,Arceus Electric Form,Iron tail,Hyper beam,Rhyperior,Mud Slap,Earthquake,3.0466595,26.31168404839114,866199
+10,Arceus Electric Form,Iron tail,Futuresight,Rhyperior,Mud Slap,Earthquake,3.315017,38.924481700713116,926961
+6,Arceus Electric Form,Shadow claw,Futuresight,Rhyperior,Mud Slap,Earthquake,3.0223773,27.80777869327798,859402
+7,Arceus Electric Form,Random,Random,Rhyperior,Mud Slap,Earthquake,3.1355176,31.022721773574407,888193
+8,Kyurem White Form,Dragon breath,Blizzard,Tyranitar Shadow Form,Smack Down,Stone Edge,2.261572,31.557479010896976,611694
+9,Kyurem White Form,Steel wing,Blizzard,Tyranitar Shadow Form,Smack Down,Stone Edge,2.2657075,37.93773473426253,611688
+9,Kyurem White Form,Dragon breath,Dragon pulse,Rampardos,Smack Down,Rock Slide,2.1499906,37.5250805698678,572082
+15,Kyurem White Form,Dragon breath,Dragon pulse,Rhyperior,Smack Down,Rock Wrecker,2.2751877,27.048487032012087,634635
+17,Kyurem White Form,Dragon breath,Dragon pulse,Tyranitar Shadow Form,Smack Down,Stone Edge,2.3039272,38.21317445520949,616191
+16,Kyurem White Form,Steel wing,Dragon pulse,Tyranitar Shadow Form,Smack Down,Stone Edge,2.3091009,38.380464798065624,618371
+17,Kyurem White Form,Steel wing,Dragon pulse,Rampardos,Smack Down,Rock Slide,2.3286538,48.54769675494084,597045
+23,Kyurem White Form,Steel wing,Dragon pulse,Rhyperior,Smack Down,Rock Wrecker,2.3786988,31.183714006751533,643908
+27,Kyurem White Form,Dragon breath,Focus blast,Rhyperior,Smack Down,Rock Wrecker,2.399469,32.88350093616754,648144
+17,Kyurem White Form,Dragon breath,Ancient power,Tyranitar Shadow Form,Smack Down,Stone Edge,2.174289,25.131233731647335,610032
+20,Kyurem White Form,Dragon breath,Ancient power,Rhyperior,Smack Down,Rock Wrecker,2.2497785,14.496578604770525,641039
+26,Kyurem White Form,Dragon breath,Ancient power,Rampardos,Smack Down,Rock Slide,2.3020988,38.52910794902462,615110
+16,Kyurem White Form,Steel wing,Ancient power,Tyranitar Shadow Form,Smack Down,Stone Edge,2.162421,25.901050384401188,600048
+20,Kyurem White Form,Steel wing,Ancient power,Rhyperior,Smack Down,Rock Wrecker,2.2265122,16.856656280857663,633129
+22,Kyurem White Form,Steel wing,Ancient power,Rampardos,Smack Down,Rock Slide,2.2454627,39.738474692076345,594898
+24,Kyurem White Form,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,2.4808474,41.99528674113434,660221
+29,Kyurem White Form,Random,Random,Rampardos,Smack Down,Rock Slide,2.5112314,51.27696182482977,647688
+9,Kyurem Black Form,Dragon tail,Outrage,Tyranitar Shadow Form,Smack Down,Stone Edge,2.2513976,35.920757846640406,606218
+20,Kyurem Black Form,Dragon tail,Outrage,Rhyperior,Smack Down,Rock Wrecker,2.4875867,38.250214962420344,670037
+30,Kyurem Black Form,Dragon tail,Outrage,Rampardos,Smack Down,Rock Slide,2.743187,63.833230042401354,687583
+8,Kyurem Black Form,Dragon tail,Blizzard,Tyranitar Shadow Form,Smack Down,Stone Edge,2.2663522,36.21478326480988,612503
+9,Kyurem Black Form,Shadow claw,Outrage,Tyranitar Shadow Form,Smack Down,Stone Edge,2.2443438,35.29265597795478,603668
+8,Kyurem Black Form,Shadow claw,Blizzard,Tyranitar Shadow Form,Smack Down,Stone Edge,2.2525196,29.850826478172326,611943
+12,Kyurem Black Form,Dragon tail,Stone edge,Rhyperior,Smack Down,Rock Wrecker,2.1957002,21.564897272343636,624403
+13,Kyurem Black Form,Dragon tail,Stone edge,Rampardos,Smack Down,Rock Slide,2.1959703,41.17003028546046,567637
+14,Kyurem Black Form,Dragon tail,Stone edge,Tyranitar Shadow Form,Smack Down,Stone Edge,2.228258,32.05851846287566,602278
+13,Kyurem Black Form,Shadow claw,Stone edge,Rampardos,Smack Down,Rock Slide,2.154909,35.989403025651775,581943
+19,Kyurem Black Form,Shadow claw,Stone edge,Rhyperior,Smack Down,Rock Wrecker,2.227594,18.772095678019934,633415
+21,Kyurem Black Form,Shadow claw,Stone edge,Tyranitar Shadow Form,Smack Down,Stone Edge,2.267754,31.89262011606202,614129
+18,Kyurem Black Form,Dragon tail,Iron head,Tyranitar Shadow Form,Smack Down,Stone Edge,2.2368898,37.66298369818292,597804
+22,Kyurem Black Form,Dragon tail,Iron head,Rhyperior,Smack Down,Rock Wrecker,2.2841825,33.53908987969886,617094
+29,Kyurem Black Form,Dragon tail,Iron head,Rampardos,Smack Down,Rock Slide,2.36519,51.43479251957018,601919
+23,Kyurem Black Form,Shadow claw,Iron head,Tyranitar Shadow Form,Smack Down,Stone Edge,2.2671475,35.12420086482871,612349
+24,Kyurem Black Form,Shadow claw,Iron head,Rhyperior,Smack Down,Rock Wrecker,2.2980494,32.54258467213609,621768
+29,Kyurem Black Form,Shadow claw,Iron head,Rampardos,Smack Down,Rock Slide,2.374047,49.00519849995319,609486
+9,Kyurem Black Form,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,2.243711,34.31152901369132,605864
+23,Kyurem Black Form,Random,Random,Rampardos,Smack Down,Rock Slide,2.5272777,54.559332813618404,644823
+22,Arceus Poison Form,Shadow claw,Hyper beam,Rhyperior,Mud Slap,Earthquake,3.0876086,22.652276617830626,876973
+19,Arceus Poison Form,Iron tail,Hyper beam,Rhyperior,Mud Slap,Earthquake,3.0531025,26.2088651925378,868013
+21,Arceus Poison Form,Iron tail,Outrage,Rhyperior,Mud Slap,Earthquake,3.1367664,35.36191831414793,890666
+22,Arceus Poison Form,Shadow claw,Futuresight,Rhyperior,Mud Slap,Earthquake,3.0248783,27.756366372288895,860080
+25,Arceus Poison Form,Random,Random,Rhyperior,Mud Slap,Earthquake,3.141204,30.99587897977813,889180
+2,Arceus Psychic Form,Iron tail,Futuresight,Tyranitar Shadow Form,Bite,Crunch,2.6130261,24.55260488442917,743306
+5,Arceus Psychic Form,Shadow claw,Futuresight,Tyranitar Shadow Form,Bite,Crunch,2.6197927,16.500085449842153,748627
+3,Arceus Psychic Form,Iron tail,Outrage,Tyranitar Shadow Form,Bite,Crunch,2.7234702,33.910799092424604,743148
+3,Arceus Psychic Form,Shadow claw,Hyper beam,Tyranitar Shadow Form,Bite,Crunch,2.6474445,20.464210029676078,752252
+3,Arceus Psychic Form,Shadow claw,Outrage,Tyranitar Shadow Form,Bite,Crunch,2.6418934,29.118682665294482,746052
+5,Arceus Psychic Form,Iron tail,Hyper beam,Tyranitar Shadow Form,Bite,Crunch,2.63586,28.67987296261828,749900
+3,Arceus Psychic Form,Random,Random,Tyranitar Shadow Form,Bite,Crunch,2.6481185,25.537077063378742,748132
+26,Zacian Crowned Sword Form,Quick attack,Play rough,Rhyperior,Mud Slap,Earthquake,3.331127,41.97405657004974,912333
+26,Zacian Crowned Sword Form,Metal claw,Play rough,Rhyperior,Mud Slap,Earthquake,3.369326,52.217845960618185,910745
+14,Zacian Crowned Sword Form,Snarl,Wild charge,Rhyperior,Mud Slap,Earthquake,3.032332,20.702551223395236,861149
+13,Zacian Crowned Sword Form,Fire fang,Wild charge,Rhyperior,Mud Slap,Earthquake,2.9774506,18.834967720240925,848130
+13,Zacian Crowned Sword Form,Quick attack,Wild charge,Rhyperior,Mud Slap,Earthquake,2.9537678,18.213181410754792,847973
+19,Zacian Crowned Sword Form,Metal claw,Wild charge,Rhyperior,Mud Slap,Earthquake,3.127143,23.85487216582757,888426
+27,Zacian Crowned Sword Form,Random,Random,Rhyperior,Mud Slap,Earthquake,3.3183393,42.01524368951141,908641
+4,Arceus Bug Form,Shadow claw,Hyper beam,Tyranitar Shadow Form,Smack Down,Stone Edge,2.5895617,19.98118670136546,735866
+10,Arceus Bug Form,Shadow claw,Hyper beam,Rampardos,Smack Down,Rock Slide,2.6510644,30.72572497159063,744382
+18,Arceus Bug Form,Shadow claw,Hyper beam,Rhyperior,Smack Down,Rock Wrecker,2.8812733,21.49316789339114,818505
+11,Arceus Bug Form,Iron tail,Hyper beam,Tyranitar Shadow Form,Smack Down,Stone Edge,2.6606245,28.90470426995947,757194
+15,Arceus Bug Form,Iron tail,Hyper beam,Rampardos,Smack Down,Rock Slide,2.7215118,40.04714435401044,735514
+16,Arceus Bug Form,Iron tail,Hyper beam,Rhyperior,Smack Down,Rock Wrecker,2.7821038,24.13617373719381,790905
+9,Arceus Bug Form,Shadow claw,Outrage,Tyranitar Shadow Form,Smack Down,Stone Edge,2.6678061,29.432851459826676,753173
+14,Arceus Bug Form,Shadow claw,Outrage,Rampardos,Smack Down,Rock Slide,2.8350222,44.70132306609146,762832
+18,Arceus Bug Form,Shadow claw,Outrage,Rhyperior,Smack Down,Rock Wrecker,2.8830853,31.111598518670654,817533
+12,Arceus Bug Form,Iron tail,Outrage,Tyranitar Shadow Form,Smack Down,Stone Edge,2.7805114,34.615202836605405,758399
+17,Arceus Bug Form,Iron tail,Outrage,Rhyperior,Smack Down,Rock Wrecker,2.849685,32.105257406903156,808788
+20,Arceus Bug Form,Iron tail,Outrage,Rampardos,Smack Down,Rock Slide,2.9079974,51.66745012590832,771570
+6,Arceus Bug Form,Shadow claw,Futuresight,Tyranitar Shadow Form,Smack Down,Stone Edge,2.467069,14.033419012506352,731817
+12,Arceus Bug Form,Shadow claw,Futuresight,Rampardos,Smack Down,Rock Slide,2.710652,37.02887649826314,732521
+20,Arceus Bug Form,Shadow claw,Futuresight,Rhyperior,Smack Down,Rock Wrecker,2.8177602,26.387851050356744,801396
+8,Arceus Bug Form,Iron tail,Futuresight,Tyranitar Shadow Form,Smack Down,Stone Edge,2.5790353,22.214106496721072,732866
+23,Arceus Bug Form,Iron tail,Futuresight,Rhyperior,Smack Down,Rock Wrecker,2.863146,33.59248365015174,801009
+24,Arceus Bug Form,Iron tail,Futuresight,Rampardos,Smack Down,Rock Slide,2.8746142,51.80330669534916,753355
+8,Arceus Bug Form,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,2.6213424,24.85035412241239,744808
+14,Arceus Bug Form,Random,Random,Rampardos,Smack Down,Rock Slide,2.7859366,42.81039996792934,750577
+17,Arceus Bug Form,Random,Random,Rhyperior,Smack Down,Rock Wrecker,2.8369024,28.094069071259778,803241
+2,Meloetta,Low kick,Hyper beam,Tyranitar Shadow Form,Bite,Crunch,2.5837295,29.730845246191276,726226
+1,Meloetta,Quick attack,Hyper beam,Tyranitar Shadow Form,Bite,Crunch,2.5166335,24.576165031885868,715942
+28,Meloetta,Quick attack,Close combat,Tyranitar Shadow Form,Bite,Crunch,3.63575,86.38383905191367,910858
+29,Meloetta,Low kick,Close combat,Tyranitar Shadow Form,Bite,Crunch,3.5896866,87.1224212968389,892597
+3,Meloetta,Quick attack,Fire punch,Tyranitar Shadow Form,Bite,Crunch,2.5066946,15.505362137655684,721687
+3,Meloetta,Low kick,Fire punch,Tyranitar Shadow Form,Bite,Crunch,2.5052717,18.96017537704079,711993
+4,Meloetta,Quick attack,Ice punch,Tyranitar Shadow Form,Bite,Crunch,2.525315,21.819980972883936,717809
+3,Meloetta,Low kick,Ice punch,Tyranitar Shadow Form,Bite,Crunch,2.4889293,24.841605260575975,708101
+5,Meloetta,Random,Random,Tyranitar Shadow Form,Bite,Crunch,2.7227216,33.82953713284911,751000
+3,Arceus Ghost Form,Shadow claw,Hyper beam,Tyranitar Shadow Form,Bite,Crunch,2.6303372,20.734526612661337,747400
+4,Arceus Ghost Form,Iron tail,Outrage,Tyranitar Shadow Form,Bite,Crunch,2.7229888,33.888690720465824,743042
+2,Arceus Ghost Form,Shadow claw,Outrage,Tyranitar Shadow Form,Bite,Crunch,2.6303394,29.369917746463397,742153
+6,Arceus Ghost Form,Shadow claw,Futuresight,Tyranitar Shadow Form,Bite,Crunch,2.560996,15.251574781257544,747391
+6,Arceus Ghost Form,Iron tail,Hyper beam,Tyranitar Shadow Form,Bite,Crunch,2.6370597,28.65681221775907,750204
+8,Arceus Ghost Form,Iron tail,Futuresight,Tyranitar Shadow Form,Bite,Crunch,2.620319,22.59996627970358,744585
+4,Arceus Ghost Form,Random,Random,Tyranitar Shadow Form,Bite,Crunch,2.6376019,25.157638818054842,747558
+9,Arceus Ice Form,Shadow claw,Hyper beam,Tyranitar Shadow Form,Smack Down,Stone Edge,2.592197,20.080878345075188,736592
+14,Arceus Ice Form,Shadow claw,Hyper beam,Rampardos,Smack Down,Rock Slide,2.664849,31.14320893196251,745853
+21,Arceus Ice Form,Shadow claw,Hyper beam,Rhyperior,Smack Down,Rock Wrecker,2.8813636,21.460241081999307,818492
+10,Arceus Ice Form,Shadow claw,Outrage,Tyranitar Shadow Form,Smack Down,Stone Edge,2.6700153,29.478586559197748,753107
+16,Arceus Ice Form,Shadow claw,Outrage,Rampardos,Smack Down,Rock Slide,2.8268278,44.50311083810197,760699
+20,Arceus Ice Form,Shadow claw,Outrage,Rhyperior,Smack Down,Rock Wrecker,2.8867328,31.203498852699912,817957
+4,Arceus Ice Form,Shadow claw,Futuresight,Tyranitar Shadow Form,Smack Down,Stone Edge,2.4803581,14.214089818370319,733092
+14,Arceus Ice Form,Shadow claw,Futuresight,Rampardos,Smack Down,Rock Slide,2.71017,37.25282909200454,732723
+18,Arceus Ice Form,Shadow claw,Futuresight,Rhyperior,Smack Down,Rock Wrecker,2.8189025,26.672998435850896,801739
+7,Arceus Ice Form,Iron tail,Futuresight,Tyranitar Shadow Form,Smack Down,Stone Edge,2.5768821,22.23229402318548,732257
+21,Arceus Ice Form,Iron tail,Futuresight,Rampardos,Smack Down,Rock Slide,2.8641753,51.66955266313932,749944
+22,Arceus Ice Form,Iron tail,Futuresight,Rhyperior,Smack Down,Rock Wrecker,2.8661978,33.78654974022728,801096
+13,Arceus Ice Form,Iron tail,Outrage,Tyranitar Shadow Form,Smack Down,Stone Edge,2.7803466,34.60726832139371,758355
+18,Arceus Ice Form,Iron tail,Outrage,Rhyperior,Smack Down,Rock Wrecker,2.8500953,32.112043979910624,808904
+24,Arceus Ice Form,Iron tail,Outrage,Rampardos,Smack Down,Rock Slide,2.9091275,51.67789289950899,771856
+13,Arceus Ice Form,Iron tail,Hyper beam,Tyranitar Shadow Form,Smack Down,Stone Edge,2.6639178,29.158041899470632,758172
+17,Arceus Ice Form,Iron tail,Hyper beam,Rampardos,Smack Down,Rock Slide,2.7246418,40.151678081364956,736378
+19,Arceus Ice Form,Iron tail,Hyper beam,Rhyperior,Smack Down,Rock Wrecker,2.7778466,24.246953591103157,789720
+11,Arceus Ice Form,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,2.6329675,25.154970819508495,747056
+13,Arceus Ice Form,Random,Random,Rampardos,Smack Down,Rock Slide,2.7878814,42.90784236356231,750514
+18,Arceus Ice Form,Random,Random,Rhyperior,Smack Down,Rock Wrecker,2.8397443,28.163745835632056,804117
+26,Zacian Hero Form,Snarl,Wild charge,Tyranitar Shadow Form,Iron Tail,Return,3.4558442,42.337465415559066,956705
+27,Zacian Hero Form,Metal claw,Wild charge,Tyranitar Shadow Form,Iron Tail,Return,3.5120294,46.13434073200745,954241
+26,Zacian Hero Form,Quick attack,Wild charge,Tyranitar Shadow Form,Iron Tail,Return,3.4754517,43.35486730086648,958605
+25,Zacian Hero Form,Fire fang,Wild charge,Tyranitar Shadow Form,Iron Tail,Return,3.4604354,42.838400900962476,955805
+4,Deoxys Speed Form,Zen headbutt,Thunderbolt,Tyranitar Shadow Form,Bite,Crunch,2.468629,23.921964472091055,701762
+3,Deoxys Speed Form,Charge beam,Thunderbolt,Tyranitar Shadow Form,Bite,Crunch,2.447822,25.327726297685455,696045
+6,Deoxys Speed Form,Zen headbutt,Swift,Tyranitar Shadow Form,Bite,Crunch,2.3813224,12.941753830849581,707921
+9,Deoxys Speed Form,Charge beam,Swift,Tyranitar Shadow Form,Bite,Crunch,2.383647,13.794427712499623,705053
+9,Deoxys Speed Form,Charge beam,Psycho boost,Tyranitar Shadow Form,Bite,Crunch,2.3865123,10.976393069902715,711180
+8,Deoxys Speed Form,Zen headbutt,Psycho boost,Tyranitar Shadow Form,Bite,Crunch,2.387078,10.205248525101917,711349
+5,Deoxys Speed Form,Random,Random,Tyranitar Shadow Form,Bite,Crunch,2.4084084,16.19406870503086,705405
+10,Dialga,Metal claw,Draco meteor,Rhyperior,Mud Slap,Earthquake,2.956296,34.94415384197336,827567
+11,Dialga,Dragon breath,Draco meteor,Rhyperior,Mud Slap,Earthquake,2.9991255,33.87027949893284,846311
+11,Dialga,Metal claw,Thunder,Rhyperior,Mud Slap,Earthquake,2.7126174,17.837025772164026,770617
+9,Dialga,Dragon breath,Thunder,Rhyperior,Mud Slap,Earthquake,2.6037595,14.380991650119096,775734
+27,Dialga,Metal claw,Iron head,Rhyperior,Mud Slap,Earthquake,3.0951796,45.90644344799233,836523
+23,Dialga,Dragon breath,Iron head,Rhyperior,Mud Slap,Earthquake,3.0262399,43.60346265443299,818592
+12,Dialga,Random,Random,Rhyperior,Mud Slap,Earthquake,2.8415182,28.15788111412115,802253
+9,Kyurem,Steel wing,Draco meteor,Tyranitar Shadow Form,Smack Down,Stone Edge,2.1378703,30.144671802381666,577631
+11,Kyurem,Steel wing,Draco meteor,Rhyperior,Smack Down,Rock Wrecker,2.1585393,26.385069214989493,593383
+9,Kyurem,Dragon breath,Draco meteor,Tyranitar Shadow Form,Smack Down,Stone Edge,2.0929413,25.76785739956313,574087
+12,Kyurem,Dragon breath,Draco meteor,Rhyperior,Smack Down,Rock Wrecker,2.1989563,26.599520730522794,607123
+10,Kyurem,Dragon breath,Blizzard,Tyranitar Shadow Form,Smack Down,Stone Edge,2.1028812,28.940730640202094,569479
+15,Kyurem,Dragon breath,Blizzard,Rhyperior,Smack Down,Rock Wrecker,2.169247,28.722743781026676,589455
+16,Kyurem,Dragon breath,Blizzard,Rampardos,Smack Down,Rock Slide,2.189138,41.87193773039032,563964
+10,Kyurem,Steel wing,Blizzard,Tyranitar Shadow Form,Smack Down,Stone Edge,2.086172,30.094791052085178,563814
+18,Kyurem,Steel wing,Blizzard,Rhyperior,Smack Down,Rock Wrecker,2.2100956,33.19780658106552,597340
+10,Kyurem,Steel wing,Dragon claw,Tyranitar Shadow Form,Smack Down,Stone Edge,1.9474759,22.843504117063862,545892
+16,Kyurem,Steel wing,Dragon claw,Rampardos,Smack Down,Rock Slide,2.0365949,34.33317884887974,546088
+17,Kyurem,Steel wing,Dragon claw,Rhyperior,Smack Down,Rock Wrecker,2.0368798,20.055423477034406,579443
+10,Kyurem,Dragon breath,Dragon claw,Tyranitar Shadow Form,Smack Down,Stone Edge,1.944816,21.200531924201442,550939
+15,Kyurem,Dragon breath,Dragon claw,Rampardos,Smack Down,Rock Slide,2.0235507,30.50580920557836,545469
+17,Kyurem,Dragon breath,Dragon claw,Rhyperior,Smack Down,Rock Wrecker,2.0574944,18.38299955729557,585272
+7,Kyurem,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,2.0148554,23.330504561486556,558175
+12,Kyurem,Random,Random,Rhyperior,Smack Down,Rock Wrecker,2.1013348,21.87378687957857,589589
+27,Kyurem,Random,Random,Rampardos,Smack Down,Rock Slide,2.2875454,41.24848652716835,602760
+1,Articuno,Frost breath,Blizzard,Rampardos,Smack Down,Rock Slide,1.7061429,25.334596791780235,460995
+2,Articuno,Frost breath,Blizzard,Tyranitar Shadow Form,Smack Down,Stone Edge,1.7696774,23.26572190382557,482066
+4,Articuno,Frost breath,Blizzard,Rhyperior,Smack Down,Rock Wrecker,1.8487362,23.490934012916018,505357
+1,Articuno,Ice shard,Blizzard,Rampardos,Smack Down,Rock Slide,1.6742184,23.863054576916706,452145
+2,Articuno,Ice shard,Blizzard,Tyranitar Shadow Form,Smack Down,Stone Edge,1.7561316,22.659854228186624,479379
+3,Articuno,Ice shard,Blizzard,Rhyperior,Smack Down,Rock Wrecker,1.8410393,23.663052476916835,500715
+1,Articuno,Ice shard,Ice beam,Tyranitar Shadow Form,Smack Down,Stone Edge,1.6751169,18.743059691883914,472082
+2,Articuno,Ice shard,Ice beam,Rampardos,Smack Down,Rock Slide,1.7328124,26.647556823297094,467351
+5,Articuno,Ice shard,Ice beam,Rhyperior,Smack Down,Rock Wrecker,1.8468579,24.062222314727364,501666
+1,Articuno,Frost breath,Ice beam,Tyranitar Shadow Form,Smack Down,Stone Edge,1.7009192,19.42103814291356,477639
+2,Articuno,Frost breath,Ice beam,Rampardos,Smack Down,Rock Slide,1.7485846,27.58645032322426,470869
+3,Articuno,Frost breath,Ice beam,Rhyperior,Smack Down,Rock Wrecker,1.7986712,22.79519214836461,490087
+1,Articuno,Frost breath,Icy wind,Tyranitar Shadow Form,Smack Down,Stone Edge,1.6068237,12.826833872821856,456732
+2,Articuno,Frost breath,Icy wind,Rampardos,Smack Down,Rock Slide,1.6172906,19.069970990504814,452067
+3,Articuno,Frost breath,Icy wind,Rhyperior,Smack Down,Rock Wrecker,1.7448664,17.54066326060496,496157
+1,Articuno,Ice shard,Ancient power,Rampardos,Smack Down,Rock Slide,1.5900409,17.84762995547939,449352
+2,Articuno,Ice shard,Ancient power,Tyranitar Shadow Form,Smack Down,Stone Edge,1.621983,12.468562455751496,461022
+3,Articuno,Ice shard,Ancient power,Rhyperior,Smack Down,Rock Wrecker,1.6829085,9.293152718154307,501506
+1,Articuno,Frost breath,Ancient power,Rampardos,Smack Down,Rock Slide,1.6085831,18.56242798085991,452605
+2,Articuno,Frost breath,Ancient power,Tyranitar Shadow Form,Smack Down,Stone Edge,1.6224256,12.206691256229657,461147
+3,Articuno,Frost breath,Ancient power,Rhyperior,Smack Down,Rock Wrecker,1.6704698,8.91059232029656,497800
+1,Articuno,Ice shard,Icy wind,Tyranitar Shadow Form,Smack Down,Stone Edge,1.609189,13.104203350961296,457401
+2,Articuno,Ice shard,Icy wind,Rampardos,Smack Down,Rock Slide,1.6248196,19.129204160352845,454499
+3,Articuno,Ice shard,Icy wind,Rhyperior,Smack Down,Rock Wrecker,1.7311461,17.76509654847799,492294
+1,Articuno,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,1.6424994,15.232294037540019,465678
+2,Articuno,Random,Random,Rampardos,Smack Down,Rock Slide,1.6470053,20.324835054273283,456054
+3,Articuno,Random,Random,Rhyperior,Smack Down,Rock Wrecker,1.7533383,16.593539285784548,499135
+18,Regice,Lock on,Earthquake,Rampardos,Smack Down,Rock Slide,3.4523456,43.40697840483349,937103
+27,Regice,Lock on,Earthquake,Tyranitar Shadow Form,Smack Down,Stone Edge,3.5875475,43.42891095076893,991288
+17,Regice,Frost breath,Earthquake,Tyranitar Shadow Form,Smack Down,Stone Edge,3.470217,39.779691883820945,977701
+26,Regice,Frost breath,Earthquake,Rhyperior,Smack Down,Rock Wrecker,3.7033296,42.14517300822913,1043756
+18,Regice,Frost breath,Blizzard,Tyranitar Shadow Form,Smack Down,Stone Edge,3.4266462,39.80716271675267,959866
+19,Regice,Frost breath,Blizzard,Rampardos,Smack Down,Rock Slide,3.4758155,44.249021841135765,944517
+29,Regice,Frost breath,Blizzard,Rhyperior,Smack Down,Rock Wrecker,3.7215695,45.06459340825309,1031018
+22,Regice,Rock smash,Earthquake,Tyranitar Shadow Form,Smack Down,Stone Edge,3.6318095,52.714132404618404,981677
+23,Regice,Rock smash,Earthquake,Rhyperior,Smack Down,Rock Wrecker,3.6549835,41.09945322189051,1030396
+7,Regice,Lock on,Blizzard,Tyranitar Shadow Form,Smack Down,Stone Edge,3.2247503,29.00639262450485,916879
+24,Regice,Lock on,Blizzard,Rampardos,Smack Down,Rock Slide,3.5566883,46.10520110197471,968825
+26,Regice,Rock smash,Focus blast,Rhyperior,Smack Down,Rock Wrecker,3.6390696,40.118891490570824,1029491
+19,Regice,Rock smash,Blizzard,Tyranitar Shadow Form,Smack Down,Stone Edge,3.4828446,44.36289660556072,946017
+20,Regice,Rock smash,Blizzard,Rampardos,Smack Down,Rock Slide,3.5175314,53.50304556048597,951132
+28,Regice,Rock smash,Blizzard,Rhyperior,Smack Down,Rock Wrecker,3.6686654,43.71723651471491,1021667
+26,Regice,Frost breath,Focus blast,Rhyperior,Smack Down,Rock Wrecker,3.6802104,41.212373126228094,1039538
+21,Regice,Lock on,Focus blast,Rampardos,Smack Down,Rock Slide,3.455804,42.96275586623294,941974
+25,Regice,Random,Random,Rhyperior,Smack Down,Rock Wrecker,3.6596181,36.98016850879995,1037514
+28,Regice,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,3.705243,49.184688561053896,1018688
+29,Regice,Random,Random,Rampardos,Smack Down,Rock Slide,3.7097192,53.535099508410894,1003628
+2,Thundurus Therian Form,Bite,Focus blast,Rhyperior,Smack Down,Rock Wrecker,2.0473516,25.58169245959308,558426
+16,Thundurus Therian Form,Bite,Focus blast,Rampardos,Smack Down,Rock Slide,2.6104918,55.72954496813544,666504
+24,Thundurus Therian Form,Bite,Focus blast,Tyranitar Shadow Form,Smack Down,Return,2.7671587,59.122942086742725,706492
+2,Thundurus Therian Form,Volt switch,Focus blast,Rhyperior,Smack Down,Rock Wrecker,2.0132995,23.18188216120883,565111
+11,Thundurus Therian Form,Volt switch,Focus blast,Rampardos,Smack Down,Rock Slide,2.4938622,52.02538089964835,638296
+21,Thundurus Therian Form,Volt switch,Focus blast,Tyranitar Shadow Form,Smack Down,Stone Edge,2.6847994,56.347254257591715,687335
+2,Thundurus Therian Form,Bite,Thunderbolt,Rhyperior,Smack Down,Rock Wrecker,1.9467874,12.069383867343852,559879
+3,Thundurus Therian Form,Bite,Thunderbolt,Tyranitar Shadow Form,Smack Down,Stone Edge,1.9663516,26.39104988783366,533294
+5,Thundurus Therian Form,Bite,Thunderbolt,Rampardos,Smack Down,Rock Slide,2.0734565,39.12901606892414,541242
+2,Thundurus Therian Form,Volt switch,Thunder,Rhyperior,Smack Down,Rock Wrecker,1.8968602,10.153138266293634,563588
+4,Thundurus Therian Form,Volt switch,Thunder,Tyranitar Shadow Form,Smack Down,Stone Edge,1.9959009,27.096463529577708,539589
+10,Thundurus Therian Form,Volt switch,Thunder,Rampardos,Smack Down,Rock Slide,2.151247,44.27442668952701,553432
+2,Thundurus Therian Form,Volt switch,Thunderbolt,Rhyperior,Smack Down,Rock Wrecker,1.8860425,10.419446497695766,558647
+3,Thundurus Therian Form,Volt switch,Thunderbolt,Rampardos,Smack Down,Rock Slide,1.9659085,35.65749845886037,517352
+4,Thundurus Therian Form,Volt switch,Thunderbolt,Tyranitar Shadow Form,Smack Down,Stone Edge,1.9971374,29.296845136685384,540066
+3,Thundurus Therian Form,Bite,Thunder,Rampardos,Smack Down,Rock Slide,1.9292644,32.60483123450255,519850
+4,Thundurus Therian Form,Bite,Thunder,Rhyperior,Smack Down,Rock Wrecker,1.9381082,11.985039382713678,558899
+7,Thundurus Therian Form,Bite,Thunder,Tyranitar Shadow Form,Smack Down,Stone Edge,2.0255358,28.61842194291864,548669
+2,Thundurus Therian Form,Bite,Sludge wave,Tyranitar Shadow Form,Smack Down,Stone Edge,1.8525254,16.37256506431529,527070
+4,Thundurus Therian Form,Bite,Sludge wave,Rampardos,Smack Down,Rock Slide,1.899906,24.578284299089123,516792
+5,Thundurus Therian Form,Bite,Sludge wave,Rhyperior,Smack Down,Rock Wrecker,1.9068869,10.67567603972912,566962
+2,Thundurus Therian Form,Volt switch,Sludge wave,Tyranitar Shadow Form,Smack Down,Stone Edge,1.800286,17.856472633464744,512241
+3,Thundurus Therian Form,Volt switch,Sludge wave,Rampardos,Smack Down,Rock Slide,1.876807,25.021360549531114,507288
+4,Thundurus Therian Form,Volt switch,Sludge wave,Rhyperior,Smack Down,Rock Wrecker,1.8845923,9.019938066876483,561608
+2,Thundurus Therian Form,Random,Random,Rhyperior,Smack Down,Rock Wrecker,1.9451329,14.121275805051221,563338
+5,Thundurus Therian Form,Random,Random,Rampardos,Smack Down,Rock Slide,2.1286368,38.8510311919314,558993
+6,Thundurus Therian Form,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,2.1613963,33.44598447415626,580795
+2,Zapdos,Charge beam,Zap cannon,Rhyperior,Smack Down,Rock Wrecker,2.153121,11.005989439375044,641630
+3,Zapdos,Charge beam,Zap cannon,Tyranitar Shadow Form,Smack Down,Stone Edge,2.2039597,25.845298649801695,617002
+23,Zapdos,Charge beam,Zap cannon,Rampardos,Smack Down,Rock Slide,2.8610215,60.008101153579446,733633
+2,Zapdos,Charge beam,Thunderbolt,Rhyperior,Smack Down,Rock Wrecker,2.1521814,10.617308334822305,641253
+3,Zapdos,Charge beam,Thunderbolt,Tyranitar Shadow Form,Smack Down,Stone Edge,2.1879566,27.522167784907868,601491
+7,Zapdos,Charge beam,Thunderbolt,Rampardos,Smack Down,Rock Slide,2.3503704,41.634577140168346,620203
+2,Zapdos,Charge beam,Ancient power,Tyranitar Shadow Form,Smack Down,Stone Edge,2.0700014,18.316194497345453,588671
+3,Zapdos,Charge beam,Ancient power,Rampardos,Smack Down,Rock Slide,2.127868,27.197625343273476,578961
+4,Zapdos,Charge beam,Ancient power,Rhyperior,Smack Down,Rock Wrecker,2.1544895,10.65303737331857,641938
+3,Zapdos,Charge beam,Thunder,Rhyperior,Smack Down,Rock Wrecker,2.1546094,10.115864708218536,642073
+4,Zapdos,Charge beam,Thunder,Rampardos,Smack Down,Rock Slide,2.1685903,33.10147465206023,586232
+7,Zapdos,Charge beam,Thunder,Tyranitar Shadow Form,Smack Down,Stone Edge,2.2702901,29.219412748180083,619004
+2,Zapdos,Charge beam,Drill peck,Rampardos,Smack Down,Rock Slide,2.0271208,23.52773929958099,569013
+3,Zapdos,Charge beam,Drill peck,Tyranitar Shadow Form,Smack Down,Stone Edge,2.0712616,16.598399175211146,589043
+5,Zapdos,Charge beam,Drill peck,Rhyperior,Smack Down,Rock Wrecker,2.2057183,13.417341454930868,639456
+2,Zapdos,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,2.137278,21.65464121624625,599506
+3,Zapdos,Random,Random,Rhyperior,Smack Down,Rock Wrecker,2.16487,10.825243503642533,642085
+5,Zapdos,Random,Random,Rampardos,Smack Down,Rock Slide,2.268009,34.54928792055375,612271
+10,Cresselia,Confusion,Moonblast,Tyranitar Shadow Form,Bite,Crunch,2.9949896,33.42989983303125,843631
+15,Cresselia,Psycho cut,Moonblast,Tyranitar Shadow Form,Bite,Crunch,3.0886874,37.65213633945056,851569
+9,Cresselia,Confusion,Aurora beam,Tyranitar Shadow Form,Bite,Crunch,2.8687418,18.306478056013354,821924
+13,Cresselia,Psycho cut,Aurora beam,Tyranitar Shadow Form,Bite,Crunch,2.8983288,19.809047302090658,825053
+7,Cresselia,Confusion,Futuresight,Tyranitar Shadow Form,Bite,Crunch,2.7677338,12.645671265820521,824784
+8,Cresselia,Psycho cut,Futuresight,Tyranitar Shadow Form,Bite,Crunch,2.7819686,12.006427964400121,829026
+8,Cresselia,Random,Random,Tyranitar Shadow Form,Bite,Crunch,2.874223,19.335322427113898,832801
+2,Heatran,Bug bite,Fire blast,Rhyperior,Mud Slap,Earthquake,1.7379717,13.688440643827082,493862
+2,Heatran,Fire spin,Fire blast,Rhyperior,Mud Slap,Earthquake,1.7265843,13.384135355578668,490624
+2,Heatran,Bug bite,Flamethrower,Rhyperior,Mud Slap,Earthquake,1.7213278,12.517846987244543,489216
+7,Heatran,Fire spin,Iron head,Rhyperior,Mud Slap,Earthquake,1.8593636,24.89095166000347,507309
+4,Heatran,Fire spin,Flamethrower,Rhyperior,Mud Slap,Earthquake,1.7455078,12.7690110222043,496013
+7,Heatran,Bug bite,Iron head,Rhyperior,Mud Slap,Earthquake,1.8966259,27.119044724103993,513940
+4,Heatran,Fire spin,Stone edge,Rhyperior,Mud Slap,Earthquake,1.7347617,11.72762748495825,493252
+4,Heatran,Bug bite,Stone edge,Rhyperior,Mud Slap,Earthquake,1.7106973,11.148938299576614,487481
+2,Heatran,Random,Random,Rhyperior,Mud Slap,Earthquake,1.7349865,14.317101156921222,493132
+1,Reshiram,Fire fang,Draco meteor,Rhyperior,Smack Down,Rock Wrecker,2.5837693,29.65510003983559,724857
+3,Reshiram,Fire fang,Draco meteor,Tyranitar Shadow Form,Smack Down,Stone Edge,2.619246,33.30788557448239,710254
+13,Reshiram,Fire fang,Draco meteor,Rampardos,Smack Down,Rock Slide,3.005736,60.33251804482608,777698
+1,Reshiram,Dragon breath,Draco meteor,Tyranitar Shadow Form,Smack Down,Stone Edge,2.5699084,31.996397597652347,701119
+3,Reshiram,Dragon breath,Draco meteor,Rhyperior,Mud Slap,Rock Wrecker,2.6172574,30.676608220573645,731183
+15,Reshiram,Dragon breath,Draco meteor,Rampardos,Smack Down,Rock Slide,2.9807389,61.79323734813849,766247
+3,Reshiram,Dragon breath,Stone edge,Tyranitar Shadow Form,Smack Down,Stone Edge,2.377676,28.23323397252086,663709
+6,Reshiram,Dragon breath,Stone edge,Rampardos,Smack Down,Rock Slide,2.3932176,35.47077879777212,647015
+10,Reshiram,Dragon breath,Stone edge,Rhyperior,Mud Slap,Rock Wrecker,2.5002334,19.03979728975583,710567
+6,Reshiram,Fire fang,Stone edge,Rampardos,Smack Down,Rock Slide,2.3857026,33.917320446497584,644764
+11,Reshiram,Fire fang,Stone edge,Rhyperior,Mud Slap,Rock Wrecker,2.4890306,18.207257826741603,707402
+13,Reshiram,Fire fang,Stone edge,Tyranitar Shadow Form,Smack Down,Stone Edge,2.569854,32.292779426661625,701448
+9,Reshiram,Fire fang,Overheat,Rhyperior,Mud Slap,Rock Wrecker,2.4485795,23.598257592157328,696313
+10,Reshiram,Fire fang,Overheat,Rampardos,Smack Down,Rock Slide,2.4870474,37.40197108436552,672258
+12,Reshiram,Fire fang,Overheat,Tyranitar Shadow Form,Smack Down,Stone Edge,2.5199637,29.872863803537484,701876
+6,Reshiram,Dragon breath,Overheat,Rampardos,Smack Down,Rock Slide,2.4168007,35.07519054894889,653047
+10,Reshiram,Dragon breath,Overheat,Rhyperior,Mud Slap,Rock Wrecker,2.4529603,23.776284187671692,697592
+14,Reshiram,Dragon breath,Overheat,Tyranitar Shadow Form,Smack Down,Stone Edge,2.5572178,31.212666613755285,705326
+7,Reshiram,Fire fang,Crunch,Tyranitar Shadow Form,Smack Down,Stone Edge,2.35688,17.360429945709374,669998
+13,Reshiram,Fire fang,Crunch,Rampardos,Smack Down,Rock Slide,2.4666111,36.15762647648477,666860
+15,Reshiram,Fire fang,Crunch,Rhyperior,Mud Slap,Rock Wrecker,2.488878,21.75655325111562,707478
+6,Reshiram,Dragon breath,Crunch,Tyranitar Shadow Form,Smack Down,Stone Edge,2.363977,17.409217787457983,672006
+9,Reshiram,Dragon breath,Crunch,Rampardos,Smack Down,Rock Slide,2.4132671,34.35876375189357,652006
+17,Reshiram,Dragon breath,Crunch,Rhyperior,Mud Slap,Rock Wrecker,2.511259,22.944140397607043,713971
+3,Reshiram,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,2.457061,25.253329580680987,684927
+4,Reshiram,Random,Random,Rhyperior,Mud Slap,Rock Wrecker,2.4842482,21.638889386573837,709951
+6,Reshiram,Random,Random,Rampardos,Smack Down,Rock Slide,2.499978,37.57741920786101,675498
+2,Entei,Fire fang,Overheat,Tyranitar Shadow Form,Smack Down,Stone Edge,1.8995738,21.184356787167054,539922
+5,Entei,Fire fang,Overheat,Rampardos,Smack Down,Rock Slide,2.0004728,25.1205200718088,546975
+7,Entei,Fire fang,Overheat,Rhyperior,Mud Slap,Rock Wrecker,2.0711126,17.307446961317368,589141
+2,Entei,Fire spin,Overheat,Tyranitar Shadow Form,Smack Down,Stone Edge,1.8869615,20.457947203724288,536884
+5,Entei,Fire spin,Overheat,Rampardos,Smack Down,Rock Slide,2.006495,25.344191856825415,545006
+7,Entei,Fire spin,Overheat,Rhyperior,Mud Slap,Rock Wrecker,2.066498,17.165198034949086,587825
+3,Entei,Fire fang,Fire blast,Tyranitar Shadow Form,Smack Down,Stone Edge,1.9099082,17.025836732083636,543505
+5,Entei,Fire fang,Fire blast,Rampardos,Smack Down,Rock Slide,1.9788558,23.861267433726088,549419
+8,Entei,Fire fang,Fire blast,Rhyperior,Mud Slap,Rock Wrecker,2.0913322,16.365985850983268,594897
+3,Entei,Fire spin,Fire blast,Tyranitar Shadow Form,Smack Down,Stone Edge,1.9047647,17.302795791046155,542049
+5,Entei,Fire spin,Fire blast,Rampardos,Smack Down,Rock Slide,1.939917,22.913844375626244,541767
+7,Entei,Fire spin,Fire blast,Rhyperior,Mud Slap,Rock Wrecker,2.073432,15.961995741842005,589792
+6,Entei,Fire fang,Iron head,Rhyperior,Mud Slap,Rock Wrecker,2.0442283,22.689464244918483,577342
+8,Entei,Fire fang,Iron head,Tyranitar Shadow Form,Smack Down,Stone Edge,2.0537279,28.050291802729774,558545
+18,Entei,Fire fang,Iron head,Rampardos,Smack Down,Rock Slide,2.2036755,42.74087273125536,573751
+7,Entei,Fire spin,Iron head,Rhyperior,Mud Slap,Rock Wrecker,2.03953,22.63612381187465,575771
+9,Entei,Fire spin,Iron head,Tyranitar Shadow Form,Smack Down,Stone Edge,2.0485263,27.475580802060872,558149
+13,Entei,Fire spin,Iron head,Rampardos,Smack Down,Rock Slide,2.1586225,41.03624265008516,563389
+4,Entei,Fire spin,Flame charge,Rampardos,Smack Down,Rock Slide,1.9090493,18.49551619143117,543262
+5,Entei,Fire spin,Flame charge,Tyranitar Shadow Form,Smack Down,Stone Edge,1.9276825,13.199762272167701,548581
+8,Entei,Fire spin,Flame charge,Rhyperior,Mud Slap,Rock Wrecker,1.9894171,11.636290710877438,584877
+4,Entei,Fire fang,Flame charge,Rampardos,Smack Down,Rock Slide,1.9030232,18.888753586442206,541556
+5,Entei,Fire fang,Flame charge,Tyranitar Shadow Form,Smack Down,Stone Edge,1.9172267,13.086013115330626,545829
+8,Entei,Fire fang,Flame charge,Rhyperior,Mud Slap,Rock Wrecker,1.9915302,11.698651727243545,586303
+3,Entei,Fire spin,Flamethrower,Rampardos,Smack Down,Rock Slide,1.8880668,22.127311545823773,528050
+5,Entei,Fire spin,Flamethrower,Tyranitar Shadow Form,Smack Down,Stone Edge,1.9174358,15.957843466235083,545635
+8,Entei,Fire spin,Flamethrower,Rhyperior,Mud Slap,Rock Wrecker,2.0506275,14.203618534730243,583766
+4,Entei,Fire fang,Flamethrower,Rampardos,Smack Down,Rock Slide,1.9159595,22.87715574741492,531692
+5,Entei,Fire fang,Flamethrower,Tyranitar Shadow Form,Smack Down,Stone Edge,1.9190906,16.016750853083646,546103
+8,Entei,Fire fang,Flamethrower,Rhyperior,Mud Slap,Rock Wrecker,2.0578632,14.354901137808596,585791
+4,Entei,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,1.9142572,17.419033224048214,543507
+5,Entei,Random,Random,Rampardos,Smack Down,Rock Slide,1.980963,24.822738628039346,546004
+8,Entei,Random,Random,Rhyperior,Mud Slap,Rock Wrecker,2.0317395,15.27894775022032,584783
+9,Tornadus Therian Form,Gust,Focus blast,Rhyperior,Smack Down,Rock Wrecker,2.348977,27.17957314437344,659508
+24,Tornadus Therian Form,Gust,Focus blast,Rampardos,Smack Down,Rock Slide,2.719851,54.705136481119226,704428
+9,Tornadus Therian Form,Astonish,Focus blast,Rhyperior,Smack Down,Rock Wrecker,2.364197,27.385424518295498,661124
+28,Tornadus Therian Form,Astonish,Focus blast,Rampardos,Smack Down,Rock Slide,2.8862488,60.65149776878144,739175
+1,Tornadus Therian Form,Astonish,Psychic,Tyranitar Shadow Form,Smack Down,Stone Edge,1.9762623,10.778857037691152,587003
+12,Tornadus Therian Form,Astonish,Psychic,Rhyperior,Smack Down,Rock Wrecker,2.2423513,20.69368140838641,637670
+20,Tornadus Therian Form,Astonish,Psychic,Rampardos,Smack Down,Rock Slide,2.3882236,40.80509117373518,633369
+6,Tornadus Therian Form,Gust,Hurricane,Tyranitar Shadow Form,Smack Down,Stone Edge,2.058104,18.85488395063631,585424
+11,Tornadus Therian Form,Gust,Hurricane,Rampardos,Smack Down,Rock Slide,2.223858,29.128068138265743,602217
+13,Tornadus Therian Form,Gust,Hurricane,Rhyperior,Smack Down,Rock Wrecker,2.2748692,17.43068939809958,646789
+4,Tornadus Therian Form,Gust,Heat wave,Rampardos,Smack Down,Rock Slide,2.0676715,22.0250542619348,588196
+6,Tornadus Therian Form,Gust,Heat wave,Tyranitar Shadow Form,Smack Down,Stone Edge,2.0888777,14.987105480822787,594108
+14,Tornadus Therian Form,Gust,Heat wave,Rhyperior,Smack Down,Rock Wrecker,2.2522256,13.71276556419849,648238
+5,Tornadus Therian Form,Astonish,Heat wave,Rampardos,Smack Down,Rock Slide,2.0568278,19.867460127049938,585077
+6,Tornadus Therian Form,Astonish,Heat wave,Tyranitar Shadow Form,Smack Down,Stone Edge,2.0771601,13.026925943325411,596596
+13,Tornadus Therian Form,Astonish,Heat wave,Rhyperior,Smack Down,Rock Wrecker,2.1938462,12.153952452813751,651659
+6,Tornadus Therian Form,Astonish,Hurricane,Tyranitar Shadow Form,Smack Down,Stone Edge,2.0739725,17.687497334073782,589875
+12,Tornadus Therian Form,Astonish,Hurricane,Rampardos,Smack Down,Rock Slide,2.215248,28.711977321550208,604264
+15,Tornadus Therian Form,Astonish,Hurricane,Rhyperior,Smack Down,Rock Wrecker,2.2865455,15.452805112731344,651454
+5,Tornadus Therian Form,Gust,Psychic,Tyranitar Shadow Form,Smack Down,Stone Edge,2.0688539,13.089868639786612,588830
+12,Tornadus Therian Form,Gust,Psychic,Rhyperior,Smack Down,Rock Wrecker,2.2756302,21.459010140779295,647128
+14,Tornadus Therian Form,Gust,Psychic,Rampardos,Smack Down,Rock Slide,2.3151138,38.07014766442061,619341
+10,Tornadus Therian Form,Random,Random,Rhyperior,Smack Down,Rock Wrecker,2.2828815,19.440041556277606,650727
+13,Tornadus Therian Form,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,2.310658,26.937728127498232,639929
+14,Tornadus Therian Form,Random,Random,Rampardos,Smack Down,Rock Slide,2.3596196,36.58827825637977,635322
+4,Azelf,Confusion,Futuresight,Tyranitar Shadow Form,Bite,Crunch,1.7354618,12.279262678907305,494271
+4,Azelf,Extrasensory,Futuresight,Tyranitar Shadow Form,Bite,Crunch,1.7361217,11.926102393576272,495240
+3,Azelf,Confusion,Fire blast,Tyranitar Shadow Form,Bite,Crunch,1.7400541,14.016114519732152,495421
+3,Azelf,Extrasensory,Fire blast,Tyranitar Shadow Form,Bite,Crunch,1.7353886,13.562938014746694,494106
+4,Azelf,Confusion,Swift,Tyranitar Shadow Form,Bite,Crunch,1.7170736,10.762648079325759,494198
+5,Azelf,Extrasensory,Swift,Tyranitar Shadow Form,Bite,Crunch,1.7066134,10.526691909443535,493381
+3,Azelf,Random,Random,Tyranitar Shadow Form,Bite,Crunch,1.7161053,11.50066468329394,494793
+1,Deoxys Attack Form,Poison jab,Zap cannon,Tyranitar Shadow Form,Bite,Crunch,0.6920607,10.882010031004807,187801
+2,Deoxys Attack Form,Zen headbutt,Zap cannon,Tyranitar Shadow Form,Bite,Crunch,0.69776726,10.371869414834128,189813
+2,Deoxys Attack Form,Zen headbutt,Dark pulse,Tyranitar Shadow Form,Bite,Crunch,0.65013486,6.778605014298679,185771
+2,Deoxys Attack Form,Poison jab,Dark pulse,Tyranitar Shadow Form,Bite,Crunch,0.6590133,7.397265583728245,185921
+4,Deoxys Attack Form,Poison jab,Psycho boost,Tyranitar Shadow Form,Bite,Crunch,0.6481344,4.6731421005101375,186419
+4,Deoxys Attack Form,Zen headbutt,Psycho boost,Tyranitar Shadow Form,Bite,Crunch,0.6461092,4.4056481807129595,186686
+1,Deoxys Attack Form,Random,Random,Tyranitar Shadow Form,Bite,Crunch,0.66396743,7.374812251526534,186855
+30,Mewtwo,Confusion,Focus blast,Tyranitar Shadow Form,Bite,Crunch,2.7596142,54.892498812775756,714055
+29,Mewtwo,Psycho cut,Focus blast,Tyranitar Shadow Form,Bite,Crunch,2.8134997,59.435043449237874,719769
+4,Mewtwo,Psycho cut,Psychic,Tyranitar Shadow Form,Bite,Crunch,2.07418,14.70845236907905,590816
+4,Mewtwo,Psycho cut,Thunderbolt,Tyranitar Shadow Form,Bite,Crunch,2.1779046,28.2063935207424,594985
+3,Mewtwo,Confusion,Thunderbolt,Tyranitar Shadow Form,Bite,Crunch,2.1070864,25.282804691040965,586810
+3,Mewtwo,Psycho cut,Flamethrower,Tyranitar Shadow Form,Bite,Crunch,2.0836115,17.197339639795622,592658
+4,Mewtwo,Confusion,Psychic,Tyranitar Shadow Form,Bite,Crunch,2.074802,15.09767633877147,590170
+4,Mewtwo,Psycho cut,Ice beam,Tyranitar Shadow Form,Bite,Crunch,2.1164646,25.239023514612935,588559
+3,Mewtwo,Confusion,Flamethrower,Tyranitar Shadow Form,Bite,Crunch,2.0806425,16.957017184489537,591823
+4,Mewtwo,Confusion,Ice beam,Tyranitar Shadow Form,Bite,Crunch,2.0889394,24.227892144052145,585472
+4,Mewtwo,Random,Random,Tyranitar Shadow Form,Bite,Crunch,2.2080085,25.98485411358385,611935
+3,Thundurus,Thunder shock,Thunder,Rampardos,Smack Down,Rock Slide,1.933078,28.83699398850255,522364
+4,Thundurus,Thunder shock,Thunder,Rhyperior,Smack Down,Rock Wrecker,1.9500695,9.919921315752335,580839
+6,Thundurus,Thunder shock,Thunder,Tyranitar Shadow Form,Smack Down,Stone Edge,2.0305908,28.804491225473647,549680
+3,Thundurus,Astonish,Thunder,Rhyperior,Smack Down,Rock Wrecker,1.9446787,11.107359155494253,575822
+4,Thundurus,Astonish,Thunder,Rampardos,Smack Down,Rock Slide,1.9591218,29.958192118543835,529377
+6,Thundurus,Astonish,Thunder,Tyranitar Shadow Form,Smack Down,Stone Edge,2.037144,27.000300578350434,554410
+2,Thundurus,Thunder shock,Brick break,Rampardos,Smack Down,Rock Slide,1.9126757,29.46828313091657,515169
+4,Thundurus,Thunder shock,Brick break,Tyranitar Shadow Form,Smack Down,Stone Edge,1.9767686,29.85592820376893,532726
+6,Thundurus,Thunder shock,Brick break,Rhyperior,Smack Down,Rock Wrecker,2.0192635,18.467004993507206,574220
+3,Thundurus,Astonish,Brick break,Rampardos,Smack Down,Rock Slide,1.9024833,29.155102781520213,512967
+5,Thundurus,Astonish,Brick break,Tyranitar Shadow Form,Smack Down,Stone Edge,1.9804803,27.556753886953878,537724
+6,Thundurus,Astonish,Brick break,Rhyperior,Smack Down,Rock Wrecker,2.0166242,18.495337930114786,573710
+3,Thundurus,Thunder shock,Crunch,Tyranitar Shadow Form,Smack Down,Stone Edge,1.8627493,13.019279692959664,530002
+4,Thundurus,Thunder shock,Crunch,Rampardos,Smack Down,Rock Slide,1.8985312,25.09757861120197,513611
+6,Thundurus,Thunder shock,Crunch,Rhyperior,Smack Down,Rock Wrecker,2.0221527,15.177745917930238,575210
+2,Thundurus,Astonish,Thunder punch,Tyranitar Shadow Form,Smack Down,Stone Edge,1.8592858,16.10713098950096,528939
+4,Thundurus,Astonish,Thunder punch,Rhyperior,Smack Down,Rock Wrecker,1.9438415,8.15592783747429,579264
+6,Thundurus,Astonish,Thunder punch,Rampardos,Smack Down,Rock Slide,1.9592062,27.242831756189506,530753
+2,Thundurus,Thunder shock,Thunder punch,Tyranitar Shadow Form,Smack Down,Stone Edge,1.8162459,17.794190823291714,516803
+4,Thundurus,Thunder shock,Thunder punch,Rampardos,Smack Down,Rock Slide,1.9409897,27.88338179573383,525292
+5,Thundurus,Thunder shock,Thunder punch,Rhyperior,Smack Down,Rock Wrecker,1.956173,7.056586140887767,582939
+3,Thundurus,Astonish,Crunch,Tyranitar Shadow Form,Smack Down,Stone Edge,1.8341689,11.7635108935495,525471
+4,Thundurus,Astonish,Crunch,Rampardos,Smack Down,Rock Slide,1.9251081,25.59592033573019,521679
+9,Thundurus,Astonish,Crunch,Rhyperior,Smack Down,Rock Wrecker,2.0523326,16.62017167972533,583796
+2,Thundurus,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,1.8973475,19.285841081857363,532105
+3,Thundurus,Random,Random,Rampardos,Smack Down,Rock Slide,1.906548,25.567852641303293,520471
+5,Thundurus,Random,Random,Rhyperior,Smack Down,Rock Wrecker,1.9770855,12.384867448164371,577910
+29,Palkia,Dragon breath,Fire blast,Rampardos,Smack Down,Outrage,3.0933127,36.712907569319526,862237
+17,Regigigas,Hidden power fighting,Giga impact,Rhyperior,Mud Slap,Super Power,3.6958277,45.30316806597717,1024831
+19,Regigigas,Zen headbutt,Giga impact,Rhyperior,Mud Slap,Super Power,3.7977285,45.457339423075155,1054961
+3,Tornadus,Air slash,Hyper beam,Tyranitar Shadow Form,Smack Down,Stone Edge,1.8288606,16.784077976920038,520418
+6,Tornadus,Air slash,Hyper beam,Rampardos,Smack Down,Rock Slide,1.8950512,22.677980378056482,525949
+12,Tornadus,Air slash,Hyper beam,Rhyperior,Smack Down,Rock Wrecker,2.0445132,16.06932023971098,581593
+14,Tornadus,Bite,Grass knot,Tyranitar Shadow Form,Smack Down,Stone Edge,2.1425507,39.70891858682519,560989
+20,Tornadus,Bite,Grass knot,Rampardos,Smack Down,Rock Slide,2.2239273,48.152963950379046,568646
+28,Tornadus,Bite,Grass knot,Rhyperior,Smack Down,Rock Wrecker,2.3521073,43.44026109003051,616272
+3,Tornadus,Bite,Hyper beam,Tyranitar Shadow Form,Smack Down,Stone Edge,1.8428677,14.981257768719892,524377
+7,Tornadus,Bite,Hyper beam,Rampardos,Smack Down,Rock Slide,1.8864061,22.575034185766075,523063
+12,Tornadus,Bite,Hyper beam,Rhyperior,Smack Down,Rock Wrecker,2.0552053,16.494988022013846,584619
+17,Tornadus,Air slash,Grass knot,Tyranitar Shadow Form,Smack Down,Stone Edge,2.1312342,36.72521679429157,564256
+25,Tornadus,Air slash,Grass knot,Rampardos,Smack Down,Rock Slide,2.3152125,51.21181297215708,589912
+26,Tornadus,Air slash,Grass knot,Rhyperior,Smack Down,Rock Wrecker,2.32414,40.58189554660202,615169
+7,Tornadus,Air slash,Dark pulse,Tyranitar Shadow Form,Smack Down,Stone Edge,1.8576326,14.427919782516689,528546
+12,Tornadus,Air slash,Dark pulse,Rampardos,Smack Down,Rock Slide,2.0100439,31.85404867951114,540376
+13,Tornadus,Air slash,Dark pulse,Rhyperior,Smack Down,Rock Wrecker,2.0136144,18.725400157153,572848
+4,Tornadus,Bite,Dark pulse,Tyranitar Shadow Form,Smack Down,Stone Edge,1.8452234,13.98015275185885,524974
+11,Tornadus,Bite,Dark pulse,Rhyperior,Smack Down,Rock Wrecker,2.0084772,19.41805907711621,571404
+13,Tornadus,Bite,Dark pulse,Rampardos,Smack Down,Rock Slide,2.0312908,34.335399624999454,541658
+7,Tornadus,Air slash,Hurricane,Tyranitar Shadow Form,Smack Down,Stone Edge,1.8531832,17.57651075682119,527407
+10,Tornadus,Air slash,Hurricane,Rampardos,Smack Down,Rock Slide,1.9359127,25.579955554377538,524797
+14,Tornadus,Air slash,Hurricane,Rhyperior,Smack Down,Rock Wrecker,2.0500023,17.286066113271875,583157
+7,Tornadus,Bite,Hurricane,Tyranitar Shadow Form,Smack Down,Stone Edge,1.8497373,18.144777057119274,526426
+11,Tornadus,Bite,Hurricane,Rampardos,Smack Down,Rock Slide,1.9568335,27.662972561244757,529476
+15,Tornadus,Bite,Hurricane,Rhyperior,Smack Down,Rock Wrecker,2.0021272,16.66758935681248,569598
+8,Tornadus,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,1.9016011,19.582706799633744,533566
+10,Tornadus,Random,Random,Rampardos,Smack Down,Rock Slide,1.987726,29.765240177775333,537946
+14,Tornadus,Random,Random,Rhyperior,Smack Down,Rock Wrecker,2.074836,21.069463002552766,584694
+17,Xerneas,Tackle,Giga impact,Tyranitar Shadow Form,Iron Tail,Return,2.781372,33.21494786580061,770421
+15,Xerneas,Zen headbutt,Giga impact,Tyranitar Shadow Form,Iron Tail,Stone Edge,2.717547,30.916467229658384,767218
+21,Xerneas,Zen headbutt,Thunder,Tyranitar Shadow Form,Iron Tail,Stone Edge,2.6414313,23.56820984721468,750940
+22,Xerneas,Tackle,Thunder,Tyranitar Shadow Form,Iron Tail,Stone Edge,2.6516027,25.039512061541533,754083
+28,Xerneas,Random,Random,Tyranitar Shadow Form,Iron Tail,Return,2.830198,37.89044383506256,780105
+4,Raikou,Volt switch,Shadow ball,Rhyperior,Mud Slap,Earthquake,2.5281196,23.137056769442548,718763
+4,Raikou,Thunder shock,Shadow ball,Rhyperior,Mud Slap,Earthquake,2.5184236,23.764703111668364,716108
+3,Raikou,Thunder shock,Thunder,Rhyperior,Mud Slap,Earthquake,2.3579733,10.78454596414754,702676
+3,Raikou,Volt switch,Thunder,Rhyperior,Mud Slap,Earthquake,2.3565404,11.10292093821059,702249
+3,Raikou,Thunder shock,Wild charge,Rhyperior,Mud Slap,Earthquake,2.3306212,12.350757741495093,693986
+3,Raikou,Volt switch,Wild charge,Rhyperior,Mud Slap,Earthquake,2.3511283,12.235965585628165,700253
+4,Raikou,Thunder shock,Thunderbolt,Rhyperior,Mud Slap,Earthquake,2.3807507,11.68810381009992,709463
+4,Raikou,Volt switch,Thunderbolt,Rhyperior,Mud Slap,Earthquake,2.3631043,11.38664870591615,704204
+3,Raikou,Random,Random,Rhyperior,Mud Slap,Earthquake,2.3874087,13.57172285748811,704383
+30,Rayquaza,Dragon tail,Outrage,Rampardos,Smack Down,Rock Slide,2.1304846,41.47670047583857,549149
+25,Rayquaza,Dragon tail,Ancient power,Tyranitar Shadow Form,Smack Down,Stone Edge,1.9014335,21.467167735604054,540332
+29,Rayquaza,Random,Random,Rampardos,Smack Down,Rock Slide,1.9995356,29.036605452741707,541083
+1,Moltres,Wing attack,Overheat,Rampardos,Smack Down,Rock Slide,1.3275856,16.838818472211063,361794
+2,Moltres,Wing attack,Overheat,Tyranitar Shadow Form,Smack Down,Stone Edge,1.3619981,16.351018154614998,375563
+3,Moltres,Wing attack,Overheat,Rhyperior,Smack Down,Rock Wrecker,1.3792729,11.60093963894046,392370
+1,Moltres,Wing attack,Fire blast,Tyranitar Shadow Form,Smack Down,Stone Edge,1.2568605,11.141713258105522,357692
+2,Moltres,Wing attack,Fire blast,Rampardos,Smack Down,Rock Slide,1.3213379,15.902768841676611,365517
+3,Moltres,Wing attack,Fire blast,Rhyperior,Smack Down,Rock Wrecker,1.4012433,11.294009616097524,398728
+1,Moltres,Fire spin,Overheat,Rampardos,Smack Down,Rock Slide,1.3254673,17.917947061317847,358018
+2,Moltres,Fire spin,Overheat,Tyranitar Shadow Form,Smack Down,Stone Edge,1.3716718,16.728217435263048,378265
+3,Moltres,Fire spin,Overheat,Rhyperior,Smack Down,Rock Wrecker,1.3761668,11.958646750830562,391476
+1,Moltres,Wing attack,Ancient power,Tyranitar Shadow Form,Smack Down,Stone Edge,1.2682325,11.141343799309269,360940
+2,Moltres,Wing attack,Ancient power,Rampardos,Smack Down,Rock Slide,1.3022045,15.718372717691675,359961
+3,Moltres,Wing attack,Ancient power,Rhyperior,Smack Down,Rock Wrecker,1.3141512,6.97168859514008,391057
+1,Moltres,Fire spin,Ancient power,Tyranitar Shadow Form,Smack Down,Stone Edge,1.2640954,11.476012963023823,359764
+2,Moltres,Fire spin,Ancient power,Rampardos,Smack Down,Rock Slide,1.3088287,16.709565970613095,356009
+3,Moltres,Fire spin,Ancient power,Rhyperior,Smack Down,Rock Wrecker,1.3117076,7.27757302263171,389978
+1,Moltres,Fire spin,Fire blast,Tyranitar Shadow Form,Smack Down,Stone Edge,1.2546749,12.216601945365456,357079
+2,Moltres,Fire spin,Fire blast,Rampardos,Smack Down,Rock Slide,1.3251808,16.615475506709824,361490
+3,Moltres,Fire spin,Fire blast,Rhyperior,Smack Down,Rock Wrecker,1.3816409,11.01104944430357,393050
+1,Moltres,Wing attack,Heat wave,Rampardos,Smack Down,Rock Slide,1.2637696,14.60969353893063,356236
+2,Moltres,Wing attack,Heat wave,Tyranitar Shadow Form,Smack Down,Stone Edge,1.2699248,10.382769673300784,361394
+4,Moltres,Wing attack,Heat wave,Rhyperior,Smack Down,Rock Wrecker,1.3785768,9.377623489317376,393205
+1,Moltres,Fire spin,Heat wave,Tyranitar Shadow Form,Smack Down,Stone Edge,1.258633,10.760275154616764,358198
+2,Moltres,Fire spin,Heat wave,Rampardos,Smack Down,Rock Slide,1.3045874,16.276911812034186,356965
+3,Moltres,Fire spin,Heat wave,Rhyperior,Smack Down,Rock Wrecker,1.3680828,9.520118040891708,389302
+1,Moltres,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,1.2734892,11.437910549255736,361799
+2,Moltres,Random,Random,Rampardos,Smack Down,Rock Slide,1.295391,15.131961775580676,358176
+3,Moltres,Random,Random,Rhyperior,Smack Down,Rock Wrecker,1.353939,9.245001153072899,392305
+4,Mesprit,Extrasensory,Futuresight,Tyranitar Shadow Form,Bite,Crunch,2.2638428,12.793143275426871,670208
+4,Mesprit,Confusion,Futuresight,Tyranitar Shadow Form,Bite,Crunch,2.2583344,13.04271448413018,668156
+4,Mesprit,Extrasensory,Blizzard,Tyranitar Shadow Form,Bite,Crunch,2.3366652,21.53782188698916,664326
+4,Mesprit,Confusion,Blizzard,Tyranitar Shadow Form,Bite,Crunch,2.345729,23.54461067651813,667241
+3,Mesprit,Extrasensory,Swift,Tyranitar Shadow Form,Bite,Crunch,2.2545817,11.510350127534513,671832
+4,Mesprit,Confusion,Swift,Tyranitar Shadow Form,Bite,Crunch,2.2523594,11.63494999814782,671130
+4,Mesprit,Random,Random,Tyranitar Shadow Form,Bite,Crunch,2.2747557,14.441025901273088,668864
+3,Deoxys,Charge beam,Hyper beam,Tyranitar Shadow Form,Bite,Crunch,1.4274238,16.521824793380894,399772
+3,Deoxys,Charge beam,Thunderbolt,Tyranitar Shadow Form,Bite,Crunch,1.4233454,18.545402148835752,388822
+3,Deoxys,Zen headbutt,Hyper beam,Tyranitar Shadow Form,Bite,Crunch,1.4237123,16.461678197415054,398744
+3,Deoxys,Zen headbutt,Thunderbolt,Tyranitar Shadow Form,Bite,Crunch,1.4116242,17.898531191529,388659
+5,Deoxys,Zen headbutt,Psycho boost,Tyranitar Shadow Form,Bite,Crunch,1.34278,7.926934443546989,392562
+5,Deoxys,Charge beam,Psycho boost,Tyranitar Shadow Form,Bite,Crunch,1.3549521,8.4240704207538,390657
+3,Deoxys,Random,Random,Tyranitar Shadow Form,Bite,Crunch,1.3878219,13.152089882761745,391976
+7,Latias,Charm,Outrage,Tyranitar Shadow Form,Bite,Crunch,2.8963006,42.19107553679546,782847
+12,Latias,Dragon breath,Outrage,Tyranitar Shadow Form,Bite,Crunch,2.8218145,36.77183883921426,764282
+6,Latias,Zen headbutt,Outrage,Tyranitar Shadow Form,Bite,Crunch,2.736008,32.253353984876995,763795
+8,Latias,Dragon breath,Psychic,Tyranitar Shadow Form,Bite,Crunch,2.671296,17.000447986332304,761482
+14,Latias,Charm,Thunder,Tyranitar Shadow Form,Bite,Crunch,2.7966878,35.38603700320358,758577
+7,Latias,Zen headbutt,Psychic,Tyranitar Shadow Form,Bite,Crunch,2.595133,15.161661006132608,763224
+12,Latias,Dragon breath,Thunder,Tyranitar Shadow Form,Bite,Crunch,2.6744878,25.66656224931299,760695
+13,Latias,Zen headbutt,Thunder,Tyranitar Shadow Form,Bite,Crunch,2.6815176,23.46454264373204,762259
+6,Latias,Charm,Psychic,Tyranitar Shadow Form,Bite,Crunch,2.6748405,22.99186685504125,760059
+7,Latias,Random,Random,Tyranitar Shadow Form,Bite,Crunch,2.6916413,25.33356865089511,761680
+24,Zekrom,Charge beam,Outrage,Rhyperior,Mud Slap,Earthquake,2.8263018,30.554138999288377,799175
+18,Zekrom,Charge beam,Wild charge,Rhyperior,Mud Slap,Earthquake,2.5610578,14.43222720484452,757367
+22,Zekrom,Dragon breath,Wild charge,Rhyperior,Mud Slap,Earthquake,2.702116,17.615828817596324,768310
+25,Zekrom,Dragon breath,Crunch,Rhyperior,Mud Slap,Earthquake,2.6913059,24.58522847546749,765269
+26,Zekrom,Random,Random,Rhyperior,Mud Slap,Earthquake,2.7858222,24.859202510806835,792440
+7,Ho Oh,Extrasensory,Solar beam,Rampardos,Smack Down,Rock Slide,2.3782268,49.04296431312353,610742
+10,Ho Oh,Extrasensory,Solar beam,Tyranitar Shadow Form,Smack Down,Stone Edge,2.5732105,53.3823391815066,660708
+29,Ho Oh,Extrasensory,Solar beam,Rhyperior,Smack Down,Rock Wrecker,2.9667044,60.85037314744787,763933
+1,Ho Oh,Steel wing,Solar beam,Rampardos,Smack Down,Rock Slide,2.1918125,45.92054269432868,561849
+8,Ho Oh,Steel wing,Solar beam,Tyranitar Shadow Form,Smack Down,Stone Edge,2.4488244,51.80355778536002,626540
+25,Ho Oh,Steel wing,Solar beam,Rhyperior,Smack Down,Rock Wrecker,2.8258328,59.053828183693234,725097
+1,Ho Oh,Incinerate,Solar beam,Rampardos,Smack Down,Rock Slide,2.0428581,38.1197907376995,535487
+7,Ho Oh,Incinerate,Solar beam,Tyranitar Shadow Form,Smack Down,Stone Edge,2.3511977,43.88107287754866,616123
+15,Ho Oh,Incinerate,Solar beam,Rhyperior,Smack Down,Rock Wrecker,2.7003698,50.24046233429492,707704
+1,Ho Oh,Hidden power fighting,Solar beam,Rampardos,Smack Down,Rock Slide,2.0541062,41.273547863718576,532938
+4,Ho Oh,Hidden power fighting,Solar beam,Tyranitar Shadow Form,Smack Down,Stone Edge,2.2452328,46.063834873697424,579095
+23,Ho Oh,Hidden power fighting,Solar beam,Rhyperior,Smack Down,Rock Wrecker,2.7826722,55.84896651492286,720747
+1,Ho Oh,Hidden power fighting,Brave bird,Rampardos,Smack Down,Rock Slide,1.7563368,28.674021968162005,474892
+2,Ho Oh,Hidden power fighting,Brave bird,Rhyperior,Smack Down,Rock Wrecker,1.8312482,18.853986701379966,521003
+3,Ho Oh,Hidden power fighting,Brave bird,Tyranitar Shadow Form,Smack Down,Stone Edge,1.8660638,26.094115155979463,504180
+1,Ho Oh,Steel wing,Brave bird,Rampardos,Smack Down,Rock Slide,1.7423012,28.71581899366606,469709
+2,Ho Oh,Steel wing,Brave bird,Tyranitar Shadow Form,Smack Down,Stone Edge,1.7473502,21.267777463518243,480469
+3,Ho Oh,Steel wing,Brave bird,Rhyperior,Smack Down,Rock Wrecker,1.8057201,18.955955657035254,513732
+1,Ho Oh,Incinerate,Brave bird,Rampardos,Smack Down,Rock Slide,1.6972102,24.577116088416478,458582
+2,Ho Oh,Incinerate,Brave bird,Tyranitar Shadow Form,Smack Down,Stone Edge,1.7073805,18.471993245402743,485456
+3,Ho Oh,Incinerate,Brave bird,Rhyperior,Smack Down,Rock Wrecker,1.8050034,15.635262792275343,512866
+1,Ho Oh,Extrasensory,Brave bird,Tyranitar Shadow Form,Smack Down,Stone Edge,1.6644062,15.474011872152541,473112
+2,Ho Oh,Extrasensory,Brave bird,Rampardos,Smack Down,Rock Slide,1.7213806,24.019782588890227,465063
+3,Ho Oh,Extrasensory,Brave bird,Rhyperior,Smack Down,Rock Wrecker,1.8016385,16.84794891791198,512144
+1,Ho Oh,Hidden power fighting,Fire blast,Rampardos,Smack Down,Rock Slide,1.7081391,23.142731703072297,461121
+2,Ho Oh,Hidden power fighting,Fire blast,Rhyperior,Smack Down,Rock Wrecker,1.7747835,15.367734100881096,504304
+3,Ho Oh,Hidden power fighting,Fire blast,Tyranitar Shadow Form,Smack Down,Stone Edge,1.7907655,22.317725516991334,486814
+1,Ho Oh,Extrasensory,Fire blast,Tyranitar Shadow Form,Smack Down,Stone Edge,1.6648465,13.105608922445715,473157
+2,Ho Oh,Extrasensory,Fire blast,Rampardos,Smack Down,Rock Slide,1.7287253,21.346889065241356,473297
+4,Ho Oh,Extrasensory,Fire blast,Rhyperior,Smack Down,Rock Wrecker,1.8287456,14.286128617257894,519586
+1,Ho Oh,Incinerate,Fire blast,Tyranitar Shadow Form,Smack Down,Stone Edge,1.6746215,16.77650254814411,476128
+2,Ho Oh,Incinerate,Fire blast,Rampardos,Smack Down,Rock Slide,1.6898503,20.849254481439548,461396
+4,Ho Oh,Incinerate,Fire blast,Rhyperior,Smack Down,Rock Wrecker,1.8336034,14.336992316846313,520960
+1,Ho Oh,Steel wing,Fire blast,Tyranitar Shadow Form,Smack Down,Stone Edge,1.6464916,18.343610338592804,468272
+2,Ho Oh,Steel wing,Fire blast,Rampardos,Smack Down,Rock Slide,1.7762392,26.966795191436805,480017
+3,Ho Oh,Steel wing,Fire blast,Rhyperior,Smack Down,Rock Wrecker,1.7884909,15.375331819247696,508158
+1,Ho Oh,Random,Random,Rampardos,Smack Down,Rock Slide,1.8055524,27.133336573579207,487888
+2,Ho Oh,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,1.8571452,24.135145401460612,510371
+4,Ho Oh,Random,Random,Rhyperior,Smack Down,Rock Wrecker,2.049304,24.485807365966597,568414
+2,Mewtwo A Form,Iron tail,Rock slide,Tyranitar Shadow Form,Bite,Crunch,2.9956906,29.750812895771265,852180
+4,Mewtwo A Form,Confusion,Rock slide,Tyranitar Shadow Form,Bite,Crunch,3.0128853,23.90690124249475,856111
+7,Mewtwo A Form,Iron tail,Earthquake,Tyranitar Shadow Form,Bite,Crunch,3.117259,38.63855731270362,851822
+22,Mewtwo A Form,Iron tail,Dynamic punch,Tyranitar Shadow Form,Bite,Crunch,3.4897583,61.92183536432289,920875
+6,Mewtwo A Form,Confusion,Earthquake,Tyranitar Shadow Form,Bite,Crunch,3.0343628,33.006506308785795,856850
+8,Mewtwo A Form,Iron tail,Futuresight,Tyranitar Shadow Form,Bite,Crunch,3.0165162,22.231299864064408,856674
+21,Mewtwo A Form,Confusion,Dynamic punch,Tyranitar Shadow Form,Bite,Crunch,3.4582484,56.92938657509235,922773
+4,Mewtwo A Form,Confusion,Futuresight,Tyranitar Shadow Form,Bite,Crunch,2.8887053,14.489945271831521,860834
+6,Mewtwo A Form,Random,Random,Tyranitar Shadow Form,Bite,Crunch,3.1435745,35.565073708575184,875362
+7,Latios,Dragon breath,Psychic,Tyranitar Shadow Form,Bite,Crunch,2.359372,17.737723990104588,670698
+8,Latios,Dragon breath,Dragon claw,Tyranitar Shadow Form,Bite,Crunch,2.3897688,27.450236103024082,671258
+7,Latios,Zen headbutt,Psychic,Tyranitar Shadow Form,Bite,Crunch,2.342479,15.749827476520025,667470
+9,Latios,Zen headbutt,Dragon claw,Tyranitar Shadow Form,Bite,Crunch,2.3570712,24.63844703303917,666973
+21,Latios,Random,Random,Tyranitar Shadow Form,Bite,Crunch,2.554626,31.234914062243657,705907
+6,Uxie,Confusion,Thunder,Tyranitar Shadow Form,Bite,Crunch,2.9537234,19.35043845507695,841211
+6,Uxie,Extrasensory,Thunder,Tyranitar Shadow Form,Bite,Crunch,2.9491763,19.502580214378582,841976
+6,Uxie,Confusion,Futuresight,Tyranitar Shadow Form,Bite,Crunch,2.836681,12.958331416298645,845330
+6,Uxie,Confusion,Swift,Tyranitar Shadow Form,Bite,Crunch,2.8465552,11.859337039522316,848273
+6,Uxie,Extrasensory,Swift,Tyranitar Shadow Form,Bite,Crunch,2.8477154,11.491770974498445,848619
+6,Uxie,Extrasensory,Futuresight,Tyranitar Shadow Form,Bite,Crunch,2.844781,12.43891752099653,847744
+5,Uxie,Random,Random,Tyranitar Shadow Form,Bite,Crunch,2.8662262,13.666265075366606,844838
+9,Giratina Origin Form,Dragon tail,Dragon pulse,Tyranitar Shadow Form,Bite,Crunch,2.1723847,26.30609134726587,600410
+6,Giratina Origin Form,Shadow claw,Shadow ball,Tyranitar Shadow Form,Bite,Crunch,2.0960662,19.599493826179845,596197
+7,Giratina Origin Form,Shadow claw,Dragon pulse,Tyranitar Shadow Form,Bite,Crunch,2.1273148,24.34176111070497,597415
+6,Giratina Origin Form,Dragon tail,Shadow ball,Tyranitar Shadow Form,Bite,Crunch,2.0910225,21.447345398563876,594799
+12,Giratina Origin Form,Dragon tail,Ominous wind,Tyranitar Shadow Form,Bite,Crunch,2.1084752,14.852630790400166,599629
+12,Giratina Origin Form,Shadow claw,Ominous wind,Tyranitar Shadow Form,Bite,Crunch,2.0725036,12.768279891714105,597379
+6,Giratina Origin Form,Random,Random,Tyranitar Shadow Form,Bite,Crunch,2.1119769,19.87063214862445,597388
+18,Giratina,Dragon breath,Ancient power,Tyranitar Shadow Form,Bite,Crunch,2.5309837,18.449079075519304,719199
+18,Giratina,Shadow claw,Ancient power,Tyranitar Shadow Form,Bite,Crunch,2.5421724,18.062114624850558,722330
+10,Giratina,Dragon breath,Dragon claw,Tyranitar Shadow Form,Bite,Crunch,2.5252752,21.108540991460664,717683
+13,Giratina,Shadow claw,Dragon claw,Tyranitar Shadow Form,Bite,Crunch,2.5287292,20.46701880902505,718640
+11,Giratina,Dragon breath,Shadow sneak,Tyranitar Shadow Form,Bite,Crunch,2.4332316,12.245183978301332,725102
+11,Giratina,Shadow claw,Shadow sneak,Tyranitar Shadow Form,Bite,Crunch,2.4320571,11.916854802462026,724753
+13,Giratina,Random,Random,Tyranitar Shadow Form,Bite,Crunch,2.482751,15.554552006926135,722362
+15,Lugia,Extrasensory,Hydro pump,Tyranitar Shadow Form,Smack Down,Crunch,3.4927943,42.64803699150635,966446
+27,Lugia,Extrasensory,Hydro pump,Rhyperior,Smack Down,Rock Wrecker,3.7659924,49.5414434504162,1019161
+3,Lugia,Extrasensory,Futuresight,Tyranitar Shadow Form,Smack Down,Stone Edge,3.0822985,16.22822012837762,918346
+20,Lugia,Extrasensory,Futuresight,Rampardos,Smack Down,Rock Slide,3.5031316,50.6218026926554,946754
+22,Lugia,Extrasensory,Futuresight,Rhyperior,Smack Down,Rock Wrecker,3.513027,32.37596718654164,999111
+11,Lugia,Dragon tail,Hydro pump,Tyranitar Shadow Form,Smack Down,Crunch,3.4147644,42.522860319839886,937139
+25,Lugia,Dragon tail,Hydro pump,Rhyperior,Smack Down,Rock Wrecker,3.7686145,49.56228460011628,1020843
+10,Lugia,Dragon tail,Futuresight,Tyranitar Shadow Form,Smack Down,Stone Edge,3.2530854,21.011715917121435,923981
+20,Lugia,Dragon tail,Futuresight,Rampardos,Smack Down,Rock Slide,3.5041873,50.5482927771799,947047
+22,Lugia,Dragon tail,Futuresight,Rhyperior,Smack Down,Rock Wrecker,3.5184813,32.3402769761126,1000625
+7,Lugia,Dragon tail,Sky attack,Tyranitar Shadow Form,Smack Down,Stone Edge,3.2383382,27.51666747711387,920499
+11,Lugia,Dragon tail,Sky attack,Rampardos,Smack Down,Rock Slide,3.3528368,40.46709589871816,927775
+16,Lugia,Dragon tail,Sky attack,Rhyperior,Smack Down,Rock Wrecker,3.5629654,25.33127962103981,1012174
+8,Lugia,Extrasensory,Sky attack,Tyranitar Shadow Form,Smack Down,Stone Edge,3.267225,24.480399742638706,928238
+13,Lugia,Extrasensory,Sky attack,Rampardos,Smack Down,Rock Slide,3.3492608,40.41253804573629,927098
+17,Lugia,Extrasensory,Sky attack,Rhyperior,Smack Down,Rock Wrecker,3.5612512,25.350588846298816,1011776
+9,Lugia,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,3.2703638,26.625113928272643,935121
+18,Lugia,Random,Random,Rhyperior,Smack Down,Rock Wrecker,3.5708315,31.071889276425157,1013833
+25,Lugia,Random,Random,Rampardos,Smack Down,Rock Slide,3.6907265,54.74299643379705,995374
+4,Deoxys Defense Form,Counter,Rock slide,Tyranitar Shadow Form,Bite,Crunch,3.5352056,32.547260592948106,1005458
+6,Deoxys Defense Form,Zen headbutt,Rock slide,Tyranitar Shadow Form,Bite,Crunch,3.5402067,24.097865436054832,1006235
+4,Deoxys Defense Form,Counter,Thunderbolt,Tyranitar Shadow Form,Bite,Crunch,3.5175202,33.197797097982004,1000478
+6,Deoxys Defense Form,Zen headbutt,Thunderbolt,Tyranitar Shadow Form,Bite,Crunch,3.5378628,24.691617146803374,1005444
+6,Deoxys Defense Form,Counter,Psycho boost,Tyranitar Shadow Form,Bite,Crunch,3.378312,16.869811367881397,1006736
+8,Deoxys Defense Form,Zen headbutt,Psycho boost,Tyranitar Shadow Form,Bite,Crunch,3.3898938,10.236108420671698,1010188
+5,Deoxys Defense Form,Random,Random,Tyranitar Shadow Form,Bite,Crunch,3.4779878,23.56220613184913,1004119
+8,Yveltal,Gust,Focus blast,Rhyperior,Smack Down,Rock Wrecker,2.3028812,27.928761408505853,637049
+24,Yveltal,Gust,Focus blast,Rampardos,Smack Down,Rock Slide,2.656457,52.43120318001564,690437
+4,Yveltal,Gust,Hyper beam,Tyranitar Shadow Form,Smack Down,Stone Edge,2.0563328,20.02046475109936,584922
+7,Yveltal,Gust,Hyper beam,Rampardos,Smack Down,Rock Slide,2.1519215,27.91252698798066,582365
+9,Yveltal,Gust,Hyper beam,Rhyperior,Smack Down,Rock Wrecker,2.2622101,17.414248207343686,643121
+11,Yveltal,Snarl,Focus blast,Rhyperior,Smack Down,Rock Wrecker,2.3337655,28.12956267375458,645083
+28,Yveltal,Snarl,Focus blast,Rampardos,Smack Down,Rock Slide,2.7836246,57.89613314455753,714594
+3,Yveltal,Sucker punch,Dark pulse,Tyranitar Shadow Form,Smack Down,Stone Edge,2.0659885,16.905047759609744,587315
+11,Yveltal,Sucker punch,Dark pulse,Rhyperior,Smack Down,Rock Wrecker,2.2324123,23.84894009370835,635006
+14,Yveltal,Sucker punch,Dark pulse,Rampardos,Smack Down,Rock Slide,2.338462,40.6516846805175,619300
+4,Yveltal,Snarl,Hyper beam,Tyranitar Shadow Form,Smack Down,Stone Edge,2.0700462,17.369630635614154,588469
+8,Yveltal,Snarl,Hyper beam,Rampardos,Smack Down,Rock Slide,2.1427064,26.549556607205247,587089
+11,Yveltal,Snarl,Hyper beam,Rhyperior,Smack Down,Rock Wrecker,2.2714384,18.36181820009745,645783
+3,Yveltal,Gust,Dark pulse,Tyranitar Shadow Form,Smack Down,Stone Edge,2.0391018,17.58858267649991,579741
+9,Yveltal,Gust,Dark pulse,Rampardos,Smack Down,Rock Slide,2.1923234,36.69280931319615,585146
+10,Yveltal,Gust,Dark pulse,Rhyperior,Smack Down,Rock Wrecker,2.2299895,23.09502333356262,633384
+5,Yveltal,Sucker punch,Hyper beam,Tyranitar Shadow Form,Smack Down,Stone Edge,2.0631793,16.221988278479888,586490
+7,Yveltal,Sucker punch,Hyper beam,Rampardos,Smack Down,Rock Slide,2.0853481,24.3002108299611,584422
+13,Yveltal,Sucker punch,Hyper beam,Rhyperior,Smack Down,Rock Wrecker,2.2701077,17.545896649682096,645392
+2,Yveltal,Snarl,Dark pulse,Tyranitar Shadow Form,Smack Down,Stone Edge,2.0355413,17.220500869617215,578704
+10,Yveltal,Snarl,Dark pulse,Rhyperior,Smack Down,Rock Wrecker,2.2041733,23.532368252542305,626760
+12,Yveltal,Snarl,Dark pulse,Rampardos,Smack Down,Rock Slide,2.2450087,38.56695519912792,596549
+11,Yveltal,Sucker punch,Focus blast,Rhyperior,Smack Down,Rock Wrecker,2.321058,27.4780332604851,646637
+27,Yveltal,Sucker punch,Focus blast,Rampardos,Smack Down,Rock Slide,2.7995496,58.87954864083086,716238
+3,Yveltal,Sucker punch,Psychic,Tyranitar Shadow Form,Smack Down,Stone Edge,1.9882687,11.609486313754912,585233
+12,Yveltal,Sucker punch,Psychic,Rhyperior,Smack Down,Rock Wrecker,2.2248948,22.69859693226954,632790
+18,Yveltal,Sucker punch,Psychic,Rampardos,Smack Down,Rock Slide,2.3814054,42.30185699420628,628163
+3,Yveltal,Snarl,Psychic,Tyranitar Shadow Form,Smack Down,Stone Edge,2.0006745,12.148882581563328,579991
+12,Yveltal,Snarl,Psychic,Rhyperior,Smack Down,Rock Wrecker,2.2435446,23.45702266466878,637995
+16,Yveltal,Snarl,Psychic,Rampardos,Smack Down,Rock Slide,2.3355443,41.0066174565478,617774
+8,Yveltal,Gust,Psychic,Tyranitar Shadow Form,Smack Down,Stone Edge,2.0542243,13.222475985180733,583907
+10,Yveltal,Gust,Psychic,Rampardos,Smack Down,Rock Slide,2.167361,35.628332330104975,579830
+13,Yveltal,Gust,Psychic,Rhyperior,Smack Down,Rock Wrecker,2.238346,22.314198079441557,636642
+6,Yveltal,Gust,Hurricane,Tyranitar Shadow Form,Smack Down,Stone Edge,2.0214658,19.8592187613364,575055
+10,Yveltal,Gust,Hurricane,Rampardos,Smack Down,Rock Slide,2.1411405,27.940956008987424,579964
+14,Yveltal,Gust,Hurricane,Rhyperior,Smack Down,Rock Wrecker,2.2704074,18.492351984826968,645496
+8,Yveltal,Snarl,Hurricane,Tyranitar Shadow Form,Smack Down,Stone Edge,2.0624855,18.902337620426067,586554
+11,Yveltal,Snarl,Hurricane,Rampardos,Smack Down,Rock Slide,2.1551847,30.20708270320214,582352
+16,Yveltal,Snarl,Hurricane,Rhyperior,Smack Down,Rock Wrecker,2.2774725,19.49212738524652,647520
+9,Yveltal,Sucker punch,Hurricane,Tyranitar Shadow Form,Smack Down,Stone Edge,2.107319,19.788371543459675,599336
+12,Yveltal,Sucker punch,Hurricane,Rampardos,Smack Down,Rock Slide,2.1788027,29.24529623026831,591016
+14,Yveltal,Sucker punch,Hurricane,Rhyperior,Smack Down,Rock Wrecker,2.2274659,17.781903297000166,633323
+10,Yveltal,Random,Random,Tyranitar Shadow Form,Smack Down,Stone Edge,2.2276409,24.44720384526035,622201
+11,Yveltal,Random,Random,Rhyperior,Smack Down,Rock Wrecker,2.2489727,20.41039748662653,641014
+12,Yveltal,Random,Random,Rampardos,Smack Down,Rock Slide,2.2791026,35.6397624925349,612318

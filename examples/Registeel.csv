@@ -1,0 +1,301 @@
+Rank,Raidboss,raid_move1,raid_move2,defender_name,defender_move1,defender_move2,estimator,effective_deaths,effective_combat_time
+1,Registeel,Metal claw,Hyper beam,Charizard Mega Y,Fire Spin,Blast Burn,2.5099413,18.43288520917529,713068
+2,Registeel,Metal claw,Hyper beam,Moltres Shadow Form,Fire Spin,Overheat,2.7912881,21.99472668073705,792949
+3,Registeel,Metal claw,Hyper beam,Entei Shadow Form,Fire Fang,Overheat,2.8671339,21.305167831939567,814414
+4,Registeel,Metal claw,Hyper beam,Machamp Shadow Form,Counter,Dynamic Punch,2.8971295,31.72036374008793,821389
+5,Registeel,Metal claw,Hyper beam,Charizard Mega X,Fire Spin,Blast Burn,2.9127893,21.143403802903343,827379
+6,Registeel,Metal claw,Hyper beam,Reshiram,Fire Fang,Overheat,2.9344034,21.479946642033532,833828
+7,Registeel,Metal claw,Hyper beam,Chandelure,Fire Spin,Overheat,2.9768162,15.120933471389948,887090
+8,Registeel,Metal claw,Hyper beam,Houndoom Mega,Fire Fang,Flamethrower,2.9953482,22.3588313948756,850853
+9,Registeel,Metal claw,Hyper beam,Lucario,Counter,Aura Sphere,3.0011566,22.0179731545736,852462
+10,Registeel,Metal claw,Hyper beam,Hariyama Shadow Form,Counter,Dynamic Punch,3.049708,33.111862218064815,866842
+11,Registeel,Metal claw,Hyper beam,Arcanine Shadow Form,Fire Fang,Flamethrower,3.0718775,32.16555059074877,874231
+12,Registeel,Metal claw,Hyper beam,Charizard Shadow Form,Fire Spin,Blast Burn,3.1028407,33.288023720706995,881395
+13,Registeel,Metal claw,Hyper beam,Magmortar Shadow Form,Fire Spin,Fire Punch,3.1572433,34.04168264030747,896937
+14,Registeel,Metal claw,Hyper beam,Houndoom Shadow Form,Fire Fang,Flamethrower,3.168197,34.39122284647219,899483
+15,Registeel,Metal claw,Hyper beam,Ho Oh Shadow Form,Incinerate,Fire Blast,3.1978686,22.83432217903892,908342
+16,Registeel,Metal claw,Hyper beam,Conkeldurr,Counter,Dynamic Punch,3.231988,24.375234627530823,918237
+17,Registeel,Metal claw,Hyper beam,Salamence Shadow Form,Fire Fang,Fire Blast,3.263989,31.881468402057116,928543
+18,Registeel,Metal claw,Hyper beam,Excadrill,Mud Slap,Earthquake,3.285429,19.72778793927103,954616
+19,Registeel,Metal claw,Hyper beam,Machamp,Counter,Dynamic Punch,3.3307061,28.634760509711803,946744
+20,Registeel,Metal claw,Hyper beam,Emboar,Ember,Blast Burn,3.3471372,27.251700436080775,951269
+21,Registeel,Metal claw,Hyper beam,Mamoswine Shadow Form,Mud Slap,Bulldoze,3.3575811,36.32344060855802,953178
+22,Registeel,Metal claw,Hyper beam,Moltres,Fire Spin,Overheat,3.3722522,24.404856233303214,957947
+23,Registeel,Metal claw,Hyper beam,Darmanitan,Fire Fang,Overheat,3.376698,37.201195754010016,957098
+24,Registeel,Metal claw,Hyper beam,Breloom,Counter,Dynamic Punch,3.412151,36.98566197521301,969176
+25,Registeel,Metal claw,Hyper beam,Blaziken,Counter,Blast Burn,3.4220853,36.62360713932954,972050
+26,Registeel,Metal claw,Hyper beam,Entei,Fire Fang,Overheat,3.4427152,24.93041829240912,977994
+27,Registeel,Metal claw,Hyper beam,Alakazam Shadow Form,Counter,Focus Blast,3.4471083,38.01707411263593,977659
+28,Registeel,Metal claw,Hyper beam,Landorus Therian Form,Mud Shot,Earthquake,3.4673018,25.78294759151355,985046
+29,Registeel,Metal claw,Hyper beam,Charizard,Fire Spin,Blast Burn,3.4710028,27.02324722089468,986308
+30,Registeel,Metal claw,Hyper beam,Garchomp,Mud Shot,Earth Power,3.473233,23.782735636842553,986453
+1,Registeel,Rock smash,Hyper beam,Charizard Mega Y,Fire Spin,Blast Burn,2.5330667,17.9576189984603,719512
+2,Registeel,Rock smash,Hyper beam,Moltres Shadow Form,Fire Spin,Overheat,2.743197,24.251969432154837,779979
+3,Registeel,Rock smash,Hyper beam,Machamp Shadow Form,Counter,Dynamic Punch,2.8182116,29.889093477108254,799626
+4,Registeel,Rock smash,Hyper beam,Entei Shadow Form,Fire Fang,Overheat,2.8851638,23.809977275065368,820000
+5,Registeel,Rock smash,Hyper beam,Charizard Mega X,Fire Spin,Blast Burn,2.9183807,22.298372556875087,829036
+6,Registeel,Rock smash,Hyper beam,Reshiram,Fire Fang,Overheat,2.9243577,20.613142241913305,830627
+7,Registeel,Rock smash,Hyper beam,Chandelure,Fire Spin,Overheat,2.928139,13.642920101540891,872585
+8,Registeel,Rock smash,Hyper beam,Lucario,Counter,Aura Sphere,3.005117,29.123945311252427,854708
+9,Registeel,Rock smash,Hyper beam,Houndoom Mega,Fire Fang,Flamethrower,3.0510523,31.187605579964966,868157
+10,Registeel,Rock smash,Hyper beam,Hariyama Shadow Form,Counter,Dynamic Punch,3.0534475,31.932481315056265,867236
+11,Registeel,Rock smash,Hyper beam,Charizard Shadow Form,Fire Spin,Blast Burn,3.0694547,31.847497271619773,871934
+12,Registeel,Rock smash,Hyper beam,Arcanine Shadow Form,Fire Fang,Flamethrower,3.1100588,32.24375185229396,883323
+13,Registeel,Rock smash,Hyper beam,Magmortar Shadow Form,Fire Spin,Fire Punch,3.1163573,32.701787464208785,885111
+14,Registeel,Rock smash,Hyper beam,Salamence Shadow Form,Fire Fang,Fire Blast,3.1725106,27.897826300530348,901870
+15,Registeel,Rock smash,Hyper beam,Ho Oh Shadow Form,Incinerate,Fire Blast,3.1956613,21.62708257921591,909281
+16,Registeel,Rock smash,Hyper beam,Conkeldurr,Counter,Dynamic Punch,3.217898,24.407163727891273,914310
+17,Registeel,Rock smash,Hyper beam,Darmanitan,Fire Fang,Overheat,3.2698627,34.585527503550296,927609
+18,Registeel,Rock smash,Hyper beam,Gengar Mega,Lick,Focus Blast,3.2786744,13.391627932867225,977044
+19,Registeel,Rock smash,Hyper beam,Houndoom Shadow Form,Fire Fang,Flamethrower,3.313748,41.86908121582411,899937
+20,Registeel,Rock smash,Hyper beam,Mamoswine Shadow Form,Mud Slap,Bulldoze,3.3142567,35.94159869363373,941086
+21,Registeel,Rock smash,Hyper beam,Blaziken,Fire Spin,Blast Burn,3.361592,34.7830816925728,954885
+22,Registeel,Rock smash,Hyper beam,Machamp,Counter,Dynamic Punch,3.3622825,29.75959962008218,956010
+23,Registeel,Rock smash,Hyper beam,Moltres,Fire Spin,Overheat,3.3639884,23.303283169973,956306
+24,Registeel,Rock smash,Hyper beam,Breloom,Counter,Dynamic Punch,3.3744998,36.73015425754137,958847
+25,Registeel,Rock smash,Hyper beam,Entei,Fire Fang,Overheat,3.4018786,23.917936836341724,966235
+26,Registeel,Rock smash,Hyper beam,Excadrill,Mud Slap,Drill Run,3.4233093,26.97106587967319,972796
+27,Registeel,Rock smash,Hyper beam,Alakazam Shadow Form,Counter,Focus Blast,3.4550211,36.3518790557522,981722
+28,Registeel,Rock smash,Hyper beam,Heatran,Fire Spin,Flamethrower,3.461353,21.123199113656607,990762
+29,Registeel,Rock smash,Hyper beam,Emboar,Ember,Blast Burn,3.4614756,35.11063643442598,984972
+30,Registeel,Rock smash,Hyper beam,Landorus Therian Form,Mud Shot,Earthquake,3.462595,24.376562245813698,983755
+1,Registeel,Metal claw,Focus blast,Charizard Mega Y,Fire Spin,Blast Burn,2.3966558,12.897691671019109,714203
+2,Registeel,Metal claw,Focus blast,Moltres Shadow Form,Fire Spin,Overheat,2.603354,15.270285552639315,764950
+3,Registeel,Metal claw,Focus blast,Entei Shadow Form,Fire Fang,Overheat,2.85443,21.4194569742242,810878
+4,Registeel,Metal claw,Focus blast,Machamp Shadow Form,Counter,Dynamic Punch,2.870221,32.08300079019124,811570
+5,Registeel,Metal claw,Focus blast,Chandelure,Fire Spin,Overheat,2.920872,14.244856808165967,870419
+6,Registeel,Metal claw,Focus blast,Reshiram,Fire Fang,Overheat,2.9246604,19.801491462247583,830850
+7,Registeel,Metal claw,Focus blast,Charizard Mega X,Fire Spin,Blast Burn,2.9321299,21.80794276795301,833081
+8,Registeel,Metal claw,Focus blast,Charizard Shadow Form,Fire Spin,Blast Burn,2.9397302,21.80755680193088,835060
+9,Registeel,Metal claw,Focus blast,Ho Oh Shadow Form,Incinerate,Fire Blast,2.9426887,14.25328683470578,876921
+10,Registeel,Metal claw,Focus blast,Hariyama Shadow Form,Counter,Dynamic Punch,2.9908621,30.07154027302621,850978
+11,Registeel,Metal claw,Focus blast,Lucario,Counter,Aura Sphere,3.0179818,33.910109617511004,851814
+12,Registeel,Metal claw,Focus blast,Arcanine Shadow Form,Fire Fang,Flamethrower,3.0811343,28.89873124871386,876160
+13,Registeel,Metal claw,Focus blast,Houndoom Mega,Fire Fang,Flamethrower,3.1287081,35.05950790478566,883315
+14,Registeel,Metal claw,Focus blast,Darmanitan,Fire Fang,Overheat,3.1511374,31.470108545125093,896531
+15,Registeel,Metal claw,Focus blast,Magmortar Shadow Form,Fire Spin,Fire Punch,3.1839697,35.36409239402994,900987
+16,Registeel,Metal claw,Focus blast,Moltres,Fire Spin,Overheat,3.191766,17.492558994377006,951060
+17,Registeel,Metal claw,Focus blast,Alakazam Shadow Form,Counter,Focus Blast,3.2051585,29.93036311120734,911540
+18,Registeel,Metal claw,Focus blast,Salamence Shadow Form,Fire Fang,Fire Blast,3.221748,21.718020090651276,914789
+19,Registeel,Metal claw,Focus blast,Gengar Mega,Lick,Focus Blast,3.2277744,12.958084615873037,961877
+20,Registeel,Metal claw,Focus blast,Conkeldurr,Counter,Dynamic Punch,3.2487345,24.595422972046975,923021
+21,Registeel,Metal claw,Focus blast,Landorus Therian Form,Mud Shot,Earthquake,3.285992,19.02653256387885,970967
+22,Registeel,Metal claw,Focus blast,Entei,Fire Fang,Overheat,3.3096807,21.341789910158127,940048
+23,Registeel,Metal claw,Focus blast,Emboar,Ember,Blast Burn,3.319758,25.432339148227808,943346
+24,Registeel,Metal claw,Focus blast,Machamp,Counter,Dynamic Punch,3.342294,26.982570010132903,949874
+25,Registeel,Metal claw,Focus blast,Blaziken,Counter,Blast Burn,3.3439379,35.248091759357116,951712
+26,Registeel,Metal claw,Focus blast,Houndoom Shadow Form,Fire Fang,Flamethrower,3.35055,47.58005822878218,905352
+27,Registeel,Metal claw,Focus blast,Mamoswine Shadow Form,Mud Slap,Bulldoze,3.3767748,39.64097916096881,946526
+28,Registeel,Metal claw,Focus blast,Garchomp,Mud Shot,Earth Power,3.4301133,22.31829707222388,974177
+29,Registeel,Metal claw,Focus blast,Flareon,Fire Spin,Overheat,3.4347205,28.57869226382882,976070
+30,Registeel,Metal claw,Focus blast,Breloom,Counter,Dynamic Punch,3.4456801,38.169094260111706,975367
+1,Registeel,Lock on,Hyper beam,Charizard Mega Y,Fire Spin,Blast Burn,2.536459,19.352582539814957,720791
+2,Registeel,Lock on,Hyper beam,Machamp Shadow Form,Counter,Dynamic Punch,2.7655888,22.9586242621432,785826
+3,Registeel,Lock on,Hyper beam,Moltres Shadow Form,Fire Spin,Overheat,2.7753038,21.272163945974896,788405
+4,Registeel,Lock on,Hyper beam,Reshiram,Fire Fang,Overheat,2.8218148,17.197987334493565,809887
+5,Registeel,Lock on,Hyper beam,Entei Shadow Form,Fire Fang,Overheat,2.8756998,21.78744092943075,816873
+6,Registeel,Lock on,Hyper beam,Chandelure,Fire Spin,Overheat,2.8972723,13.284215993174673,863387
+7,Registeel,Lock on,Hyper beam,Charizard Mega X,Fire Spin,Blast Burn,2.9677846,22.52202781360942,843058
+8,Registeel,Lock on,Hyper beam,Hariyama Shadow Form,Counter,Dynamic Punch,2.968371,23.19720682118417,843318
+9,Registeel,Lock on,Hyper beam,Charizard Shadow Form,Fire Spin,Blast Burn,3.0120096,31.888225288766264,857268
+10,Registeel,Lock on,Hyper beam,Houndoom Mega,Fire Fang,Flamethrower,3.0189292,23.234032377180277,857672
+11,Registeel,Lock on,Hyper beam,Lucario,Counter,Aura Sphere,3.0250666,23.12188856695333,859408
+12,Registeel,Lock on,Hyper beam,Arcanine Shadow Form,Fire Fang,Flamethrower,3.0361924,23.453327785348296,862587
+13,Registeel,Lock on,Hyper beam,Ho Oh Shadow Form,Incinerate,Fire Blast,3.0486155,18.31166769982081,884939
+14,Registeel,Lock on,Hyper beam,Darmanitan,Fire Fang,Overheat,3.1233873,25.349505309793518,887798
+15,Registeel,Lock on,Hyper beam,Salamence Shadow Form,Fire Fang,Fire Blast,3.1691303,23.7718250923891,900338
+16,Registeel,Lock on,Hyper beam,Magmortar Shadow Form,Fire Spin,Fire Punch,3.1902673,36.257556595872074,899569
+17,Registeel,Lock on,Hyper beam,Mamoswine Shadow Form,Mud Slap,Bulldoze,3.2142096,24.27087124270619,913191
+18,Registeel,Lock on,Hyper beam,Gengar Mega,Lick,Focus Blast,3.2233188,12.938959116672175,960548
+19,Registeel,Lock on,Hyper beam,Houndoom Shadow Form,Fire Fang,Flamethrower,3.2254465,36.72193258016363,909750
+20,Registeel,Lock on,Hyper beam,Excadrill,Mud Slap,Earthquake,3.2269518,18.665878669612898,952094
+21,Registeel,Lock on,Hyper beam,Blaziken,Counter,Blast Burn,3.234324,27.20629311634947,919318
+22,Registeel,Lock on,Hyper beam,Entei,Fire Spin,Overheat,3.2420301,19.255689802746428,950998
+23,Registeel,Lock on,Hyper beam,Conkeldurr,Counter,Dynamic Punch,3.280488,25.1344199226573,932173
+24,Registeel,Lock on,Hyper beam,Garchomp,Mud Shot,Earth Power,3.3202043,19.505822254884364,973487
+25,Registeel,Lock on,Hyper beam,Emboar,Ember,Blast Burn,3.322301,24.828990065979347,943911
+26,Registeel,Lock on,Hyper beam,Machamp,Counter,Dynamic Punch,3.3606565,25.618973262868778,954905
+27,Registeel,Lock on,Hyper beam,Moltres,Fire Spin,Overheat,3.3893185,25.58696332348455,962987
+28,Registeel,Lock on,Hyper beam,Flareon,Fire Spin,Overheat,3.425139,25.981848731578374,973204
+29,Registeel,Lock on,Hyper beam,Lopunny Mega,Low Kick,Focus Blast,3.4275417,25.77869663705981,973844
+30,Registeel,Lock on,Hyper beam,Infernape,Fire Spin,Blast Burn,3.4580946,27.35323813920244,982656
+1,Registeel,Rock smash,Focus blast,Charizard Mega Y,Fire Spin,Blast Burn,2.3968074,12.876916049139473,714208
+2,Registeel,Rock smash,Focus blast,Moltres Shadow Form,Fire Spin,Overheat,2.6532648,15.969403362907746,767866
+3,Registeel,Rock smash,Focus blast,Machamp Shadow Form,Counter,Dynamic Punch,2.802649,30.06936763368484,795283
+4,Registeel,Rock smash,Focus blast,Entei Shadow Form,Fire Fang,Overheat,2.8427405,22.035293985607645,807535
+5,Registeel,Rock smash,Focus blast,Charizard Mega X,Fire Spin,Blast Burn,2.9222052,21.96222886354636,830073
+6,Registeel,Rock smash,Focus blast,Reshiram,Fire Fang,Overheat,2.9268496,20.900791923931223,831578
+7,Registeel,Rock smash,Focus blast,Charizard Shadow Form,Fire Spin,Blast Burn,2.9377232,20.886412161759814,834842
+8,Registeel,Rock smash,Focus blast,Chandelure,Fire Spin,Overheat,2.9577131,13.281294307659772,881398
+9,Registeel,Rock smash,Focus blast,Hariyama Shadow Form,Counter,Dynamic Punch,3.0015075,31.234941965129075,853803
+10,Registeel,Rock smash,Focus blast,Ho Oh Shadow Form,Incinerate,Fire Blast,3.0320551,14.793137656036452,903552
+11,Registeel,Rock smash,Focus blast,Houndoom Mega,Fire Fang,Flamethrower,3.0703092,35.49622403762811,865363
+12,Registeel,Rock smash,Focus blast,Salamence Shadow Form,Fire Fang,Fire Blast,3.0741405,18.889257389758317,880905
+13,Registeel,Rock smash,Focus blast,Arcanine Shadow Form,Fire Fang,Flamethrower,3.0975752,32.217799404100745,881426
+14,Registeel,Rock smash,Focus blast,Magmortar Shadow Form,Fire Spin,Fire Punch,3.1314847,33.41710259618218,888099
+15,Registeel,Rock smash,Focus blast,Moltres,Fire Spin,Overheat,3.1751618,17.098381695301242,945631
+16,Registeel,Rock smash,Focus blast,Gengar Mega,Lick,Focus Blast,3.2153497,9.075025954283102,958173
+17,Registeel,Rock smash,Focus blast,Alakazam Shadow Form,Counter,Focus Blast,3.2259955,27.167633906282262,916951
+18,Registeel,Rock smash,Focus blast,Landorus Therian Form,Mud Shot,Earthquake,3.2333713,17.412337982254563,963125
+19,Registeel,Rock smash,Focus blast,Conkeldurr,Counter,Dynamic Punch,3.2452176,24.48058165294432,922001
+20,Registeel,Rock smash,Focus blast,Darmanitan,Fire Fang,Overheat,3.2919865,34.86736168212362,934341
+21,Registeel,Rock smash,Focus blast,Machamp,Counter,Dynamic Punch,3.349764,28.535639287049953,952148
+22,Registeel,Rock smash,Focus blast,Blaziken,Fire Spin,Blast Burn,3.3693347,35.60260037322539,956894
+23,Registeel,Rock smash,Focus blast,Emboar,Ember,Blast Burn,3.3722608,30.565674888558693,959019
+24,Registeel,Rock smash,Focus blast,Lucario,Counter,Aura Sphere,3.3917716,56.5196732279218,915251
+25,Registeel,Rock smash,Focus blast,Entei,Fire Fang,Overheat,3.4001868,23.99520221179078,965944
+26,Registeel,Rock smash,Focus blast,Breloom,Counter,Dynamic Punch,3.431774,38.016898102515285,972986
+27,Registeel,Rock smash,Focus blast,Garchomp,Mud Shot,Earth Power,3.4742303,23.38058464075134,987662
+28,Registeel,Rock smash,Focus blast,Mamoswine Shadow Form,Mud Slap,Bulldoze,3.5264773,45.25619704738543,955673
+29,Registeel,Rock smash,Focus blast,Excadrill,Mud Slap,Drill Run,3.5974913,43.368252448510376,996382
+30,Registeel,Rock smash,Focus blast,Houndoom Shadow Form,Fire Fang,Flamethrower,3.6456144,66.90824568592244,954998
+1,Registeel,Rock smash,Flash cannon,Charizard Mega Y,Fire Spin,Blast Burn,2.3965917,12.683437423233705,714175
+2,Registeel,Rock smash,Flash cannon,Moltres Shadow Form,Fire Spin,Overheat,2.7087436,16.739074725931665,780598
+3,Registeel,Rock smash,Flash cannon,Entei Shadow Form,Fire Fang,Overheat,2.7479348,16.8672999898772,790492
+4,Registeel,Rock smash,Flash cannon,Reshiram,Fire Fang,Overheat,2.7663386,15.29329822700165,824270
+5,Registeel,Rock smash,Flash cannon,Machamp Shadow Form,Counter,Dynamic Punch,2.7670233,29.40895872632443,787467
+6,Registeel,Rock smash,Flash cannon,Charizard Mega X,Fire Spin,Blast Burn,2.8047326,16.439054839152767,825321
+7,Registeel,Rock smash,Flash cannon,Charizard Shadow Form,Fire Spin,Blast Burn,2.9421363,19.86083491911873,835987
+8,Registeel,Rock smash,Flash cannon,Hariyama Shadow Form,Counter,Dynamic Punch,2.9798696,29.405314334387004,847663
+9,Registeel,Rock smash,Flash cannon,Houndoom Mega,Fire Fang,Flamethrower,2.9967353,22.711853478235053,851131
+10,Registeel,Rock smash,Flash cannon,Lucario,Counter,Aura Sphere,3.018258,29.825526852400994,858606
+11,Registeel,Rock smash,Flash cannon,Magmortar Shadow Form,Fire Spin,Fire Blast,3.037113,24.649202237292698,863172
+12,Registeel,Rock smash,Flash cannon,Ho Oh Shadow Form,Incinerate,Fire Blast,3.0434394,14.755700476322254,906945
+13,Registeel,Rock smash,Flash cannon,Chandelure,Fire Spin,Overheat,3.0637982,18.781889012568605,885117
+14,Registeel,Rock smash,Flash cannon,Arcanine Shadow Form,Fire Fang,Flamethrower,3.0697842,22.841130195086247,871894
+15,Registeel,Rock smash,Flash cannon,Houndoom Shadow Form,Fire Fang,Flamethrower,3.1087937,33.86577601393036,884852
+16,Registeel,Rock smash,Flash cannon,Darmanitan,Fire Fang,Overheat,3.110672,24.20046531205902,883920
+17,Registeel,Rock smash,Flash cannon,Moltres,Fire Spin,Overheat,3.1201546,16.21218376006393,929805
+18,Registeel,Rock smash,Flash cannon,Salamence Shadow Form,Fire Fang,Fire Blast,3.1485343,25.23422703379486,894735
+19,Registeel,Rock smash,Flash cannon,Entei,Fire Fang,Overheat,3.2003207,16.96416158108761,953683
+20,Registeel,Rock smash,Flash cannon,Blaziken,Counter,Blast Burn,3.2408414,25.159467891899133,920948
+21,Registeel,Rock smash,Flash cannon,Conkeldurr,Counter,Dynamic Punch,3.2603927,25.94272757513289,926531
+22,Registeel,Rock smash,Flash cannon,Emboar,Ember,Blast Burn,3.3364577,22.512402315105454,947337
+23,Registeel,Rock smash,Flash cannon,Landorus Therian Form,Mud Shot,Earthquake,3.3485248,24.315469713079985,951187
+24,Registeel,Rock smash,Flash cannon,Machamp,Counter,Dynamic Punch,3.3493338,27.870327019896752,951981
+25,Registeel,Rock smash,Flash cannon,Excadrill,Mud Slap,Drill Run,3.418106,27.54003598105553,971348
+26,Registeel,Rock smash,Flash cannon,Lopunny Mega,Low Kick,Focus Blast,3.4217145,31.34465971508354,973240
+27,Registeel,Rock smash,Flash cannon,Garchomp,Mud Shot,Earth Power,3.426412,21.811050841485272,976180
+28,Registeel,Rock smash,Flash cannon,Alakazam Shadow Form,Counter,Focus Blast,3.498229,40.71997939042949,977702
+29,Registeel,Rock smash,Flash cannon,Breloom,Counter,Dynamic Punch,3.5048494,41.134068560037875,979674
+30,Registeel,Rock smash,Flash cannon,Mamoswine Shadow Form,Mud Slap,Bulldoze,3.5422559,45.62800380216036,961626
+1,Registeel,Lock on,Focus blast,Charizard Mega Y,Fire Spin,Blast Burn,2.3882732,11.769427420878143,711705
+2,Registeel,Lock on,Focus blast,Moltres Shadow Form,Fire Spin,Overheat,2.6246521,15.613250634579895,766404
+3,Registeel,Lock on,Focus blast,Machamp Shadow Form,Counter,Dynamic Punch,2.7678668,22.189773723736458,786421
+4,Registeel,Lock on,Focus blast,Reshiram,Fire Fang,Overheat,2.8019137,16.760744475075057,815416
+5,Registeel,Lock on,Focus blast,Charizard Shadow Form,Fire Spin,Blast Burn,2.8407025,17.01409404176085,823836
+6,Registeel,Lock on,Focus blast,Entei Shadow Form,Fire Fang,Overheat,2.8699584,22.551850772237657,815403
+7,Registeel,Lock on,Focus blast,Charizard Mega X,Fire Spin,Blast Burn,2.8836267,19.515477259069268,819174
+8,Registeel,Lock on,Focus blast,Chandelure,Fire Spin,Overheat,2.915252,12.034506871153429,868745
+9,Registeel,Lock on,Focus blast,Hariyama Shadow Form,Counter,Dynamic Punch,2.9831834,23.688290944421635,847650
+10,Registeel,Lock on,Focus blast,Salamence Shadow Form,Fire Fang,Fire Blast,3.0264065,17.959201824206485,886421
+11,Registeel,Lock on,Focus blast,Ho Oh Shadow Form,Incinerate,Fire Blast,3.0265052,13.897208750733999,901898
+12,Registeel,Lock on,Focus blast,Arcanine Shadow Form,Fire Fang,Flamethrower,3.044837,23.929800570685885,865193
+13,Registeel,Lock on,Focus blast,Magmortar Shadow Form,Fire Spin,Fire Punch,3.048508,24.90448108597745,866573
+14,Registeel,Lock on,Focus blast,Lucario,Counter,Aura Sphere,3.062703,35.43893652830034,859821
+15,Registeel,Lock on,Focus blast,Moltres,Fire Spin,Overheat,3.089498,14.874674243033438,920670
+16,Registeel,Lock on,Focus blast,Darmanitan,Fire Fang,Overheat,3.0924516,24.259967030322436,878683
+17,Registeel,Lock on,Focus blast,Houndoom Mega,Fire Fang,Flamethrower,3.1502707,36.40467369976189,884180
+18,Registeel,Lock on,Focus blast,Houndoom Shadow Form,Fire Fang,Flamethrower,3.1664166,36.56162946824777,889202
+19,Registeel,Lock on,Focus blast,Gengar Mega,Lick,Focus Blast,3.1681845,8.731138778840943,944118
+20,Registeel,Lock on,Focus blast,Landorus Therian Form,Mud Shot,Earthquake,3.1871843,15.590045802042173,949781
+21,Registeel,Lock on,Focus blast,Blaziken,Counter,Blast Burn,3.212802,24.965492375499963,912957
+22,Registeel,Lock on,Focus blast,Entei,Fire Fang,Overheat,3.2445471,19.35501562239569,946145
+23,Registeel,Lock on,Focus blast,Alakazam Shadow Form,Counter,Focus Blast,3.251019,25.042378588023936,923768
+24,Registeel,Lock on,Focus blast,Conkeldurr,Counter,Dynamic Punch,3.3051434,25.876583545853986,939220
+25,Registeel,Lock on,Focus blast,Landorus,Mud Shot,Earth Power,3.3090148,16.088759714256337,986086
+26,Registeel,Lock on,Focus blast,Emboar,Ember,Blast Burn,3.352211,25.965246298832113,952580
+27,Registeel,Lock on,Focus blast,Garchomp,Mud Shot,Earth Power,3.3553257,19.980000914406467,977513
+28,Registeel,Lock on,Focus blast,Machamp,Counter,Dynamic Punch,3.3891168,26.52932611242063,963035
+29,Registeel,Lock on,Focus blast,Mamoswine Shadow Form,Mud Slap,Bulldoze,3.4104486,38.998603718750694,959672
+30,Registeel,Lock on,Focus blast,Flareon,Fire Spin,Overheat,3.4166894,26.459615711998577,970853
+1,Registeel,Lock on,Flash cannon,Charizard Mega Y,Fire Spin,Blast Burn,2.385187,11.471700213075117,710785
+2,Registeel,Lock on,Flash cannon,Moltres Shadow Form,Fire Spin,Overheat,2.561777,14.188937421920464,761534
+3,Registeel,Lock on,Flash cannon,Entei Shadow Form,Fire Fang,Overheat,2.6273227,13.450724934944205,782942
+4,Registeel,Lock on,Flash cannon,Reshiram,Fire Fang,Overheat,2.7499933,12.68590612108588,819497
+5,Registeel,Lock on,Flash cannon,Charizard Mega X,Fire Spin,Blast Burn,2.7627697,12.96379437517859,823305
+6,Registeel,Lock on,Flash cannon,Machamp Shadow Form,Counter,Dynamic Punch,2.806342,25.405245375150024,797979
+7,Registeel,Lock on,Flash cannon,Houndoom Mega,Fire Fang,Flamethrower,2.865097,15.90406183117233,852078
+8,Registeel,Lock on,Flash cannon,Arcanine Shadow Form,Fire Fang,Flamethrower,2.933837,17.237033710390726,863425
+9,Registeel,Lock on,Flash cannon,Charizard Shadow Form,Fire Spin,Blast Burn,2.9462109,19.806969898600872,838522
+10,Registeel,Lock on,Flash cannon,Lucario,Counter,Aura Sphere,2.9920876,20.095311677889335,851182
+11,Registeel,Lock on,Flash cannon,Darmanitan,Fire Fang,Overheat,2.9971683,18.723989604985483,855339
+12,Registeel,Lock on,Flash cannon,Magmortar Shadow Form,Fire Spin,Fire Blast,3.011903,19.914987874034217,856504
+13,Registeel,Lock on,Flash cannon,Hariyama Shadow Form,Counter,Dynamic Punch,3.0193467,27.532849790491795,858535
+14,Registeel,Lock on,Flash cannon,Ho Oh Shadow Form,Incinerate,Fire Blast,3.0464742,13.876758276896735,907849
+15,Registeel,Lock on,Flash cannon,Houndoom Shadow Form,Fire Fang,Flamethrower,3.0721545,20.737381174587885,872646
+16,Registeel,Lock on,Flash cannon,Salamence Shadow Form,Fire Fang,Fire Blast,3.171364,27.506807121924453,901535
+17,Registeel,Lock on,Flash cannon,Chandelure,Fire Spin,Overheat,3.1728299,20.102184490187003,905270
+18,Registeel,Lock on,Flash cannon,Moltres,Fire Spin,Overheat,3.1732166,14.946613255691164,945618
+19,Registeel,Lock on,Flash cannon,Blaziken,Counter,Blast Burn,3.2088158,20.545170881708103,913406
+20,Registeel,Lock on,Flash cannon,Emboar,Ember,Blast Burn,3.2089112,17.645309882463025,953781
+21,Registeel,Lock on,Flash cannon,Conkeldurr,Counter,Dynamic Punch,3.2263303,21.71195861782662,916778
+22,Registeel,Lock on,Flash cannon,Excadrill,Mud Slap,Earthquake,3.2334788,17.644670333002008,962121
+23,Registeel,Lock on,Flash cannon,Entei,Fire Fang,Overheat,3.2562907,13.836903143855432,970374
+24,Registeel,Lock on,Flash cannon,Flareon,Fire Spin,Overheat,3.296526,18.931689303965285,977530
+25,Registeel,Lock on,Flash cannon,Garchomp,Mud Shot,Earth Power,3.2992291,19.14646201421093,977710
+26,Registeel,Lock on,Flash cannon,Machamp,Counter,Dynamic Punch,3.326297,25.527563455361747,945277
+27,Registeel,Lock on,Flash cannon,Landorus Therian Form,Mud Shot,Earthquake,3.3293717,22.164407518567824,946005
+28,Registeel,Lock on,Flash cannon,Lopunny Mega,Low Kick,Focus Blast,3.3362467,22.63638520276485,947342
+29,Registeel,Lock on,Flash cannon,Breloom,Counter,Dynamic Punch,3.3487482,30.00916839684916,952240
+30,Registeel,Lock on,Flash cannon,Mamoswine Shadow Form,Mud Slap,Bulldoze,3.577815,45.123140187016006,977315
+1,Registeel,Metal claw,Flash cannon,Charizard Mega Y,Fire Spin,Blast Burn,2.395046,13.059425931288308,712491
+2,Registeel,Metal claw,Flash cannon,Moltres Shadow Form,Fire Spin,Overheat,2.6243842,16.15544419825177,754456
+3,Registeel,Metal claw,Flash cannon,Entei Shadow Form,Fire Fang,Overheat,2.6948931,15.114113301231432,801581
+4,Registeel,Metal claw,Flash cannon,Reshiram,Fire Fang,Overheat,2.7190442,13.507298788507079,810275
+5,Registeel,Metal claw,Flash cannon,Charizard Mega X,Fire Spin,Blast Burn,2.7524927,14.597279542182964,820242
+6,Registeel,Metal claw,Flash cannon,Machamp Shadow Form,Counter,Dynamic Punch,2.7967777,27.245555775616445,795507
+7,Registeel,Metal claw,Flash cannon,Houndoom Mega,Fire Fang,Flamethrower,2.869243,16.511685215995673,850823
+8,Registeel,Metal claw,Flash cannon,Hariyama Shadow Form,Counter,Dynamic Punch,2.9453952,27.634399870278248,837592
+9,Registeel,Metal claw,Flash cannon,Charizard Shadow Form,Fire Spin,Blast Burn,2.9472032,20.525224110798796,837059
+10,Registeel,Metal claw,Flash cannon,Lucario,Counter,Aura Sphere,2.9850855,20.83607786719344,847779
+11,Registeel,Metal claw,Flash cannon,Magmortar Shadow Form,Fire Spin,Fire Punch,3.0422382,21.822432859526252,863963
+12,Registeel,Metal claw,Flash cannon,Arcanine Shadow Form,Fire Fang,Flamethrower,3.049882,20.108795647212933,866734
+13,Registeel,Metal claw,Flash cannon,Ho Oh Shadow Form,Incinerate,Fire Blast,3.068149,14.79139417895096,914308
+14,Registeel,Metal claw,Flash cannon,Chandelure,Fire Spin,Overheat,3.085549,20.021507962607107,877641
+15,Registeel,Metal claw,Flash cannon,Darmanitan,Fire Fang,Overheat,3.0908685,20.04854745817297,879721
+16,Registeel,Metal claw,Flash cannon,Houndoom Shadow Form,Fire Fang,Flamethrower,3.1150024,26.359283476130194,885460
+17,Registeel,Metal claw,Flash cannon,Moltres,Fire Spin,Overheat,3.1249747,16.61309028910353,930555
+18,Registeel,Metal claw,Flash cannon,Salamence Shadow Form,Fire Fang,Fire Blast,3.148542,27.102708682789046,895067
+19,Registeel,Metal claw,Flash cannon,Entei,Fire Spin,Overheat,3.174606,14.559827260747559,946032
+20,Registeel,Metal claw,Flash cannon,Conkeldurr,Counter,Dynamic Punch,3.2616494,27.093638629514256,927061
+21,Registeel,Metal claw,Flash cannon,Blaziken,Fire Spin,Blast Burn,3.264199,21.98509289768552,926866
+22,Registeel,Metal claw,Flash cannon,Emboar,Ember,Blast Burn,3.3307102,20.561995490864195,954397
+23,Registeel,Metal claw,Flash cannon,Excadrill,Mud Slap,Earthquake,3.3336124,20.377094176571138,960057
+24,Registeel,Metal claw,Flash cannon,Heatran,Fire Spin,Flamethrower,3.3408225,10.529124598841593,995565
+25,Registeel,Metal claw,Flash cannon,Flareon,Fire Spin,Overheat,3.351178,21.398982745160406,956129
+26,Registeel,Metal claw,Flash cannon,Machamp,Counter,Dynamic Punch,3.3556855,28.759198927744155,953943
+27,Registeel,Metal claw,Flash cannon,Lopunny Mega,Low Kick,Focus Blast,3.4177814,29.003294714990915,971527
+28,Registeel,Metal claw,Flash cannon,Garchomp,Mud Shot,Earth Power,3.4676242,22.309413940865525,988054
+29,Registeel,Metal claw,Flash cannon,Mamoswine Shadow Form,Mud Slap,Bulldoze,3.499638,43.905089586724564,956130
+30,Registeel,Metal claw,Flash cannon,Alakazam Shadow Form,Counter,Focus Blast,3.5657206,43.755403099928735,982525
+1,Registeel,Random,Random,Charizard Mega Y,Fire Spin,Blast Burn,2.423024,13.946269604499118,713261
+2,Registeel,Random,Random,Moltres Shadow Form,Fire Spin,Overheat,2.66728,17.293497977599493,773090
+3,Registeel,Random,Random,Entei Shadow Form,Fire Fang,Overheat,2.7835047,18.48073419930274,806277
+4,Registeel,Random,Random,Machamp Shadow Form,Counter,Dynamic Punch,2.7998447,25.59254564044179,796085
+5,Registeel,Random,Random,Reshiram,Fire Fang,Overheat,2.8167434,16.486616556301,821323
+6,Registeel,Random,Random,Charizard Mega X,Fire Spin,Blast Burn,2.8485613,18.23218188471934,827210
+7,Registeel,Random,Random,Charizard Shadow Form,Fire Spin,Blast Burn,2.9598508,22.98987143703071,843010
+8,Registeel,Random,Random,Chandelure,Fire Spin,Overheat,2.9676652,14.133694178006946,875537
+9,Registeel,Random,Random,Hariyama Shadow Form,Counter,Dynamic Punch,2.986695,26.184544360195915,851277
+10,Registeel,Random,Random,Houndoom Mega,Fire Fang,Flamethrower,2.986711,24.22603602280515,858447
+11,Registeel,Random,Random,Lucario,Counter,Aura Sphere,3.009822,26.462731374382074,856667
+12,Registeel,Random,Random,Arcanine Shadow Form,Fire Fang,Flamethrower,3.0456445,24.330756911019936,868781
+13,Registeel,Random,Random,Ho Oh Shadow Form,Incinerate,Fire Blast,3.0588977,15.871146141387978,901787
+14,Registeel,Random,Random,Magmortar Shadow Form,Fire Spin,Fire Punch,3.0964038,27.367652031900597,879924
+15,Registeel,Random,Random,Salamence Shadow Form,Fire Fang,Fire Blast,3.130996,23.30352916204293,895716
+16,Registeel,Random,Random,Darmanitan,Fire Fang,Overheat,3.1328242,25.903553875808907,891144
+17,Registeel,Random,Random,Moltres,Fire Spin,Overheat,3.196446,18.25324370202578,940778
+18,Registeel,Random,Random,Houndoom Shadow Form,Fire Fang,Flamethrower,3.2002063,35.22404636811144,894070
+19,Registeel,Random,Random,Conkeldurr,Counter,Dynamic Punch,3.2153714,22.9008357425916,923901
+20,Registeel,Random,Random,Blaziken,Counter,Blast Burn,3.2760172,27.022972279441802,931748
+21,Registeel,Random,Random,Entei,Fire Fang,Overheat,3.2768006,18.513547160358286,956649
+22,Registeel,Random,Random,Gengar Mega,Lick,Focus Blast,3.300063,16.38431372230838,971317
+23,Registeel,Random,Random,Emboar,Ember,Blast Burn,3.3270369,24.033391149126597,954528
+24,Registeel,Random,Random,Machamp,Counter,Dynamic Punch,3.3276358,25.497567820553453,951589
+25,Registeel,Random,Random,Landorus Therian Form,Mud Shot,Earthquake,3.3341973,21.337793356310293,968117
+26,Registeel,Random,Random,Alakazam Shadow Form,Counter,Focus Blast,3.3773606,33.976519801138785,952216
+27,Registeel,Random,Random,Mamoswine Shadow Form,Mud Slap,Bulldoze,3.379485,35.4699788272169,945156
+28,Registeel,Random,Random,Garchomp,Mud Shot,Earth Power,3.3890238,20.257018081518183,982467
+29,Registeel,Random,Random,Excadrill,Mud Slap,Drill Run,3.3934002,24.993468800832176,978168
+30,Registeel,Random,Random,Breloom,Counter,Dynamic Punch,3.427306,35.40288520340561,969421
