@@ -45,15 +45,17 @@ def parse_friendship(friendship_str):
     return str(result[0]) if result else '0'
 
 def get_pokemon_data(raid_boss, raid_level=5, pkm_level=35, 
-                     friendship='0', weather='NO_WEATHER'):
+                     friendship='0', weather='NO_WEATHER',
+                     trainer_id=None):
     """
     :param str raid_boss: 
     :param int raid_level: raid boss level, 6 or MEGA for mega raids.
     :param int pkm_level: pokemon level.
     :param int friendship: friendship level, default is 4 for best friend,
     :param str weather: weather, default is NO_WEATHER
-           weather could be: SUNNY, RAINY, PARTLY_CLOUDY, CLOUDY, WINDY, SNOW, FOG
-    :return: pokemon json file or None
+           weather could be: CLEAR, RAINY, PARTLY_CLOUDY, CLOUDY, WINDY, SNOW, FOG
+    :param int trainer_id: int or str, pokebattler trainer id. 
+    :return: pokemon json file or None or html error code like 404
     """
     payload = {
         "sort": "TIME",
@@ -68,10 +70,22 @@ def get_pokemon_data(raid_boss, raid_level=5, pkm_level=35,
     }
     if raid_level == 6:
         raid_level = "MEGA"
-
-    url = f'https://fight.pokebattler.com/raids/defenders/{raid_boss}/'\
-          f'levels/RAID_LEVEL_{raid_level}/attackers/levels/{pkm_level}/'\
-            'strategies/CINEMATIC_ATTACK_WHEN_POSSIBLE/DEFENSE_RANDOM_MC'
+    
+    # url with API key:
+    # https://www.pokebattler.com/raids/defenders/HEATRAN/levels/
+    # RAID_LEVEL_5/attackers/users/757345/strategies/
+    # CINEMATIC_ATTACK_WHEN_POSSIBLE/DEFENSE_RANDOM_MC
+    # ?sort=ESTIMATOR
+    # &weatherCondition=CLEAR&dodgeStrategy=DODGE_REACTION_TIME&aggregation=AVERAGE
+    # &includeMegas=true&randomAssistants=-1&numMegas=0#raid-estimator
+    if (trainer_id):
+        url = f'https://fight.pokebattler.com/raids/defenders/{raid_boss}/'\
+              f'levels/RAID_LEVEL_{raid_level}/attackers/users/{trainer_id}/'\
+                'strategies/CINEMATIC_ATTACK_WHEN_POSSIBLE/DEFENSE_RANDOM_MC'
+    else:
+        url = f'https://fight.pokebattler.com/raids/defenders/{raid_boss}/'\
+              f'levels/RAID_LEVEL_{raid_level}/attackers/levels/{pkm_level}/'\
+                'strategies/CINEMATIC_ATTACK_WHEN_POSSIBLE/DEFENSE_RANDOM_MC'
     try:
         r = requests.get(url, params=payload)
         if r.ok:
@@ -84,6 +98,7 @@ def get_pokemon_data(raid_boss, raid_level=5, pkm_level=35,
 
 def format_str(pb_str):
     """
+    Format pokemon name/move id. Example: DRAGON_TAIL_FAST -> Dragon Tail
     :param str pb_str: string from pokebattler, like this: DRAGON_TAIL_FAST
     """
     if (pb_str.endswith('_FAST')):
@@ -299,13 +314,21 @@ def load_raid_info(filename='raids.json', raid_type="RAID_LEVEL_5_LEGACY"):
         result.append(raid['pokemon'])
     return result
 
-def download_data(raid_level=5, pkm_level=40, raid_type='RAID_LEVEL_5'):
+def download_data(raid_level=5, pkm_level=40, trainer_id=None, raid_type='RAID_LEVEL_5'):
     #
     pokemon_list = load_raid_info(raid_type=raid_type)
     print(f"{len(pokemon_list)} Pokemon found. Downloading data. ")
     for pkm in pokemon_list:
         try:
-            data = get_pokemon_data(raid_boss=pkm, raid_level=raid_level, pkm_level=pkm_level)
+            if (trainer_id):
+                data = get_pokemon_data(raid_boss=pkm, 
+                                        raid_level=raid_level,
+                                        pkm_level=pkm_level,
+                                        trainer_id=trainer_id)
+            else:
+                data = get_pokemon_data(raid_boss=pkm, 
+                                        raid_level=raid_level,
+                                        pkm_level=pkm_level)
         except Exception as e:
             print(e)
         if (data):
@@ -314,7 +337,7 @@ def download_data(raid_level=5, pkm_level=40, raid_type='RAID_LEVEL_5'):
             with open(filename, 'w') as fout:
                 json.dump(data, fout)
 
-def output_pokemons_ranking_as_csv(pokemon_names, filename="raid.csv"):
+def export_pokemons_ranking_as_csv(pokemon_names, filename="raid.csv"):
     keywords = ['future_mega', 'legacy_mega', 'future_T5', 'legacy_T5']
     for keyword in keywords:
         find_pokemon_ranking(dir_path=f"level_40/{keyword}_raid/",
@@ -340,9 +363,8 @@ def pokebattler_file_to_csv(filename, shadow=True, mega=True,
                       highlight_pkm=[])
 
 if (__name__ == "__main__"):
-    pokemon_names = ["Rhyperior", "Rampardos", "Tyranitar Shadow Form"]
-    output_pokemons_ranking_as_csv(pokemon_names=pokemon_names, filename="rock_type_pokemon.csv")
-
+    data = get_pokemon_data("RAYQUAZA", raid_level=5, pkm_level=35, 
+                            friendship='0', weather='NO_WEATHER')
     """
     data = get_pokemon_data("RAYQUAZA", raid_level=5, pkm_level=35, 
                         friendship='0', weather='NO_WEATHER')
