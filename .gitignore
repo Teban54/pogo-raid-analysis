@@ -1,3 +1,4 @@
 # Ignore pokebattler files
 level_40
 .DS_Store
+.idea
