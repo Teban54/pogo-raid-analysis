@@ -3,6 +3,9 @@ import requests
 import csv
 import os
 
+from get_json import *
+from utils import *
+
 # from regis.utilities import *
 """
 Pokemon names:
@@ -32,73 +35,9 @@ export_pokemons_ranking_as_csv(pokemon_names=pokemon_names, filename="rock_type_
 ```
 """
 
-def parse_friendship(friendship_str):  # Currently unused
-    raid_friends = {
-        'no': 0,
-        'good': 1,
-        'great': 2,
-        'ultra': 3,
-        'best': 4
-        }   
-    friendship_str = friendship_str.lower()
-    result = [val for key,val in raid_friends.items() if key in friendship_str]
-    return str(result[0]) if result else '0'
 
 
-def get_pokemon_data(raid_boss, raid_level=5, pkm_level=35, 
-                     friendship='4', weather='NO_WEATHER',
-                     trainer_id=None):
-    """
-    Get the list of best attackers from Pokebattler and return it as JSON.
 
-    :param str raid_boss:
-    :param int raid_level: raid boss level, 6 or MEGA for mega raids.
-    :param int pkm_level: pokemon level.
-    :param int friendship: friendship level, default is 4 for best friend,
-    :param str weather: weather, default is NO_WEATHER
-           weather could be: CLEAR, RAINY, PARTLY_CLOUDY, CLOUDY, WINDY, SNOW, FOG
-    :param int trainer_id: int or str, pokebattler trainer id. 
-    :return: pokemon json file or None or html error code like 404
-    """
-    payload = {
-        "sort": "TIME",
-        "weatherCondition": weather,
-        "dodgeStrategy": "DODGE_REACTION_TIME",
-        "aggregation": "AVERAGE",
-        "includeLegendary": "true",
-        "includeShadow": "true",
-        "includeMegas": "true",
-        "randomAssistants": "-1",
-        "friendLevel": f"FRIENDSHIP_LEVEL_{friendship}",
-        "attackerTypes": "POKEMON_TYPE_ALL"  #["POKEMON_TYPE_ICE","POKEMON_TYPE_FIRE"]
-    }
-    if raid_level == 6:
-        raid_level = "MEGA"
-    
-    # url with API key:
-    # https://www.pokebattler.com/raids/defenders/HEATRAN/levels/
-    # RAID_LEVEL_5/attackers/users/757345/strategies/
-    # CINEMATIC_ATTACK_WHEN_POSSIBLE/DEFENSE_RANDOM_MC
-    # ?sort=ESTIMATOR
-    # &weatherCondition=CLEAR&dodgeStrategy=DODGE_REACTION_TIME&aggregation=AVERAGE
-    # &includeMegas=true&randomAssistants=-1&numMegas=0#raid-estimator
-    if (trainer_id):
-        url = f'https://fight.pokebattler.com/raids/defenders/{raid_boss}/'\
-              f'levels/RAID_LEVEL_{raid_level}/attackers/users/{trainer_id}/'\
-                'strategies/CINEMATIC_ATTACK_WHEN_POSSIBLE/DEFENSE_RANDOM_MC'
-    else:
-        url = f'https://fight.pokebattler.com/raids/defenders/{raid_boss}/'\
-              f'levels/RAID_LEVEL_{raid_level}/attackers/levels/{pkm_level}/'\
-                'strategies/CINEMATIC_ATTACK_WHEN_POSSIBLE/DEFENSE_RANDOM_MC'
-    try:
-        r = requests.get(url, params=payload)
-        if r.ok:
-            return r.json()
-        else:
-            return str(r)
-    except Exception as e:
-        print(e)
-        return None
 
 
 def format_str(pb_str):
@@ -115,7 +54,7 @@ def format_str(pb_str):
 
 def sort_random_move_data(data, shadow=True, mega=True, pkm_num=None):
     """
-    Extract the rankings list when the raid boss uses random moves from the overall JSON results.
+    Extract the rankings pokemon_names_list.json when the raid boss uses random moves from the overall JSON results.
     This function is needed because Pokebattler lists the random move rankings
     separately from move-specific rankings.
 
@@ -132,12 +71,12 @@ def sort_random_move_data(data, shadow=True, mega=True, pkm_num=None):
 
 def sort_data_by_move(data, shadow=True, mega=True, pkm_num=None):
     """
-    Extract the rankings list from the overall JSON results.
+    Extract the rankings pokemon_names_list.json from the overall JSON results.
     Sort raid data for each raid boss move with all attacker moves.
     Include both random and specific boss movesets.
 
     :param dict data: pokebattler json file. 
-    :return: a list of dicts. 
+    :return: a pokemon_names_list.json of dicts.
     """
     raid_moves = data["attackers"][0]["byMove"]
     results = []
@@ -156,14 +95,14 @@ def sort_data_by_move(data, shadow=True, mega=True, pkm_num=None):
 
 def sort_rankings_list_by_move(data, shadow=True, mega=True, pkm_num=None):
     """
-    Sort an individual rankings list by estimator, reformat to readable form,
+    Sort an individual rankings pokemon_names_list.json by estimator, reformat to readable form,
     and retain only valid attributes (see example).
 
-    :param str data: Rankings list from the json file from pokebattler.
+    :param str data: Rankings pokemon_names_list.json from the json file from pokebattler.
     :param bool shadow: if True, include shadow pokemon.
     :param bool mega: if True, include mega pokemon.
-    :param int pkm_num: Number of Pokemon to be included in the list.
-    :return: Make a new list of dicts like:
+    :param int pkm_num: Number of Pokemon to be included in the pokemon_names_list.json.
+    :return: Make a new pokemon_names_list.json of dicts like:
         {'name': 'PORYGON_Z_SHADOW_FORM', 
          'move1': 'tricky room', 
          'move2': 'recover',
@@ -179,7 +118,7 @@ def sort_rankings_list_by_move(data, shadow=True, mega=True, pkm_num=None):
             continue
         if ((not mega) and ("_MEGA") in pkm_name):
             continue
-           
+
         for moveset in defender["byMove"]:
             result = {
               'name': format_str(pkm_name),
@@ -190,7 +129,7 @@ def sort_rankings_list_by_move(data, shadow=True, mega=True, pkm_num=None):
               'effectiveCombatTime': moveset['result']['effectiveCombatTime']
             }
             results.append(result)
-    results = sorted(results, key=lambda d: d['estimator']) 
+    results = sorted(results, key=lambda d: d['estimator'])
     return results[0:pkm_num] if (pkm_num) else results
 
 
@@ -200,7 +139,7 @@ def get_best_moveset(data):
 
     :param data: JSON block describing this attacker against a specific raid:
         {"pokemonId":"HYDREIGON",
-         "byMove": [a list] ..."
+         "byMove": [a pokemon_names_list.json] ..."
     :return: Best moveset for a raid counter with estimator/effective deaths/effective combat time.
     """
     pkm_name = format_str(data['pokemonId'])
@@ -218,13 +157,13 @@ def get_best_moveset(data):
 
 def sort_by_pkm(data, shadow=True, mega=True, pkm_num=None):
     """
-    Extract the rankings list from the overall JSON results.
+    Extract the rankings pokemon_names_list.json from the overall JSON results.
     Sort raid data for raid boss move, but only keep the best moveset for each defender.
     Includes both random and specific boss movesets.
 
     :param data: json file from pokebattler
     :param int pkm_num: output pokemon number, default is all. 
-    :list return: 
+    :pokemon_names_list.json return:
     """
     results = []
     # random_move = data["attackers"][0]["randomMove"]
@@ -236,7 +175,7 @@ def sort_by_pkm(data, shadow=True, mega=True, pkm_num=None):
             if ((not mega) and ('_MEGA' in pkm['pokemonId'])):
                 continue
             ranking.append(get_best_moveset(pkm))
-            ranking = sorted(ranking, key=lambda d: d['estimator']) 
+            ranking = sorted(ranking, key=lambda d: d['estimator'])
         result = {
             'fast_move': format_str(raid_boss_moveset['move1']),
             'charged_move': format_str(raid_boss_moveset['move2']),
@@ -246,7 +185,7 @@ def sort_by_pkm(data, shadow=True, mega=True, pkm_num=None):
     return results
 
 
-def export_as_csv(data, 
+def export_as_csv(data,
                   filename='export.csv',
                   shadow=True, mega=True,
                   export_data_by_move=True,
@@ -261,7 +200,7 @@ def export_as_csv(data,
                 True: export data with all raid counters' possible movesets. 
                 False: export best moveset of raid counters
     ### :param int export_pkm_num: pokemon/pokemon moveset number.
-    :param list highlight_pkm: Export pokemon in highlight pokemon list only.
+    :param list highlight_pkm: Export pokemon in highlight pokemon pokemon_names_list.json only.
                 If empty, all Pokemon are exported.
     """
     if export_data_by_move:
@@ -323,64 +262,10 @@ def format_print(result):
         print(f"{pkm['name']} | {pkm['move1']} | {pkm['move2']} | {pkm['estimator']} | {pkm['effectiveCombatTime']/1000}")
 
 
-def load_raid_info(filename='raids.json', raid_type="RAID_LEVEL_5_LEGACY"):
-    """
-    Extract all raid bosses of a certain tier listed in raids.json from Pokebattler.
-    This list can be used later to get simulations against all raid bosses.
-
-    :param filename: Filename of raids information
-    :param raid_type: Raid types
-        Future raid: "RAID_LEVEL_5_FUTURE" / "RAID_LEVEL_MEGA_FUTURE"
-        Legacy raid: "RAID_LEVEL_5_LEGACY" / "RAID_LEVEL_MEGA_LEGACY"
-        Current raid: "RAID_LEVEL_5" / "RAID_LEVEL_MEGA"
-    """
-    with open(filename, 'r') as fin:
-        data = json.load(fin)
-    # data:
-    result = []
-    for tier in data['tiers']:
-        if tier['tier'] == raid_type:
-            raids = tier['raids']
-    for raid in raids:
-        result.append(raid['pokemon'])
-    return result
 
 
-def download_data(raid_level=5, pkm_level=40, trainer_id=None, raid_type='RAID_LEVEL_5'):
-    """
-    Download the rankings lists of all raids of a certain tier from Pokebattler.
-    Writes them to JSON files.
 
-    :param raid_level: Raid tier, in integer (to setup the simulations)
-    :param pkm_level: Level of Pokemon used
-    :param trainer_id: ID of user whose Pokebox will be used for simulations.
-                    If None, all attackers by level will be used.
-    :param raid_type: Raid types
-        Future raid: "RAID_LEVEL_5_FUTURE" / "RAID_LEVEL_MEGA_FUTURE"
-        Legacy raid: "RAID_LEVEL_5_LEGACY" / "RAID_LEVEL_MEGA_LEGACY"
-        Current raid: "RAID_LEVEL_5" / "RAID_LEVEL_MEGA"
-    """
-    #
-    pokemon_list = load_raid_info(raid_type=raid_type)
-    print(f"{len(pokemon_list)} Pokemon found. Downloading data. ")
-    for pkm in pokemon_list:
-        try:
-            if (trainer_id):
-                data = get_pokemon_data(raid_boss=pkm,
-                                        raid_level=raid_type,
-                                        pkm_level=pkm_level,
-                                        trainer_id=trainer_id)
-            else:
-                data = get_pokemon_data(raid_boss=pkm,
-                                        raid_level=raid_type,
-                                        pkm_level=pkm_level)
-        except Exception as e:
-            print(e)
-        if (data):
-            print(f"Downloading {pkm} data. ")
-            filename = f"{pkm}_no_weather.json"
-            with open(filename, 'w') as fout:
-                json.dump(data, fout)
+
 
 
 def export_pokemons_ranking_as_csv(pokemon_names, filename="raid.csv"):
@@ -417,25 +302,31 @@ def pokebattler_file_to_csv(filename, shadow=True, mega=True,
                       export_data_by_move=export_data_by_move,
                       highlight_pkm=[])
 
-if (__name__ == "__main__"):
+
+if __name__ == "__main__":
+
+
+
     """
     data = get_pokemon_data("RAYQUAZA", raid_level=5, pkm_level=35, 
-                            friendship='0', weather='NO_WEATHER')
+                            friendship='no friend', weather='NO_WEATHER')
     """
 
 
-    data = get_pokemon_data("RAYQUAZA", raid_level=5, pkm_level=35, 
-                        friendship='0', weather='NO_WEATHER')
+    """data = get_pokebattler_raid_ranking("KYOGRE", raid_level=5, pkm_level=40,
+                                        friendship='best friend', weather='NO_WEATHER',
+                                        attack_strategy='dodge specials',
+                                        mega=False)
     with open("test.json", "w") as fout:
         json.dump(data, fout)
 
 
-    # 
+    #
     with open('test.json', 'r') as f:
         data = json.load(f)
-    export_as_csv(data, export_data_by_move=True,
-                    highlight_pkm=["Darmanitan Galarian Standard Form"])
-
+    export_as_csv(data, export_data_by_move=True)
+                    #gighlight_pkm=["Darmanitan Galarian Standard Form"])
+    """
 
     """
     download_data(raid_type="RAID_LEVEL_5_LEGACY")

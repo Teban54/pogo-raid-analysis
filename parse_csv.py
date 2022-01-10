@@ -1,4 +1,4 @@
-import csv 
+import csv
 
 """
 Output: Pokemon ranking with random raid boss move
@@ -7,7 +7,7 @@ Output: Pokemon ranking with random raid boss move
 def load_file(filename, sort_by="estimator"):
     """
     :param filename: csv filename. 
-    :return: Not sure, a list of dicts? Or just dict? 
+    :return: Not sure, a pokemon_names_list.json of dicts? Or just dict?
     {
         "Kyurem": {
             "Tyranitar Shadow Form": 7,
@@ -22,7 +22,7 @@ def load_file(filename, sort_by="estimator"):
         reader = csv.DictReader(fin)
         for row in reader:
             if (row['raid_move1'] != 'Random') or (row['raid_move2'] != 'Random'):
-                continue 
+                continue
             if (row['Raidboss'] not in result):
                 result[row['Raidboss']] = {'Raidboss': row['Raidboss']}
             result[row['Raidboss']][row['defender_name']] = row[sort_by]
@@ -48,7 +48,7 @@ def write_as_csv(result, fout='test.csv'):
     """
     headers = ['Raidboss']
     headers += find_all_counters(result)
-    with open(fout, 'w', newline='') as csvfile: 
+    with open(fout, 'w', newline='') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=headers)
         writer.writeheader()
         for raid_boss in result:
