@@ -44,7 +44,7 @@ class Metadata:
             self.moves_JSON = get_pokebattler_metadata("moves", write_file=False)
         if self.raids_JSON is None or self.Pokemon_JSON is None or self.moves_JSON is None:
             if init_from_JSON:
-                # TODO: Ass a warning if local JSON is too old
+                # TODO: Add a warning if local JSON is too old
                 self.raids_JSON = load_json_from_file(os.path.join(JSON_DATA_PATH, "raids.json"))
                 self.Pokemon_JSON = load_json_from_file(os.path.join(JSON_DATA_PATH, "pokemon.json"))
                 self.moves_JSON = load_json_from_file(os.path.join(JSON_DATA_PATH, "moves.json"))
