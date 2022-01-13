@@ -1,7 +1,8 @@
 """
 This module includes two main types of utilities:
 - A class for Pokemon species.
-- Utilities related to Pokemon, e.g. typing.
+- Utilities for dealing with single or multiple Pokemon.
+    (Utilities related to typing without any specific Pokemon are in utils.py.)
 """
 
 from utils import *
@@ -24,8 +25,9 @@ class Pokemon:
                 (In practice, GM_JSON is typically left blank, since GM isn't loaded yet at this stage)
         """
         self.name = None
-        self.type = None
+        self.type = None  # Natural language, e.g. "Dragon"
         self.type2 = None
+        self.types = []  # List of all types, length 1 or 2
         self.base_attack = -1
         self.base_defense = -1
         self.base_stamina = -1
@@ -62,8 +64,10 @@ class Pokemon:
         self.JSON = JSON
         self.name = JSON['pokemonId']
         self.type = parse_type_code2str(JSON['type'])
+        self.types.append(self.type)
         if 'type2' in JSON:
             self.type2 = parse_type_code2str(JSON['type2'])
+            self.types.append(self.type2)
         self.base_attack = JSON['stats'].get('baseAttack', -1)
         self.base_defense = JSON['stats'].get('baseDefense', -1)
         self.base_stamina = JSON['stats'].get('baseStamina', -1)
@@ -155,3 +159,4 @@ class Pokemon:
                     evo_codename = evo_block['form'] + '_FORM'
                 self.evolutions.append(evo_codename + ('_SHADOW_FORM' if shadow else ''))
                 # This could cause two "_FORM"'s if there's a shadow with a special form, but that's not a thing yet
+

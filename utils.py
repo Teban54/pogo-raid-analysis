@@ -6,6 +6,7 @@ import requests
 import os
 import sys
 import re
+import numpy as np
 
 from params import *
 
@@ -88,7 +89,7 @@ def GM_templateId_to_pokemon_codename(template_id):
     return match.group(2) if match else None
 
 
-def check_attack_strategy_isstr(attack_strategy):
+def is_attack_strategy_str(attack_strategy):
     """
     Check if a given string for attack strategy is natural language (e.g. "no dodging").
 
@@ -98,7 +99,7 @@ def check_attack_strategy_isstr(attack_strategy):
     return any(x in attack_strategy.lower() for x in ['no', 'special', 'all']) and '_' not in attack_strategy
 
 
-def check_attack_strategy_iscode(attack_strategy):
+def is_attack_strategy_code(attack_strategy):
     """
     Check if a given string for attack strategy is Pokebattler code name (e.g. "CINEMATIC_ATTACK_WHEN_POSSIBLE").
 
@@ -120,11 +121,11 @@ def parse_attack_strategy_str2code(attack_strategy_str):
     :return: Attack strategy in Pokebattler code name.
         Should be one of: "CINEMATIC_ATTACK_WHEN_POSSIBLE", "DODGE_SPECIALS", "DODGE_WEAVE_CAUTIOUS".
     """
-    if not check_attack_strategy_isstr(attack_strategy_str) and not check_attack_strategy_iscode(attack_strategy_str):
+    if not is_attack_strategy_str(attack_strategy_str) and not is_attack_strategy_code(attack_strategy_str):
         print(f"Warning (parse_attack_strategy_str2code): Attack strategy string {attack_strategy_str} is invalid",
               file=sys.stderr)
         return "CINEMATIC_ATTACK_WHEN_POSSIBLE"
-    if check_attack_strategy_iscode(attack_strategy_str):
+    if is_attack_strategy_code(attack_strategy_str):
         return attack_strategy_str
     conv = {
         'no': "CINEMATIC_ATTACK_WHEN_POSSIBLE",
@@ -147,11 +148,11 @@ def parse_attack_strategy_code2str(attack_strategy_code):
     :return: Attack strategy in natural language.
         Should be one of: "No Dodging", "Dodge Specials PRO", "Dodge All Weave".
     """
-    if not check_attack_strategy_isstr(attack_strategy_code) and not check_attack_strategy_iscode(attack_strategy_code):
+    if not is_attack_strategy_str(attack_strategy_code) and not is_attack_strategy_code(attack_strategy_code):
         print(f"Warning (parse_attack_strategy_code2str): Attack strategy string {attack_strategy_code} is invalid",
               file=sys.stderr)
         return "No Dodging"
-    if check_attack_strategy_isstr(attack_strategy_code):
+    if is_attack_strategy_str(attack_strategy_code):
         return attack_strategy_code
     conv = {
         "CINEMATIC_ATTACK_WHEN_POSSIBLE": "No Dodging",
@@ -161,7 +162,7 @@ def parse_attack_strategy_code2str(attack_strategy_code):
     return conv.get(attack_strategy_code.upper(), "No Dodging")
 
 
-def check_dodge_strategy_isstr(dodge_strategy):
+def is_dodge_strategy_str(dodge_strategy):
     """
     Check if a given string for dodge strategy is natural language (e.g. "realistic dodging").
 
@@ -171,7 +172,7 @@ def check_dodge_strategy_isstr(dodge_strategy):
     return any(x in dodge_strategy.lower() for x in ['perfect', 'realistic', '25']) and '_' not in dodge_strategy
 
 
-def check_dodge_strategy_iscode(dodge_strategy):
+def is_dodge_strategy_code(dodge_strategy):
     """
     Check if a given string for dodge strategy is Pokebattler code name (e.g. "DODGE_REACTION_TIME").
 
@@ -193,11 +194,11 @@ def parse_dodge_strategy_str2code(dodge_strategy_str):
     :return: Dodge strategy in Pokebattler code name.
         Should be one of: "DODGE_100", "DODGE_REACTION_TIME", "DODGE_REACTION_TIME2", "DODGE_25".
     """
-    if not check_dodge_strategy_isstr(dodge_strategy_str) and not check_dodge_strategy_iscode(dodge_strategy_str):
+    if not is_dodge_strategy_str(dodge_strategy_str) and not is_dodge_strategy_code(dodge_strategy_str):
         print(f"Warning (parse_dodge_strategy_str2code): Dodge strategy string {dodge_strategy_str} is invalid",
               file=sys.stderr)
         return "DODGE_REACTION_TIME"
-    if check_dodge_strategy_iscode(dodge_strategy_str):
+    if is_dodge_strategy_code(dodge_strategy_str):
         return dodge_strategy_str
     conv = {
         'perfect': "DODGE_100",
@@ -220,11 +221,11 @@ def parse_dodge_strategy_code2str(dodge_strategy_code):
     :return: Dodge strategy in natural language.
         Should be one of: "Perfect Dodging", "Realistic Dodging", "Realistic Dodging Pro", "25% Dodging".
     """
-    if not check_dodge_strategy_isstr(dodge_strategy_code) and not check_dodge_strategy_iscode(dodge_strategy_code):
+    if not is_dodge_strategy_str(dodge_strategy_code) and not is_dodge_strategy_code(dodge_strategy_code):
         print(f"Warning (parse_dodge_strategy_code2str): Dodge strategy string {dodge_strategy_code} is invalid",
               file=sys.stderr)
         return "Realistic Dodging"
-    if check_dodge_strategy_isstr(dodge_strategy_code):
+    if is_dodge_strategy_str(dodge_strategy_code):
         return dodge_strategy_code
     conv = {
         "DODGE_100": "Perfect Dodging",
@@ -250,7 +251,7 @@ Ignored for now since options other than Estimator and TTW are rarely used.
 """
 
 
-def check_friendship_isstr(friendship):
+def is_friendship_str(friendship):
     """
     Check if a given string for friendship is natural language (e.g. "best friend").
 
@@ -260,7 +261,7 @@ def check_friendship_isstr(friendship):
     return any(x in friendship.lower() for x in ['no', 'good', 'great', 'ultra', 'best'])
 
 
-def check_friendship_iscode(friendship):
+def is_friendship_code(friendship):
     """
     Check if a given string for friendship is Pokebattler code name (e.g. "FRIENDSHIP_LEVEL_4").
 
@@ -280,10 +281,10 @@ def parse_friendship_str2code(friendship_str):
     :return: Friendship in Pokebattler code name,
         in the form of "FRIENDSHIP_LEVEL_<x>" where x is 0,1,2,3 or 4
     """
-    if not check_friendship_isstr(friendship_str) and not check_friendship_iscode(friendship_str):
+    if not is_friendship_str(friendship_str) and not is_friendship_code(friendship_str):
         print(f"Warning (parse_friendship_str2code): Friendship string {friendship_str} is invalid", file=sys.stderr)
         return "FRIENDSHIP_LEVEL_0"
-    if check_friendship_iscode(friendship_str):
+    if is_friendship_code(friendship_str):
         return friendship_str
     conv = {
         'no': 0,
@@ -308,10 +309,10 @@ def parse_friendship_code2str(friendship_code):
     :return: Friendship in natural language,
         in the form of "<x> Friend" where x is "No", "Good", "Great", "Ultra" or "Best"
     """
-    if not check_friendship_isstr(friendship_code) and not check_friendship_iscode(friendship_code):
+    if not is_friendship_str(friendship_code) and not is_friendship_code(friendship_code):
         print(f"Warning (parse_friendship_code2str): Friendship string {friendship_code} is invalid", file=sys.stderr)
         return "FRIENDSHIP_LEVEL_0"
-    if check_friendship_isstr(friendship_code):
+    if is_friendship_str(friendship_code):
         return friendship_code
     conv = {
         0: 'No',
@@ -324,7 +325,7 @@ def parse_friendship_code2str(friendship_code):
     return conv[int(intstr)] + " Friend"
 
 
-def check_type_isstr(pkm_type):
+def is_type_str(pkm_type):
     """
     Check if a given string for Pokemon type is natural language (e.g. "dragon").
 
@@ -334,7 +335,7 @@ def check_type_isstr(pkm_type):
     return pkm_type.lower() in [x.lower() for x in POKEMON_TYPES]
 
 
-def check_type_iscode(pkm_type):
+def is_type_code(pkm_type):
     """
     Check if a given string for Pokemon type is Pokebattler code name (e.g. "POKEMON_TYPE_DRAGON").
 
@@ -353,10 +354,10 @@ def parse_type_str2code(type_str):
     :return: Pokemon type in Pokebattler code name,
         in the form of "POKEMON_TYPE_<x>".
     """
-    if not check_type_isstr(type_str) and not check_type_iscode(type_str):
+    if not is_type_str(type_str) and not is_type_code(type_str):
         print(f"Warning (parse_type_str2code): Pokemon type string {type_str} is invalid", file=sys.stderr)
         return "POKEMON_TYPE_NORMAL"
-    if check_type_iscode(type_str):
+    if is_type_code(type_str):
         return type_str
     return f"POKEMON_TYPE_{type_str.upper()}"
 
@@ -365,14 +366,153 @@ def parse_type_code2str(type_code):
     """
     Parse Pokemon type value from code name (e.g. "POKEMON_TYPE_DRAGON")
     to natural word (e.g. "Dragon").
+    If a natural word ("dragon") is passed in, simply reformat it.
 
     :param type_code: Pokemon type in Pokebattler code name,
         in the form of "POKEMON_TYPE_<x>".
     :return: Pokemon type in natural language, e.g. "Dragon".
     """
-    if not check_type_isstr(type_code) and not check_type_iscode(type_code):
+    if not is_type_str(type_code) and not is_type_code(type_code):
         print(f"Warning (parse_type_code2str): Pokemon type string {type_code} is invalid", file=sys.stderr)
         return "Normal"
-    if check_type_isstr(type_code):
-        return type_code
+    if is_type_str(type_code):
+        return type_code.capitalize()  # Reformat input
     return type_code.split("_")[-1].capitalize()
+
+
+def parse_type_strs2inds(type_strs):
+    """
+    Given a list of Pokemon types as natural language (e.g. "dragon"),
+    return a list of their indices in the POKEMON_TYPES list (e.g. 14).
+    :param type_strs: List of Pokemon types in natural language, or a single type
+    :return: List of indices, or None if any element of the list is not a Pokemon type
+    """
+    if type(type_strs) is not list:
+        type_strs = [type_strs]
+    # Convert possible code names to natural strings, and capitalize them
+    if not all((type(s) is int and 0 <= s < len(POKEMON_TYPES)
+                or type(s) is str and (is_type_str(s) or is_type_code(s)))
+               for s in type_strs):
+        print(f"Warning (parse_type_strs2inds): Some strings in {type_strs} are invalid", file=sys.stderr)
+        return None
+    type_strs = [parse_type_code2str(s).capitalize() for s in type_strs]
+    return [POKEMON_TYPES.index(s) for s in type_strs]
+
+
+def parse_type_inds2strs(type_inds):
+    """
+    Given a list of Pokemon types as indices (e.g. 14),
+    return a list of their names as natural language (e.g. "Dragon").
+    :param type_inds: List of Pokemon types as indices
+    :return: List of type names, or None if any element of the list is not a valid index
+    """
+    # Convert possible code names to natural strings, and capitalize them
+    if not all((type(id) is int and 0 <= id < len(POKEMON_TYPES)) for id in type_inds):
+        print(f"Warning (parse_type_inds2strs): Some indices in {type_inds} are invalid", file=sys.stderr)
+        return None
+    return [POKEMON_TYPES[id] for id in type_inds]
+
+
+# ----------------- Type Effectiveness -----------------
+
+
+def get_effectiveness_single_defender(type_strs):
+    """
+    Get the type effectiveness table for a single defender with possibly multiple types.
+    :param type_strs: List of defender's types in natural language, or defender's only type as a single string
+    :return: List of type effectiveness values with length 18, corresponding to attacking types.
+            A value of 1 means this attacking type is super effective to the given defender,
+            2 means double effective, 0 means neutral, -1 means resisted, -2 means double resisted, etc.
+            Returns None if any element in the input is invalid.
+    """
+    if type(type_strs) is str:  # Mono type
+        type_strs = [type_strs]
+    type_inds = parse_type_strs2inds(type_strs)
+    if type_inds is None:
+        return None
+    eff_table_def_types = [TYPE_EFFECTIVENESS_TRANSPOSE[id] for id in type_inds]
+    # ^ Each element is a list of length 18, for each defending type
+    ret_array = np.sum(np.array(eff_table_def_types), 0)  # Sum over types
+    return list(ret_array)
+
+
+def get_weaknesses(type_strs):
+    """
+    Get all single and double weaknesses for a single defender with possibly multiple types.
+    :param type_strs: List of defender's types in natural language, or defender's only type as a single string
+    :return: Dict as following:
+        {'DOUBLE_WEAKNESSES': ['Ground', ...],
+         'SINGLE_WEAKNESSES': ['Water', ...]}
+    """
+    eff_list = get_effectiveness_single_defender(type_strs)
+    if not eff_list:  # Error
+        return None
+    double_inds = [i for i, val in enumerate(eff_list) if val == 2]
+    single_inds = [i for i, val in enumerate(eff_list) if val == 1]
+    return {
+        'DOUBLE_WEAKNESSES': parse_type_inds2strs(double_inds),
+        'SINGLE_WEAKNESSES': parse_type_inds2strs(single_inds)
+    }
+
+
+def get_attack_effectiveness(attack_type, defend_types):
+    """
+    Check the effectiveness of an attacking type against a single defender with possibly multiple types.
+    :param attack_type: Name of attacking type in natural language, e.g. "dragon"
+    :param defend_types: List of defender's types in natural language, or defender's only type as a single string
+    :return: Effectiveness of this attack as a single value.
+            A value of 1 means this attacking type is super effective to the given defender,
+            2 means double effective, 0 means neutral, -1 means resisted, -2 means double resisted, etc.
+            Returns None if any element in the input is invalid.
+    """
+    attack_inds = parse_type_strs2inds([attack_type])
+    defend_inds = parse_type_strs2inds(defend_types)
+    if not attack_inds or not defend_inds:
+        return None
+    attack_ind = attack_inds[0]
+    return sum(TYPE_EFFECTIVENESS[attack_ind][id] for id in defend_inds)
+
+
+def get_contender_types(defend_types):
+    """
+    Find all "contender types" against a single defender with possibly multiple types.
+    "Contender type" is defined as:
+    - If the defender has double weakness(es): Its double weaknesses are the only contender types.
+    - If the defender has single weakness(es) but no double weaknesses: Its single weaknesses are the only contender types.
+    - If the defender has no weaknesses: Types that are not resisted are the only contender types.
+        (Impossible as of Gen 8)
+
+    :param defend_types: List of defender's types in natural language, or defender's only type as a single string
+    :return: List of all contender types in natural language.
+            Returns None in case of errors.
+    """
+    weaknesses = get_weaknesses(defend_types)
+    if weaknesses is None:
+        return None
+    if weaknesses.get('DOUBLE_WEAKNESSES', []):
+        return weaknesses['DOUBLE_WEAKNESSES']
+    if weaknesses.get('SINGLE_WEAKNESSES', []):
+        return weaknesses['SINGLE_WEAKNESSES']
+    # Defender has no weaknesses  (This part of code has not been tested yet)
+    eff_table = get_effectiveness_single_defender(defend_types)
+    neutral_ids = [i for i, val in enumerate(eff_table) if val == 0]
+    return parse_type_inds2strs(neutral_ids)
+
+
+def is_contender_type(attack_type, defend_types):
+    """
+    Check if an attacking type is a "contender type" against a single defender with possibly multiple types.
+    "Contender type" is defined as:
+    - If the defender has double weakness(es): Its double weaknesses are the only contender types.
+    - If the defender has single weakness(es) but no double weaknesses: Its single weaknesses are the only contender types.
+    - If the defender has no weaknesses: Types that are not resisted are the only contender types.
+        (Impossible as of Gen 8)
+    For definition of "contender type", see docs for get_contender_types.
+
+    :param attack_type: Name of attacking type in natural language, e.g. "dragon"
+    :param defend_types: List of defender's types in natural language, or defender's only type as a single string
+    :return: Whether the attacking type is a contender type.
+    """
+    attack_type = parse_type_code2str(attack_type)
+    return attack_type in get_contender_types(defend_types)
+

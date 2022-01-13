@@ -93,6 +93,9 @@ def get_pokebattler_raid_ranking(raid_boss, raid_level=5, pkm_level=40,
     return do_http_request(url, payload)
 
 
+# TODO: Consolidate everything below
+
+
 def load_raid_info(filename='raids.json', raid_type="RAID_LEVEL_5_LEGACY"):
     """
     Extract all raid bosses of a certain tier listed in raids.json from Pokebattler.

@@ -4,8 +4,40 @@ Parameters.
 
 JSON_DATA_PATH = "data/json/"
 
-POKEMON_TYPES = ["Bug", "Dark", "Dragon", "Electric", "Fairy", "Fighting", "Fire", "Flying", "Grass", "Ground", "Ghost",
-                 "Ice", "Normal", "Poison", "Psychic", "Rock", "Steel", "Water"]  # Natural language
+#POKEMON_TYPES = ["Bug", "Dark", "Dragon", "Electric", "Fairy", "Fighting", "Fire", "Flying", "Grass", "Ground", "Ghost",
+#                 "Ice", "Normal", "Poison", "Psychic", "Rock", "Steel", "Water"]  # Natural language
+POKEMON_TYPES = ["Normal", "Fire", "Water", "Electric", "Grass", "Ice", "Fighting", "Poison", "Ground", "Flying",
+                 "Psychic", "Bug", "Rock", "Ghost", "Dragon", "Dark", "Steel", "Fairy"]  # Natural language
+TYPE_EFFECTIVENESS = [  # Axis 0 is attacker, Axis 1 is defender
+    # Values are exponents to be applied to SE multiplier (-2,-1,0,1,2)
+    # +---> This axis is defender
+    # |
+    # V   This axis is attacker
+    #N Fr Wt Ec Gs Ic Ft Pi Gd Fy Pc Bg Rk Gh Dr Dk St Fa
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,-1,-2, 0, 0,-1, 0],  # Normal attack
+    [0,-1,-1, 0, 1, 1, 0, 0, 0, 0, 0, 1,-1, 0,-1, 0, 1, 0],  # Fire attack
+    [0, 1,-1, 0,-1, 0, 0, 0, 1, 0, 0, 0, 1, 0,-1, 0, 0, 0],  # Water attack
+    [0, 0, 1,-1,-1, 0, 0, 0,-2, 1, 0, 0, 0, 0,-1, 0, 0, 0],  # Electric attack
+    [0,-1, 1, 0,-1, 0, 0,-1, 1,-1, 0,-1, 1, 0,-1, 0,-1, 0],  # Grass attack
+    [0,-1,-1, 0, 1,-1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0,-1, 0],  # Ice attack
+    [1, 0, 0, 0, 0, 1, 0,-1, 0,-1,-1,-1, 1,-2, 0, 1, 1,-1],  # Fighting attack
+    [0, 0, 0, 0, 1, 0, 0,-1,-1, 0, 0, 0,-1,-1, 0, 0,-2, 1],  # Poison attack
+    [0, 1, 0, 1,-1, 0, 0, 1, 0,-2, 0,-1, 1, 0, 0, 0, 1, 0],  # Ground attack
+    [0, 0, 0,-1, 1, 0, 1, 0, 0, 0, 0, 1,-1, 0, 0, 0,-1, 0],  # Flying attack
+    [0, 0, 0, 0, 0, 0, 1, 1, 0, 0,-1, 0, 0, 0, 0,-2,-1, 0],  # Psychic attack
+    [0,-1, 0, 0, 1, 0,-1,-1, 0,-1, 1, 0, 0,-1, 0, 1,-1,-1],  # Bug attack
+    [0, 1, 0, 0, 0, 1,-1, 0,-1, 1, 0, 1, 0, 0, 0, 0,-1, 0],  # Rock attack
+    [-2,0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0,-1, 0, 0],  # Ghost attack
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,-1,-2],  # Dragon attack
+    [0, 0, 0, 0, 0, 0,-1, 0, 0, 0, 1, 0, 0, 1, 0,-1, 0,-1],  # Dark attack
+    [0,-1,-1,-1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0,-1, 1],  # Steel attack
+    [0,-1, 0, 0, 0, 0, 1,-1, 0, 0, 0, 0, 0, 0, 1, 1,-1, 0],  # Fairy attack
+]
+TYPE_EFFECTIVENESS_TRANSPOSE = [  # Axis 0 is defender, Axis 1 is attacker
+    [TYPE_EFFECTIVENESS[i][j] for i in range(len(TYPE_EFFECTIVENESS))]
+    for j in range(len(TYPE_EFFECTIVENESS[0]))
+]
+SE_MULTIPLIER = 1.6  # Don't think will be needed for my project, but...?
 
 SPECIAL_BASE_DISPLAY_NAMES = {  # Default: Replace _ with space (Tapu Koko)
     'NIDORAN_FEMALE': 'Nidoran♀',
@@ -67,6 +99,13 @@ COSMETIC_FORMS_PER_POKEMON = {  # These specific Pokemon have these cosmetic for
 }
 # TODO: When using any Pokemon above, make sure only their regular forms are considered
 #  (and not considered again if one of the cosmetic forms already is)
+
 IGNORED_FORMS = {  # Forms that should not exist
     'URSHIFU': [''],  # Current GM has Urshifu "regular" form as mono Fighting
+    'HONEDGE': [''],  # The Honedge line has no stats yet in either GM or Pokebattler
+    'DOUBLADE': [''],
+    'AEGISLASH': [''],
+    'ZYGARDE': [''],  # Zygarde has no stats yet in either GM or Pokebattler
 }
+# TODO: When using any Pokemon above, make sure these forms are ignored
+
