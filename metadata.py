@@ -6,7 +6,8 @@ import csv
 
 from utils import *
 from get_json import *
-from pokemon import Pokemon
+from pokemon import *
+from raid_bosses import *
 
 
 class Metadata:
@@ -28,8 +29,14 @@ class Metadata:
         self.raids_JSON = None
         self.Pokemon_JSON = None
         self.moves_JSON = None
-        self.Pokedex = {}  # Lookup by code name: {"BULBASAUR_SHADOW_FORM": <Pokemon object>, ...}
         self.GM_JSON = None
+
+        self.Pokedex = {}  # Lookup by code name: {"BULBASAUR_SHADOW_FORM": <Pokemon object>, ...}
+
+        self.raids = []  # May be unnecessary?
+        self.raids_by_category = {}  # {"RAID_LEVEL_5_LEGACY": [list of RaidBoss objects], ...}
+        self.raids_by_tier = {}  # {"RAID_LEVEL_5": [list of RaidBoss objects, current, legacy, future], ...}
+        self.raid_categories_by_tier = {}  # {"RAID_LEVEL_5": set("RAID_LEVEL_5_LEGACY", ...), ...}
 
         if init_from_pokebattler:
             self.raids_JSON = get_pokebattler_metadata("raids", write_file=False)
@@ -37,6 +44,7 @@ class Metadata:
             self.moves_JSON = get_pokebattler_metadata("moves", write_file=False)
         if self.raids_JSON is None or self.Pokemon_JSON is None or self.moves_JSON is None:
             if init_from_JSON:
+                # TODO: Ass a warning if local JSON is too old
                 self.raids_JSON = load_json_from_file(os.path.join(JSON_DATA_PATH, "raids.json"))
                 self.Pokemon_JSON = load_json_from_file(os.path.join(JSON_DATA_PATH, "pokemon.json"))
                 self.moves_JSON = load_json_from_file(os.path.join(JSON_DATA_PATH, "moves.json"))
@@ -48,6 +56,10 @@ class Metadata:
         if init_from_GM:
             self.GM_JSON = load_json_from_file(os.path.join(JSON_DATA_PATH, "latest.json"))
             self.load_pokedex_from_GM()
+
+        self.load_raids()
+
+    # ----------------- Pokedex -----------------
 
     def load_pokedex(self):
         """
@@ -61,14 +73,6 @@ class Metadata:
                     file=sys.stderr)
             else:
                 self.Pokedex[pkm_codename] = pkm
-
-        # Add evolutions (Removed as it fails on forms like shadows and Alolans)
-        """
-        for pkm_codename, pkm in self.Pokedex.items():
-            if pkm.pre_evo:
-                pre_evo = self.find_pokemon(codename=pkm.pre_evo)
-                pre_evo.evolutions.append(pkm_codename)
-        """
 
     def load_pokedex_from_GM(self):
         """
@@ -131,10 +135,11 @@ class Metadata:
         #print(f"Error (Metadata.find_pokemon): Pokemon {codename} not found", file=sys.stderr)
         return None
 
-    def debug_print_pokemon_to_csv(self, filename="data/pokemon.csv"):
+    def debug_print_pokemon_to_csv(self, filename="data/metadata/pokemon.csv"):
         """
         Debug function that outputs all Pokemon to CSV.
         """
+        os.makedirs(os.path.dirname(filename), exist_ok=True)
         with open(filename, mode='w') as csv_file:
             fieldnames = ['Code name', 'Type 1', 'Type 2', 'Attack', 'Defense', 'Stamina',
                           'Pre-evolution', 'Evolutions', 'Is legendary', 'Is mythical', 'Is shadow', 'Is mega',
@@ -159,10 +164,63 @@ class Metadata:
             if keyword.lower() in item.get('templateId', '').lower():
                 print(item)
 
+    # ----------------- Raids -----------------
+
+    def load_raids(self):
+        """
+        Process the Raid JSON file and fill the lists of raid bosses with RaidBoss objects.
+        Should only be called after the Pokedex is loaded!
+        """
+        for category_JSON in self.raids_JSON['tiers']:
+            category = category_JSON['tier']  # Code name, "RAID_LEVEL_5_LEGACY"
+            tier = category_JSON['info']['guessTier']  # Code name, "RAID_LEVEL_5"
+            if category == 'RAID_LEVEL_UNSET':
+                # Important! Skip this.
+                # It's basically a list of all Pokemon.
+                # Contains obsolete data such as BLASTOISE_NOEVOLVE_FORM and MEWTWO_A_INTRO_FORM.
+                continue
+
+            if category not in self.raids_by_category:
+                self.raids_by_category[category] = []
+            if tier not in self.raids_by_tier:
+                self.raids_by_tier[tier] = []
+            if tier not in self.raid_categories_by_tier:
+                self.raid_categories_by_tier[tier] = set()
+            self.raid_categories_by_tier[tier].add(category)
+
+            for boss_JSON in category_JSON['raids']:
+                boss = RaidBoss(pokebattler_JSON=boss_JSON, tier_codename=tier, category_codename=category,
+                                metadata=self)
+                self.raids.append(boss)
+                self.raids_by_category[category].append(boss)
+                self.raids_by_tier[tier].append(boss)
+
+    def debug_print_raids_to_csv(self, filename="data/metadata/raids.csv"):
+        """
+        Debug function that outputs all raids (RaidBoss objects) to CSV.
+        """
+        os.makedirs(os.path.dirname(filename), exist_ok=True)
+        with open(filename, mode='w') as csv_file:
+            fieldnames = ['Tier', 'Category', 'Pokemon codename', 'Base', 'Form', 'Is mega']
+            writer = csv.writer(csv_file)
+            writer.writerow(fieldnames)
+            for boss in self.raids:
+                writer.writerow([
+                    parse_raid_tier_code2str(boss.tier),
+                    boss.category,
+                    boss.pokemon_codename, boss.pokemon_base,
+                    boss.pokemon_form if boss.pokemon_form else '',
+                    boss.is_mega
+                ])
+
 
 if __name__ == "__main__":
     META = Metadata(init_from_pokebattler=True, init_from_JSON=False,
                     init_from_GM=True)
+
+    META.debug_print_pokemon_to_csv()
+    META.debug_print_raids_to_csv()
+
     #print([pkm['pokemonId'] for pkm in META.Pokemon_JSON['pokemon']])
     #print(META.Pokemon_JSON['pokemon'][9])
 
@@ -174,7 +232,5 @@ if __name__ == "__main__":
         print(pkm.JSON['pokedex']['pokemonId'], '\t\t', pkm_codename, '\t\t', pkm.JSON['pokedex'].get('form', "---"),
               '\t\t', pkm.JSON.get('form', "---"))
     """
-
-    META.debug_print_pokemon_to_csv()
 
     #META.debug_lookup_GM("piloswine")

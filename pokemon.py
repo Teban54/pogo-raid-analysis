@@ -33,7 +33,7 @@ class Pokemon:
         self.base_stamina = -1
         self.pre_evo = None
         self.JSON = None
-        self.base_codename = None  # "MR_MIME" when Pokemon is "MR_MIME_GALARIAN_FORM", or "VENUSAUR_MEGA"
+        self.base_codename = None  # "MR_MIME" when Pokemon is "MR_MIME_GALARIAN_FORM", or "VENUSAUR" for "VENUSAUR_MEGA"
         self.form_codename = None  # "GALARIAN" when Pokemon is "MR_MIME_GALARIAN_FORM"
         self.base_displayname = None
         self.form_displayname = None

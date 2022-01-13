@@ -2,10 +2,16 @@
 Parameters.
 """
 
+
+# ----------------- FILES -----------------
+
+
 JSON_DATA_PATH = "data/json/"
 
-#POKEMON_TYPES = ["Bug", "Dark", "Dragon", "Electric", "Fairy", "Fighting", "Fire", "Flying", "Grass", "Ground", "Ghost",
-#                 "Ice", "Normal", "Poison", "Psychic", "Rock", "Steel", "Water"]  # Natural language
+
+# ----------------- Types -----------------
+
+
 POKEMON_TYPES = ["Normal", "Fire", "Water", "Electric", "Grass", "Ice", "Fighting", "Poison", "Ground", "Flying",
                  "Psychic", "Bug", "Rock", "Ghost", "Dragon", "Dark", "Steel", "Fairy"]  # Natural language
 TYPE_EFFECTIVENESS = [  # Axis 0 is attacker, Axis 1 is defender
@@ -38,6 +44,10 @@ TYPE_EFFECTIVENESS_TRANSPOSE = [  # Axis 0 is defender, Axis 1 is attacker
     for j in range(len(TYPE_EFFECTIVENESS[0]))
 ]
 SE_MULTIPLIER = 1.6  # Don't think will be needed for my project, but...?
+
+
+# ----------------- Pokemon -----------------
+
 
 SPECIAL_BASE_DISPLAY_NAMES = {  # Default: Replace _ with space (Tapu Koko)
     'NIDORAN_FEMALE': 'Nidoran♀',
@@ -109,3 +119,46 @@ IGNORED_FORMS = {  # Forms that should not exist
 }
 # TODO: When using any Pokemon above, make sure these forms are ignored
 
+
+# ----------------- Raid Bosses -----------------
+
+
+RAID_TIERS_CODE2STR = {
+    "RAID_LEVEL_1": "Tier 1",
+    "RAID_LEVEL_2": "Tier 2",
+    "RAID_LEVEL_3": "Tier 3",
+    "RAID_LEVEL_4": "Tier 4",
+    "RAID_LEVEL_4_5": "Tier 4.5",
+    "RAID_LEVEL_5": "Tier 5",
+    "RAID_LEVEL_6": "Tier 6",
+    "RAID_LEVEL_MEGA": "Mega Tier",
+}
+RAID_CATEGORIES_CODE2STR = {  # Shouldn't be needed for this project, but just in case
+    "RAID_LEVEL_1": "Tier 1",
+    "RAID_LEVEL_1_LEGACY": "Legacy Tier 1",
+    "RAID_LEVEL_1_FUTURE": "Future Tier 1",  # In case
+    "RAID_LEVEL_2": "Tier 2",
+    "RAID_LEVEL_2_LEGACY": "Legacy Tier 2",
+    "RAID_LEVEL_2_FUTURE": "Future Tier 2",  # In case
+    "RAID_LEVEL_3": "Tier 3",
+    "RAID_LEVEL_3_LEGACY": "Legacy Tier 3",
+    "RAID_LEVEL_3_FUTURE": "Future Tier 3",  # In case
+    "RAID_LEVEL_4": "Tier 4",
+    "RAID_LEVEL_4_LEGACY": "Legacy Tier 4",
+    "RAID_LEVEL_4_FUTURE": "Future Tier 4",  # In case
+    "RAID_LEVEL_4_5": "Tier 4.5",
+    "RAID_LEVEL_4_5_LEGACY": "Legacy Tier 4.5",
+    "RAID_LEVEL_4_5_FUTURE": "Future Tier 4.5",  # In case
+    "RAID_LEVEL_5": "Tier 5",
+    "RAID_LEVEL_5_LEGACY": "Legacy Tier 5",
+    "RAID_LEVEL_5_FUTURE": "Future Tier 5",
+    "RAID_LEVEL_6": "Tier 6",
+    "RAID_LEVEL_6_LEGACY": "Legacy Tier 6",
+    "RAID_LEVEL_6_FUTURE": "Future Tier 6",  # In case
+    "RAID_LEVEL_MEGA": "Mega Tier",
+    "RAID_LEVEL_MEGA_LEGACY": "Legacy Mega Tier",
+    "RAID_LEVEL_MEGA_FUTURE": "Future Mega Tier",
+    "RAID_LEVEL_UNSET": "Tier ?",  # Should be ignored when reading JSON
+}
+# TODO: Reminder - If encountered a tier not listed above, do not report an error, only a warning!!
+# This is to easily adapt in future if Niantic adds a new tier or Pokebattler adds a new category
