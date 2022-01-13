@@ -42,14 +42,22 @@ class Metadata:
             self.raids_JSON = get_pokebattler_metadata("raids", write_file=False)
             self.Pokemon_JSON = get_pokebattler_metadata("pokemon", write_file=False)
             self.moves_JSON = get_pokebattler_metadata("moves", write_file=False)
-        if self.raids_JSON is None or self.Pokemon_JSON is None or self.moves_JSON is None:
+        if self.raids_JSON is None:
             if init_from_JSON:
                 # TODO: Add a warning if local JSON is too old
                 self.raids_JSON = load_json_from_file(os.path.join(JSON_DATA_PATH, "raids.json"))
+            if self.raids_JSON is None:
+                print(f"Warning (Metadata.__init__): Loading raids JSON failed", file=sys.stderr)
+        if self.Pokemon_JSON is None:
+            if init_from_JSON:
                 self.Pokemon_JSON = load_json_from_file(os.path.join(JSON_DATA_PATH, "pokemon.json"))
+            if self.Pokemon_JSON is None:
+                print(f"Warning (Metadata.__init__): Loading Pokemon JSON failed", file=sys.stderr)
+        if self.moves_JSON is None:
+            if init_from_JSON:
                 self.moves_JSON = load_json_from_file(os.path.join(JSON_DATA_PATH, "moves.json"))
-        if self.raids_JSON is None or self.Pokemon_JSON is None or self.moves_JSON is None:
-            print(f"Warning (Metadata.__init__): Loading JSON failed", file=sys.stderr)
+            if self.moves_JSON is None:
+                print(f"Warning (Metadata.__init__): Loading moves JSON failed", file=sys.stderr)
 
         self.load_pokedex()
 
