@@ -496,7 +496,74 @@ def parse_raid_tier_code2str(tier_code):
     return strs[0] if strs else "Tier 5"
 
 
-""" Conversions of tier categories have not been written yet as they're currently not used, but could be soon """
+def is_raid_category_str(category):
+    """
+    Check if a given string for raid category is natural language (e.g. "tier 5" or "5").
+
+    :param category: Raid category string to be checked.
+    :return: Whether the string is natural language.
+    """
+    return any(trim_raid_tier_str(x) == trim_raid_tier_str(category)
+               for x in RAID_CATEGORIES_CODE2STR.values())
+
+
+def is_raid_category_code(category):
+    """
+    Check if a given string for raid category is Pokebattler code name (e.g. "RAID_LEVEL_5").
+
+    :param category: Raid category string to be checked.
+    :return: Whether the string is code name.
+    """
+    return category in RAID_CATEGORIES_CODE2STR.keys()
+
+
+def parse_raid_category_str2code(category_str):
+    """
+    Parse raid category from natural language (e.g. "legacy tier 5") to code name (e.g. "RAID_LEVEL_5_LEGACY").
+
+    If no matches are found, return RAID_LEVEL_<trimmed tier string, upper case, with _>.
+    (Some tolerance of possible new tiers that may be added to Pokebattler, but not perfect.)
+
+    :param category_str: Raid category in natural language, as a string. Can be with or without the word "tier".
+        E.g. "Tier 5", "5", "Mega Tier", "Tier Mega", "Mega" are all fine.
+        Do not accept integers. Do not accept words other than "tier".
+    :return: Raid category in Pokebattler code name, in form of "RAID_LEVEL_<x>".
+    """
+    if not is_raid_category_str(category_str) and not is_raid_category_code(category_str):
+        print(f"Warning (parse_raid_category_str2code): Raid category string {category_str} is invalid",
+              file=sys.stderr)
+        # Tolerance (see above)
+        return "RAID_LEVEL_" + trim_raid_tier_str(category_str).upper().replace(" ", "_").replace(".", "_")
+    if is_raid_category_code(category_str):
+        return category_str
+    category_str = trim_raid_tier_str(category_str)
+    codes = [key for key, val in RAID_CATEGORIES_CODE2STR.items() if trim_raid_tier_str(val) == category_str]
+    return codes[0] if codes else "RAID_LEVEL_5"
+
+
+def parse_raid_category_code2str(category_code):
+    """
+    Parse raid category from code name (e.g. "RAID_LEVEL_5"_LEGACY) to natural language (e.g. "Legacy Tier 5").
+    If a natural word ("5") is passed in, simply reformat it.
+
+    If no matches are found, return the ORIGINAL CODE NAME.
+    (Tolerance of possible new tiers that may be added to Pokebattler.)
+
+    :param category_code: Raid category in Pokebattler code name, in form of "RAID_LEVEL_<x>".
+    :return: Raid category in natural language, as a well-formatted string with word "Tier".
+        E.g. "Legacy Tier 5", "Future Mega Tier".
+    """
+    if not is_raid_category_str(category_code) and not is_raid_category_code(category_code):
+        print(f"Warning (parse_raid_category_code2str): Raid tier code name {category_code} is invalid",
+              file=sys.stderr)
+        return category_code  # Tolerance (see above)!!!
+    if is_raid_category_str(category_code):
+        # Reformat
+        category_str = trim_raid_tier_str(category_code)
+        strs = [val for key, val in RAID_CATEGORIES_CODE2STR.items() if trim_raid_tier_str(val) == category_str]
+        return strs[0] if strs else "Tier 5"
+    strs = [val for key, val in RAID_CATEGORIES_CODE2STR.items() if key.lower() == category_code.lower()]
+    return strs[0] if strs else "Tier 5"
 
 
 # ----------------- Type Effectiveness -----------------

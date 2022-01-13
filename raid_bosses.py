@@ -76,3 +76,12 @@ class RaidBoss:
             print(f"Warning (RaidBoss.init_pokemon): Pokemon with code name {self.pokemon_codename} not found",
                 file=sys.stderr)
             # Try parsing forms here just in case?
+
+
+def raid_bosses_to_pokemon(bosses_list):
+    """
+    Convert a list of RaidBoss objects to a list of Pokemon objects.
+    :param bosses_list: List of raid bosses
+    :return; Pokemon objects
+    """
+    return [rb.pokemon for rb in bosses_list]

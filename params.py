@@ -160,5 +160,5 @@ RAID_CATEGORIES_CODE2STR = {  # Shouldn't be needed for this project, but just i
     "RAID_LEVEL_MEGA_FUTURE": "Future Mega Tier",
     "RAID_LEVEL_UNSET": "Tier ?",  # Should be ignored when reading JSON
 }
-# TODO: Reminder - If encountered a tier not listed above, do not report an error, only a warning!!
+# Reminder - If encountered a tier not listed above, do not report an error, only a warning!!
 # This is to easily adapt in future if Niantic adds a new tier or Pokebattler adds a new category

@@ -203,6 +203,22 @@ class Metadata:
                 self.raids_by_category[category].append(boss)
                 self.raids_by_tier[tier].append(boss)
 
+    def get_raid_bosses_by_tier(self, tier):
+        """
+        Get all raid bosses of a certain raid tier (e.g. Tier 5) recorded on Pokebattler.
+        :param tier: Raid tier, either as natural language or code name
+        :return: List of RaidBoss objects describing all bosses of that tier
+        """
+        return self.raids_by_tier.get(parse_raid_tier_str2code(tier), [])
+
+    def get_raid_bosses_by_category(self, category):
+        """
+        Get all raid bosses of a certain raid category (e.g. Legacy Tier 5) recorded on Pokebattler.
+        :param category: Raid category, either as natural language or code name
+        :return: List of RaidBoss objects describing all bosses of that category
+        """
+        return self.raids_by_category.get(parse_raid_category_str2code(category), [])
+
     def debug_print_raids_to_csv(self, filename="data/metadata/raids.csv"):
         """
         Debug function that outputs all raids (RaidBoss objects) to CSV.
@@ -242,3 +258,13 @@ if __name__ == "__main__":
     """
 
     #META.debug_lookup_GM("piloswine")
+
+    """
+    bosses = META.get_raid_bosses_by_tier("Tier 5")
+    for boss in bosses:
+        print(boss.pokemon.displayname)
+    print('--------')
+    bosses = META.get_raid_bosses_by_category("Legacy Tier 5")
+    for boss in bosses:
+        print(boss.pokemon.displayname)
+    """
