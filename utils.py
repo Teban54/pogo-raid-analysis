@@ -1,5 +1,9 @@
 """
-Utilities functions
+Generic utilities functions.
+
+This module does not involve any Pokemon, RaidBoss or Move objects.
+Utilities involving these objects can be found in the respective modules.
+However, utilities dealing with their names can often be found here.
 """
 import json
 import requests
@@ -543,7 +547,7 @@ def parse_raid_category_str2code(category_str):
 
 def parse_raid_category_code2str(category_code):
     """
-    Parse raid category from code name (e.g. "RAID_LEVEL_5"_LEGACY) to natural language (e.g. "Legacy Tier 5").
+    Parse raid category from code name (e.g. "RAID_LEVEL_5_LEGACY") to natural language (e.g. "Legacy Tier 5").
     If a natural word ("5") is passed in, simply reformat it.
 
     If no matches are found, return the ORIGINAL CODE NAME.
@@ -668,4 +672,22 @@ def is_contender_type(attack_type, defend_types):
     """
     attack_type = parse_type_code2str(attack_type)
     return attack_type in get_contender_types(defend_types)
+
+
+# ----------------- Moves -----------------
+
+
+def parse_move_code2str(move_code):
+    """
+    Parse move name from code name (e.g. "SMACK_DOWN_FAST") to natural language (e.g. "Smack Down").
+    Does not check whether the name is valid.
+
+    :param move_code: Move in Pokebattler code name, possibly including "_FAST".
+    :return: Move name in natural language.
+    """
+    if move_code in SPECIAL_MOVE_DISPLAY_NAMES:
+        return SPECIAL_MOVE_DISPLAY_NAMES[move_code]
+    if "_FAST" in move_code:
+        move_code = move_code.replace("_FAST", "")
+    return codename_to_displayname(move_code)
 

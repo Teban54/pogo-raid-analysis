@@ -162,3 +162,28 @@ RAID_CATEGORIES_CODE2STR = {  # Shouldn't be needed for this project, but just i
 }
 # Reminder - If encountered a tier not listed above, do not report an error, only a warning!!
 # This is to easily adapt in future if Niantic adds a new tier or Pokebattler adds a new category
+
+
+# ----------------- Moves -----------------
+
+
+SPECIAL_MOVE_DISPLAY_NAMES = {
+    'VICE_GRIP': 'Vise Grip',
+    'X_SCISSOR': 'X-Scissor',
+    #'SCALD_BLASTOISE': 'Scald',
+    #'HYDRO_PUMP_BLASTOISE': 'Hydro Pump',
+    #'WRAP_GREEN': 'Wrap',
+    #'WRAP_PINK': 'Wrap',
+    'WATER_GUN_FAST_BLASTOISE': 'Water Gun Blastoise',
+    'MUD_SLAP_FAST': 'Mud-Slap',
+    'SUPER_POWER': 'Superpower',
+    'POWER_UP_PUNCH': 'Power-Up Punch',
+    'LOCK_ON_FAST': 'Lock-On',
+    'V_CREATE': 'V-Create',
+    'TRI_ATTACK': 'Tri-Attack',
+}
+IGNORED_MOVES = {
+    "DODGE",
+    "MOVE_NONE",
+    "RANDOM",
+}

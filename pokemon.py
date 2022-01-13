@@ -17,27 +17,29 @@ class Pokemon:
     This is primarily used for raid boss lists and type filtering.
     Therefore, limited data is parsed for now.
     """
-    def __init__(self, pokebattler_JSON=None, GM_JSON=None):
+    def __init__(self, pokebattler_JSON=None, GM_JSON=None, metadata=None):
         """
         Initialize the attributes and use the Pokebattler JSON information to fill them.
         :param pokebattler_JSON: JSON block from Pokebattler relating to this Pokemon
         :param GM_JSON: JSON block from Game Master relating to this Pokemon, if applicable
                 (In practice, GM_JSON is typically left blank, since GM isn't loaded yet at this stage)
+        :param metadata: Current Metadata object (to lookup moves)
         """
         self.name = None
+        self.base_codename = None  # "MR_MIME" when Pokemon is "MR_MIME_GALARIAN_FORM", or "VENUSAUR" for "VENUSAUR_MEGA"
+        self.form_codename = None  # "GALARIAN" when Pokemon is "MR_MIME_GALARIAN_FORM"
+        self.base_displayname = None
+        self.form_displayname = None
+        self.displayname = None
+
         self.type = None  # Natural language, e.g. "Dragon"
         self.type2 = None
         self.types = []  # List of all types, length 1 or 2
         self.base_attack = -1
         self.base_defense = -1
         self.base_stamina = -1
+
         self.pre_evo = None
-        self.JSON = None
-        self.base_codename = None  # "MR_MIME" when Pokemon is "MR_MIME_GALARIAN_FORM", or "VENUSAUR" for "VENUSAUR_MEGA"
-        self.form_codename = None  # "GALARIAN" when Pokemon is "MR_MIME_GALARIAN_FORM"
-        self.base_displayname = None
-        self.form_displayname = None
-        self.displayname = None
         self.is_legendary = False
         self.is_mythical = False
         self.is_shadow = False
@@ -45,16 +47,29 @@ class Pokemon:
         self.mega_codename = None  # "X", "Y"
         self.mega_displayname = None
 
+        self.fast_moves = []  # List of code names, include all legacy moves (ETM or not), from Pokebattler data
+        self.charged_moves = []  # Not Move objects!!!
+        self.movesets = []  # "tmMovesets" from Pokebattler, includes all possible movesets (e.g. Mud Shot/Rock Blast Golem)
+        self.current_movesets = []  # From Pokebattler
+        # Moveset lists follow Pokebattler format:
+        # [{'quickMove': 'ROCK_THROW_FAST', 'cinematicMove': 'EARTHQUAKE'}, ...]
+
+        self.JSON = None
+        self.metadata = metadata
+
         # The following are from GM
         self.GM_JSON = None
         self.evolutions = []
 
+        # Load data
         if pokebattler_JSON:
             self.init_from_pokebattler(pokebattler_JSON)
             self.init_forms()
             self.init_display_names()
         if GM_JSON:
             self.init_from_GM(GM_JSON)
+
+    # ----------------- Initialization -----------------
 
     def init_from_pokebattler(self, JSON):
         """
@@ -74,6 +89,10 @@ class Pokemon:
         self.pre_evo = JSON.get('parentPokemonId', None)
         self.is_legendary = (JSON.get('rarity', '') == 'POKEMON_RARITY_LEGENDARY')
         self.is_mythical = (JSON.get('rarity', '') == 'POKEMON_RARITY_MYTHIC')
+        self.fast_moves = JSON['quickMoves']
+        self.charged_moves = JSON['cinematicMoves']
+        self.movesets = JSON['tmMovesets']
+        self.current_movesets = JSON['currentMovesets']
 
     def init_forms(self):
         """
@@ -159,4 +178,48 @@ class Pokemon:
                     evo_codename = evo_block['form'] + '_FORM'
                 self.evolutions.append(evo_codename + ('_SHADOW_FORM' if shadow else ''))
                 # This could cause two "_FORM"'s if there's a shadow with a special form, but that's not a thing yet
+
+    # ----------------- Moves -----------------
+
+    def is_move_stab(self, move):
+        """
+        Check if a given move is STAB on this Pokemon.
+        :param move: Move, either as a Move object or as a string (will lookup in metadata if string)
+        :return: Whether the move is STAB. Returns False in case of errors.
+        """
+        if type(move) is str:
+            if not self.metadata:
+                print(f"Warning (Pokemon.is_move_stab): Metadata not found", file=sys.stderr)
+                return False
+            move = self.metadata.find_move(move)
+        return move.type in self.types
+
+    def get_fast_moves(self, stab_only=False):
+        """
+        Get a list of fast moves as Move objects.
+        :param stab_only: If True, only STAB moves are returned.
+        :return: List of fast moves as Move objects
+        """
+        if not self.metadata:
+            print(f"Warning (Pokemon.get_fast_moves): Metadata not found", file=sys.stderr)
+            return []
+        moves = self.metadata.find_moves(self.fast_moves)
+        if stab_only:
+            moves = [move for move in moves if self.is_move_stab(move)]
+        return moves
+
+    def get_charged_moves(self, stab_only=False):
+        """
+        Get a list of charged moves as Move objects.
+        :param stab_only: If True, only STAB moves are returned.
+        :return: List of charged moves as Move objects
+        """
+        if not self.metadata:
+            print(f"Warning (Pokemon.get_charged_moves): Metadata not found", file=sys.stderr)
+            return []
+        moves = self.metadata.find_moves(self.charged_moves)
+        if stab_only:
+            moves = [move for move in moves if self.is_move_stab(move)]
+        return moves
+
 

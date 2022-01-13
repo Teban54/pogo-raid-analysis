@@ -7,7 +7,8 @@ import csv
 from utils import *
 from get_json import *
 from pokemon import *
-from raid_bosses import *
+from raid_boss import *
+from move import *
 
 
 class Metadata:
@@ -30,6 +31,10 @@ class Metadata:
         self.Pokemon_JSON = None
         self.moves_JSON = None
         self.GM_JSON = None
+
+        self.moves = {}  # Lookup by code name: {"SMACK_DOWN_FAST": <Move object>, ...}
+        self.fast_moves = []
+        self.charged_moves = []
 
         self.Pokedex = {}  # Lookup by code name: {"BULBASAUR_SHADOW_FORM": <Pokemon object>, ...}
 
@@ -59,6 +64,8 @@ class Metadata:
             if self.moves_JSON is None:
                 print(f"Warning (Metadata.__init__): Loading moves JSON failed", file=sys.stderr)
 
+        self.load_moves()
+
         self.load_pokedex()
 
         if init_from_GM:
@@ -67,6 +74,64 @@ class Metadata:
 
         self.load_raids()
 
+    # ----------------- Moves -----------------
+
+    def load_moves(self):
+        """
+        Process the Move JSON file and fill the lists of moves with Move objects.
+        """
+        for move_json in self.moves_JSON['move']:
+            if 'moveId' not in move_json or move_json['moveId'] in IGNORED_MOVES:
+                continue
+            move = Move(pokebattler_JSON=move_json)
+            move_codename = move.name
+            if move_codename in self.moves:
+                print(f"Warning (Metadata.load_moves): Duplicate move with code name {move_codename}",
+                    file=sys.stderr)
+            else:
+                self.moves[move_codename] = move
+            if move.is_fast:
+                self.fast_moves.append(move)
+            else:
+                self.charged_moves.append(move)
+
+    def find_move(self, codename):  # TODO(maybe): Make it support natural names too
+        """
+        Find a move with a given code name.
+        :param codename: Pokebattler code name of move (e.g. SMACK_DOWN_FAST)
+        :return: Move object
+        """
+        if codename and codename in self.moves:
+            return self.moves[codename]
+        #print(f"Error (Metadata.find_pokemon): Pokemon {codename} not found", file=sys.stderr)
+        return None
+
+    def find_moves(self, codenames):
+        """
+        Find all moves with given code names.
+        Strictly match the code names (e.g. searching HIDDEN_POWER_FAST will not return Hidden Powers of specific types).
+        :param codenames: Pokebattler code names of moves as list
+        :return: List of Move objects
+        """
+        lst = [self.find_move(name) for name in codenames]
+        return [move for move in lst if move is not None]
+
+    def debug_print_moves_to_csv(self, filename="data/metadata/moves.csv"):
+        """
+        Debug function that outputs all moves to CSV.
+        """
+        os.makedirs(os.path.dirname(filename), exist_ok=True)
+        with open(filename, mode='w') as csv_file:
+            fieldnames = ['Code name', 'Display name', 'Type', 'Is fast', 'Power', 'Energy delta',
+                          'Duration', 'Window start', 'Window end']
+            writer = csv.writer(csv_file)
+            writer.writerow(fieldnames)
+            for move_codename, move in self.moves.items():
+                writer.writerow([
+                    move.name, move.displayname, move.type, move.is_fast, move.power, move.energy_delta,
+                    move.duration, move.window_start, move.window_end
+                ])
+
     # ----------------- Pokedex -----------------
 
     def load_pokedex(self):
@@ -74,7 +139,7 @@ class Metadata:
         Process the Pokemon JSON file and fill the Pokedex in meta data with Pokemon objects.
         """
         for pkm_json in self.Pokemon_JSON['pokemon']:
-            pkm = Pokemon(pokebattler_JSON=pkm_json)
+            pkm = Pokemon(pokebattler_JSON=pkm_json, metadata=self)
             pkm_codename = pkm.name
             if pkm_codename in self.Pokedex:
                 print(f"Warning (Metadata.load_pokedex): Duplicate Pokemon with code name {pkm_codename}",
@@ -153,7 +218,7 @@ class Metadata:
                           'Pre-evolution', 'Evolutions', 'Is legendary', 'Is mythical', 'Is shadow', 'Is mega',
                           'Base code name', 'Base display name',
                           'Form code name', 'Form display name', 'Mega code name', 'Mega display name',
-                          'Display name']
+                          'Display name', 'Fast moves', 'Charged moves']
             writer = csv.writer(csv_file)
             writer.writerow(fieldnames)
             for pkm_codename, pkm in self.Pokedex.items():
@@ -161,7 +226,8 @@ class Metadata:
                     pkm.name, pkm.type, pkm.type2, pkm.base_attack, pkm.base_defense, pkm.base_stamina,
                     pkm.pre_evo, pkm.evolutions, pkm.is_legendary, pkm.is_mythical, pkm.is_shadow, pkm.is_mega,
                     pkm.base_codename, pkm.base_displayname, pkm.form_codename, pkm.form_displayname,
-                    pkm.mega_codename, pkm.mega_displayname, pkm.displayname
+                    pkm.mega_codename, pkm.mega_displayname, pkm.displayname,
+                    pkm.fast_moves, pkm.charged_moves
                 ])
 
     def debug_lookup_GM(self, keyword):
@@ -242,11 +308,13 @@ if __name__ == "__main__":
     META = Metadata(init_from_pokebattler=True, init_from_JSON=False,
                     init_from_GM=True)
 
+    META.debug_print_moves_to_csv()
     META.debug_print_pokemon_to_csv()
     META.debug_print_raids_to_csv()
 
     #print([pkm['pokemonId'] for pkm in META.Pokemon_JSON['pokemon']])
     #print(META.Pokemon_JSON['pokemon'][9])
+    #print(META.find_pokemon('GOLEM').JSON)
 
     #for pkm_codename, pkm in META.Pokedex.items():
     #    print(pkm_codename, pkm.evolutions)
