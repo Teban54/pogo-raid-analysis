@@ -4,7 +4,6 @@ This module includes two main types of utilities:
 - Utilities for dealing with single or multiple moves.
 """
 
-
 from utils import *
 from params import *
 

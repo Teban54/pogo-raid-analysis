@@ -9,6 +9,7 @@ from get_json import *
 from pokemon import *
 from raid_boss import *
 from move import *
+from raid_ensemble import *
 
 
 class Metadata:
@@ -208,6 +209,18 @@ class Metadata:
         #print(f"Error (Metadata.find_pokemon): Pokemon {codename} not found", file=sys.stderr)
         return None
 
+    def get_all_pokemon(self, remove_ignored=True):
+        """
+        Get a list of all Pokemon.
+        :param remove_ignored: If True, Pokemon and forms that should be ignored
+            (including cosmetic forms) will not be included.
+        :return: All Pokemon as a list of Pokemon objects
+        """
+        lst = list(self.Pokedex.values())
+        if remove_ignored:
+            lst = remove_pokemon_to_ignore(lst)
+        return lst
+
     def debug_print_pokemon_to_csv(self, filename="data/metadata/pokemon.csv"):
         """
         Debug function that outputs all Pokemon to CSV.
@@ -336,3 +349,37 @@ if __name__ == "__main__":
     for boss in bosses:
         print(boss.pokemon.displayname)
     """
+
+    """
+    pkms = META.get_all_pokemon(remove_ignored=True)
+    #pkms = filter_pokemon_by_criteria(pkms, criterion_weak_to_contender_type, attack_type='Water')
+    #pkms = filter_pokemon_by_criteria(pkms, criterion_evo_stage, keep_final_stage=False, keep_pre_evo=True)
+    #pkms = filter_pokemon_by_criteria(pkms, criterion_shadow_mega, is_shadow=True, is_not_shadow=True,
+    #                                  is_mega=True, is_not_mega=False)
+    pkms = filter_pokemon_by_criteria(pkms, criterion_legendary_or_mythical, negate=True)
+    for pkm in pkms:
+        print(pkm.displayname)
+    """
+
+    """
+    pkms = META.get_all_pokemon(remove_ignored=True)
+    dct = group_pokemon_by_basename(pkms, separate_shadows=True, separate_megas=True)
+    for key, val in dct.items():
+        print(key + ", ", end='')
+        for pkm in val:
+            print(pkm.displayname + ", ", end='')
+        print()
+    """
+
+
+    pkms = META.get_all_pokemon(remove_ignored=True)
+    #ensemble = RaidEnsemble(pokemons=pkms, tier='RAID_LEVEL_5', weight_multiplier=3,
+    #                        forms_weight_strategy='combine', separate_shadows=True, separate_megas=True)
+    ensemble = RaidEnsemble(raid_bosses=[])
+    ensemble.extend(RaidEnsemble(raid_bosses=remove_raids_to_ignore(META.get_raid_bosses_by_tier('Tier 5')),
+                                 weight_multiplier=5))
+    ensemble.extend(RaidEnsemble(raid_bosses=remove_raids_to_ignore(META.get_raid_bosses_by_tier('Mega')),
+                                 weight_multiplier=3))
+    ensemble.extend(RaidEnsemble(raid_bosses=remove_raids_to_ignore(META.get_raid_bosses_by_tier('Tier 3')),
+                                 weight_multiplier=1))
+    ensemble.debug_print_to_csv()

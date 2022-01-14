@@ -14,6 +14,7 @@ NOTE: Distinction between "raid tier" and "raid category":
 
 from utils import *
 from params import *
+from pokemon import *
 
 
 class RaidBoss:
@@ -23,18 +24,20 @@ class RaidBoss:
 
     This is primarily used for parsing raid boss lists.
     """
-    def __init__(self, pokebattler_JSON=None, pokemon_codename=None, tier_codename=None, category_codename=None,
+    def __init__(self, pokebattler_JSON=None, pokemon_obj=None, pokemon_codename=None,
+                 tier_codename=None, category_codename=None,
                  metadata=None):
         """
         Initialize the attributes and use the Pokebattler JSON information to fill them.
         :param pokebattler_JSON: JSON block from Pokebattler relating to this raid
+        :param pokemon_obj: Pokemon object, in case JSON is not provided
         :param pokemon_codename: Code name of the Pokemon, in case JSON is not provided
         :param tier_codename: Code name of the raid tier
         :param category_codename: Code name of the raid category
         :param metadata: Current Metadata object (to initialize Pokemon object)
         """
         self.pokemon_codename = pokemon_codename  # Possibly None if JSON is provided
-        self.pokemon = None
+        self.pokemon = pokemon_obj
         self.tier = tier_codename
         self.category = category_codename
         self.pokemon_base = None  # "MR_MIME" when Pokemon is "MR_MIME_GALARIAN_FORM", or "VENUSAUR" for "VENUSAUR_MEGA"
@@ -67,7 +70,13 @@ class RaidBoss:
         This populates the following fields: pokemon, pokemon_base, pokemon_form, is_mega.
         :param metadata: Metadata object
         """
-        self.pokemon = metadata.find_pokemon(self.pokemon_codename)
+        if self.JSON:  # Either one of the three can be provided: JSON, pokemon, pokemon_codename
+            self.pokemon = metadata.find_pokemon(self.pokemon_codename)
+        elif self.pokemon:
+            self.pokemon_codename = self.pokemon.name  # Metadata not required in this case
+        else:
+            self.pokemon = metadata.find_pokemon(self.pokemon_codename)
+
         if self.pokemon:
             self.pokemon_base = self.pokemon.base_codename
             self.pokemon_form = self.pokemon.form_codename  # Ignores shadow and mega
@@ -85,3 +94,79 @@ def raid_bosses_to_pokemon(bosses_list):
     :return; Pokemon objects
     """
     return [rb.pokemon for rb in bosses_list]
+
+
+# ----------------- Raid filtering and grouping -----------------
+
+
+def filter_raids_by_criteria(raid_list, criterion, **kwargs):
+    """
+    Filter a list of raid bosses with a given criterion function.
+    Returns all raid bosses that evaluate to True on the criterion function.
+    See also: filter_pokemon_by_criteria
+
+    The criterion function should take in at least one parameter, and the first must be a RaidBoss object.
+    Additional arguments can be passed into filter_raids_by_criteria as **kwargs.
+
+    Example:
+        def is_form(raid_boss, form):
+            return raid_boss.pokemon.form_codename == form
+        result = filter_raids_by_criteria(raid_list, is_form, form='WINTER_2020')
+
+    :param raid_list: List of RaidBoss objects to be filtered
+    :param criterion: A criterion function as described above
+    :return: List of RaidBoss that evaluate to True on the criterion
+    """
+    return [raid for raid in raid_list if criterion(raid, **kwargs)]
+
+
+def criterion_not_ignore_raid(raid):
+    """
+    Returns True if the RaidBoss should NOT be ignored.
+    An example of raids that should be ignored is Meloetta raids.
+    We also ignore a raid if the featured Pokemon should be ignored.
+
+    :param raid: RaidBoss object to be evaluated on
+    :return: True if the RaidBoss should not be ignored
+    """
+    return (raid.pokemon_codename not in IGNORED_RAID_BOSSES.get(raid.tier, [])
+            and criterion_not_ignore_pokemon(raid.pokemon))
+
+
+def remove_raids_to_ignore(raid_list):
+    """
+    Given a list of RaidBoss, returns a new list that removes all raids that should be ignored.
+    See also: remove_pokemon_to_ignore
+    :param raid_list: List of RaidBoss objects
+    :return: Filtered list of RaidBoss objects
+    """
+    return filter_raids_by_criteria(raid_list, criterion_not_ignore_raid)
+
+
+def group_raid_bosses_by_basename(boss_list, separate_shadows=True, separate_megas=True):
+    """
+    Given a list of RaidBoss objects, group them into a dict with the base names of their Pokemon as keys,
+    and different forms as a list under that key.
+    See also: group_pokemon_by_basename
+
+    :param boss_list: List of RaidBoss objects
+    :param separate_shadows: If True, each shadow will be considered as a separate base Pokemon,
+        instead of as a form of the non-shadow variant.
+    :param separate_megas: If True, each mega evolution will be considered as a separate base Pokemon,
+        instead of as a form of the non-mega variant.
+        This also means Mega X and Mega Y will be treated as different base Pokemon.
+    :return: Dict of the following structure: {'GIRATINA': [<Giratina boss obj>, <Giratina-Origin boss obj>], ...}
+    """
+    ret = {}
+    for boss in boss_list:
+        pkm = boss.pokemon
+        base = pkm.base_codename
+        if pkm.is_shadow and separate_shadows:
+            base += "_SHADOW_FORM"
+            # Need to check shadows with forms (e.g. Shadow Darmanitan Zen) in future, but okay for now
+        if pkm.is_mega and separate_megas:
+            base = pkm.name
+        if base not in ret:
+            ret[base] = []
+        ret[base].append(boss)
+    return ret

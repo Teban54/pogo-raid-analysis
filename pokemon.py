@@ -223,3 +223,191 @@ class Pokemon:
         return moves
 
 
+# ----------------- Pokemon filtering and grouping -----------------
+
+
+def subtract_from_pokemon_list(list1, list2):
+    """
+    Given two lists of Pokemon, return "list1 - list2": all Pokemon in list 1
+    but not in list 2.
+    Does not modify either lists.
+
+    :param list1: List of Pokemon to be considered
+    :param list2: List of all Pokemon to be removed
+    :return: All Pokemon in list 1 but not list 2
+    """
+    list2_names = set(pkm.name for pkm in list2)
+    return [pkm for pkm in list1 if pkm.name not in list2_names]
+
+
+def union_pokemon_list(list1, list2):
+    """
+    Given two lists of Pokemon, return "list1 \cup list2": all Pokemon in either list 1
+    or list 2, or both.
+    Does not modify either lists.
+
+    :param list1: List of Pokemon
+    :param list2: List of Pokemon
+    :return: All Pokemon in either list 1 or list 2
+    """
+    ret = list(list1)
+    ret.extend(subtract_from_pokemon_list(list2, list1))
+    return ret
+
+
+def intersect_pokemon_list(list1, list2):
+    """
+    Given two lists of Pokemon, return "list1 \cap list2": all Pokemon in both list 1
+    and list 2.
+    Does not modify either lists.
+
+    :param list1: List of Pokemon
+    :param list2: List of Pokemon
+    :return: All Pokemon in both list 1 and list 2
+    """
+    list2_names = set(pkm.name for pkm in list2)
+    return [pkm for pkm in list1 if pkm.name in list2_names]
+
+
+def filter_pokemon_by_criteria(pkm_list, criterion, **kwargs):
+    """
+    Filter a list of Pokemon with a given criterion function.
+    Returns all Pokemon that evaluate to True on the criterion function.
+    See also: filter_raids_by_criteria
+
+    The criterion function should take in at least one parameter, and the first must be a Pokemon object.
+    Additional arguments can be passed into filter_pokemon_by_criteria as **kwargs.
+
+    Example:
+        def is_form(pokemon, form):
+            return pokemon.form_codename == form
+        result = filter_pokemon_by_criteria(pokemon_list, is_form, form='WINTER_2020')
+
+    :param pkm_list: List of Pokemon objects to be filtered
+    :param criterion: A criterion function as described above
+    :return: List of Pokemon that evaluate to True on the criterion
+    """
+    return [pkm for pkm in pkm_list if criterion(pkm, **kwargs)]
+
+
+def criterion_not_ignore_pokemon(pokemon):
+    """
+    Returns True if the Pokemon and form should NOT be ignored.
+    An example of forms that should be ignored is cosmetic forms.
+    :param pokemon: Pokemon object to be evaluated on
+    :return: True if the Pokemon should not be ignored
+    """
+    form = pokemon.form_codename if pokemon.form_codename is not None else ''
+    return (form not in COSMETIC_FORMS_UNIVERSAL
+            and form not in COSMETIC_FORMS_PER_POKEMON.get(pokemon.base_codename, [])
+            and form not in IGNORED_FORMS.get(pokemon.base_codename, []))
+
+
+def remove_pokemon_to_ignore(pkm_list):
+    """
+    Given a list of Pokemon, return a new list that removes all cosmetic forms
+    and other Pokemon or forms that should be ignored.
+    See also: remove_raids_to_ignore
+    :param pkm_list: List of Pokemon objects
+    :return: Filtered list of Pokemon objects
+    """
+    return filter_pokemon_by_criteria(pkm_list, criterion_not_ignore_pokemon)
+
+
+def criterion_weak_to_contender_type(pokemon, attack_type=None):
+    """
+    Return True if the attacking type is a contender type against the Pokemon.
+    E.g. If the given attacking type is Ice, returns True if the Pokemon is
+    a mono grass/flying/dragon types, or Rayquaza, Landorus, etc.
+
+    :param pokemon: Defending Pokemon object to be evaluated on
+    :param attack_type: Attacking type, as either natural language or code name
+    :return: True if the attacking type is a contender type against the given defending Pokemon
+    """
+    return is_contender_type(attack_type, pokemon.types)
+
+
+def criterion_evo_stage(pokemon, keep_final_stage=True, keep_pre_evo=False):
+    """
+    Return True if the Pokemon's evolution stage matches requirements:
+    a final stage Pokemon (Venusaur, Lapras, Pikachu Libre),
+    or a pre-evolution Pokemon (e.g. Bulbasaur, Ivysaur, Bonsly).
+    Mega evolutions are not considered as evolutions.
+
+    :param pokemon: Pokemon object to be evaluated on
+    :param keep_final_stage: If True, returns True if the Pokemon is a final stage Pokemon
+    :param keep_pre_evo: If True, returns True if the Pokemon is a pre-evolution Pokemon
+    :return: Whether the Pokemon satisfies required evolution stages
+    """
+    def is_final_stage(pkm):
+        return not pkm.evolutions
+    return (keep_final_stage and is_final_stage(pokemon)
+            or keep_pre_evo and not is_final_stage(pokemon))
+
+
+def criterion_shadow_mega(pokemon, is_shadow=False, is_not_shadow=True, is_mega=False, is_not_mega=True):
+    """
+    Return True if the Pokemon matches the given shadow and mega requirements:
+    is or is not a shadow, and is or is not a mega.
+    Note that when checking if the Pokemon is a shadow, the mega requirements are ignored; vice versa.
+
+    :param pokemon: Pokemon object to be evaluated on
+    :param is_shadow: If True, returns True if and only if the Pokemon is a shadow.
+        Ignores all other parameters.
+    :param is_not_shadow: If True, returns True only if the Pokemon is not a shadow.
+        Still subject to mega requirements.
+    :param is_mega: If True, returns True if and only if the Pokemon is a mega.
+        Ignores all other parameters.
+    :param is_not_mega: If True, returns True only if the Pokemon is not a mega.
+        Still subject to shadow requirements.
+    :return: Whether the Pokemon satisfies the shadow and mega requirements
+    """
+    if is_shadow:
+        if is_mega:
+            print(f"Warning (criterion_shadow_mega): Both is_shadow and is_mega are True. Returning shadows.", file=sys.stderr)
+        return pokemon.is_shadow
+    if is_mega:
+        return pokemon.is_mega
+    return not (is_not_shadow and pokemon.is_shadow) and not (is_not_mega and pokemon.is_mega)
+
+
+def criterion_legendary_or_mythical(pokemon, negate=False):
+    """
+    Checks if the Pokemon is a legendary or mythical, or if negated,
+    if the Pokemon is not a legendary nor mythical.
+    :param pokemon: Pokemon object to be evaluated on
+    :param negate: Whether to negate the filter (i.e. check if not legendary or mythical)
+    :return: If negate==False: Whether the Pokemon is a legendary or mythical.
+        If negate==True: Whether the Pokemon is a legendary nor mythical.
+    """
+    return (pokemon.is_legendary or pokemon.is_mythical) ^ negate
+
+
+def group_pokemon_by_basename(pkm_list, separate_shadows=True, separate_megas=True):
+    """
+    Given a list of Pokemon, group them into a dict with the base names as keys,
+    and different forms as a list under that key.
+    See also: group_raid_bosses_by_basename
+
+    :param pkm_list: List of Pokemon objects
+    :param separate_shadows: If True, each shadow will be considered as a separate base Pokemon,
+        instead of as a form of the non-shadow variant.
+    :param separate_megas: If True, each mega evolution will be considered as a separate base Pokemon,
+        instead of as a form of the non-mega variant.
+        This also means Mega X and Mega Y will be treated as different base Pokemon.
+    :return: Dict of the following structure: {'GIRATINA': [<Giratina object>, <Giratina-Origin object>], ...}
+    """
+    ret = {}
+    for pkm in pkm_list:
+        base = pkm.base_codename
+        if pkm.is_shadow and separate_shadows:
+            base += "_SHADOW_FORM"
+            # Need to check shadows with forms (e.g. Shadow Darmanitan Zen) in future, but okay for now
+        if pkm.is_mega and separate_megas:
+            base = pkm.name
+        if base not in ret:
+            ret[base] = []
+        ret[base].append(pkm)
+    return ret
+
+
