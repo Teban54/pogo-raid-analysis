@@ -9,6 +9,100 @@ Parameters.
 JSON_DATA_PATH = "data/json/"
 
 
+# ----------------- Ensembles -----------------
+
+
+# The following forms are considered as a standalone Pokemon, not as a form of their base Pokemon.
+# Therefore, they will receive a weight of 1 on their own,
+# instead of all forms of the base Pokemon sharing a weight of 1 (e.g. Arceus).
+# The only place where this is utilized is when assigning weights.
+FORMS_AS_SEPARATE_POKEMON_UNIVERSAL = [
+    'ALOLA', 'GALARIAN'
+]
+FORMS_AS_SEPARATE_POKEMON_PER_POKEMON = {
+    # <base codename>: [<form to be considered as separate>, (<two forms to be>, <combined as single pokemon>)]
+    # All dict values here must be lists
+    # For each element, if it's a single string, this form will become a standalone Pokemon with no forms
+    # If it's a tuple or list, those forms will become (multiple) forms of a standalone Pokemon
+    # All forms not mentioned here are treated as their own standalone Pokemon
+
+    # For example:
+    'DARMANITAN': [('GALARIAN_STANDARD', 'GALARIAN_ZEN')],
+    # This makes G-Darmanitan Standard and G-Darmanitan Zen two forms of a Pokemon (G-Darmanitan)
+    # The two forms not mentioned, Darmanitan Standard and Darmanitan Zen, are two forms of a Pokemon (U-Darmanitan)
+
+    # Example of a single separate form (hypothetical):
+    # 'NECROZMA': ['ULTRA', ('DUSK_MANE', 'DAWN_WINGS')]
+    # This makes 3 standalone Pokemon: Regular form, Dusk Mane AND Dawn Wings forms, Ultra form
+}
+
+
+# ----------------- Ignored Pokemon and Raids -----------------
+
+
+IGNORED_RAID_BOSSES = {  # Keys are raid tiers, no "legacy"
+    "RAID_LEVEL_5": ['ZACIAN_HERO_FORM', 'ZAMAZENTA_HERO_FORM',  # Zacian and Zamazenta with no forms are already under future T5s
+                    'MELOETTA_ARIA_FORM', 'MELOETTA_PIROUETTE_FORM']  # Already got from special research
+}
+
+IGNORED_FORMS = {  # Forms and Pokemon that should not exist
+    'URSHIFU': [''],  # Current GM has Urshifu "regular" form as mono Fighting
+    'HONEDGE': [''],  # The Honedge line has no stats yet in either GM or Pokebattler
+    'DOUBLADE': [''],
+    'AEGISLASH': [''],
+    'ZYGARDE': [''],  # Zygarde has no stats yet in either GM or Pokebattler
+}
+# [Reminder] When using any Pokemon above, make sure these forms are ignored
+
+COSMETIC_FORMS_UNIVERSAL = [  # Any Pokemon with these forms only have cosmetic changes
+                              # (e.g. should not be considered a different raid boss)
+    'FALL_2019', 'COPY_2019', 'COSTUME_2020', 'ADVENTURE_HAT_2020', 'WINTER_2020',
+    # Note Pikachu Costume 2020 is Flying Pikachu with the move Fly, but it's the same as FLYING_5TH_ANNIV
+    # VS_2019 is Pikachu Libre
+    '2020', '2021', '2022'
+]
+COSMETIC_FORMS_PER_POKEMON = {  # These specific Pokemon have these cosmetic forms (i.e. same as their normal form)
+    'PIKACHU': ['KARIYUSHI'],
+    'SHELLOS': ['WEST_SEA', 'EAST_SEA'],
+    'GASTRODON': ['WEST_SEA', 'EAST_SEA'],
+    'BASCULIN': ['RED_STRIPED', 'BLUE_STRIPED'],
+    'KELDEO': ['ORDINARY', 'RESOLUTE'],
+    'DEERLING': ['SPRING', 'SUMMER', 'AUTUMN', 'WINTER'],
+    'SAWSBUCK': ['SPRING', 'SUMMER', 'AUTUMN', 'WINTER'],
+    'FRILLISH': ['FEMALE'],
+    'JELLICENT': ['FEMALE'],
+    'PYROAR': ['FEMALE'],
+    'FURFROU': ['NATURAL', 'HEART', 'STAR', 'DIAMOND', 'DEBUTANTE', 'MATRON', 'DANDY', 'LA_REINE', 'KABUKI', 'PHARAOH'],
+    'SINISTEA': ['PHONY', 'ANTIQUE'],
+    'POLTEAGEIST': ['PHONY', 'ANTIQUE'],
+
+    # The following Pokemon have non-cosmetic forms, but one of them is identical to the "regular" form
+    # (the one with no forms listed, which also appears in both Pokebattler and GM data),
+    # hence this form is also considered cosmetic
+    # [CAREFUL!!] Make sure the forms that Pokebattler uses on their Legacy T5 lists do NOT appear here!!!
+    'BURMY': ['PLANT'],
+    'WORMADAM': ['PLANT'],
+    'SHAYMIN': ['LAND'],
+    'CHERRIM': ['OVERCAST'],
+    'DARMANITAN': ['STANDARD'],  # Galarian has no "regular" form, only Standard and Zen
+    'TORNADUS': ['INCARNATE'],
+    'THUNDURUS': ['INCARNATE'],
+    'LANDORUS': ['INCARNATE'],
+    'MELOETTA': ['ARIA'],  # Note that Pokebattler lists Aria Meloetta on their list,
+                           # but it's fine since Meloetta raids as a whole are ignored
+    'EISCUE': ['ICE'],
+    'INDEEDEE': ['MALE'],
+    'MORPEKO': ['FULL_BELLY'],  # Considering Hangry as non-cosmetic since Aura Wheel could be added one day
+    'ZACIAN': [''],  # ['HERO'],
+    'ZAMAZENTA': [''],  # ['HERO'],
+    'PUMPKABOO': ['SMALL'],
+    'GOURGEIST': ['SMALL'],
+    'HOOPA': ['CONFINED'],
+}
+# [Reminder] When using any Pokemon above, make sure only their regular forms are considered
+#  (and not considered again if one of the cosmetic forms already is)
+
+
 # ----------------- Types -----------------
 
 
@@ -66,63 +160,6 @@ SPECIAL_FORM_DISPLAY_NAMES = {
     'VS_2019': 'Libre',
 }
 
-COSMETIC_FORMS_UNIVERSAL = [  # Any Pokemon with these forms only have cosmetic changes
-                              # (e.g. should not be considered a different raid boss)
-    'FALL_2019', 'COPY_2019', 'COSTUME_2020', 'ADVENTURE_HAT_2020', 'WINTER_2020',
-    # Note Pikachu Costume 2020 is Flying Pikachu with the move Fly, but it's the same as FLYING_5TH_ANNIV
-    # VS_2019 is Pikachu Libre
-    '2020', '2021', '2022'
-]
-COSMETIC_FORMS_PER_POKEMON = {  # These specific Pokemon have these cosmetic forms (i.e. same as their normal form)
-    'PIKACHU': ['KARIYUSHI'],
-    'SHELLOS': ['WEST_SEA', 'EAST_SEA'],
-    'GASTRODON': ['WEST_SEA', 'EAST_SEA'],
-    'BASCULIN': ['RED_STRIPED', 'BLUE_STRIPED'],
-    'KELDEO': ['ORDINARY', 'RESOLUTE'],
-    'DEERLING': ['SPRING', 'SUMMER', 'AUTUMN', 'WINTER'],
-    'SAWSBUCK': ['SPRING', 'SUMMER', 'AUTUMN', 'WINTER'],
-    'FRILLISH': ['FEMALE'],
-    'JELLICENT': ['FEMALE'],
-    'PYROAR': ['FEMALE'],
-    'FURFROU': ['NATURAL', 'HEART', 'STAR', 'DIAMOND', 'DEBUTANTE', 'MATRON', 'DANDY', 'LA_REINE', 'KABUKI', 'PHARAOH'],
-    'SINISTEA': ['PHONY', 'ANTIQUE'],
-    'POLTEAGEIST': ['PHONY', 'ANTIQUE'],
-
-    # The following Pokemon have non-cosmetic forms, but one of them is identical to the "regular" form
-    # (the one with no forms listed, which also appears in both Pokebattler and GM data),
-    # hence this form is also considered cosmetic
-    # [CAREFUL!!] Make sure the forms that Pokebattler uses on their Legacy T5 lists do NOT appear here!!!
-    'BURMY': ['PLANT'],
-    'WORMADAM': ['PLANT'],
-    'SHAYMIN': ['LAND'],
-    'CHERRIM': ['OVERCAST'],
-    'DARMANITAN': ['STANDARD'],  # Galarian has no "regular" form, only Standard and Zen
-    'TORNADUS': ['INCARNATE'],
-    'THUNDURUS': ['INCARNATE'],
-    'LANDORUS': ['INCARNATE'],
-    'MELOETTA': ['ARIA'],  # Note that Pokebattler lists Aria Meloetta on their list,
-                           # but it's fine since Meloetta raids as a whole are ignored
-    'EISCUE': ['ICE'],
-    'INDEEDEE': ['MALE'],
-    'MORPEKO': ['FULL_BELLY'],  # Considering Hangry as non-cosmetic since Aura Wheel could be added one day
-    'ZACIAN': [''],  # ['HERO'],
-    'ZAMAZENTA': [''],  # ['HERO'],
-    'PUMPKABOO': ['SMALL'],
-    'GOURGEIST': ['SMALL'],
-    'HOOPA': ['CONFINED'],
-}
-# TODO: When using any Pokemon above, make sure only their regular forms are considered
-#  (and not considered again if one of the cosmetic forms already is)
-
-IGNORED_FORMS = {  # Forms and Pokemon that should not exist
-    'URSHIFU': [''],  # Current GM has Urshifu "regular" form as mono Fighting
-    'HONEDGE': [''],  # The Honedge line has no stats yet in either GM or Pokebattler
-    'DOUBLADE': [''],
-    'AEGISLASH': [''],
-    'ZYGARDE': [''],  # Zygarde has no stats yet in either GM or Pokebattler
-}
-# TODO: When using any Pokemon above, make sure these forms are ignored
-
 
 # ----------------- Raid Bosses -----------------
 
@@ -167,14 +204,15 @@ RAID_CATEGORIES_CODE2STR = {  # Shouldn't be needed for this project, but just i
 # Reminder - If encountered a tier not listed above, do not report an error, only a warning!!
 # This is to easily adapt in future if Niantic adds a new tier or Pokebattler adds a new category
 
-IGNORED_RAID_BOSSES = {  # Keys are raid tiers, no "legacy"
-    "RAID_LEVEL_5": ['ZACIAN_HERO_FORM', 'ZAMAZENTA_HERO_FORM',  # Zacian and Zamazenta with no forms are already under future T5s
-                    'MELOETTA_ARIA_FORM', 'MELOETTA_PIROUETTE_FORM']  # Already got from special research
-}  # TODO: Implement filter to actually ignore them
-
 
 # ----------------- Moves -----------------
 
+
+IGNORED_MOVES = {
+    "DODGE",
+    "MOVE_NONE",
+    "RANDOM",
+}
 
 SPECIAL_MOVE_DISPLAY_NAMES = {
     'VICE_GRIP': 'Vise Grip',
@@ -190,24 +228,5 @@ SPECIAL_MOVE_DISPLAY_NAMES = {
     'LOCK_ON_FAST': 'Lock-On',
     'V_CREATE': 'V-Create',
     'TRI_ATTACK': 'Tri-Attack',
-}
-IGNORED_MOVES = {
-    "DODGE",
-    "MOVE_NONE",
-    "RANDOM",
-}
-
-
-# ----------------- Ensembles -----------------
-
-
-# The following forms are considered as a standalone Pokemon, not as a form of their base Pokemon
-# Therefore, they will receive a weight of 1 on their own,
-# instead of all forms of the base Pokemon sharing a weight of 1 (e.g. Arceus)
-FORMS_AS_SEPARATE_POKEMON_UNIVERSAL = [
-    'ALOLA', 'GALARIAN'
-]
-FORMS_AS_SEPARATE_POKEMON_PER_POKEMON = {
-    'DARMANITAN': ['GALARIAN_STANDARD', 'GALARIAN_ZEN'],
 }
 

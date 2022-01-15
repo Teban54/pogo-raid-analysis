@@ -53,11 +53,11 @@ class Config:
                 (Typically from config.py)
         :return: RaidEnsemble object
         """
-        def parse_pokemon_pool(cfg):
+        def build_raids_list(cfg):
             """
-            Parse the Pokemon pool.
+            Parse the Pokemon pool and build the list or RaidBoss objects.
             :param cfg: Individual config dict for one single group of raid bosses
-            :return: Tuple of len 3: (list of RaidBoss'es, list of Pokemon, raid tier), whichever applicable
+            :return: List of RaidBoss objects
             """
             if 'Pokemon pool' not in cfg:
                 print(f"Error (Config.parse_raid_ensemble_config): "
@@ -103,50 +103,54 @@ class Config:
                 pokemon = self.meta.get_all_pokemon(remove_ignored=True)
                 if pool == "all pokemon except above":
                     pokemon = subtract_from_pokemon_list(pokemon, pokemon_used)
-            return raids, pokemon, tier
+            tier = parse_raid_tier_str2code(tier)
 
-        def apply_filter(ens, filter_key, filter_val):
+            if raids is not None:
+                return raids
+            return pokemon_list_to_raid_boss_list(pokemon, tier)
+
+        def apply_filter(raids_list, filter_key, filter_val):
             """
-            Parse one filter from config and applyit to the current ensemble.
-            :param ens: Current RaidEnsemble object
+            Parse one filter from config and apply it to the current list of raid bosses.
+            :param raids: Current list of RaidBoss objects
             :param filter_key: Filter key listed in config
             :param filter_val: Filter value listed in config
-            :return: New, filtered RaidEnsemble object
+            :return: New, filtered list of RaidBoss objects
             """
             filter_key = filter_key.lower()
             if filter_key == "weak to contender types":
-                return filter_ensemble_by_criteria(ens, criterion_pokemon=criterion_weak_to_contender_types,
-                                                   attack_types=filter_val)
+                return filter_raids_by_criteria(raids_list, criterion_pokemon=criterion_weak_to_contender_types,
+                                                attack_types=filter_val)
             if filter_key == "evolution stage":
-                return filter_ensemble_by_criteria(ens, criterion_pokemon=criterion_evo_stage,
-                                                   keep_final_stage=(filter_val.lower() == 'final'),
-                                                   keep_pre_evo=('pre' in filter_val.lower()))
+                return filter_raids_by_criteria(raids_list, criterion_pokemon=criterion_evo_stage,
+                                                keep_final_stage=(filter_val.lower() == 'final'),
+                                                keep_pre_evo=('pre' in filter_val.lower()))
             if filter_key == "is shadow" or filter_key == "is not shadow":
-                return filter_ensemble_by_criteria(ens,
+                return filter_raids_by_criteria(raids_list,
                     criterion_pokemon=criterion_shadow,
                     is_shadow=(filter_key == "is shadow" and filter_val),
                     is_not_shadow=(filter_key == "is not shadow" and filter_val)
                 )
             if filter_key == "is mega" or filter_key == "is not mega":
-                return filter_ensemble_by_criteria(ens,
+                return filter_raids_by_criteria(raids_list,
                     criterion_pokemon=criterion_mega,
                     is_mega=(filter_key == "is mega" and filter_val),
                     is_not_mega=(filter_key == "is not mega" and filter_val)
                 )
             if filter_key == "is legendary" or filter_key == "is not legendary":
-                return filter_ensemble_by_criteria(ens,
+                return filter_raids_by_criteria(raids_list,
                     criterion_pokemon=criterion_legendary,
                     is_legendary=(filter_key == "is legendary" and filter_val),
                     is_not_legendary=(filter_key == "is not legendary" and filter_val)
                 )
             if filter_key == "is mythical" or filter_key == "is not mythical":
-                return filter_ensemble_by_criteria(ens,
+                return filter_raids_by_criteria(raids_list,
                     criterion_pokemon=criterion_mythical,
                     is_mythical=(filter_key == "is mythical" and filter_val),
                     is_not_mythical=(filter_key == "is not mythical" and filter_val)
                 )
             if filter_key == "is legendary or mythical" or filter_key == "is not legendary or mythical":
-                return filter_ensemble_by_criteria(ens,
+                return filter_raids_by_criteria(raids_list,
                     criterion_pokemon=criterion_legendary_or_mythical,
                     is_legendary_or_mythical=(filter_key == "is legendary or mythical" and filter_val),
                     is_not_legendary_or_mythical=(filter_key == "is not legendary or mythical" and filter_val)
@@ -154,7 +158,7 @@ class Config:
             print(f"Error (Config.parse_raid_ensemble_config): "
                   f"Filter criteria {filter_key} does not match one of expected values.",
                   file=sys.stderr)
-            return ens
+            return raids_list
 
         def combine_ensembles(ens_list):
             """
@@ -175,15 +179,17 @@ class Config:
         ensembles = []  # (RaidEnsemble, total weight needed) for each dict, will combine them later
         pokemon_used = set()  # All Pokemon that currently exist in any group (for "All Pokemon except above")
         for cfg in config:
-            raids, pokemon, tier = parse_pokemon_pool(cfg)
+            raids = build_raids_list(cfg)
             weight = cfg.get("Weight of each Pokemon", 1)
             weight_group = cfg.get("Weight of whole group", -1)
             forms_weight_strategy = cfg.get("Forms weight strategy", 1)
 
-            ens = RaidEnsemble(raid_bosses=raids, pokemons=pokemon, tier=tier,
-                               weight_multiplier=weight, forms_weight_strategy=forms_weight_strategy)
+            # Apply filter first before building RaidEnsemble,
+            # So that weights are only assigned to Pokemon that remain after filters
             for filter_key, filter_val in cfg.get('Filters', {}).items():
-                ens = apply_filter(ens, filter_key, filter_val)
+                raids = apply_filter(raids, filter_key, filter_val)
+            ens = RaidEnsemble(raid_bosses=raids,
+                               weight_multiplier=weight, forms_weight_strategy=forms_weight_strategy)
 
             if weight_group >= 0:
                 cur_weight = ens.get_weight_sum()

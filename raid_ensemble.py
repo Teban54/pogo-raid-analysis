@@ -68,7 +68,7 @@ class RaidEnsemble:
 
         :param raid_bosses: Dict or list of RaidBoss objects (method 1,2)
         :param pokemons: Dict or list of Pokemon objects (method 3,4)
-        :param tier: Raid tier for all Pokemon specified (method 3,4)
+        :param tier: Raid tier for all Pokemon specified, either natural or codename (method 3,4)
         :param weight_multiplier: Weight of each Pokemon
         :param forms_weight_strategy: How weights of Pokemon with several forms should be handled;
             Should be either "combine" or "separate", see above
@@ -101,7 +101,7 @@ class RaidEnsemble:
 
         :param raid_bosses: Dict or list of RaidBoss objects (method 1,2)
         :param pokemons: Dict or list of Pokemon objects (method 3,4)
-        :param tier: Raid tier for all Pokemon specified (method 3,4)
+        :param tier: Raid tier for all Pokemon specified, either natural or codename (method 3,4)
         :param separate_shadows: If True, each shadow will be considered as a separate base Pokemon,
             instead of as a form of the non-shadow variant.
         :param separate_megas: If True, each mega evolution will be considered as a separate base Pokemon,
@@ -131,8 +131,9 @@ class RaidEnsemble:
             if type(pokemons) is list:
                 pokemons = group_pokemon_by_basename(
                     pokemons, separate_shadows=separate_shadows, separate_megas=separate_megas)
+            tier = parse_raid_tier_str2code(tier)
             raid_boss_dict = {
-                base: [RaidBoss(pokemon_obj=pkm, tier_codename=tier) for pkm in mons]
+                base: pokemon_list_to_raid_boss_list(mons, tier) #[RaidBoss(pokemon_obj=pkm, tier_codename=tier) for pkm in mons]
                 for base, mons in pokemons.items()
             }
 
@@ -141,6 +142,51 @@ class RaidEnsemble:
             for base in raid_boss_dict.keys():
                 raid_boss_dict[base] = remove_dupes_in_list(raid_boss_dict[base])
         return raid_boss_dict
+
+    def assign_weight_to_forms(self, bosses_list, weight_multiplier=1,
+                 forms_weight_strategy="combine"):
+        """
+        Given a list from a single dict value, which is a list of RaidBoss objects
+        with the same base codename, return a list of tuples with these RaidBoss
+        objects and their weight.
+        :param bosses_list: List of RaidBoss objects
+        :param weight_multiplier: Weight of each Pokemon
+        :param forms_weight_strategy: How weights of Pokemon with several forms should be handled;
+            Should be either "combine" or "separate", see above
+        :return: List of tuples with the RaidBoss objects in the input and their assigned weight
+        """
+        # First, filter out forms that should be separate Pokemon (Alola etc)
+        bosses_by_separate_forms = {}  # Dict mapping standalone form name to list of RaidBoss objects
+        # e.g. Darmanitan: {'GALARIAN_STANDARD': [<G Standard>, <G Zen>], '': [<U Standard>, <U Zen>]}
+        # e.g. Necrozma: {'ULTRA': [<Ultra>], 'DUSK_MANE': [<Dusk Mane>, <Dawn Wings>], '': [<Regular>]}
+        for boss in bosses_list:
+            base = boss.pokemon.base_codename
+            form = boss.pokemon.form_codename if boss.pokemon.form_codename is not None else ''
+            form_root = ''  # 'GALARIAN_STANDARD'
+            if form in FORMS_AS_SEPARATE_POKEMON_UNIVERSAL:
+                form_root = form
+            else:
+                for single_mon in FORMS_AS_SEPARATE_POKEMON_PER_POKEMON.get(base, []):
+                    if type(single_mon) is str:  # single_mon may be string or tuple (list)
+                        single_mon = [single_mon]
+                    if form in single_mon:
+                        form_root = single_mon[0]
+                        break
+            if form_root not in bosses_by_separate_forms:
+                bosses_by_separate_forms[form_root] = []
+            bosses_by_separate_forms[form_root].append(boss)
+
+        ret = []
+        for form_root, bosses in bosses_by_separate_forms.items():
+            if len(bosses) == 0:  # Avoid /0
+                continue
+            if "combine" in forms_weight_strategy.lower():
+                ret.extend((boss, weight_multiplier / len(bosses))
+                           for boss in bosses)
+            else:  # if forms_weight_strategy == "separate":
+                ret.extend((boss, weight_multiplier * 1.0)
+                           for boss in bosses)
+        return ret
 
     def convert_raid_dict_to_weighted_list(self, raid_dict, weight_multiplier=1,
                  forms_weight_strategy="combine"):
@@ -153,38 +199,10 @@ class RaidEnsemble:
         :param forms_weight_strategy: How weights of Pokemon with several forms should be handled;
             Should be either "combine" or "separate", see above
         """
-        def assign_weight_to_forms(bosses_list):
-            """
-            Given a list from a single dict value, which is a list of RaidBoss objects
-            with the same base codename, return a list of tuples with these RaidBoss
-            objects and their weight.
-            """
-            # First, filter out forms that should be separate Pokemon (Alola etc)
-            bosses_list_separate_forms = []  # Alola, Galarian
-            bosses_list_true_forms = []  # Origin, Therian etc
-            for boss in bosses_list:
-                base = boss.pokemon.base_codename
-                form = boss.pokemon.form_codename if boss.pokemon.form_codename is not None else ''
-                if (form in FORMS_AS_SEPARATE_POKEMON_UNIVERSAL
-                        or form in FORMS_AS_SEPARATE_POKEMON_PER_POKEMON.get(base, [])):
-                    bosses_list_separate_forms.append(boss)
-                else:
-                    bosses_list_true_forms.append(boss)
-
-            ret = [(boss, weight_multiplier * 1.0) for boss in bosses_list_separate_forms]
-            if len(bosses_list_true_forms) == 0:  # Avoid /0
-                return ret
-            if "combine" in forms_weight_strategy.lower():
-                ret.extend((boss, weight_multiplier / len(bosses_list_true_forms))
-                           for boss in bosses_list_true_forms)
-            else:  # if forms_weight_strategy == "separate":
-                ret.extend((boss, weight_multiplier * 1.0)
-                           for boss in bosses_list_true_forms)
-            return ret
-
         raid_list = []
         for base, bosses in raid_dict.items():
-            raid_list.extend(assign_weight_to_forms(bosses))
+            raid_list.extend(self.assign_weight_to_forms(bosses, weight_multiplier=weight_multiplier,
+                                                         forms_weight_strategy=forms_weight_strategy))
         return raid_list
 
     def extend(self, ensemble2):

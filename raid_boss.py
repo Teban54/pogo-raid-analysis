@@ -87,13 +87,24 @@ class RaidBoss:
             # Try parsing forms here just in case?
 
 
-def raid_bosses_to_pokemon(bosses_list):
+def pokemon_list_to_raid_boss_list(pokemon_list, tier):
+    """
+    Convert a list of Pokemon objects to a list of RaidBoss objects.
+    :param pokemon_list: List of Pokemon bosses
+    :param tier: Tier name, either natural language or code name
+    :return; RaidBoss objects
+    """
+    tier = parse_raid_tier_str2code(tier)
+    return [RaidBoss(pokemon_obj=pkm, tier_codename=tier) for pkm in pokemon_list]
+
+
+def raid_boss_list_to_pokemon_list(raid_list):
     """
     Convert a list of RaidBoss objects to a list of Pokemon objects.
-    :param bosses_list: List of raid bosses
+    :param raid_list: List of raid bosses
     :return; Pokemon objects
     """
-    return [rb.pokemon for rb in bosses_list]
+    return [rb.pokemon for rb in raid_list]
 
 
 # ----------------- Raid filtering and grouping -----------------
