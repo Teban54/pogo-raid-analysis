@@ -8,6 +8,9 @@ so that you don't have to change everything whenever you want to run something d
 from params import *
 
 
+CONFIG_WRITE_ALL_COUNTERS = True
+
+
 CONFIG_RAID_BOSS_ENSEMBLE = [
     # Lists of raid bosses you want to use.
     # You can specify several groups, each group enclosed by a {} with the format shown below.

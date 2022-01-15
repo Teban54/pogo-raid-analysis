@@ -33,18 +33,21 @@ def get_pokebattler_metadata(metadata_name, write_file=False):
     return data
 
 
-def get_pokebattler_raid_ranking(raid_boss, raid_level=5, pkm_level=40,
-                                 friendship='Best Friend', weather='NO_WEATHER',
-                                 legendary=True, shadow=True, mega=True,
-                                 trainer_id=None,
-                                 attack_strategy='No Dodging', dodge_strategy='Realistic Dodging'):
+def get_pokebattler_raid_counters(raid_boss=None, raid_boss_codename=None, raid_tier="Tier 5",
+                                  attacker_level=40,
+                                  friendship='Best Friend', weather='NO_WEATHER',
+                                  legendary=True, shadow=True, mega=True,
+                                  trainer_id=None,
+                                  attack_strategy='No Dodging', dodge_strategy='Realistic Dodging'):
     """
-    Get the pokemon_names_list.json of best attackers from Pokebattler and return it as JSON.
+    Get the list of best attackers from Pokebattler and return it as JSON.
     Sorted by Estimator.
 
-    :param str raid_boss: Code name of the raid boss (e.g. "LANDORUS_THERIAN_FORM").
-    :param int raid_level: Raid boss level, 6 or MEGA for mega raids.
-    :param int pkm_level: Attackerl evel.
+    :param raid_boss: RaidBoss object.
+    :param str raid_boss_codename: Code name of the raid boss (e.g. "LANDORUS_THERIAN_FORM"),
+            if a RaidBoss object is not provided.
+    :param int raid_tier: Raid tier, either as natural language or code name.
+    :param int attacker_level: Attacker level.
     :param int friendship: Friendship level, either as natural language or code name.
             Default is best friend.
     :param str weather: weather, default is NO_WEATHER
@@ -60,6 +63,7 @@ def get_pokebattler_raid_ranking(raid_boss, raid_level=5, pkm_level=40,
             Should be one of: "Perfect Dodging", "Realistic Dodging", "Realistic Dodging Pro", "25% Dodging".
     :return: Pokebattler ranking results parsed as JSON, or an error string or None if applicable
     """
+    # TODO: Replace the entire payload and parameters with BattleSetting object
     payload = {
         "sort": "ESTIMATOR",  # TODO: Set this arbitrarily
         "weatherCondition": weather,
@@ -72,8 +76,9 @@ def get_pokebattler_raid_ranking(raid_boss, raid_level=5, pkm_level=40,
         "friendLevel": parse_friendship_str2code(friendship),
         "attackerTypes": "POKEMON_TYPE_ALL"  # ["POKEMON_TYPE_ICE","POKEMON_TYPE_FIRE"]
     }
-    if raid_level == 6:
-        raid_level = "MEGA"
+    if raid_boss:
+        raid_boss_codename = raid_boss.pokemon_codename
+        raid_tier = raid_boss.tier
 
     # url with API key:
     # https://www.pokebattler.com/raids/defenders/HEATRAN/levels/
@@ -83,17 +88,17 @@ def get_pokebattler_raid_ranking(raid_boss, raid_level=5, pkm_level=40,
     # &weatherCondition=CLEAR&dodgeStrategy=DODGE_REACTION_TIME&aggregation=AVERAGE
     # &includeMegas=true&randomAssistants=-1&numMegas=0#raid-estimator
     if trainer_id:
-        url = f'https://fight.pokebattler.com/raids/defenders/{raid_boss}/' \
-              f'levels/RAID_LEVEL_{raid_level}/attackers/users/{trainer_id}/' \
+        url = f'https://fight.pokebattler.com/raids/defenders/{raid_boss_codename}/' \
+              f'levels/RAID_LEVEL_{raid_tier}/attackers/users/{trainer_id}/' \
               f'strategies/{parse_attack_strategy_str2code(attack_strategy)}/DEFENSE_RANDOM_MC'
     else:
-        url = f'https://fight.pokebattler.com/raids/defenders/{raid_boss}/' \
-              f'levels/RAID_LEVEL_{raid_level}/attackers/levels/{pkm_level}/' \
+        url = f'https://fight.pokebattler.com/raids/defenders/{raid_boss_codename}/' \
+              f'levels/RAID_LEVEL_{raid_tier}/attackers/levels/{attacker_level}/' \
               f'strategies/{parse_attack_strategy_str2code(attack_strategy)}/DEFENSE_RANDOM_MC'
     return do_http_request(url, payload)
 
 
-# TODO: Consolidate everything below
+# TODO: Remove everything below
 
 
 def load_raid_info(filename='raids.json', raid_type="RAID_LEVEL_5_LEGACY"):
@@ -138,14 +143,14 @@ def download_data(raid_level=5, pkm_level=40, trainer_id=None, raid_type='RAID_L
     for pkm in pokemon_list:
         try:
             if (trainer_id):
-                data = get_pokebattler_raid_ranking(raid_boss=pkm,
-                                                    raid_level=raid_type,
-                                                    pkm_level=pkm_level,
-                                                    trainer_id=trainer_id)
+                data = get_pokebattler_raid_counters(raid_boss_codename=pkm,
+                                                     raid_tier=raid_type,
+                                                     attacker_level=pkm_level,
+                                                     trainer_id=trainer_id)
             else:
-                data = get_pokebattler_raid_ranking(raid_boss=pkm,
-                                                    raid_level=raid_type,
-                                                    pkm_level=pkm_level)
+                data = get_pokebattler_raid_counters(raid_boss_codename=pkm,
+                                                     raid_tier=raid_type,
+                                                     attacker_level=pkm_level)
         except Exception as e:
             print(e)
         if (data):

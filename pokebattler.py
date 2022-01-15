@@ -313,7 +313,7 @@ if __name__ == "__main__":
     """
 
 
-    """data = get_pokebattler_raid_ranking("KYOGRE", raid_level=5, pkm_level=40,
+    """data = get_pokebattler_raid_counters("KYOGRE", raid_level=5, pkm_level=40,
                                         friendship='best friend', weather='NO_WEATHER',
                                         attack_strategy='dodge specials',
                                         mega=False)
