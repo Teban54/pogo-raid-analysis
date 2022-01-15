@@ -9,6 +9,7 @@ from raid_boss import *
 from move import *
 from raid_ensemble import *
 from config import *
+from battle_settings import *
 
 
 class Config:
@@ -42,9 +43,10 @@ class Config:
             pass
         if config_raid_ensemble:
             self.raid_ensemble = self.parse_raid_ensemble_config(config_raid_ensemble)
-        if config_battle_settings:
-            # TODO
-            pass
+        self.battle_settings = self.parse_battle_settings_config(
+            config_battle_settings if config_battle_settings
+            else {}  # No battle settings specified, use default values
+        )
 
     def parse_raid_ensemble_config(self, config):
         """
@@ -208,3 +210,17 @@ class Config:
             ensembles.append(ens)
             pokemon_used.update(ens.get_pokemon_list())
         return combine_ensembles(ensembles)
+
+    def parse_battle_settings_config(self, config):
+        """
+        Construct a BattleSettings object from the configuration dict in config.py.
+        :param config: Dict describing battle settings config
+                (Typically from config.py)
+        :return: BattleSettings object
+        """
+        friendship_str = config.get("Friendship", "Best")
+        weather_str = config.get("Weather", "Extreme")
+        attack_strategy_str = config.get("Attack strategy", "No Dodging")
+        dodge_strategy_str = config.get("Dodge strategy", "Realistic Dodging")
+        return BattleSettings(friendship_str=friendship_str, weather_str=weather_str,
+                              attack_strategy_str=attack_strategy_str,dodge_strategy_str=dodge_strategy_str)

@@ -240,19 +240,100 @@ def parse_dodge_strategy_code2str(dodge_strategy_code):
     return conv.get(dodge_strategy_code.upper(), "Realistic Dodging")
 
 
-"""
-Parser for sorting that could be implemented:
-{
-    "Overall": "OVERALL",
-    "Power": "POWER",
-    "Win %": "WIN",
-    "Time to Win": "TIME",
-    "Potions": "POTIONS",
-    "Damage (TDO)": "TDO",
-    "Estimator": "ESTIMATOR"
-}
-Ignored for now since options other than Estimator and TTW are rarely used. 
-"""
+def is_weather_str(weather):
+    """
+    Check if a given string for weather is natural language (e.g. "sunny", "extreme").
+    NOTE: Some code names, e.g. "CLEAR", also pass this check.
+
+    :param weather: Weather string to be checked.
+    :return: Whether the string is natural language.
+    """
+    return ('part' in weather.lower() and 'cloud' in weather.lower()
+            or any(x in weather.lower()
+                   for x in ['extreme', 'no ', 'neutral', 'sun', 'clear', 'rain', 'cloud',
+                             'wind', 'snow', 'fog'])
+            and '_' not in weather)
+
+
+def is_weather_code(weather):
+    """
+    Check if a given string for weather is Pokebattler code name (e.g. "CLEAR", "NO_WEATHER").
+
+    :param weather: Weather string to be checked.
+    :return: Whether the string is code name.
+    """
+    return weather.lower() in [x.lower() for x in [
+        "NO_WEATHER", "CLEAR", "RAINY", "PARTLY_CLOUDY", "CLOUDY", "WINDY", "SNOW", "FOG"]]
+
+
+def parse_weather_str2code(weather_str):
+    """
+    Parse weather from natural language (e.g. "sunny", "extreme")
+    to code name (e.g. "CLEAR", "NO_WEATHER").
+
+    :param weather_str: Weather in natural language.
+        Should be one of (with some variant): "Extreme"/"Neutral"/"No Weather", "Sunny"/"Clear",
+        "Rainy", "Partly Cloudy", "Cloudy", "Windy", "Snow", "Fog".
+    :return: Weather in Pokebattler code name.
+        Should be one of: "NO_WEATHER", "CLEAR", "RAINY", "PARTLY_CLOUDY", "CLOUDY", "WINDY", "SNOW", "FOG".
+    """
+    if not is_weather_str(weather_str) and not is_weather_code(weather_str):
+        print(f"Warning (parse_weather_str2code): Weather string {weather_str} is invalid",
+              file=sys.stderr)
+        return "NO_WEATHER"
+    if is_weather_code(weather_str):
+        # NOTE: This can potentially include some natural words, e.g. "fog"
+        # Converting this to actual code name format
+        return weather_str.upper()
+
+    weather_str = weather_str.lower()
+    if 'part' in weather_str and 'cloud' in weather_str:
+        return "PARTLY_CLOUDY"
+    conv = {
+        'extreme': "NO_WEATHER",
+        'neutral': "NO_WEATHER",
+        'no ': "NO_WEATHER",  # Space to avoid "snow"
+        'sun': "CLEAR",
+        'clear': "CLEAR",
+        'rain': "RAINY",
+        'cloud': "CLOUDY",
+        'wind': "WINDY",
+        'snow': "SNOW",
+        'fog': "FOG"
+    }
+    strs = [val for key, val in conv.items() if key in weather_str]
+    return strs[0] if strs else "NO_WEATHER"
+
+
+def parse_weather_code2str(weather_code):
+    """
+    Parse weather from code name (e.g. "CLEAR", "NO_WEATHER")
+    to natural language (e.g. "sunny", "extreme").
+
+    :param weather_code: Weather in Pokebattler code name.
+        Should be one of: "NO_WEATHER", "CLEAR", "RAINY", "PARTLY_CLOUDY", "CLOUDY", "WINDY", "SNOW", "FOG".
+    :return: Weather in natural language.
+        Should be one of: "Extreme", "Clear", "Rainy", "Partly Cloudy", "Cloudy", "Windy", "Snow", "Fog".
+    """
+    if not is_weather_str(weather_code) and not is_weather_code(weather_code):
+        print(f"Warning (parse_weather_code2str): Weather string {weather_code} is invalid",
+              file=sys.stderr)
+        return "Extreme"
+    if is_weather_str(weather_code) and not is_weather_code(weather_code):
+        # Example of names that fall here: "Sunny", "Foggy"
+        # Reformat them by first converting them to code name (lol)
+        return parse_weather_code2str(parse_weather_str2code(weather_code))
+    conv = {
+        "NO_WEATHER": "Extreme",
+        "CLEAR": "Clear",
+        "RAINY": "Rainy",
+        "PARTLY_CLOUDY": "Partly Cloudy",
+        "CLOUDY": "Cloudy",
+        "WINDY": "Windy",
+        "SNOW": "Snow",
+        "FOG": "Fog"
+    }
+    return conv.get(weather_code.upper(), "Extreme")
 
 
 def is_friendship_str(friendship):
@@ -327,6 +408,97 @@ def parse_friendship_code2str(friendship_code):
     }
     intstr = friendship_code[-1]
     return conv[int(intstr)] + " Friend"
+
+
+def is_sort_option_str(sort_option):
+    """
+    Check if a given string for Pokebattler sorting option is natural language
+    (e.g. "estimator", "time to win", "TTW", "win rate").
+    NOTE: Some code names, e.g. "POWER", also pass this check.
+
+    :param sort_option: Sorting option to be checked.
+    :return: Whether the string is natural language.
+    """
+    return any(x in sort_option.lower()
+               for x in ['overall', 'power', 'win', 'time', 'ttw', 'potion', 'damage', 'tdo', 'estimat'])
+
+
+def is_sort_option_code(sort_option):
+    """
+    Check if a given string for Pokebattler sorting option is Pokebattler code name
+    (e.g. "ESTIMATOR", "TIME", "WIN").
+
+    :param sort_option: Sorting option to be checked.
+    :return: Whether the string is code name.
+    """
+    return sort_option.lower() in [x.lower() for x in [
+        "OVERALL", "POWER", "WIN", "TIME", "POTIONS", "TDO", "ESTIMATOR"]]
+
+
+def parse_sort_option_str2code(sort_option_str):
+    """
+    Parse Pokebattler sorting option from natural language (e.g. "estimator",
+    "time to win", "TTW", "win rate") to code name (e.g. "ESTIMATOR", "TIME", "WIN").
+
+    :param sort_option_str: Sorting option in natural language.
+        Should be one of (with some variant): "Overall", "Power", "Win Rate", "Time to Win",
+        "Potions", "Damage (TDO)", "Estimator".
+    :return: Sorting option in Pokebattler code name.
+        Should be one of: "OVERALL", "POWER", "WIN", "TIME", "POTIONS", "TDO", "ESTIMATOR".
+    """
+    if not is_sort_option_str(sort_option_str) and not is_sort_option_code(sort_option_str):
+        print(f"Warning (parse_sort_option_str2code): Sorting option string {sort_option_str} is invalid",
+              file=sys.stderr)
+        return "ESTIMATOR"
+    if is_sort_option_code(sort_option_str):
+        # NOTE: This can potentially include some natural words, e.g. "Overall", "Win", "TDO"
+        # Converting this to actual code name format
+        return sort_option_str.upper()
+
+    sort_option_str = sort_option_str.lower()
+    conv = {
+        'overall': "OVERALL",
+        'power': "POWER",
+        'win': "WIN",
+        'time': "TIME",
+        'ttw': "TIME",
+        'potion': "POTIONS",
+        'damage': "TDO",
+        'tdo': "TDO",
+        'estimat': "ESTIMATOR",
+    }
+    strs = [val for key, val in conv.items() if key in sort_option_str]
+    return strs[0] if strs else "ESTIMATOR"
+
+
+def parse_sort_option_code2str(sort_option_code):
+    """
+    Parse Pokebattler sorting option from code name (e.g. "ESTIMATOR", "TIME", "WIN")
+    to natural language (e.g. "estimator", "time to win", "TTW", "win rate").
+
+    :param sort_option_code: Sorting option in Pokebattler code name.
+        Should be one of: "OVERALL", "POWER", "WIN", "TIME", "POTIONS", "TDO", "ESTIMATOR".
+    :return: Sorting option in natural language.
+        Should be one of: "Overall", "Power", "Win Rate", "Time to Win", "Potions", "Damage (TDO)", "Estimator".
+    """
+    if not is_sort_option_str(sort_option_code) and not is_sort_option_code(sort_option_code):
+        print(f"Warning (parse_sort_option_code2str): Sorting option string {sort_option_code} is invalid",
+              file=sys.stderr)
+        return "Estimator"
+    if is_sort_option_str(sort_option_code) and not is_sort_option_code(sort_option_code):
+        # Example of names that fall here: "Win Rate", "TTW", "Damage (TDO)"
+        # Reformat them by first converting them to code name (lol)
+        return parse_sort_option_code2str(parse_sort_option_str2code(sort_option_code))
+    conv = {
+        "OVERALL": "Overall",
+        "POWER": "Power",
+        "WIN": "Win Rate",
+        "TIME": "Time to Win",
+        "POTIONS": "Potions",
+        "TDO": "Damage (TDO)",
+        "ESTIMATOR": "Estimator"
+    }
+    return conv.get(sort_option_code.upper(), "Estimator")
 
 
 def is_type_str(pkm_type):

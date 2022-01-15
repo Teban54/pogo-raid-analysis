@@ -44,7 +44,7 @@ class CountersList:
         """
         self.boss = None
         self.attacker_ensemble = attacker_ensemble
-        self.battle_settings = battle_settings
+        self.battle_settings = None
         self.attacker_level = attacker_level
         self.trainer_id = trainer_id
         self.results = None
@@ -52,6 +52,7 @@ class CountersList:
         self.metadata = metadata
 
         self.init_raid_boss(raid_boss, raid_boss_pokemon, raid_boss_codename, raid_tier)
+        self.init_battle_settings(battle_settings)
         self.get_JSON()
 
     def init_raid_boss(self, raid_boss=None, raid_boss_pokemon=None, raid_boss_codename=None, raid_tier="Tier 5"):
@@ -72,6 +73,22 @@ class CountersList:
         self.boss = RaidBoss(pokemon_obj=raid_boss_pokemon, pokemon_codename=raid_boss_codename,
                              tier_codename=raid_tier, metadata=self.metadata)
 
+    def init_battle_settings(self, battle_settings=None):
+        """
+        Loads the BattleSettings object and handles exceptions.
+        This populates the following fields: bottle_settings.
+        """
+        if not battle_settings:
+            print(f"Warning (CountersList.__init__): BattleSettings not found. Using default settings.",
+                  file=sys.stderr)
+            battle_settings = BattleSettings()
+        if battle_settings.is_multiple():
+            print(f"Warning (CountersList.__init__): BattleSettings includes multiple settings "
+                  f"(this class requires a single setting). Using the first set.",
+                  file=sys.stderr)
+            battle_settings = battle_settings.indiv_settings[0]
+        self.battle_settings = battle_settings
+
     def get_JSON(self):
         """
         Pull the Pokebattler JSON and store it in the object.
@@ -80,7 +97,7 @@ class CountersList:
             raid_boss=self.boss,
             attacker_level=self.attacker_level,
             trainer_id=self.trainer_id,
-            # TODO: Remaining data to be parsed from battle settings and attacker ensemble later
+            battle_settings=self.battle_settings
         )
 
 
@@ -108,15 +125,18 @@ class CountersListsByLevel:
         """
         self.boss = None
         self.attacker_ensemble = attacker_ensemble
-        self.battle_settings = battle_settings
+        self.battle_settings = None
         self.results = None
+        self.min_level = min_level
+        self.max_level = max_level
         self.JSON = None
         self.metadata = metadata
 
         self.lists_by_level = {}  # Dict mapping attacker level to CountersList object
 
         self.init_raid_boss(raid_boss, raid_boss_pokemon, raid_boss_codename, raid_tier)
-        self.get_JSON()
+        self.init_battle_settings(battle_settings)
+        self.create_individual_lists()
 
     def init_raid_boss(self, raid_boss=None, raid_boss_pokemon=None, raid_boss_codename=None, raid_tier="Tier 5"):
         """
@@ -135,6 +155,22 @@ class CountersListsByLevel:
         raid_tier = parse_raid_tier_str2code(raid_tier)
         self.boss = RaidBoss(pokemon_obj=raid_boss_pokemon, pokemon_codename=raid_boss_codename,
                              tier_codename=raid_tier, metadata=self.metadata)
+
+    def init_battle_settings(self, battle_settings=None):
+        """
+        Loads the BattleSettings object and handles exceptions.
+        This populates the following fields: bottle_settings.
+        """
+        if not battle_settings:
+            print(f"Warning (CountersListsByLevel.__init__): BattleSettings not found. Using default settings.",
+                  file=sys.stderr)
+            battle_settings = BattleSettings()
+        if battle_settings.is_multiple():
+            print(f"Warning (CountersListsByLevel.__init__): BattleSettings includes multiple settings "
+                  f"(this class requires a single setting). Using the first set.",
+                  file=sys.stderr)
+            battle_settings = battle_settings.indiv_settings[0]
+        self.battle_settings = battle_settings
 
     def create_individual_lists(self):
         """

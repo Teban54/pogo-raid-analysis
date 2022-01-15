@@ -13,6 +13,7 @@ import requests
 import os
 
 from utils import *
+from battle_settings import *
 
 
 def get_pokebattler_metadata(metadata_name, write_file=False):
@@ -34,46 +35,48 @@ def get_pokebattler_metadata(metadata_name, write_file=False):
 
 
 def get_pokebattler_raid_counters(raid_boss=None, raid_boss_codename=None, raid_tier="Tier 5",
-                                  attacker_level=40,
-                                  friendship='Best Friend', weather='NO_WEATHER',
+                                  attacker_level=40, trainer_id=None,
+                                  battle_settings=None,
                                   legendary=True, shadow=True, mega=True,
-                                  trainer_id=None,
-                                  attack_strategy='No Dodging', dodge_strategy='Realistic Dodging'):
+                                  sort_option="Estimator"):
     """
     Get the list of best attackers from Pokebattler and return it as JSON.
-    Sorted by Estimator.
 
     :param raid_boss: RaidBoss object.
     :param str raid_boss_codename: Code name of the raid boss (e.g. "LANDORUS_THERIAN_FORM"),
             if a RaidBoss object is not provided.
     :param int raid_tier: Raid tier, either as natural language or code name.
     :param int attacker_level: Attacker level.
-    :param int friendship: Friendship level, either as natural language or code name.
-            Default is best friend.
-    :param str weather: weather, default is NO_WEATHER
-            weather could be: CLEAR, RAINY, PARTLY_CLOUDY, CLOUDY, WINDY, SNOW, FOG
+    :param int trainer_id: Pokebattler Trainer ID if a trainer's own Pokebox is used.
+            If None, use all attackers by level.
+    :param battle_settings: BattleSettings object, including friendship, weather, and attack/dodge strategies.
+            Must be for a single set of settings.
     :param legendary: If True, include Legendary Pokemon.
     :param shadow: If True, include Shadow Pokemon.
     :param mega: If True, include Mega Evolutions.
-    :param int trainer_id: Pokebattler Trainer ID if a trainer's own Pokebox is used.
-            If None, use all attackers by level.
-    :param attack_strategy: Attack strategy, i.e. dodge or not.
-            Should be one of: "No Dodging", "Dodge Specials PRO", "Dodge All Weave".
-    :param dodge_strategy: Dodge strategy, i.e. accuracy of dodging.
-            Should be one of: "Perfect Dodging", "Realistic Dodging", "Realistic Dodging Pro", "25% Dodging".
+    :param sort_option: Sorting option for Pokebattler counters list.
     :return: Pokebattler ranking results parsed as JSON, or an error string or None if applicable
     """
-    # TODO: Replace the entire payload and parameters with BattleSetting object
+    if not battle_settings:
+        print(f"Warning (get_pokebattler_raid_counters): BattleSettings not found. Using default settings.",
+              file=sys.stderr)
+        battle_settings = BattleSettings()
+    if battle_settings.is_multiple():
+        print(f"Warning (get_pokebattler_raid_counters): BattleSettings includes multiple settings. Using the first set.",
+              file=sys.stderr)
+        battle_settings = battle_settings.indiv_settings[0]
+
+    # TODO: Replace the remaining payload and parameters with AttackerEnsemble object
     payload = {
-        "sort": "ESTIMATOR",  # TODO: Set this arbitrarily
-        "weatherCondition": weather,
-        "dodgeStrategy": parse_dodge_strategy_str2code(dodge_strategy),
+        "sort": parse_sort_option_str2code(sort_option),
+        "weatherCondition": battle_settings.weather_code,
+        "dodgeStrategy": battle_settings.dodge_strategy_code,
         "aggregation": "AVERAGE",
         "includeLegendary": legendary,
         "includeShadow": shadow,
         "includeMegas": mega,
         "randomAssistants": "-1",
-        "friendLevel": parse_friendship_str2code(friendship),
+        "friendLevel": battle_settings.friendship_code,
         "attackerTypes": "POKEMON_TYPE_ALL"  # ["POKEMON_TYPE_ICE","POKEMON_TYPE_FIRE"]
     }
     if raid_boss:
@@ -90,11 +93,11 @@ def get_pokebattler_raid_counters(raid_boss=None, raid_boss_codename=None, raid_
     if trainer_id:
         url = f'https://fight.pokebattler.com/raids/defenders/{raid_boss_codename}/' \
               f'levels/RAID_LEVEL_{raid_tier}/attackers/users/{trainer_id}/' \
-              f'strategies/{parse_attack_strategy_str2code(attack_strategy)}/DEFENSE_RANDOM_MC'
+              f'strategies/{battle_settings.attack_strategy_code}/DEFENSE_RANDOM_MC'
     else:
         url = f'https://fight.pokebattler.com/raids/defenders/{raid_boss_codename}/' \
               f'levels/RAID_LEVEL_{raid_tier}/attackers/levels/{attacker_level}/' \
-              f'strategies/{parse_attack_strategy_str2code(attack_strategy)}/DEFENSE_RANDOM_MC'
+              f'strategies/{battle_settings.attack_strategy_code}/DEFENSE_RANDOM_MC'
     return do_http_request(url, payload)
 
 

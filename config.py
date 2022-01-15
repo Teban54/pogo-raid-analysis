@@ -10,6 +10,19 @@ from params import *
 
 CONFIG_WRITE_ALL_COUNTERS = True
 
+CONFIG_BATTLE_SETTINGS = {
+    # All battle settings that are allowed on Pokebattler counters list page, EXCEPT attacker level.
+    # Can accept lists instead of a single value, e.g. "Weather": ["Extreme", "Rainy"],
+    # In that case, simulations for all combinations of all specified options will be generated.
+    "Friendship": "Best",  # No Friend, Good Friend, Great Friend, Ultra Friend, Best Friend (can omit "Friend")
+                           # Default: Best Friend
+    "Weather": "Extreme",  # Extreme/No Weather/Neutral, Sunny/Clear, Rainy, Partly Cloudy, Cloudy, Windy, Snow, Fog
+                           # Default: Extreme
+    "Attack strategy": "No Dodging",  # No Dodging, Dodge Specials PRO, Dodge All Weave
+                                      # Default: No Dodging
+    "Dodge strategy": "Realistic Dodging"  # Perfect Dodging, Realistic Dodging, Realistic Dodging Pro, 25% Dodging
+                                           # Default: Realistic Dodging
+}
 
 CONFIG_RAID_BOSS_ENSEMBLE = [
     # Lists of raid bosses you want to use.

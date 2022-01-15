@@ -335,11 +335,14 @@ if __name__ == "__main__":
     META.debug_print_pokemon_to_csv()
     META.debug_print_raids_to_csv()
 
+    CONFIG = Config(metadata=META, config_raid_ensemble=CONFIG_RAID_BOSS_ENSEMBLE,
+                    config_battle_settings=CONFIG_BATTLE_SETTINGS)
+
     # --- Comments below were newer debug statements, newest to oldest.
     # I'm too lazy to revert the old ones lol
 
-    CONFIG = Config(metadata=META, config_raid_ensemble=CONFIG_RAID_BOSS_ENSEMBLE)
     CONFIG.raid_ensemble.debug_print_to_csv()
+    CONFIG.battle_settings.debug_print()
 
     # --- Comments below were old debug statements, oldest to newest.
 
