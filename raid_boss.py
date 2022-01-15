@@ -99,25 +99,36 @@ def raid_bosses_to_pokemon(bosses_list):
 # ----------------- Raid filtering and grouping -----------------
 
 
-def filter_raids_by_criteria(raid_list, criterion, **kwargs):
+def filter_raids_by_criteria(raid_list, criterion_raid=None, criterion_pokemon=None, **kwargs):
     """
-    Filter a list of raid bosses with a given criterion function.
-    Returns all raid bosses that evaluate to True on the criterion function.
-    See also: filter_pokemon_by_criteria
+    Filter a list of raid bosses with a given criterion function for raids,
+    and/or a criterion function for Pokemon.
+    Returns all raid bosses that evaluate to True on both criterion functions.
+    See also: filter_pokemon_by_criteria, filter_ensemble_by_criteria
 
-    The criterion function should take in at least one parameter, and the first must be a RaidBoss object.
+    The criterion function for raids should take in at least one parameter,
+    and the first must be a RaidBoss object.
+    The criterion function for Pokemon should take in at least one parameter,
+    and the first must be a Pokemon object.
     Additional arguments can be passed into filter_raids_by_criteria as **kwargs.
 
     Example:
-        def is_form(raid_boss, form):
-            return raid_boss.pokemon.form_codename == form
-        result = filter_raids_by_criteria(raid_list, is_form, form='WINTER_2020')
+        def is_higher_than_level(raid_boss, level_ceiling):
+            return int(raid_boss.tier.replace("RAID_LEVEL_")) >= level_ceiling
+        def is_form(pokemon, form):
+            return pokemon.form_codename == form
+        result = filter_raids_by_criteria(
+            raid_list, criterion=is_higher_than_level, criterion_pokemon=is_form,
+            level_ceiling=3, form='WINTER_2020')
 
     :param raid_list: List of RaidBoss objects to be filtered
-    :param criterion: A criterion function as described above
-    :return: List of RaidBoss that evaluate to True on the criterion
+    :param criterion_raid: A criterion function for raids as described above
+    :param criterion_pokemon: A criterion function for Pokemon as described above
+    :return: List of RaidBoss that evaluate to True on both criterion
     """
-    return [raid for raid in raid_list if criterion(raid, **kwargs)]
+    return [raid for raid in raid_list
+            if (criterion_raid is None or criterion_raid(raid, **kwargs))
+            and (criterion_pokemon is None or criterion_pokemon(raid.pokemon, **kwargs))]
 
 
 def criterion_not_ignore_raid(raid):
@@ -140,7 +151,7 @@ def remove_raids_to_ignore(raid_list):
     :param raid_list: List of RaidBoss objects
     :return: Filtered list of RaidBoss objects
     """
-    return filter_raids_by_criteria(raid_list, criterion_not_ignore_raid)
+    return filter_raids_by_criteria(raid_list, criterion_raid=criterion_not_ignore_raid)
 
 
 def group_raid_bosses_by_basename(boss_list, separate_shadows=True, separate_megas=True):

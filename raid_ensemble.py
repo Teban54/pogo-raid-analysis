@@ -92,7 +92,6 @@ class RaidEnsemble:
         self.bosses = self.convert_raid_dict_to_weighted_list(
             raid_dict, weight_multiplier=weight_multiplier, forms_weight_strategy=forms_weight_strategy)
 
-
     def build_raid_dict(self, raid_bosses=None, pokemons=None, tier=None,
                         separate_shadows=True, separate_megas=True, remove_dupes=True):
         """
@@ -216,6 +215,20 @@ class RaidEnsemble:
             return
         self.apply_multiplier(1.0 / self.get_weight_sum())
 
+    def get_raids_list(self):
+        """
+        Get a list of raid bosses included in this ensemble.
+        :return: List of RaidBoss objects
+        """
+        return [raid for raid, weight in self.bosses]
+
+    def get_pokemon_list(self):
+        """
+        Get a list of Pokemon included in this ensemble.
+        :return: List of Pokemon objects
+        """
+        return [raid.pokemon for raid, weight in self.bosses]
+
     def debug_print_to_csv(self, filename="data/debug/ensemble.csv"):
         """
         Debug function that outputs the current ensemble to CSV.
@@ -231,3 +244,39 @@ class RaidEnsemble:
                     boss.pokemon.displayname,
                     weight
                 ])
+
+
+def filter_ensemble_by_criteria(ensemble, criterion_raid=None, criterion_pokemon=None, **kwargs):
+    """
+    Filter a RaidEnsemble with a given criterion function for raids,
+    and optionally, a criterion function for Pokemon.
+    Returns a NEW RaidEnsemble object with all raid bosses that evaluate to True
+    on both criterion functions, with their original weights.
+    See also: filter_pokemon_by_criteria, filter_raids_by_criteria
+
+    The criterion function for raids should take in at least one parameter,
+    and the first must be a RaidBoss object.
+    The criterion function for Pokemon should take in at least one parameter,
+    and the first must be a Pokemon object.
+    Additional arguments can be passed into filter_raids_by_criteria as **kwargs.
+
+    Example:
+        def is_higher_than_level(raid_boss, level_ceiling):
+            return int(raid_boss.tier.replace("RAID_LEVEL_")) >= level_ceiling
+        def is_form(pokemon, form):
+            return pokemon.form_codename == form
+        result = filter_ensemble_by_criteria(
+            ensemble, criterion=is_higher_than_level, criterion_pokemon=is_form,
+            level_ceiling=3, form='WINTER_2020')
+
+    :param ensemble: RaidEnsemble object to be filtered
+    :param criterion_raid: A criterion function for raids as described above
+    :param criterion_pokemon: A criterion function for Pokemon as described above
+    :return: New RaidEnsemble object whose raids evaluate to True on both criterion
+    """
+    new_list = [(raid, weight) for raid, weight in ensemble.bosses
+                if (criterion_raid is None or criterion_raid(raid, **kwargs))
+                and (criterion_pokemon is None or criterion_pokemon(raid.pokemon, **kwargs))]
+    new_ens = RaidEnsemble([])
+    new_ens.bosses = new_list
+    return new_ens

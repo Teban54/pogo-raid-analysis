@@ -10,6 +10,8 @@ from pokemon import *
 from raid_boss import *
 from move import *
 from raid_ensemble import *
+from config import *
+from config_parser import *
 
 
 class Metadata:
@@ -282,21 +284,29 @@ class Metadata:
                 self.raids_by_category[category].append(boss)
                 self.raids_by_tier[tier].append(boss)
 
-    def get_raid_bosses_by_tier(self, tier):
+    def get_raid_bosses_by_tier(self, tier, remove_ignored=True):
         """
         Get all raid bosses of a certain raid tier (e.g. Tier 5) recorded on Pokebattler.
         :param tier: Raid tier, either as natural language or code name
+        :param remove_ignored: If True, raids that should be ignored will not be included.
         :return: List of RaidBoss objects describing all bosses of that tier
         """
-        return self.raids_by_tier.get(parse_raid_tier_str2code(tier), [])
+        lst = self.raids_by_tier.get(parse_raid_tier_str2code(tier), [])
+        if remove_ignored:
+            lst = remove_raids_to_ignore(lst)
+        return lst
 
-    def get_raid_bosses_by_category(self, category):
+    def get_raid_bosses_by_category(self, category, remove_ignored=True):
         """
         Get all raid bosses of a certain raid category (e.g. Legacy Tier 5) recorded on Pokebattler.
         :param category: Raid category, either as natural language or code name
+        :param remove_ignored: If True, raids that should be ignored will not be included.
         :return: List of RaidBoss objects describing all bosses of that category
         """
-        return self.raids_by_category.get(parse_raid_category_str2code(category), [])
+        lst =  self.raids_by_category.get(parse_raid_category_str2code(category), [])
+        if remove_ignored:
+            lst = remove_raids_to_ignore(lst)
+        return lst
 
     def debug_print_raids_to_csv(self, filename="data/metadata/raids.csv"):
         """
@@ -324,6 +334,14 @@ if __name__ == "__main__":
     META.debug_print_moves_to_csv()
     META.debug_print_pokemon_to_csv()
     META.debug_print_raids_to_csv()
+
+    # --- Comments below were newer debug statements, newest to oldest.
+    # I'm too lazy to revert the old ones lol
+
+    CONFIG = Config(metadata=META, config_raid_ensemble=CONFIG_RAID_BOSS_ENSEMBLE)
+    CONFIG.raid_ensemble.debug_print_to_csv()
+
+    # --- Comments below were old debug statements, oldest to newest.
 
     #print([pkm['pokemonId'] for pkm in META.Pokemon_JSON['pokemon']])
     #print(META.Pokemon_JSON['pokemon'][9])
@@ -371,7 +389,7 @@ if __name__ == "__main__":
         print()
     """
 
-
+    """
     pkms = META.get_all_pokemon(remove_ignored=True)
     #ensemble = RaidEnsemble(pokemons=pkms, tier='RAID_LEVEL_5', weight_multiplier=3,
     #                        forms_weight_strategy='combine', separate_shadows=True, separate_megas=True)
@@ -382,4 +400,8 @@ if __name__ == "__main__":
                                  weight_multiplier=3))
     ensemble.extend(RaidEnsemble(raid_bosses=remove_raids_to_ignore(META.get_raid_bosses_by_tier('Tier 3')),
                                  weight_multiplier=1))
+    ensemble = filter_ensemble_by_criteria(ensemble, criterion_pokemon=criterion_weak_to_contender_types,
+                                           attack_types=["Ice", "Steel"])
     ensemble.debug_print_to_csv()
+    """
+

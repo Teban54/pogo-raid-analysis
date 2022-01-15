@@ -233,7 +233,7 @@ def subtract_from_pokemon_list(list1, list2):
     Does not modify either lists.
 
     :param list1: List of Pokemon to be considered
-    :param list2: List of all Pokemon to be removed
+    :param list2: List or collection of all Pokemon to be removed
     :return: All Pokemon in list 1 but not list 2
     """
     list2_names = set(pkm.name for pkm in list2)
@@ -273,7 +273,7 @@ def filter_pokemon_by_criteria(pkm_list, criterion, **kwargs):
     """
     Filter a list of Pokemon with a given criterion function.
     Returns all Pokemon that evaluate to True on the criterion function.
-    See also: filter_raids_by_criteria
+    See also: filter_raids_by_criteria, filter_ensemble_by_criteria
 
     The criterion function should take in at least one parameter, and the first must be a Pokemon object.
     Additional arguments can be passed into filter_pokemon_by_criteria as **kwargs.
@@ -327,6 +327,22 @@ def criterion_weak_to_contender_type(pokemon, attack_type=None):
     return is_contender_type(attack_type, pokemon.types)
 
 
+def criterion_weak_to_contender_types(pokemon, attack_types=[]):
+    """
+    Return True if any of the attacking types is a contender type against the Pokemon.
+    E.g. If the given attacking type is Ice, returns True if the Pokemon is
+    a mono grass/flying/dragon types, or Rayquaza, Landorus, etc.
+    If there are no types given, return False.
+
+    :param pokemon: Defending Pokemon object to be evaluated on
+    :param attack_types: List of attacking types, as either natural language or code name
+    :return: True if any of the attacking types is a contender type against the given defending Pokemon
+    """
+    if not attack_types:
+        return False
+    return any(is_contender_type(attack_type, pokemon.types) for attack_type in attack_types)
+
+
 def criterion_evo_stage(pokemon, keep_final_stage=True, keep_pre_evo=False):
     """
     Return True if the Pokemon's evolution stage matches requirements:
@@ -345,42 +361,92 @@ def criterion_evo_stage(pokemon, keep_final_stage=True, keep_pre_evo=False):
             or keep_pre_evo and not is_final_stage(pokemon))
 
 
-def criterion_shadow_mega(pokemon, is_shadow=False, is_not_shadow=True, is_mega=False, is_not_mega=True):
+def criterion_shadow(pokemon, is_shadow=False, is_not_shadow=False):
     """
-    Return True if the Pokemon matches the given shadow and mega requirements:
-    is or is not a shadow, and is or is not a mega.
-    Note that when checking if the Pokemon is a shadow, the mega requirements are ignored; vice versa.
+    Return True if the Pokemon matches the given shadow requirements: is or is not a shadow.
 
     :param pokemon: Pokemon object to be evaluated on
     :param is_shadow: If True, returns True if and only if the Pokemon is a shadow.
         Ignores all other parameters.
+        If False, has no effect.
     :param is_not_shadow: If True, returns True only if the Pokemon is not a shadow.
-        Still subject to mega requirements.
+        If False, has no effect.
+    :return: Whether the Pokemon satisfies the shadow requirements
+    """
+    return (pokemon.is_shadow if is_shadow
+            else not pokemon.is_shadow if is_not_shadow
+            else True)
+
+
+def criterion_mega(pokemon, is_mega=False, is_not_mega=False):
+    """
+    Return True if the Pokemon matches the given mega requirements: is or is not a mega.
+
+    :param pokemon: Pokemon object to be evaluated on
     :param is_mega: If True, returns True if and only if the Pokemon is a mega.
         Ignores all other parameters.
+        If False, has no effect.
     :param is_not_mega: If True, returns True only if the Pokemon is not a mega.
-        Still subject to shadow requirements.
-    :return: Whether the Pokemon satisfies the shadow and mega requirements
+        If False, has no effect.
+    :return: Whether the Pokemon satisfies the mega requirements
     """
-    if is_shadow:
-        if is_mega:
-            print(f"Warning (criterion_shadow_mega): Both is_shadow and is_mega are True. Returning shadows.", file=sys.stderr)
-        return pokemon.is_shadow
-    if is_mega:
-        return pokemon.is_mega
-    return not (is_not_shadow and pokemon.is_shadow) and not (is_not_mega and pokemon.is_mega)
+    return (pokemon.is_mega if is_mega
+            else not pokemon.is_mega if is_not_mega
+            else True)
 
 
-def criterion_legendary_or_mythical(pokemon, negate=False):
+def criterion_legendary(pokemon, is_legendary=False, is_not_legendary=False):
     """
-    Checks if the Pokemon is a legendary or mythical, or if negated,
-    if the Pokemon is not a legendary nor mythical.
+    Return True if the Pokemon matches the given legendary requirements: is or is not a legendary.
+    NOTE: Mythicals are not considered as legendaries for this purpose.
+
     :param pokemon: Pokemon object to be evaluated on
-    :param negate: Whether to negate the filter (i.e. check if not legendary or mythical)
-    :return: If negate==False: Whether the Pokemon is a legendary or mythical.
-        If negate==True: Whether the Pokemon is a legendary nor mythical.
+    :param is_legendary: If True, returns True if and only if the Pokemon is a legendary.
+        Ignores all other parameters.
+        If False, has no effect.
+    :param is_not_legendary: If True, returns True only if the Pokemon is not a legendary.
+        If False, has no effect.
+    :return: Whether the Pokemon satisfies the legendary requirements
     """
-    return (pokemon.is_legendary or pokemon.is_mythical) ^ negate
+    return (pokemon.is_legendary if is_legendary
+            else not pokemon.is_legendary if is_not_legendary
+            else True)
+
+
+def criterion_mythical(pokemon, is_mythical=False, is_not_mythical=False):
+    """
+    Return True if the Pokemon matches the given mythical requirements: is or is not a mythical.
+
+    :param pokemon: Pokemon object to be evaluated on
+    :param is_mythical: If True, returns True if and only if the Pokemon is a mythical.
+        Ignores all other parameters.
+        If False, has no effect.
+    :param is_not_mythical: If True, returns True only if the Pokemon is not a mythical.
+        If False, has no effect.
+    :return: Whether the Pokemon satisfies the mythical requirements
+    """
+    return (pokemon.is_mythical if is_mythical
+            else not pokemon.is_mythical if is_not_mythical
+            else True)
+
+
+def criterion_legendary_or_mythical(pokemon, is_legendary_or_mythical=False,
+                                    is_not_legendary_or_mythical=False):
+    """
+    Return True if the Pokemon matches the given legendary or requirements:
+    is legendary or mythical, or is not legendary nor mythical.
+
+    :param pokemon: Pokemon object to be evaluated on
+    :param is_legendary_or_mythical: If True, returns True if and only if the Pokemon is legendary or mythical.
+        Ignores all other parameters.
+        If False, has no effect.
+    :param is_not_legendary_or_mythical: If True, returns True only if the Pokemon is not legendary nor mythical.
+        If False, has no effect.
+    :return: Whether the Pokemon satisfies the legendary or mythical requirements
+    """
+    return (pokemon.is_legendary or pokemon.is_mythical if is_legendary_or_mythical
+            else not (pokemon.is_legendary or pokemon.is_mythical) if is_not_legendary_or_mythical
+            else True)
 
 
 def group_pokemon_by_basename(pkm_list, separate_shadows=True, separate_megas=True):

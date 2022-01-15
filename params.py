@@ -105,8 +105,8 @@ COSMETIC_FORMS_PER_POKEMON = {  # These specific Pokemon have these cosmetic for
     'EISCUE': ['ICE'],
     'INDEEDEE': ['MALE'],
     'MORPEKO': ['FULL_BELLY'],  # Considering Hangry as non-cosmetic since Aura Wheel could be added one day
-    'ZACIAN': ['HERO'],
-    'ZAMAZENTA': ['HERO'],
+    'ZACIAN': [''],  # ['HERO'],
+    'ZAMAZENTA': [''],  # ['HERO'],
     'PUMPKABOO': ['SMALL'],
     'GOURGEIST': ['SMALL'],
     'HOOPA': ['CONFINED'],
