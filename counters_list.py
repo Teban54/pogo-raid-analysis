@@ -150,19 +150,19 @@ class CountersList:
                     This block can be retrieved from either defender["total"] or defender["byMove"][0]["result"].
             :return: Processed dict with "ESTIMATOR", "TIME", "DEATHS"
             """
-            return {"ESTIMATOR": timings["estimator"],
-                    "TIME": timings["effectiveCombatTime"],
-                    "DEATHS": timings["effectiveDeaths"]}
+            return {"ESTIMATOR": timings.get("estimator", 0),
+                    "TIME": timings.get("effectiveCombatTime", 0),
+                    "DEATHS": timings.get("effectiveDeaths", 0)}  # Possible to have 0 deaths, won't have key in dict
 
-        def parse_defender(def_list):
+        def parse_defender(def_dict):
             """
             Parse a "defender" in Pokebattler JSON (which are raid attackers).
-            :param def_list: JSON block for a single defender: {"pokemonId": "MAGNETON_SHADOW_FORM", ...}
+            :param def_dict: JSON block for a single defender: {"pokemonId": "MAGNETON_SHADOW_FORM", ...}
             :return: Processed dict in format shown above
             """
-            dct = {"POKEMON_CODENAME": def_list["pokemonId"], "BY_MOVE": {}}
-            dct.update(parse_timings(def_list["total"]))
-            for mvst_blk in reversed(def_list["byMove"]):  # Pokebattler lists movesets from worst to best
+            dct = {"POKEMON_CODENAME": def_dict["pokemonId"], "BY_MOVE": {}}
+            dct.update(parse_timings(def_dict["total"]))
+            for mvst_blk in reversed(def_dict["byMove"]):  # Pokebattler lists movesets from worst to best
                 dct["BY_MOVE"][(mvst_blk["move1"], mvst_blk["move2"])] = parse_timings(mvst_blk["result"])
             return dct
 
@@ -221,6 +221,9 @@ class CountersList:
         The file will be stored in the following location:
         COUNTERS_DATA_PATH/Lists/<Tier code name>/<Boss code name>/
         Level <level>,<sort option str>,<weather str>,<friendship str>,<attack strategy str>,<dodge strategy str>.csv
+        # TODO: Add the following to file name:
+        # Include shadows, include megas, include legendaries
+        # 3 boolean parameters in this function
 
         :param path: Root path that stores all CSV file outputs
         :param best_attacker_moveset: If True, only the best moveset for each attacker will be written
@@ -310,7 +313,7 @@ class CountersListsByLevel:
     against a particular raid boss and under a particular set of battle settings.
     """
     def __init__(self, raid_boss=None, raid_boss_pokemon=None, raid_boss_codename=None, raid_tier="Tier 5",
-                 metadata=None, min_level=20, max_level=51,
+                 metadata=None, min_level=20, max_level=51, level_step=5,
                  attacker_ensemble=None, battle_settings=None, sort_option="Estimator"):
         """
         Initialize the attributes, create individual CountersList objects, and get the JSON rankings.
@@ -323,6 +326,7 @@ class CountersListsByLevel:
         :param metadata: Current Metadata object
         :param min_level: Minimum attacker level to be simulated, inclusive
         :param max_level: Maximum attacker level to be simulated, inclusive
+        :param level_step: Step size for level, either 0.5 or integer
         :param attacker_ensemble: AttackerEnsemble object describing attackers to be used
         :param battle_settings: BattleSettings object
         :param sort_option: Sorting option, as shown on Pokebattler (natural language or code name)
@@ -333,6 +337,7 @@ class CountersListsByLevel:
         self.results = None
         self.min_level = min_level
         self.max_level = max_level
+        self.level_step = level_step
         self.sort_option = parse_sort_option_str2code(sort_option)
         self.JSON = None
         self.metadata = metadata
@@ -382,21 +387,42 @@ class CountersListsByLevel:
         Create individual CounterList objects that store rankings for a particular level.
         This populates the field lists_by_level.
         """
-        for level in range(self.min_level, self.max_level + 1, 0.5):
+        for level in get_levels_in_range(self.min_level, self.max_level, step_size=self.level_step):
+            print("Creating lists for level " + str(level))
             self.lists_by_level[level] = CountersList(
                 raid_boss=self.boss, metadata=self.metadata, attacker_level=level,
                 attacker_ensemble=self.attacker_ensemble, battle_settings=self.battle_settings,
                 sort_option=self.sort_option
             )
 
+    def write_CSV_list(self, path, best_attacker_moveset=True,
+                       random_boss_moveset=True, specific_boss_moveset=False):
+        """
+        Write the counters lists to CSV in list format, with the following headers:
+        Attacker , Attacker Fast Move, Attacker Charged Move, Boss, Boss Fast Move, Boss Charged Move,
+        Estimator, Time to Win, Deaths
+        All fields are code names.
 
-class CountersListsRB:
+        The file will be stored in the following location:
+        COUNTERS_DATA_PATH/Lists/<Tier code name>/<Boss code name>/
+        Level <level>,<sort option str>,<weather str>,<friendship str>,<attack strategy str>,<dodge strategy str>.csv
+
+        :param path: Root path that stores all CSV file outputs
+        :param best_attacker_moveset: If True, only the best moveset for each attacker will be written
+        :param random_boss_moveset: If True, results for the random boss moveset will be included
+        :param specific_boss_moveset: If True, results for specific boss movesets will be included
+        """
+        for lst in self.lists_by_level.values():
+            lst.write_CSV_list(path, best_attacker_moveset=best_attacker_moveset,
+                              random_boss_moveset=random_boss_moveset, specific_boss_moveset=specific_boss_moveset)
+
+class CountersListsRE:
     """
     Class for multiple counters lists against a RaidEnsemble,
     under a particular set of battle settings.
     """
     def __init__(self, ensemble,
-                 metadata=None, min_level=20, max_level=51,
+                 metadata=None, min_level=20, max_level=51, level_step=5,
                  attacker_ensemble=None, battle_settings=None, sort_option="Estimator"):
         """
         Initialize the attributes, create individual CountersListsByLevel objects, and get the JSON rankings.
@@ -404,6 +430,7 @@ class CountersListsRB:
         :param metadata: Current Metadata object
         :param min_level: Minimum attacker level to be simulated, inclusive
         :param max_level: Maximum attacker level to be simulated, inclusive
+        :param level_step: Step size for level, either 0.5 or integer
         :param attacker_ensemble: AttackerEnsemble object describing attackers to be used
         :param battle_settings: BattleSettings object
         :param sort_option: Sorting option, as shown on Pokebattler (natural language or code name)
@@ -414,6 +441,7 @@ class CountersListsRB:
         self.results = None
         self.min_level = min_level
         self.max_level = max_level
+        self.level_step = level_step
         self.sort_option = parse_sort_option_str2code(sort_option)
         self.JSON = None
         self.metadata = metadata
@@ -446,8 +474,10 @@ class CountersListsRB:
         This populates the field lists_for_bosses.
         """
         for boss, weight in self.ensemble.bosses:
+            print("Creating lists for " + boss.pokemon_codename)
             self.lists_for_bosses.append(CountersListsByLevel(
-                raid_boss=boss, metadata=self.metadata, min_level=self.min_level, max_level=self.max_level,
+                raid_boss=boss, metadata=self.metadata,
+                min_level=self.min_level, max_level=self.max_level, level_step=self.level_step,
                 attacker_ensemble=self.attacker_ensemble, battle_settings=self.battle_settings,
                 sort_option=self.sort_option
             ))
@@ -461,3 +491,23 @@ class CountersListsRB:
         return [(boss, weight, self.lists_for_bosses[i])
                 for i, (boss, weight) in enumerate(self.ensemble.bosses)]
 
+    def write_CSV_list(self, path, best_attacker_moveset=True,
+                       random_boss_moveset=True, specific_boss_moveset=False):
+        """
+        Write the counters lists to CSV in list format, with the following headers:
+        Attacker , Attacker Fast Move, Attacker Charged Move, Boss, Boss Fast Move, Boss Charged Move,
+        Estimator, Time to Win, Deaths
+        All fields are code names.
+
+        The file will be stored in the following location:
+        COUNTERS_DATA_PATH/Lists/<Tier code name>/<Boss code name>/
+        Level <level>,<sort option str>,<weather str>,<friendship str>,<attack strategy str>,<dodge strategy str>.csv
+
+        :param path: Root path that stores all CSV file outputs
+        :param best_attacker_moveset: If True, only the best moveset for each attacker will be written
+        :param random_boss_moveset: If True, results for the random boss moveset will be included
+        :param specific_boss_moveset: If True, results for specific boss movesets will be included
+        """
+        for lst in self.lists_for_bosses:
+            lst.write_CSV_list(path, best_attacker_moveset=best_attacker_moveset,
+                              random_boss_moveset=random_boss_moveset, specific_boss_moveset=specific_boss_moveset)

@@ -863,3 +863,23 @@ def parse_move_code2str(move_code):
         move_code = move_code.replace("_FAST", "")
     return codename_to_displayname(move_code)
 
+
+# ----------------- Pokemon stats -----------------
+
+
+def get_levels_in_range(min_level, max_level, step_size=5):
+    """
+    Get a list of valid Pokemon levels within a range, inclusive on both ends.
+    :param min_level: Min level, inclusive
+    :param max_level: Max level, inclusive
+    :return: List of all levels, as ints and floats
+    """
+    if step_size == 0.5:
+        levels = [(level, level + 0.5) for level in range(min_level, max_level)]
+        levels = [l for ls in levels for l in ls]
+        levels.append(max_level)
+        return levels
+    levels = list(range(min_level, max_level, step_size))
+    levels.append(max_level)  # Ensure max level always appears on list
+    return levels
+

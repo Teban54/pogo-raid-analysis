@@ -14,10 +14,15 @@ if __name__ == "__main__":
     CONFIG = Config(metadata=META, config_raid_ensemble=CONFIG_RAID_BOSS_ENSEMBLE,
                     config_battle_settings=CONFIG_BATTLE_SETTINGS)
 
-    # --- Comments below were  debug statements, newest to oldest.
+    # --- Comments below were debug statements, newest to oldest.
 
-    cl = CountersList(raid_boss_codename="KYOGRE", raid_tier="Tier 5", metadata=META,
+    """cl = CountersList(raid_boss_codename="ALOMOMOLA", raid_tier="Tier 3", metadata=META,
                       attacker_level=40, battle_settings=CONFIG.battle_settings)
     #print(cl.rankings)
     cl.write_CSV_list(path=COUNTERS_DATA_PATH, best_attacker_moveset=True,
-                       random_boss_moveset=True, specific_boss_moveset=True)
+                       random_boss_moveset=True, specific_boss_moveset=True)"""
+
+    clre = CountersListsRE(ensemble=CONFIG.raid_ensemble, battle_settings=CONFIG.battle_settings,
+                           min_level=30, max_level=50, level_step=5)
+    clre.write_CSV_list(path=COUNTERS_DATA_PATH, best_attacker_moveset=True,
+                       random_boss_moveset=True, specific_boss_moveset=False)

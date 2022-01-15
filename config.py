@@ -72,7 +72,7 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
         "Raid tier": "Tier 5",  # Here, "Tier 5" has all past/present/future bosses
         # "Raid category": "Legacy Tier 5",  # Here, "Tier 5" has only current bosses
         "Filters": {  # Only those without # at the start are applied
-            #"Weak to contender types": ["Ice"],
+            "Weak to contender types": ["Grass"],
             #"Evolution stage": "Final",  # "Final", "Pre-evolution"
             #"Is shadow": False,  # This describes BOSSES, not attackers
             #"Is not shadow": True,
@@ -93,6 +93,9 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
     {
         "Pokemon pool": "By raid tier",
         "Raid tier": "Mega Tier",
+        "Filters": {
+            "Weak to contender types": ["Grass"],
+        },
         "Weight of each Pokemon": 1,
         "Weight of whole group": 25,
         "Forms weight strategy": "combine",
@@ -100,6 +103,9 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
     {
         "Pokemon pool": "By raid tier",
         "Raid tier": "Tier 3",
+        "Filters": {
+            "Weak to contender types": ["Grass"],
+        },
         "Weight of each Pokemon": 1,
         "Weight of whole group": 15,
         "Forms weight strategy": "combine",
@@ -109,6 +115,7 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
         "Raid tier": "Tier 3",
         # "Raid category": "Legacy Tier 5",
         "Filters": {
+            "Weak to contender types": ["Grass"],
             "Evolution stage": "Final",  # "Final", "Pre-evolution"
             "Is not shadow": True,
             "Is not mega": True,
