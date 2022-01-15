@@ -341,8 +341,8 @@ if __name__ == "__main__":
     # --- Comments below were newer debug statements, newest to oldest.
     # I'm too lazy to revert the old ones lol
 
-    CONFIG.raid_ensemble.debug_print_to_csv()
-    CONFIG.battle_settings.debug_print()
+    """CONFIG.raid_ensemble.debug_print_to_csv()
+    CONFIG.battle_settings.debug_print()"""
 
     # --- Comments below were old debug statements, oldest to newest.
 

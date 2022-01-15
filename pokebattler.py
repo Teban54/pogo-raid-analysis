@@ -313,15 +313,12 @@ if __name__ == "__main__":
     """
 
 
-    """data = get_pokebattler_raid_counters("KYOGRE", raid_level=5, pkm_level=40,
-                                        friendship='best friend', weather='NO_WEATHER',
-                                        attack_strategy='dodge specials',
-                                        mega=False)
-    with open("test.json", "w") as fout:
+    data = get_pokebattler_raid_counters(raid_boss_codename="KYOGRE", raid_tier=5)
+    with open("data/json/CountersList_example_Kyogre.json", "w") as fout:
         json.dump(data, fout)
 
 
-    #
+    """
     with open('test.json', 'r') as f:
         data = json.load(f)
     export_as_csv(data, export_data_by_move=True)

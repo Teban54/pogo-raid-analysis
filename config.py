@@ -24,6 +24,10 @@ CONFIG_BATTLE_SETTINGS = {
                                            # Default: Realistic Dodging
 }
 
+CONFIG_SORT_OPTION = "Estimator"  # Sorting option as on Pokebattler:
+# "Overall", "Power", "Win Rate", "Time to Win", "Potions", "Damage (TDO)", "Estimator"
+# Recommended to use either Estimator or TTW; others may not be perfectly supported.
+
 CONFIG_RAID_BOSS_ENSEMBLE = [
     # Lists of raid bosses you want to use.
     # You can specify several groups, each group enclosed by a {} with the format shown below.

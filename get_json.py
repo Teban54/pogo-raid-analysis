@@ -92,11 +92,11 @@ def get_pokebattler_raid_counters(raid_boss=None, raid_boss_codename=None, raid_
     # &includeMegas=true&randomAssistants=-1&numMegas=0#raid-estimator
     if trainer_id:
         url = f'https://fight.pokebattler.com/raids/defenders/{raid_boss_codename}/' \
-              f'levels/RAID_LEVEL_{raid_tier}/attackers/users/{trainer_id}/' \
+              f'levels/{raid_tier}/attackers/users/{trainer_id}/' \
               f'strategies/{battle_settings.attack_strategy_code}/DEFENSE_RANDOM_MC'
     else:
         url = f'https://fight.pokebattler.com/raids/defenders/{raid_boss_codename}/' \
-              f'levels/RAID_LEVEL_{raid_tier}/attackers/levels/{attacker_level}/' \
+              f'levels/{raid_tier}/attackers/levels/{attacker_level}/' \
               f'strategies/{battle_settings.attack_strategy_code}/DEFENSE_RANDOM_MC'
     return do_http_request(url, payload)
 
