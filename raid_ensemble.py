@@ -13,6 +13,10 @@ against each boss in the ensemble (with some normalization across all attackers)
 then taking a weighted average of these estimators using weights specified by the ensemble.
 In the example above, performance against Kyogre would matter twice as much as Giratina-A and
 Giratina-O; Skarmory would be the least important boss.
+
+Each RaidEnsemble can include one or more sets of battle settings, described as a single
+BattleSettings object. Internally, it allows different BattleSettings objects for each boss
+in the ensemble, but currently this can only be achieved via extension with another RaidEnsemble.
 """
 import csv
 
@@ -29,7 +33,7 @@ class RaidEnsemble:
     def __init__(self, raid_bosses=None, pokemons=None, tier=None,
                  weight_multiplier=1,
                  forms_weight_strategy="combine", separate_shadows=True, separate_megas=True,
-                 remove_dupes=True):
+                 remove_dupes=True, battle_settings=None):
         """
         Initialize the raid ensemble.
 
@@ -78,8 +82,13 @@ class RaidEnsemble:
             instead of as a form of the non-mega variant.
             This also means Mega X and Mega Y will be treated as different base Pokemon.
         :param remove_dupes: If True, duplicate raids with the same Pokemon and same tier will be removed.
+        :param battle_settings: Optional BattleSettings object describing specific settings for this ensemble.
+            This will be applied to all bosses in the ensemble. For different settings for each boss,
+            use extend() instead.
+            This BattleSettings can include multiple sets of settings.
         """
         self.bosses = []  # List of tuples: [(RaidBoss object with Pokemon and tier, Weight)]
+        self.battle_settings = None
 
         if ((raid_bosses is None or type(raid_bosses) not in [list, dict])
                 and (pokemons is None or type(pokemons) not in [list, dict] or not tier)):
@@ -91,6 +100,8 @@ class RaidEnsemble:
             separate_shadows=separate_shadows, separate_megas=separate_megas, remove_dupes=remove_dupes)
         self.bosses = self.convert_raid_dict_to_weighted_list(
             raid_dict, weight_multiplier=weight_multiplier, forms_weight_strategy=forms_weight_strategy)
+
+        self.battle_settings = [battle_settings,] * len(self.bosses)
 
     def build_raid_dict(self, raid_bosses=None, pokemons=None, tier=None,
                         separate_shadows=True, separate_megas=True, remove_dupes=True):
@@ -207,10 +218,13 @@ class RaidEnsemble:
 
     def extend(self, ensemble2):
         """
-        Add all tuples in another ensemble to this RaidEnsemble object. Modifies current object.
+        Add all tuples in another ensemble to this RaidEnsemble object, with their respecitve battle
+        settings.
+        Modifies current object.
         :param ensemble2: RaidEnsemble whose content is to be added
         """
         self.bosses.extend(ensemble2.bosses)
+        self.battle_settings.extend(ensemble2.battle_settings)
 
     def apply_multiplier(self, multiplier):
         """
@@ -253,14 +267,15 @@ class RaidEnsemble:
         """
         os.makedirs(os.path.dirname(filename), exist_ok=True)
         with open(filename, mode='w') as csv_file:
-            fieldnames = ['Tier', 'Pokemon', 'Weight']
+            fieldnames = ['Tier', 'Pokemon', 'Weight', 'Battle settings']
             writer = csv.writer(csv_file)
             writer.writerow(fieldnames)
-            for boss, weight in self.bosses:
+            for i, (boss, weight) in enumerate(self.bosses):
                 writer.writerow([
                     parse_raid_tier_code2str(boss.tier),
                     boss.pokemon.displayname,
-                    weight
+                    weight,
+                    self.battle_settings[i].to_string(',')
                 ])
 
 
@@ -292,9 +307,10 @@ def filter_ensemble_by_criteria(ensemble, criterion_raid=None, criterion_pokemon
     :param criterion_pokemon: A criterion function for Pokemon as described above
     :return: New RaidEnsemble object whose raids evaluate to True on both criterion
     """
-    new_list = [(raid, weight) for raid, weight in ensemble.bosses
+    new_list = [i for i, (raid, weight) in enumerate(ensemble.bosses)
                 if (criterion_raid is None or criterion_raid(raid, **kwargs))
                 and (criterion_pokemon is None or criterion_pokemon(raid.pokemon, **kwargs))]
     new_ens = RaidEnsemble([])
-    new_ens.bosses = new_list
+    new_ens.bosses = [ensemble.bosses[i] for i in new_list]
+    new_ens.battle_settings = [ensemble.battle_settings[i] for i in new_list]
     return new_ens

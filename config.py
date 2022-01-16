@@ -14,13 +14,13 @@ CONFIG_BATTLE_SETTINGS = {
     # All battle settings that are allowed on Pokebattler counters list page, EXCEPT attacker level.
     # Can accept lists instead of a single value, e.g. "Weather": ["Extreme", "Rainy"],
     # In that case, simulations for all combinations of all specified options will be generated.
-    "Friendship": "Best",  # No Friend, Good Friend, Great Friend, Ultra Friend, Best Friend (can omit "Friend")
-                           # Default: Best Friend
     "Weather": "Extreme",  # Extreme/No Weather/Neutral, Sunny/Clear, Rainy, Partly Cloudy, Cloudy, Windy, Snow, Fog
                            # Default: Extreme
+    "Friendship": "Best",  # No Friend, Good Friend, Great Friend, Ultra Friend, Best Friend (can omit "Friend")
+                           # Default: Best Friend
     "Attack strategy": "No Dodging",  # No Dodging, Dodge Specials PRO, Dodge All Weave
                                       # Default: No Dodging
-    "Dodge strategy": "Realistic Dodging"  # Perfect Dodging, Realistic Dodging, Realistic Dodging Pro, 25% Dodging
+    "Dodge strategy": "Realistic Dodging"  # Perfect Dodging, Realistic Dodging, Realistic Dodging Pro, 25 Percent Dodging
                                            # Default: Realistic Dodging
 }
 
@@ -65,6 +65,11 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
     # Note that shadows, megas, Alolans and Galarians are always considered separate Pokemon.
     # Currently there's no way to change that.
     #
+    # You can specify specific battle settings for each group listed here (e.g. Best Friends for T5s,
+    # No Friend for T3s). Use the "Battle settings" key, and write all settings as a dict （in a {} block)
+    # just like CONFIG_BATTLE_SETTINGS.
+    # If not specified, CONFIG_BATTLE_SETTINGS will be used.
+    #
     # ----- End of documentation for this section -----
 
     {
@@ -89,6 +94,13 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
         "Weight of each Pokemon": 1,
         "Weight of whole group": 50,
         "Forms weight strategy": "combine",  # "combine" or "separate"
+        "Battle settings": {  # Write group-specific battle settings, in the same format as CONFIG_BATTLE_SETTINGS
+            # If absent, CONFIG_BATTLE_SETTINGS will be used
+            "Friendship": "Best",
+            "Weather": "Extreme",
+            "Attack strategy": "No Dodging",
+            "Dodge strategy": "Realistic Dodging"
+        },
     },
     {
         "Pokemon pool": "By raid tier",
@@ -109,20 +121,26 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
         "Weight of each Pokemon": 1,
         "Weight of whole group": 15,
         "Forms weight strategy": "combine",
-    },
-    {
-        "Pokemon pool": "All Pokemon except above",
-        "Raid tier": "Tier 3",
-        # "Raid category": "Legacy Tier 5",
-        "Filters": {
-            "Weak to contender types": ["Grass"],
-            "Evolution stage": "Final",  # "Final", "Pre-evolution"
-            "Is not shadow": True,
-            "Is not mega": True,
-            "Is not legendary or mythical": True,  # Ignores Glastrier etc
+        "Battle settings": {
+            "Friendship": "No",
         },
-        "Weight of each Pokemon": 1,
-        "Weight of whole group": 10,
-        "Forms weight strategy": "combine",
     },
+    # {
+    #     "Pokemon pool": "All Pokemon except above",
+    #     "Raid tier": "Tier 3",
+    #     # "Raid category": "Legacy Tier 5",
+    #     "Filters": {
+    #         "Weak to contender types": ["Grass"],
+    #         "Evolution stage": "Final",  # "Final", "Pre-evolution"
+    #         "Is not shadow": True,
+    #         "Is not mega": True,
+    #         "Is not legendary or mythical": True,  # Ignores Glastrier etc
+    #     },
+    #     "Weight of each Pokemon": 1,
+    #     "Weight of whole group": 10,
+    #     "Forms weight strategy": "combine",
+    #     "Battle settings": {
+    #         "Friendship": "No",
+    #     },
+    # },
 ]

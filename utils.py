@@ -194,7 +194,7 @@ def parse_dodge_strategy_str2code(dodge_strategy_str):
     to code name (e.g. "DODGE_REACTION_TIME").
 
     :param dodge_strategy_str: Dodge strategy in natural language.
-        Should be one of: "Perfect Dodging", "Realistic Dodging", "Realistic Dodging Pro", "25% Dodging".
+        Should be one of: "Perfect Dodging", "Realistic Dodging", "Realistic Dodging Pro", "25 Percent Dodging".
     :return: Dodge strategy in Pokebattler code name.
         Should be one of: "DODGE_100", "DODGE_REACTION_TIME", "DODGE_REACTION_TIME2", "DODGE_25".
     """
@@ -223,7 +223,7 @@ def parse_dodge_strategy_code2str(dodge_strategy_code):
     :param dodge_strategy_code: Dodge strategy in Pokebattler code name.
         Should be one of: "DODGE_100", "DODGE_REACTION_TIME", "DODGE_REACTION_TIME2", "DODGE_25".
     :return: Dodge strategy in natural language.
-        Should be one of: "Perfect Dodging", "Realistic Dodging", "Realistic Dodging Pro", "25% Dodging".
+        Should be one of: "Perfect Dodging", "Realistic Dodging", "Realistic Dodging Pro", "25 Percent Dodging".
     """
     if not is_dodge_strategy_str(dodge_strategy_code) and not is_dodge_strategy_code(dodge_strategy_code):
         print(f"Warning (parse_dodge_strategy_code2str): Dodge strategy string {dodge_strategy_code} is invalid",
@@ -235,7 +235,7 @@ def parse_dodge_strategy_code2str(dodge_strategy_code):
         "DODGE_100": "Perfect Dodging",
         "DODGE_REACTION_TIME": "Realistic Dodging",
         "DODGE_REACTION_TIME2": "Realistic Dodging Pro",
-        "DODGE_25": "25% Dodging"
+        "DODGE_25": "25 Percent Dodging"
     }
     return conv.get(dodge_strategy_code.upper(), "Realistic Dodging")
 
@@ -874,6 +874,8 @@ def get_levels_in_range(min_level, max_level, step_size=5):
     :param max_level: Max level, inclusive
     :return: List of all levels, as ints and floats
     """
+    if min_level == max_level:
+        return [min_level]
     if step_size == 0.5:
         levels = [(level, level + 0.5) for level in range(min_level, max_level)]
         levels = [l for ls in levels for l in ls]

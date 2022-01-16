@@ -41,16 +41,18 @@ class Config:
         if config_attack_ensemble:
             # TODO
             pass
-        if config_raid_ensemble:
-            self.raid_ensemble = self.parse_raid_ensemble_config(config_raid_ensemble)
         self.battle_settings = self.parse_battle_settings_config(
             config_battle_settings if config_battle_settings
             else {}  # No battle settings specified, use default values
-        )
+        )  # Parse battle settings first, so that it can be used as default for raid ensemble
+        if config_raid_ensemble:
+            self.raid_ensemble = self.parse_raid_ensemble_config(config_raid_ensemble)
 
-    def parse_raid_ensemble_config(self, config):
+    def parse_raid_ensemble_config(self, config, battle_settings=None):
         """
         Construct a RaidEnsemble object from the configuration lists/dicts in config.py.
+        Note: Uses self.battle_settings as default battle settings.
+
         :param config: List (or occasionally dict) describing raid ensemble configs
                 (Typically from config.py)
         :return: RaidEnsemble object
@@ -190,8 +192,15 @@ class Config:
             # So that weights are only assigned to Pokemon that remain after filters
             for filter_key, filter_val in cfg.get('Filters', {}).items():
                 raids = apply_filter(raids, filter_key, filter_val)
+
+            # Parse group-specific battle settings if given
+            settings = (self.parse_battle_settings_config(cfg["Battle settings"])
+                        if "Battle settings" in cfg
+                        else self.battle_settings)
+
             ens = RaidEnsemble(raid_bosses=raids,
-                               weight_multiplier=weight, forms_weight_strategy=forms_weight_strategy)
+                               weight_multiplier=weight, forms_weight_strategy=forms_weight_strategy,
+                               battle_settings=settings)
 
             if weight_group >= 0:
                 cur_weight = ens.get_weight_sum()
@@ -218,9 +227,9 @@ class Config:
                 (Typically from config.py)
         :return: BattleSettings object
         """
-        friendship_str = config.get("Friendship", "Best")
         weather_str = config.get("Weather", "Extreme")
+        friendship_str = config.get("Friendship", "Best")
         attack_strategy_str = config.get("Attack strategy", "No Dodging")
         dodge_strategy_str = config.get("Dodge strategy", "Realistic Dodging")
-        return BattleSettings(friendship_str=friendship_str, weather_str=weather_str,
+        return BattleSettings(weather_str=weather_str, friendship_str=friendship_str,
                               attack_strategy_str=attack_strategy_str,dodge_strategy_str=dodge_strategy_str)

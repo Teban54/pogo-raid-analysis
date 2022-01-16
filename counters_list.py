@@ -21,7 +21,7 @@ from raid_boss import *
 from get_json import *
 
 
-class CountersList:
+class CountersListSingle:
     """
     Class for a single counters list, against a particular raid boss and
     under a particular set of battle settings.
@@ -307,10 +307,10 @@ class CountersList:
                         write_boss_moveset(writer, mvst_key, mvst_val)
 
 
-class CountersListsByLevel:
+class CountersListsMultiBSLevel:
     """
-    Class for multiple counters lists differing by Pokemon level,
-    against a particular raid boss and under a particular set of battle settings.
+    Class for multiple counters lists differing by battle settings and Pokemon level,
+    against a particular raid boss.
     """
     def __init__(self, raid_boss=None, raid_boss_pokemon=None, raid_boss_codename=None, raid_tier="Tier 5",
                  metadata=None, min_level=20, max_level=51, level_step=5,
@@ -328,7 +328,7 @@ class CountersListsByLevel:
         :param max_level: Maximum attacker level to be simulated, inclusive
         :param level_step: Step size for level, either 0.5 or integer
         :param attacker_ensemble: AttackerEnsemble object describing attackers to be used
-        :param battle_settings: BattleSettings object
+        :param battle_settings: BattleSettings object, with one or multiple sets of battle settings.
         :param sort_option: Sorting option, as shown on Pokebattler (natural language or code name)
         """
         self.boss = None
@@ -339,10 +339,14 @@ class CountersListsByLevel:
         self.max_level = max_level
         self.level_step = level_step
         self.sort_option = parse_sort_option_str2code(sort_option)
+        self.has_multiple_battle_settings = False
         self.JSON = None
         self.metadata = metadata
 
-        self.lists_by_level = {}  # Dict mapping attacker level to CountersList object
+        self.lists_by_bs_by_level = {}
+        # {<BattleSettings 1>: {20: <CountersListSingle>, 21: <CountersListSingle>, ...},
+        #  <BattleSettings 2>: {20: <CountersListSingle>, 21: <CountersListSingle>, ...},
+        #  ...}
 
         self.init_raid_boss(raid_boss, raid_boss_pokemon, raid_boss_codename, raid_tier)
         self.init_battle_settings(battle_settings)
@@ -369,31 +373,35 @@ class CountersListsByLevel:
     def init_battle_settings(self, battle_settings=None):
         """
         Loads the BattleSettings object and handles exceptions.
-        This populates the following fields: bottle_settings.
+        This populates the following fields: bottle_settings, has_multiple_battle_settings.
         """
         if not battle_settings:
             print(f"Warning (CountersListsByLevel.__init__): BattleSettings not found. Using default settings.",
                   file=sys.stderr)
             battle_settings = BattleSettings()
-        if battle_settings.is_multiple():
-            print(f"Warning (CountersListsByLevel.__init__): BattleSettings includes multiple settings "
-                  f"(this class requires a single setting). Using the first set.",
-                  file=sys.stderr)
-            battle_settings = battle_settings.indiv_settings[0]
+        # if battle_settings.is_multiple():
+        #     print(f"Warning (CountersListsByLevel.__init__): BattleSettings includes multiple settings "
+        #           f"(this class requires a single setting). Using the first set.",
+        #           file=sys.stderr)
+        #     battle_settings = battle_settings.indiv_settings[0]
         self.battle_settings = battle_settings
+        self.has_multiple_battle_settings = battle_settings.is_multiple()
 
     def create_individual_lists(self):
         """
-        Create individual CounterList objects that store rankings for a particular level.
-        This populates the field lists_by_level.
+        Create individual CounterList objects that store rankings for a particular
+        battle setting and level.
+        This populates the field lists_by_bs_by_level.
         """
-        for level in get_levels_in_range(self.min_level, self.max_level, step_size=self.level_step):
-            print("Creating lists for level " + str(level))
-            self.lists_by_level[level] = CountersList(
-                raid_boss=self.boss, metadata=self.metadata, attacker_level=level,
-                attacker_ensemble=self.attacker_ensemble, battle_settings=self.battle_settings,
-                sort_option=self.sort_option
-            )
+        for bs in self.battle_settings.get_indiv_settings():
+            self.lists_by_bs_by_level[bs] = {}
+            for level in get_levels_in_range(self.min_level, self.max_level, step_size=self.level_step):
+                print(f"- Level {level}, Battle settings {bs}")
+                self.lists_by_bs_by_level[bs][level] = CountersListSingle(
+                    raid_boss=self.boss, metadata=self.metadata, attacker_level=level,
+                    attacker_ensemble=self.attacker_ensemble, battle_settings=bs,
+                    sort_option=self.sort_option
+                )
 
     def write_CSV_list(self, path, best_attacker_moveset=True,
                        random_boss_moveset=True, specific_boss_moveset=False):
@@ -412,18 +420,22 @@ class CountersListsByLevel:
         :param random_boss_moveset: If True, results for the random boss moveset will be included
         :param specific_boss_moveset: If True, results for specific boss movesets will be included
         """
-        for lst in self.lists_by_level.values():
-            lst.write_CSV_list(path, best_attacker_moveset=best_attacker_moveset,
-                              random_boss_moveset=random_boss_moveset, specific_boss_moveset=specific_boss_moveset)
+        for lvl_to_lst in self.lists_by_bs_by_level.values():
+            for lst in lvl_to_lst.values():
+                lst.write_CSV_list(path, best_attacker_moveset=best_attacker_moveset,
+                                   random_boss_moveset=random_boss_moveset, specific_boss_moveset=specific_boss_moveset)
+
 
 class CountersListsRE:
     """
-    Class for multiple counters lists against a RaidEnsemble,
-    under a particular set of battle settings.
+    Class for multiple counters lists against a RaidEnsemble, with possibly multiple
+    levels.
+    Battle settings are typically specified in the RaidEnsemble, and therefore
+    not included in this object.
     """
     def __init__(self, ensemble,
                  metadata=None, min_level=20, max_level=51, level_step=5,
-                 attacker_ensemble=None, battle_settings=None, sort_option="Estimator"):
+                 attacker_ensemble=None, sort_option="Estimator"):
         """
         Initialize the attributes, create individual CountersListsByLevel objects, and get the JSON rankings.
         :param ensemble: RaidBoss object
@@ -432,12 +444,10 @@ class CountersListsRE:
         :param max_level: Maximum attacker level to be simulated, inclusive
         :param level_step: Step size for level, either 0.5 or integer
         :param attacker_ensemble: AttackerEnsemble object describing attackers to be used
-        :param battle_settings: BattleSettings object
         :param sort_option: Sorting option, as shown on Pokebattler (natural language or code name)
         """
         self.ensemble = ensemble
         self.attacker_ensemble = attacker_ensemble
-        self.battle_settings = None
         self.results = None
         self.min_level = min_level
         self.max_level = max_level
@@ -449,46 +459,31 @@ class CountersListsRE:
         self.lists_for_bosses = []  # List of CountersLists objects for each boss,
                                     # in the same order as they're listed in the ensemble
 
-        self.init_battle_settings(battle_settings)
         self.create_individual_lists()
-
-    def init_battle_settings(self, battle_settings=None):
-        """
-        Loads the BattleSettings object and handles exceptions.
-        This populates the following fields: bottle_settings.
-        """
-        if not battle_settings:
-            print(f"Warning (CountersListsRB.__init__): BattleSettings not found. Using default settings.",
-                  file=sys.stderr)
-            battle_settings = BattleSettings()
-        if battle_settings.is_multiple():
-            print(f"Warning (CountersListsRB.__init__): BattleSettings includes multiple settings "
-                  f"(this class requires a single setting). Using the first set.",
-                  file=sys.stderr)
-            battle_settings = battle_settings.indiv_settings[0]
-        self.battle_settings = battle_settings
 
     def create_individual_lists(self):
         """
         Create individual CounterListsByLevel objects that store rankings for each boss.
         This populates the field lists_for_bosses.
         """
-        for boss, weight in self.ensemble.bosses:
+        for i, (boss, weight) in enumerate(self.ensemble.bosses):
             print("Creating lists for " + boss.pokemon_codename)
-            self.lists_for_bosses.append(CountersListsByLevel(
+            bs = self.ensemble.battle_settings[i]
+            self.lists_for_bosses.append(CountersListsMultiBSLevel(
                 raid_boss=boss, metadata=self.metadata,
                 min_level=self.min_level, max_level=self.max_level, level_step=self.level_step,
-                attacker_ensemble=self.attacker_ensemble, battle_settings=self.battle_settings,
+                attacker_ensemble=self.attacker_ensemble, battle_settings=bs,
                 sort_option=self.sort_option
             ))
 
-    def get_boss_weights_counters_list(self):
+    def get_boss_weights_bs_counters_list(self):
         """
-        Build a list containing each RaidBoss, its weight, and its CounterListsByLevel.
+        Build a list containing each RaidBoss, its weight, its BattleSettings,
+        and its CounterListsMultiBSLevel.
         (Essentially breaking down RaidEnsemble back to list and adding counter lists.)
-        :return: List containing (RaidBoss, weight, CounterListsByLevel) tuples
+        :return: List containing (RaidBoss, weight, BattleSettings, CounterListsMultiBSLevel) tuples
         """
-        return [(boss, weight, self.lists_for_bosses[i])
+        return [(boss, weight, self.ensemble.battle_settings[i], self.lists_for_bosses[i])
                 for i, (boss, weight) in enumerate(self.ensemble.bosses)]
 
     def write_CSV_list(self, path, best_attacker_moveset=True,
@@ -510,4 +505,4 @@ class CountersListsRE:
         """
         for lst in self.lists_for_bosses:
             lst.write_CSV_list(path, best_attacker_moveset=best_attacker_moveset,
-                              random_boss_moveset=random_boss_moveset, specific_boss_moveset=specific_boss_moveset)
+                               random_boss_moveset=random_boss_moveset, specific_boss_moveset=specific_boss_moveset)

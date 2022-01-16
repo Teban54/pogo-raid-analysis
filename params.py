@@ -3,7 +3,7 @@ Parameters.
 """
 
 
-# ----------------- INPUT/OUTPUT -----------------
+# ----------------- Input/Output -----------------
 
 
 JSON_DATA_PATH = "data/json/"

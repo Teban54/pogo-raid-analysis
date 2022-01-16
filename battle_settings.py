@@ -13,10 +13,10 @@ class BattleSettings:
     Class for one or more sets of battle settings.
 
     Each instance of BattleSettings contains the following attributes:
-    - Friendship level: No Friend, Good Friend, Great Friend, Ultra Friend, Best Friend.
-      Default is Best Friend.
     - Weather: Extreme/No Weather/Neutral, Sunny/Clear, Rainy, Partly Cloudy, Cloudy, Windy, Snow, Fog.
       Default is Extreme.
+    - Friendship level: No Friend, Good Friend, Great Friend, Ultra Friend, Best Friend.
+      Default is Best Friend.
     - Attack strategy (dodge or not): No Dodging, Dodge Specials PRO, Dodge All Weave.
       Default is No Dodging.
     - Dodge strategy (accuracy of dodging): Perfect Dodging, Realistic Dodging, Realistic Dodging Pro, 25% Dodging.
@@ -29,24 +29,24 @@ class BattleSettings:
     e.g. weather can be ['EXTREME', 'CLEAR', "RAINY'].
     When this happens, the constructor will create a list of BattleSetting objects with all combinations.
     """
-    def __init__(self, friendship_str='best', weather_str='extreme',
+    def __init__(self, weather_str='extreme', friendship_str='best',
                  attack_strategy_str='no dodging', dodge_strategy_str='realistic dodging'):
         """
         Initialize all battle settings.
 
-        :param friendship_str: One or more friendship levels, either as natural language or code name.
         :param weather_str: One or more weathers, either as natural language or code name.
+        :param friendship_str: One or more friendship levels, either as natural language or code name.
         :param attack_strategy_str: One or more attack strategies, either as natural language or code name.
         :param dodge_strategy_str: One or more dodge strategies, either as natural language or code name.
         """
         # Parse everything to code name
-        self.friendship_code = self.init_one_setting(friendship_str, parse_friendship_str2code)
         self.weather_code = self.init_one_setting(weather_str, parse_weather_str2code)
+        self.friendship_code = self.init_one_setting(friendship_str, parse_friendship_str2code)
         self.attack_strategy_code = self.init_one_setting(attack_strategy_str, parse_attack_strategy_str2code)
         self.dodge_strategy_code = self.init_one_setting(dodge_strategy_str, parse_dodge_strategy_str2code)
 
         self.multiple = any(type(setting) is list for setting in [
-            self.friendship_code, self.weather_code, self.attack_strategy_code, self.dodge_strategy_code])
+            self.weather_code, self.friendship_code, self.attack_strategy_code, self.dodge_strategy_code])
         self.indiv_settings = []  # Stores list of individual BattleSettings if this has multiple sets of options
         if self.multiple:
             self.indiv_settings = self.break_down_multiple()
@@ -70,14 +70,14 @@ class BattleSettings:
         each representing a single set of battle settings.
         :return: List of individual BattleSettings objects
         """
-        flist, wlist, alist, dlist = (self.friendship_code, self.weather_code,
+        wlist, flist, alist, dlist = (self.weather_code, self.friendship_code,
                                       self.attack_strategy_code, self.dodge_strategy_code)
-        flist = [flist] if type(flist) is str else flist
         wlist = [wlist] if type(wlist) is str else wlist
+        flist = [flist] if type(flist) is str else flist
         alist = [alist] if type(alist) is str else alist
         dlist = [dlist] if type(dlist) is str else dlist
-        ret = [BattleSettings(friendship_str=f, weather_str=w, attack_strategy_str=a, dodge_strategy_str=d)
-               for f in flist for w in wlist for a in alist for d in dlist]
+        ret = [BattleSettings(weather_str=w, friendship_str=f, attack_strategy_str=a, dodge_strategy_str=d)
+               for w in wlist for f in flist for a in alist for d in dlist]
         return ret
 
     def is_single(self):
@@ -94,15 +94,57 @@ class BattleSettings:
         """
         return self.multiple
 
-    def get_csv_string(self):
-        pass # TODO
+    def get_indiv_settings(self):
+        """
+        Get a list of all individual settings contained in this object.
+        This will be a list containing this object itself if it only has one set of settings.
+        :return: List of individual settings contained
+        """
+        return [self] if self.is_single() else self.indiv_settings
+
+    def to_string(self, delimiter=',', multiple_settings_delimiter=';'):
+        """
+        Convert the object to a String with a given delimiter, in the following order:
+        Weather, Friendship, Attack strategy, Dodge strategy. All in natural language.
+        If this BattleSettings contains multiple individual settings, concatenate them
+        with another delimiter.
+
+        :param delimiter: Delimiter for components of an individual battle setting
+        :param multiple_settings_delimiter: Delimiter between individual battle settings
+        :return: Concatenated string
+        """
+        if self.is_single():
+            return delimiter.join([
+                parse_weather_code2str(self.weather_code),
+                parse_friendship_code2str(self.friendship_code),
+                parse_attack_strategy_code2str(self.attack_strategy_code),
+                parse_dodge_strategy_code2str(self.dodge_strategy_code),
+            ])
+        return multiple_settings_delimiter.join(indiv.to_string(delimiter) for indiv in self.indiv_settings)
+
+    def __str__(self):
+        return self.to_string()
+
+    def __hash__(self):
+        if self.is_single():
+            return hash((self.weather_code, self.friendship_code, self.attack_strategy_code, self.dodge_strategy_code))
+        return hash(tuple([hash(indiv) for indiv in self.indiv_settings]))
+
+    def __eq__(self, other):
+        if type(other) is not BattleSettings:
+            return False
+        if self.is_single() and other.is_single():
+            return ((self.weather_code, self.friendship_code, self.attack_strategy_code, self.dodge_strategy_code)
+                    == (other.weather_code, other.friendship_code, other.attack_strategy_code, other.dodge_strategy_code))
+        if self.is_multiple() and other.is_multiple():
+            return self.indiv_settings == other.indiv_settings
 
     def debug_print(self):
         """
         Debug function that prints the settings to stdout.
         """
         if self.is_single():
-            print(f"{self.friendship_code}, {self.weather_code}, {self.attack_strategy_code}, {self.dodge_strategy_code}")
+            print(f"{self.weather_code}, {self.friendship_code}, {self.attack_strategy_code}, {self.dodge_strategy_code}")
         else:
             for indiv in self.indiv_settings:
                 indiv.debug_print()
