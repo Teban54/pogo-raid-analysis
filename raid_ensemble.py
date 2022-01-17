@@ -3,7 +3,7 @@ This module includes two main types of utilities:
 - A class for ensembles of raid bosses.
 - Utilities for dealing with ensembles.
 
-An "ensemble" is a collection of Pokemon as raid bosses with associated raid tiers,
+A "raid ensemble" is a collection of Pokemon as raid bosses with associated raid tiers,
 and a weight for each raid boss.
 Example: (Kyogre, T5, 1), (Giratina-A, T5, 0.5), (Giratina-O, T5, 0.5), (Skarmory, T3, 0.2), ...
 

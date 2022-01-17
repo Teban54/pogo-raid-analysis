@@ -79,16 +79,16 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
         "Filters": {  # Only those without # at the start are applied
             "Weak to contender types": ["Grass"],
             #"Evolution stage": "Final",  # "Final", "Pre-evolution"
-            #"Is shadow": False,  # This describes BOSSES, not attackers
-            #"Is not shadow": True,
-            #"Is mega": False,
-            #"Is not mega": True,
-            #"Is legendary": False,
-            #"Is not legendary": False,
-            #"Is mythical": False,
-            #"Is not mythical": False,
-            #"Is legendary or mythical": False,
-            #"Is not legendary or mythical": False,
+            #"Must be shadow": False,  # This describes BOSSES, not attackers
+            #"Must be non shadow": True,
+            #"Must be mega": False,
+            #"Must be non mega": True,
+            #"Must be legendary": False,
+            #"Must be non legendary": False,
+            #"Must be mythical": False,
+            #"Must be non mythical": False,
+            #"Must be legendary or mythical": False,
+            #"Must be non legendary or mythical": False,
             # TODO: Add a filter for ignoring certain Pokemon or raids, identified by user
         },
         "Weight of each Pokemon": 1,
@@ -132,9 +132,9 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
     #     "Filters": {
     #         "Weak to contender types": ["Grass"],
     #         "Evolution stage": "Final",  # "Final", "Pre-evolution"
-    #         "Is not shadow": True,
-    #         "Is not mega": True,
-    #         "Is not legendary or mythical": True,  # Ignores Glastrier etc
+    #         "Must be non shadow": True,
+    #         "Must be non mega": True,
+    #         "Must be non legendary or mythical": True,  # Ignores Glastrier etc
     #     },
     #     "Weight of each Pokemon": 1,
     #     "Weight of whole group": 10,

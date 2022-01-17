@@ -28,7 +28,7 @@ class CountersListSingle:
     """
     def __init__(self, raid_boss=None, raid_boss_pokemon=None, raid_boss_codename=None, raid_tier="Tier 5",
                  metadata=None, attacker_level=40, trainer_id=None,
-                 attacker_ensemble=None, battle_settings=None, sort_option="Estimator"):
+                 attacker_criteria=None, battle_settings=None, sort_option="Estimator"):
         """
         Initialize the attributes and get the JSON rankings.
         :param raid_boss: RaidBoss object
@@ -41,12 +41,12 @@ class CountersListSingle:
         :param attacker_level: Attacker level
         :param int trainer_id: Pokebattler Trainer ID if a trainer's own Pokebox is used.
                 If None, use all attackers by level.
-        :param attacker_ensemble: AttackerEnsemble object describing attackers to be used
+        :param attacker_criteria: AttackerCriteria object describing attackers to be used
         :param battle_settings: BattleSettings object
         :param sort_option: Sorting option, as shown on Pokebattler (natural language or code name)
         """
         self.boss = None
-        self.attacker_ensemble = attacker_ensemble
+        self.attacker_criteria = attacker_criteria
         self.battle_settings = None
         self.attacker_level = attacker_level
         self.trainer_id = trainer_id
@@ -120,6 +120,8 @@ class CountersListSingle:
             ('RANDOM', 'RANDOM'): [  # Listed from best to worst (in theory)
                 {
                     "POKEMON_CODENAME": "MAGNETON_SHADOW_FORM",
+                    "LEVEL": "40",  # String because .5
+                    "IV": "15/15/15",
                     "ESTIMATOR": 2.9663813,  # Best moveset; keys match sort_options code names
                     "TIME": 778.319,  # Converted from milliseconds to seconds
                     "DEATHS": 55.08158337255771,
@@ -160,7 +162,11 @@ class CountersListSingle:
             :param def_dict: JSON block for a single defender: {"pokemonId": "MAGNETON_SHADOW_FORM", ...}
             :return: Processed dict in format shown above
             """
-            dct = {"POKEMON_CODENAME": def_dict["pokemonId"], "BY_MOVE": {}}
+            dct = {"POKEMON_CODENAME": def_dict["pokemonId"],
+                   "LEVEL": def_dict["stats"]["level"],
+                   "IV": "{}/{}/{}".format(
+                       def_dict["stats"]["attack"], def_dict["stats"]["defense"], def_dict["stats"]["stamina"]),
+                   "BY_MOVE": {}}
             dct.update(parse_timings(def_dict["total"]))
             for mvst_blk in reversed(def_dict["byMove"]):  # Pokebattler lists movesets from worst to best
                 dct["BY_MOVE"][(mvst_blk["move1"], mvst_blk["move2"])] = parse_timings(mvst_blk["result"])
@@ -230,18 +236,20 @@ class CountersListSingle:
         :param random_boss_moveset: If True, results for the random boss moveset will be included
         :param specific_boss_moveset: If True, results for specific boss movesets will be included
         """
-        def get_row_attacker_moveset(writer, boss_mvst_key, atk_codename, atk_mvst_key, atk_mvst_val):
+        def get_row_attacker_moveset(writer, boss_mvst_key, atk_dict, atk_mvst_key, atk_mvst_val):
             """
             Get row to write for an attacker with a specific moveset against a certain boss moveset.
             :param boss_mvst_key: Tuple with boss moveset, as key from self.rankings
-            :param atk_codename: Attacker's code name
+            :param atk_dict: Dict with attacker name and data (with all movesets)
             :param atk_mvst_key: Tuple with boss moveset, as key from BY_MOVE dicts
             :param atk_mvst_val: Dict , as key from BY_MOVE dicts
             """
             return {
-                "Attacker": atk_codename,
+                "Attacker": atk_dict["POKEMON_CODENAME"],
                 "Attacker Fast Move": atk_mvst_key[0],
                 "Attacker Charged Move": atk_mvst_key[1],
+                "Attacker Level": atk_dict["LEVEL"],
+                "Attacker IV": atk_dict["IV"],
                 "Boss": self.boss.pokemon_codename,
                 "Boss Fast Move": boss_mvst_key[0],
                 "Boss Charged Move": boss_mvst_key[1],
@@ -259,7 +267,7 @@ class CountersListSingle:
             atk_mvsts = atk_dict["BY_MOVE"].keys()
             if best_attacker_moveset:
                 atk_mvsts = [self.get_best_moveset_for_attacker(boss_mvst_key, attacker_data=atk_dict)]
-            return [get_row_attacker_moveset(writer, boss_mvst_key, atk_dict["POKEMON_CODENAME"],
+            return [get_row_attacker_moveset(writer, boss_mvst_key, atk_dict,
                                              atk_mvst, atk_dict["BY_MOVE"][atk_mvst])
                     for atk_mvst in atk_mvsts]
 
@@ -295,6 +303,7 @@ class CountersListSingle:
         os.makedirs(os.path.dirname(filename), exist_ok=True)
         with open(filename, mode='w') as csv_file:
             fieldnames = ["Attacker", "Attacker Fast Move", "Attacker Charged Move",
+                          "Attacker Level", "Attacker IV",
                           "Boss", "Boss Fast Move", "Boss Charged Move",
                           "Estimator", "Time to Win", "Deaths"]
             writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
@@ -314,7 +323,7 @@ class CountersListsMultiBSLevel:
     """
     def __init__(self, raid_boss=None, raid_boss_pokemon=None, raid_boss_codename=None, raid_tier="Tier 5",
                  metadata=None, min_level=20, max_level=51, level_step=5,
-                 attacker_ensemble=None, battle_settings=None, sort_option="Estimator"):
+                 attacker_criteria=None, battle_settings=None, sort_option="Estimator"):
         """
         Initialize the attributes, create individual CountersList objects, and get the JSON rankings.
         :param raid_boss: RaidBoss object
@@ -327,12 +336,12 @@ class CountersListsMultiBSLevel:
         :param min_level: Minimum attacker level to be simulated, inclusive
         :param max_level: Maximum attacker level to be simulated, inclusive
         :param level_step: Step size for level, either 0.5 or integer
-        :param attacker_ensemble: AttackerEnsemble object describing attackers to be used
+        :param attacker_criteria: AttackerCriteria object describing attackers to be used
         :param battle_settings: BattleSettings object, with one or multiple sets of battle settings.
         :param sort_option: Sorting option, as shown on Pokebattler (natural language or code name)
         """
         self.boss = None
-        self.attacker_ensemble = attacker_ensemble
+        self.attacker_criteria = attacker_criteria
         self.battle_settings = None
         self.results = None
         self.min_level = min_level
@@ -399,7 +408,7 @@ class CountersListsMultiBSLevel:
                 print(f"- Level {level}, Battle settings {bs}")
                 self.lists_by_bs_by_level[bs][level] = CountersListSingle(
                     raid_boss=self.boss, metadata=self.metadata, attacker_level=level,
-                    attacker_ensemble=self.attacker_ensemble, battle_settings=bs,
+                    attacker_criteria=self.attacker_criteria, battle_settings=bs,
                     sort_option=self.sort_option
                 )
 
@@ -435,7 +444,7 @@ class CountersListsRE:
     """
     def __init__(self, ensemble,
                  metadata=None, min_level=20, max_level=51, level_step=5,
-                 attacker_ensemble=None, sort_option="Estimator"):
+                 attacker_criteria=None, sort_option="Estimator"):
         """
         Initialize the attributes, create individual CountersListsByLevel objects, and get the JSON rankings.
         :param ensemble: RaidBoss object
@@ -443,11 +452,11 @@ class CountersListsRE:
         :param min_level: Minimum attacker level to be simulated, inclusive
         :param max_level: Maximum attacker level to be simulated, inclusive
         :param level_step: Step size for level, either 0.5 or integer
-        :param attacker_ensemble: AttackerEnsemble object describing attackers to be used
+        :param attacker_criteria: AttackerCriteria object describing attackers to be used
         :param sort_option: Sorting option, as shown on Pokebattler (natural language or code name)
         """
         self.ensemble = ensemble
-        self.attacker_ensemble = attacker_ensemble
+        self.attacker_criteria = attacker_criteria
         self.results = None
         self.min_level = min_level
         self.max_level = max_level
@@ -472,7 +481,7 @@ class CountersListsRE:
             self.lists_for_bosses.append(CountersListsMultiBSLevel(
                 raid_boss=boss, metadata=self.metadata,
                 min_level=self.min_level, max_level=self.max_level, level_step=self.level_step,
-                attacker_ensemble=self.attacker_ensemble, battle_settings=bs,
+                attacker_criteria=self.attacker_criteria, battle_settings=bs,
                 sort_option=self.sort_option
             ))
 

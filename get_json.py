@@ -66,7 +66,7 @@ def get_pokebattler_raid_counters(raid_boss=None, raid_boss_codename=None, raid_
               file=sys.stderr)
         battle_settings = battle_settings.indiv_settings[0]
 
-    # TODO: Replace the remaining payload and parameters with AttackerEnsemble object
+    # TODO: Replace the remaining payload and parameters with AttackerCriteria object
     payload = {
         "sort": parse_sort_option_str2code(sort_option),
         "weatherCondition": battle_settings.weather_code,

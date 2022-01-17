@@ -449,6 +449,29 @@ def criterion_legendary_or_mythical(pokemon, is_legendary_or_mythical=False,
             else True)
 
 
+def criterion_is_type(pokemon, type_single=None):
+    """
+    Return True if the Pokemon is of the specified type.
+
+    :param pokemon: Pokemon object to be evaluated on
+    :param type_single: Type to be checked, as either natural language or code name
+    :return: True if the Pokemon is of this type
+    """
+    type_single = parse_type_code2str(type_single)
+    return type_single in pokemon.types
+
+
+def criterion_is_types(pokemon, types=None):
+    """
+    Return True if the Pokemon is of one of the specified types.
+
+    :param pokemon: Pokemon object to be evaluated on
+    :param types: List of types to be checked, as either natural language or code name
+    :return: True if the Pokemon is of one of these types
+    """
+    return any(criterion_is_type(pokemon, tp) for tp in types)
+
+
 def group_pokemon_by_basename(pkm_list, separate_shadows=True, separate_megas=True):
     """
     Given a list of Pokemon, group them into a dict with the base names as keys,

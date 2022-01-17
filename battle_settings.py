@@ -2,6 +2,23 @@
 This module includes two main types of utilities:
 - A class that contains one or more sets of battle settings.
 - Utilities for dealing with battle settings.
+
+Each instance of BattleSettings contains the following attributes:
+- Weather: Extreme/No Weather/Neutral, Sunny/Clear, Rainy, Partly Cloudy, Cloudy, Windy, Snow, Fog.
+  Default is Extreme.
+- Friendship level: No Friend, Good Friend, Great Friend, Ultra Friend, Best Friend.
+  Default is Best Friend.
+- Attack strategy (dodge or not): No Dodging, Dodge Specials PRO, Dodge All Weave.
+  Default is No Dodging.
+- Dodge strategy (accuracy of dodging): Perfect Dodging, Realistic Dodging, Realistic Dodging Pro, 25% Dodging.
+  Default is Realistic Dodging.
+(All settings are stored as code names. Display names are shown here for easier comprehension.)
+Notably, it does NOT contain attacker level, which falls under AttackerCriteria.
+
+Each instance can contain one or more sets of possible battle settings.
+To represent multiple sets of battle settings, some attributes may contain multiple values to choose from,
+e.g. weather can be ['EXTREME', 'CLEAR', "RAINY'].
+When this happens, the constructor will create a list of BattleSetting objects with all combinations.
 """
 
 from utils import *
@@ -11,23 +28,6 @@ from params import *
 class BattleSettings:
     """
     Class for one or more sets of battle settings.
-
-    Each instance of BattleSettings contains the following attributes:
-    - Weather: Extreme/No Weather/Neutral, Sunny/Clear, Rainy, Partly Cloudy, Cloudy, Windy, Snow, Fog.
-      Default is Extreme.
-    - Friendship level: No Friend, Good Friend, Great Friend, Ultra Friend, Best Friend.
-      Default is Best Friend.
-    - Attack strategy (dodge or not): No Dodging, Dodge Specials PRO, Dodge All Weave.
-      Default is No Dodging.
-    - Dodge strategy (accuracy of dodging): Perfect Dodging, Realistic Dodging, Realistic Dodging Pro, 25% Dodging.
-      Default is Realistic Dodging.
-    (All settings are stored as code names. Display names are shown here for easier comprehension.)
-    Notably, it does NOT contain attacker level.
-
-    Each instance can contain one or more sets of possible battle settings.
-    To represent multiple sets of battle settings, some attributes may contain multiple values to choose from,
-    e.g. weather can be ['EXTREME', 'CLEAR', "RAINY'].
-    When this happens, the constructor will create a list of BattleSetting objects with all combinations.
     """
     def __init__(self, weather_str='extreme', friendship_str='best',
                  attack_strategy_str='no dodging', dodge_strategy_str='realistic dodging'):

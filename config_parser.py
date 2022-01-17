@@ -16,7 +16,7 @@ class Config:
     """
     Class for a configuration of a particular run.
     """
-    def __init__(self, metadata, config_attack_ensemble=None, config_raid_ensemble=None, config_battle_settings=None):
+    def __init__(self, metadata, config_attacker_criteria=None, config_raid_ensemble=None, config_battle_settings=None):
         """
         Initialize the configuration.
 
@@ -26,10 +26,10 @@ class Config:
         - Battle settings: Weather, friendship, etc.
 
         This constructor takes in config.py settings for each of the 3 components,
-        then construct the corresponding objects (AttackEnsemble, RaidEnsemble, BattleSettings).
+        then construct the corresponding objects (AttackerCriteria, RaidEnsemble, BattleSettings).
 
         :param metadata: Current Metadata object
-        :param config_attack_ensemble: Config for attacker ensemble from config.py
+        :param config_attacker_criteria: Config for attacker criteria from config.py
         :param config_raid_ensemble: Config for raid ensemble from config.py
         :param config_battle_settings: Config for battle settings from config.py
         """
@@ -38,7 +38,7 @@ class Config:
         self.raid_ensemble = None
         self.battle_settings = None
 
-        if config_attack_ensemble:
+        if config_attacker_criteria:
             # TODO
             pass
         self.battle_settings = self.parse_battle_settings_config(
@@ -129,35 +129,37 @@ class Config:
                 return filter_raids_by_criteria(raids_list, criterion_pokemon=criterion_evo_stage,
                                                 keep_final_stage=(filter_val.lower() == 'final'),
                                                 keep_pre_evo=('pre' in filter_val.lower()))
-            if filter_key == "is shadow" or filter_key == "is not shadow":
+            if filter_key in ["must be shadow", "must be non shadow", "must be non-shadow"]:
                 return filter_raids_by_criteria(raids_list,
                     criterion_pokemon=criterion_shadow,
-                    is_shadow=(filter_key == "is shadow" and filter_val),
-                    is_not_shadow=(filter_key == "is not shadow" and filter_val)
+                    is_shadow=(filter_key == "must be shadow" and filter_val),
+                    is_not_shadow=(filter_key in ["must be non shadow", "must be non-shadow"] and filter_val)
                 )
-            if filter_key == "is mega" or filter_key == "is not mega":
+            if filter_key in ["must be mega", "must be non mega", "must be non-mega"]:
                 return filter_raids_by_criteria(raids_list,
                     criterion_pokemon=criterion_mega,
-                    is_mega=(filter_key == "is mega" and filter_val),
-                    is_not_mega=(filter_key == "is not mega" and filter_val)
+                    is_mega=(filter_key == "must be mega" and filter_val),
+                    is_not_mega=(filter_key in ["must be non mega", "must be non-mega"] and filter_val)
                 )
-            if filter_key == "is legendary" or filter_key == "is not legendary":
+            if filter_key in ["must be legendary", "must be non legendary", "must be non-legendary"]:
                 return filter_raids_by_criteria(raids_list,
                     criterion_pokemon=criterion_legendary,
-                    is_legendary=(filter_key == "is legendary" and filter_val),
-                    is_not_legendary=(filter_key == "is not legendary" and filter_val)
+                    is_legendary=(filter_key == "must be legendary" and filter_val),
+                    is_not_legendary=(filter_key in ["must be non legendary", "must be non-legendary"] and filter_val)
                 )
-            if filter_key == "is mythical" or filter_key == "is not mythical":
+            if filter_key in ["must be mythical", "must be non mythical", "must be non-mythical"]:
                 return filter_raids_by_criteria(raids_list,
                     criterion_pokemon=criterion_mythical,
-                    is_mythical=(filter_key == "is mythical" and filter_val),
-                    is_not_mythical=(filter_key == "is not mythical" and filter_val)
+                    is_mythical=(filter_key == "must be mythical" and filter_val),
+                    is_not_mythical=(filter_key in ["must be non mythical", "must be non-mythical"] and filter_val)
                 )
-            if filter_key == "is legendary or mythical" or filter_key == "is not legendary or mythical":
+            if filter_key in ["must be legendary or mythical", "must be non legendary or mythical",
+                              "must be non-legendary or mythical"]:
                 return filter_raids_by_criteria(raids_list,
                     criterion_pokemon=criterion_legendary_or_mythical,
-                    is_legendary_or_mythical=(filter_key == "is legendary or mythical" and filter_val),
-                    is_not_legendary_or_mythical=(filter_key == "is not legendary or mythical" and filter_val)
+                    is_legendary_or_mythical=(filter_key == "must be legendary or mythical" and filter_val),
+                    is_not_legendary_or_mythical=(filter_key in [
+                        "must be non legendary or mythical", "must be non-legendary or mythical"] and filter_val)
                 )
             print(f"Error (Config.parse_raid_ensemble_config): "
                   f"Filter criteria {filter_key} does not match one of expected values.",

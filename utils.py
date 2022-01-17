@@ -556,6 +556,23 @@ def parse_type_code2str(type_code):
     return type_code.split("_")[-1].capitalize()
 
 
+def parse_type_codes2strs(type_codes):
+    """
+    Parse list of Pokemon types value from a possible mix of code names (e.g. "POKEMON_TYPE_DRAGON")
+    and natural words (e.g. "Dragon") to a list of reformatted natural words.
+
+    :param type_codes: List of Pokemon types in Pokebattler code name or natural language
+    :return: List of Pokemon types in natural language
+    """
+    # Sanity check
+    for type_code in type_codes:
+        if not is_type_str(type_code) and not is_type_code(type_code):
+            print(f"Warning (parse_type_codes2strs): Pokemon type string {type_code} is invalid. "
+                  f"Removed from the parsed list.", file=sys.stderr)
+    return [parse_type_code2str(code) for code in type_codes
+            if is_type_str(code) or is_type_code(code)]
+
+
 def parse_type_strs2inds(type_strs):
     """
     Given a list of Pokemon types as natural language (e.g. "dragon"),
@@ -885,3 +902,15 @@ def get_levels_in_range(min_level, max_level, step_size=5):
     levels.append(max_level)  # Ensure max level always appears on list
     return levels
 
+
+def is_level_in_range(level, min_level, max_level):
+    """
+    Check if a given Pokemon level, either as string or numerical value, is within a range.
+    :param level: Pokemon level, as string, int or float
+    :param min_level: Min level, inclusive
+    :param max_level: Max level, inclusive
+    :return: True if the level is within range [min_level, max_level]
+    """
+    if type(level) is str:
+        level = float(level)  # Float because .5
+    return min_level <= level <= max_level
