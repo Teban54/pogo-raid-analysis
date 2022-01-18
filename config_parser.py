@@ -7,8 +7,9 @@ from utils import *
 from pokemon import *
 from raid_boss import *
 from move import *
-from raid_ensemble import *
 from config import *
+from attacker_criteria import *
+from raid_ensemble import *
 from battle_settings import *
 
 
@@ -21,12 +22,12 @@ class Config:
         Initialize the configuration.
 
         There are 3 main components of a config:
-        - Attacker ensemble: List or type of attackers, and their min/max levels. (TBC)
+        - Attacker criteria: Sets of criteria for attackers, such as types, min/max levels, etc.
         - Raid boss ensemble: List of bosses and their weights.
         - Battle settings: Weather, friendship, etc.
 
         This constructor takes in config.py settings for each of the 3 components,
-        then construct the corresponding objects (AttackerCriteria, RaidEnsemble, BattleSettings).
+        then construct the corresponding objects (AttackerCriteriaMulti, RaidEnsemble, BattleSettings).
 
         :param metadata: Current Metadata object
         :param config_attacker_criteria: Config for attacker criteria from config.py
@@ -34,13 +35,12 @@ class Config:
         :param config_battle_settings: Config for battle settings from config.py
         """
         self.meta = metadata
-        self.attack_ensemble = None
+        self.attacker_criteria_multi = None
         self.raid_ensemble = None
         self.battle_settings = None
 
         if config_attacker_criteria:
-            # TODO
-            pass
+            self.attacker_criteria_multi = self.parse_attacker_criteria_config(config_attacker_criteria)
         self.battle_settings = self.parse_battle_settings_config(
             config_battle_settings if config_battle_settings
             else {}  # No battle settings specified, use default values
@@ -48,7 +48,44 @@ class Config:
         if config_raid_ensemble:
             self.raid_ensemble = self.parse_raid_ensemble_config(config_raid_ensemble)
 
-    def parse_raid_ensemble_config(self, config, battle_settings=None):
+    def parse_attacker_criteria_config(self, config):
+        """
+        Construct an AttackerCriteriaMulti object from the configuration lists/dicts in config.py.
+
+        :param config: List (or occasionally dict) describing attacker criteria configs
+                (Typically from config.py)
+        :return: AttackerCriteriaMulti object
+        """
+        if type(config) is dict:
+            config = [config]
+        # config is a list of dicts, and each dict represents a set of criteria
+
+        sets = []  # Each element is a single AttackerCriteria object
+        for cfg in config:
+            sets.append(AttackerCriteria(
+                metadata=self.meta,
+                pokemon_types=cfg.get("Pokemon types", None),
+                fast_types=cfg.get("Fast move types", None),
+                charged_types=cfg.get("Charged move types", None),
+                min_level=cfg.get("Min level", MIN_LEVEL_DEFAULT),
+                max_level=cfg.get("Max level", MAX_LEVEL_DEFAULT),
+                level_step=cfg.get("Level step size", LEVEL_STEP_DEFAULT),
+                pokemon_codenames=cfg.get("Pokemon code names", None),
+                trainer_id=cfg.get("Trainer ID", None),
+                is_legendary=cfg.get("Must be legendary", False),
+                is_not_legendary=cfg.get("Must be non legendary", False),
+                is_mythical=cfg.get("Must be mythical", False),
+                is_not_mythical=cfg.get("Must be non mythical", False),
+                is_legendary_or_mythical=cfg.get("Must be legendary or mythical", False),
+                is_not_legendary_or_mythical=cfg.get("Must be non legendary or mythical", False),
+                is_shadow=cfg.get("Must be shadow", False),
+                is_not_shadow=cfg.get("Must be non shadow", False),
+                is_mega=cfg.get("Must be mega", False),
+                is_not_mega=cfg.get("Must be non mega", False)
+            ))
+        return AttackerCriteriaMulti(sets, metadata=self.meta)
+
+    def parse_raid_ensemble_config(self, config):
         """
         Construct a RaidEnsemble object from the configuration lists/dicts in config.py.
         Note: Uses self.battle_settings as default battle settings.
@@ -192,8 +229,8 @@ class Config:
 
             # Apply filter first before building RaidEnsemble,
             # So that weights are only assigned to Pokemon that remain after filters
-            for filter_key, filter_val in cfg.get('Filters', {}).items():
-                raids = apply_filter(raids, filter_key, filter_val)
+            for fkey, fval in cfg.get('Filters', {}).items():
+                raids = apply_filter(raids, fkey, fval)
 
             # Parse group-specific battle settings if given
             settings = (self.parse_battle_settings_config(cfg["Battle settings"])

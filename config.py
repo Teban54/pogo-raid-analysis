@@ -28,6 +28,45 @@ CONFIG_SORT_OPTION = "Estimator"  # Sorting option as on Pokebattler:
 # "Overall", "Power", "Win Rate", "Time to Win", "Potions", "Damage (TDO)", "Estimator"
 # Recommended to use either Estimator or TTW; others may not be perfectly supported.
 
+CONFIG_ATTACKER_CRITERIA = [
+    # Lists of attackers you want to view for analysis.
+    # You can specify several sets of criteria, each enclosed by a {} with the format shown below.
+    # An attacker will be considered if it satisfies any single {} block.
+    # To use a filter, delete the first # at the start of the line, and then change the value as you wish.
+    # To drop a filter, add back the # at the start of the line.
+    {
+        # Each block contains several filters. To meet the criteria for this particular {} block,
+        # an attacker needs to pass all the filters (example: Ice charged move, levels 30-50, AND non-shadow).
+        "Charged move types": ["Grass"],  # This is an approximation for "attacker type",
+                                          # and should be used primarily for type-based filtering.
+                                          # Always put "" around type names!
+        "Min level": 30,
+        "Max level": 50,
+        "Level step size": 5,  # Can be as low as 0.5, but recommend 5 for efficiency
+        "Pokemon code names": [],  # Specific Pokemon to be considered,
+            # e.g. "MEWTWO", "VENUSAUR_SHADOW_FORM", "RAICHU_ALOLA_FORM",
+            # "SLOWBRO_GALARIAN_FORM", "CHARIZARD_MEGA_Y"
+            # NOTE: This does NOT guarantee the required Pokemon will be on the counters list,
+            # especially if the Pokemon is too weak to be in top 32 against bosses.
+            # To guarantee results, add it to your Pokebox and use "Trainer ID" option instead.
+        "Trainer ID": 52719,  # Pokebattler trainer ID
+                              # If this is provided, only Pokemon from that Trainer's Pokebox are used
+        "Must be shadow": False,  # This describes attackers, not bosses
+        "Must be non shadow": True,
+        "Must be mega": False,
+        "Must be non mega": True,
+        "Must be legendary": False,
+        "Must be non legendary": False,
+        "Must be mythical": False,
+        "Must be non mythical": False,
+        "Must be legendary or mythical": False,
+        "Must be non legendary or mythical": False,
+        "Pokemon types": [],  # Only use this if you know what you're doing
+        "Fast move types": [],  # Only use this if you know what you're doing
+    },
+    # Add more {} blocks here if needed
+]
+
 CONFIG_RAID_BOSS_ENSEMBLE = [
     # Lists of raid bosses you want to use.
     # You can specify several groups, each group enclosed by a {} with the format shown below.

@@ -52,7 +52,7 @@ class AttackerCriteria:
     Class for a single set of criteria for attackers.
     """
     def __init__(self, metadata=None, pokemon_types=None, fast_types=None, charged_types=None,
-                 min_level=30, max_level=50, level_step=5,
+                 min_level=MIN_LEVEL_DEFAULT, max_level=MAX_LEVEL_DEFAULT, level_step=LEVEL_STEP_DEFAULT,
                  pokemon_codenames=None, trainer_id=None,
                  is_legendary=False, is_not_legendary=False,
                  is_mythical=False, is_not_mythical=False,
@@ -95,7 +95,7 @@ class AttackerCriteria:
             :param types: None, a string or a list mixed with code and natural names.
             :return: Well-formatted list, or None if the filter shouldn't be active
             """
-            if types is None:
+            if types is None or not types:
                 return None
             parsed = parse_type_codes2strs(types if type(types) is list else [types])
             if not parsed:  # Empty, as a result of all inputs removed
@@ -176,6 +176,7 @@ class AttackerCriteria:
             criterion_shadow(pokemon, self.is_shadow, self.is_not_shadow),
             criterion_mega(pokemon, self.is_mega, self.is_not_mega),
         ])
+
 
 class AttackerCriteriaMulti:
     """
@@ -267,4 +268,13 @@ class AttackerCriteriaMulti:
         if any(not criteria.pokemon_types for criteria in self.sets):
             return None
         return list(set([parse_type_str2code(tp)  # Code name
+                         for criteria in self.sets for tp in criteria.pokemon_types]))
+
+    def pokebattler_trainer_ids(self):
+        """
+        Return all Pokebattler Trainer IDs that will possibly be needed for simulations.
+        :return: List of Pokebattler trainer IDs in all sets of criteria.
+                 If it includes None, simulations by level will be needed.
+        """
+        return list(set([criteria.trainer_id  # Includes None
                          for criteria in self.sets for tp in criteria.pokemon_types]))

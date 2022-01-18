@@ -231,3 +231,10 @@ SPECIAL_MOVE_DISPLAY_NAMES = {
     'TRI_ATTACK': 'Tri-Attack',
 }
 
+
+# ----------------- Default Settings -----------------
+
+
+MIN_LEVEL_DEFAULT = 30
+MAX_LEVEL_DEFAULT = 50
+LEVEL_STEP_DEFAULT = 5

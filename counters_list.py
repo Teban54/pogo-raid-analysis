@@ -322,7 +322,8 @@ class CountersListsMultiBSLevel:
     against a particular raid boss.
     """
     def __init__(self, raid_boss=None, raid_boss_pokemon=None, raid_boss_codename=None, raid_tier="Tier 5",
-                 metadata=None, min_level=20, max_level=51, level_step=5,
+                 metadata=None,
+                 min_level=MIN_LEVEL_DEFAULT, max_level=MAX_LEVEL_DEFAULT, level_step=LEVEL_STEP_DEFAULT,
                  attacker_criteria=None, battle_settings=None, sort_option="Estimator"):
         """
         Initialize the attributes, create individual CountersList objects, and get the JSON rankings.
@@ -443,7 +444,8 @@ class CountersListsRE:
     not included in this object.
     """
     def __init__(self, ensemble,
-                 metadata=None, min_level=20, max_level=51, level_step=5,
+                 metadata=None,
+                 min_level=MIN_LEVEL_DEFAULT, max_level=MAX_LEVEL_DEFAULT, level_step=LEVEL_STEP_DEFAULT,
                  attacker_criteria=None, sort_option="Estimator"):
         """
         Initialize the attributes, create individual CountersListsByLevel objects, and get the JSON rankings.
