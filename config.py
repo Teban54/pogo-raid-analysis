@@ -43,28 +43,34 @@ CONFIG_ATTACKER_CRITERIA = [
         "Min level": 30,
         "Max level": 50,
         "Level step size": 5,  # Can be as low as 0.5, but recommend 5 for efficiency
-        "Pokemon code names": [],  # Specific Pokemon to be considered,
+        # "Pokemon code names": [],  # Specific Pokemon to be considered,
             # e.g. "MEWTWO", "VENUSAUR_SHADOW_FORM", "RAICHU_ALOLA_FORM",
             # "SLOWBRO_GALARIAN_FORM", "CHARIZARD_MEGA_Y"
             # NOTE: This does NOT guarantee the required Pokemon will be on the counters list,
             # especially if the Pokemon is too weak to be in top 32 against bosses.
             # To guarantee results, add it to your Pokebox and use "Trainer ID" option instead.
-        "Trainer ID": 52719,  # Pokebattler trainer ID
-                              # If this is provided, only Pokemon from that Trainer's Pokebox are used
-        "Must be shadow": False,  # This describes attackers, not bosses
-        "Must be non shadow": True,
-        "Must be mega": False,
-        "Must be non mega": True,
-        "Must be legendary": False,
-        "Must be non legendary": False,
-        "Must be mythical": False,
-        "Must be non mythical": False,
-        "Must be legendary or mythical": False,
-        "Must be non legendary or mythical": False,
-        "Pokemon types": [],  # Only use this if you know what you're doing
-        "Fast move types": [],  # Only use this if you know what you're doing
+        # "Trainer ID": 52719,  # Pokebattler trainer ID
+        #                       # If this is provided, only Pokemon from that Trainer's Pokebox are used
+        # "Must be shadow": False,  # This describes attackers, not bosses
+        # "Must be non shadow": False,
+        # "Must be mega": False,
+        # "Must be non mega": False,
+        # "Must be legendary": False,
+        # "Must be non legendary": False,
+        # "Must be mythical": False,
+        # "Must be non mythical": False,
+        # "Must be legendary or mythical": False,
+        # "Must be non legendary or mythical": False,
+        # "Pokemon types": [],  # Only use this if you know what you're doing
+        # "Fast move types": [],  # Only use this if you know what you're doing
     },
     # Add more {} blocks here if needed
+    # {
+    #     "Charged move types": ["Ice"],
+    #     "Min level": 30,
+    #     "Max level": 50,
+    #     "Level step size": 5,
+    # },
 ]
 
 CONFIG_RAID_BOSS_ENSEMBLE = [

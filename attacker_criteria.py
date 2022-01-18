@@ -162,7 +162,7 @@ class AttackerCriteria:
                       f"IGNORING the charged move typing check.",
                       file=sys.stderr)
                 ignore_charged = True
-            charged = self.metadata.find_move(fast_codename)
+            charged = self.metadata.find_move(charged_codename)
 
         return all([
             not self.pokemon_types or criterion_is_types(pokemon, self.pokemon_types),
