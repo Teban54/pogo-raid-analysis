@@ -20,12 +20,15 @@ if __name__ == "__main__":
 
     #CONFIG.raid_ensemble.debug_print_to_csv()
 
-    """clre = CountersListsRE(ensemble=CONFIG.raid_ensemble,
-                           min_level=40, max_level=40, level_step=5)
-    clre.write_CSV_list(path=COUNTERS_DATA_PATH, best_attacker_moveset=False,
-                       random_boss_moveset=True, specific_boss_moveset=True)"""
+    clre = CountersListsRE(ensemble=CONFIG.raid_ensemble, attacker_criteria_multi=CONFIG.attacker_criteria_multi)
+    clre.load_and_parse_JSON()
+    clre.filter_rankings()
+    clre.write_CSV_list(path=COUNTERS_DATA_PATH, filtered=False,
+                        best_attacker_moveset=True, random_boss_moveset=True, specific_boss_moveset=False)
+    clre.write_CSV_list(path=COUNTERS_DATA_PATH, filtered=True,
+                        best_attacker_moveset=True, random_boss_moveset=True, specific_boss_moveset=False)
 
-    ACM = CONFIG.attacker_criteria_multi
+    """ACM = CONFIG.attacker_criteria_multi
     for AC in ACM.sets:
         print(AC.pokemon_types,AC.fast_types,AC.charged_types,AC.min_level,AC.max_level,
               AC.level_step,AC.pokemon_codenames,AC.trainer_id,AC.is_legendary,AC.is_not_legendary,
@@ -39,6 +42,8 @@ if __name__ == "__main__":
                                 fast_codename="BITE_FAST",
                                 charged_codename="GRASS_KNOT",
                                 level="40"))
+    print(ACM.all_levels())
+    print(ACM.pokebattler_legendary(), ACM.pokebattler_shadow(), ACM.pokebattler_mega())"""
 
     """cl = CountersList(raid_boss_codename="ALOMOMOLA", raid_tier="Tier 3", metadata=META,
                       attacker_level=40, battle_settings=CONFIG.battle_settings)

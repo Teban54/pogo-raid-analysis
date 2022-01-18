@@ -73,15 +73,16 @@ class Config:
                 pokemon_codenames=cfg.get("Pokemon code names", None),
                 trainer_id=cfg.get("Trainer ID", None),
                 is_legendary=cfg.get("Must be legendary", False),
-                is_not_legendary=cfg.get("Must be non legendary", False),
+                is_not_legendary=cfg.get("Must be non legendary", cfg.get("Must be non-legendary", False)),
                 is_mythical=cfg.get("Must be mythical", False),
-                is_not_mythical=cfg.get("Must be non mythical", False),
+                is_not_mythical=cfg.get("Must be non mythical", cfg.get("Must be non-mythical", False)),
                 is_legendary_or_mythical=cfg.get("Must be legendary or mythical", False),
-                is_not_legendary_or_mythical=cfg.get("Must be non legendary or mythical", False),
+                is_not_legendary_or_mythical=cfg.get(
+                    "Must be non legendary or mythical", cfg.get("Must be non-legendary or mythical", False)),
                 is_shadow=cfg.get("Must be shadow", False),
-                is_not_shadow=cfg.get("Must be non shadow", False),
+                is_not_shadow=cfg.get("Must be non shadow", cfg.get("Must be non-shadow", False)),
                 is_mega=cfg.get("Must be mega", False),
-                is_not_mega=cfg.get("Must be non mega", False)
+                is_not_mega=cfg.get("Must be non mega", cfg.get("Must be non-mega", False))
             ))
         return AttackerCriteriaMulti(sets, metadata=self.meta)
 

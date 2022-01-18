@@ -37,12 +37,12 @@ CONFIG_ATTACKER_CRITERIA = [
     {
         # Each block contains several filters. To meet the criteria for this particular {} block,
         # an attacker needs to pass all the filters (example: Ice charged move, levels 30-50, AND non-shadow).
-        "Charged move types": ["Grass"],  # This is an approximation for "attacker type",
+        "Charged move types": ["Ground"],  # This is an approximation for "attacker type",
                                           # and should be used primarily for type-based filtering.
                                           # Always put "" around type names!
-        "Min level": 30,
+        "Min level": 40,
         "Max level": 50,
-        "Level step size": 5,  # Can be as low as 0.5, but recommend 5 for efficiency
+        "Level step size": 10,  # Can be as low as 0.5, but recommend 5 for efficiency
         # "Pokemon code names": [],  # Specific Pokemon to be considered,
             # e.g. "MEWTWO", "VENUSAUR_SHADOW_FORM", "RAICHU_ALOLA_FORM",
             # "SLOWBRO_GALARIAN_FORM", "CHARIZARD_MEGA_Y"
@@ -56,9 +56,9 @@ CONFIG_ATTACKER_CRITERIA = [
         # "Must be mega": False,
         # "Must be non mega": False,
         # "Must be legendary": False,
-        # "Must be non legendary": False,
+        # "Must be non legendary": True,
         # "Must be mythical": False,
-        # "Must be non mythical": False,
+        # "Must be non mythical": True,
         # "Must be legendary or mythical": False,
         # "Must be non legendary or mythical": False,
         # "Pokemon types": [],  # Only use this if you know what you're doing
@@ -67,9 +67,9 @@ CONFIG_ATTACKER_CRITERIA = [
     # Add more {} blocks here if needed
     # {
     #     "Charged move types": ["Ice"],
-    #     "Min level": 30,
+    #     "Min level": 40,
     #     "Max level": 50,
-    #     "Level step size": 5,
+    #     "Level step size": 10,
     # },
 ]
 
@@ -122,7 +122,7 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
         "Raid tier": "Tier 5",  # Here, "Tier 5" has all past/present/future bosses
         # "Raid category": "Legacy Tier 5",  # Here, "Tier 5" has only current bosses
         "Filters": {  # Only those without # at the start are applied
-            "Weak to contender types": ["Grass"],
+            "Weak to contender types": ["Dragon"],
             #"Evolution stage": "Final",  # "Final", "Pre-evolution"
             #"Must be shadow": False,  # This describes BOSSES, not attackers
             #"Must be non shadow": True,
@@ -147,29 +147,29 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
             "Dodge strategy": "Realistic Dodging"
         },
     },
-    {
-        "Pokemon pool": "By raid tier",
-        "Raid tier": "Mega Tier",
-        "Filters": {
-            "Weak to contender types": ["Grass"],
-        },
-        "Weight of each Pokemon": 1,
-        "Weight of whole group": 25,
-        "Forms weight strategy": "combine",
-    },
-    {
-        "Pokemon pool": "By raid tier",
-        "Raid tier": "Tier 3",
-        "Filters": {
-            "Weak to contender types": ["Grass"],
-        },
-        "Weight of each Pokemon": 1,
-        "Weight of whole group": 15,
-        "Forms weight strategy": "combine",
-        "Battle settings": {
-            "Friendship": "No",
-        },
-    },
+    # {
+    #     "Pokemon pool": "By raid tier",
+    #     "Raid tier": "Mega Tier",
+    #     "Filters": {
+    #         "Weak to contender types": ["Fire"],
+    #     },
+    #     "Weight of each Pokemon": 1,
+    #     "Weight of whole group": 25,
+    #     "Forms weight strategy": "combine",
+    # },
+    # {
+    #     "Pokemon pool": "By raid tier",
+    #     "Raid tier": "Tier 3",
+    #     "Filters": {
+    #         "Weak to contender types": ["Grass"],
+    #     },
+    #     "Weight of each Pokemon": 1,
+    #     "Weight of whole group": 15,
+    #     "Forms weight strategy": "combine",
+    #     "Battle settings": {
+    #         "Friendship": "No",
+    #     },
+    # },
     # {
     #     "Pokemon pool": "All Pokemon except above",
     #     "Raid tier": "Tier 3",
