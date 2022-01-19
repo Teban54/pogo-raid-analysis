@@ -8,6 +8,7 @@ Parameters.
 
 JSON_DATA_PATH = "data/json/"
 COUNTERS_DATA_PATH = "data/counters/"
+OUTPUTS_DATA_PATH = "data/outputs/"
 
 
 # ----------------- Ensembles -----------------

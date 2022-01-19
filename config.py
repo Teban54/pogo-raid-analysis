@@ -8,7 +8,7 @@ so that you don't have to change everything whenever you want to run something d
 from params import *
 
 
-CONFIG_WRITE_ALL_COUNTERS = True
+#CONFIG_WRITE_ALL_COUNTERS = True
 
 CONFIG_BATTLE_SETTINGS = {
     # All battle settings that are allowed on Pokebattler counters list page, EXCEPT attacker level.
@@ -189,3 +189,55 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
     #     },
     # },
 ]
+
+CONFIG_ESTIMATOR_SCALING_SETTINGS = {
+    # Estimator Scaling: Estimators of different attackers against a particular boss are typically
+    # scaled before their averages across bosses are taken.
+    # A "baseline" is chosen - typically the best attacker, whose estimator will be scaled to 1.0.
+    # All other estimators will be scaled proportionally.
+    # These settings allow you to enable or disable scaling and choose the baseline.
+    #
+    # Example: Against Terrakion with random moveset, Mewtwo has estimator 1.64, Kyogre 2.10, Empoleon 2.19.
+    # Suppose we're analyzing water attackers. If scaling is not enabled, 2.10 and 2.19 will be used for averages.
+    # If "Baseline chosen before filter" is True, the best attacker before filtering attackers by type,
+    # Mewtwo (1.64), will become the baseline.
+    # Mewtwo's estimator is scaled to 1.0, Kyogre 2.10/1.64=1.28, Empoleon 2.19/1.64=1.34.
+    # If "Baseline chosen before filter" is False, AFTER filtering attackers by type (AttackerCriteria),
+    # the best attacker, Kyogre (2.10), will become the baseline.
+    # Kyogre's estimator is scaled to 1.0, and Empoleon 2.19/2.10=1.04.
+    #
+    # Why is scaling useful? This is primarily to standardize the absolute size of estimators against
+    # various bosses, allowing them to carry equivalent weight when averages are taken.
+    # With no scaling, harder bosses like Lugia and Deoxys-D, which often have estimators above 3,
+    # will have disproportionally greater impact on the average estimators of attackers.
+    # In other words, an attacker that does particularly well against Lugia will be overestimated.
+    # This is also why the "Baseline chosen before filter" is necessary, to make sure comparisons
+    # of attackers of one type (water) don't become skewed by better attackers from other types (Mewtwo).
+    #
+    # "Baseline boss moveset" can be either "Random", "Easiest" or "Hardest".
+    # The best attacker against this particular moveset (aka. the smallest estimator value), either
+    # before or after filtering, will be used as the baseline.
+    # Here, "Easiest" is defined as the moveset for which the minimum estimator is obtained.
+    #
+    # Example: T5 Reshiram, no shadows/megas, no attacker filtering.
+    # With random moveset, Rhyperior is #1, estimator 2.26.
+    # With DB/DM, Dialga is #1, estimator 2.36. This is the largest #1 estimator for any Reshiram moveset.
+    # With FF/Crunch, Rayquaza is #1, estimator 2.07. This is the smallest #1 estimator for any Reshiram moveset.
+    # Baseline chosen with each option: "Random" - 2.26, "Easiest" - 2.07, "Hardest" - 2.36.
+    # Note that once a baseline is chosen, it will be consistent across all boss movesets. For example,
+    # if set to "Easiest", then all attackers against random moveset will have estimator at least 2.26/2.07=1.09.
+    #
+    # In practice, two options for "Baseline boss moveset" have merit and can be used accordingly:
+    # - Random: This allows the best attacker to consistently have estimator 1.0 for best comparison across bosses.
+    #           It also gives an easy way to check the difficulty of a boss moveset (below or above 1.0).
+    # - Easiest: This gives greater importance to bosses with "hard" movesets, which are often coverages against
+    #            its counters. If even the best attacker takes a huge hit, its scaled estimator against random
+    #            moveset will be above 1.0. Thus, this raid boss will matter more when taking averages across
+    #            bosses, and the averages will favor attackers who perform consistently against bosses and movesets.
+    #            Example: T5 Palkia. Rayquaza's random estimator is 2.27, but only 1.98 against DT/AT.
+    #            With "Easiest", Rayquaza's scaled estimator will become 1.14. The fact that it's significantly
+    #            above 1.0 suggests T5 Palkia is a hard boss with a troublesome worst-case moveset.
+    "Enable": True,
+    "Baseline chosen before filter": False,
+    "Baseline boss moveset": "Random",  # "Random", "Easiest", "Hardest"
+}
