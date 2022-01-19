@@ -230,10 +230,12 @@ CONFIG_ESTIMATOR_SCALING_SETTINGS = {
     # In practice, two options for "Baseline boss moveset" have merit and can be used accordingly:
     # - Random: This allows the best attacker to consistently have estimator 1.0 for best comparison across bosses.
     #           It also gives an easy way to check the difficulty of a boss moveset (below or above 1.0).
-    # - Easiest: This gives greater importance to bosses with "hard" movesets, which are often coverages against
-    #            its counters. If even the best attacker takes a huge hit, its scaled estimator against random
-    #            moveset will be above 1.0. Thus, this raid boss will matter more when taking averages across
-    #            bosses, and the averages will favor attackers who perform consistently against bosses and movesets.
+    # - Easiest: This gives greater importance to bosses with "hard" movesets, which are often coverages
+    #            against its counters. If even the best attacker takes a huge hit (like Rayquaza against
+    #            dragons), its scaled estimator against random moveset will be above 1.0. Thus, this raid boss
+    #            will matter more when taking averages across bosses.
+    #            The averages will then favor attackers who perform more consistently against bosses and movesets,
+    #            like Dialga, by giving greater weight to bosses where its gap with Rayquaza is smaller.
     #            Example: T5 Palkia. Rayquaza's random estimator is 2.27, but only 1.98 against DT/AT.
     #            With "Easiest", Rayquaza's scaled estimator will become 1.14. The fact that it's significantly
     #            above 1.0 suggests T5 Palkia is a hard boss with a troublesome worst-case moveset.
