@@ -37,7 +37,7 @@ CONFIG_ATTACKER_CRITERIA = [
     {
         # Each block contains several filters. To meet the criteria for this particular {} block,
         # an attacker needs to pass all the filters (example: Ice charged move, levels 30-50, AND non-shadow).
-        "Charged move types": ["Ground"],  # This is an approximation for "attacker type",
+        "Charged move types": ["Grass"],  # This is an approximation for "attacker type",
                                           # and should be used primarily for type-based filtering.
                                           # Always put "" around type names!
         "Min level": 40,
@@ -122,7 +122,7 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
         "Raid tier": "Tier 5",  # Here, "Tier 5" has all past/present/future bosses
         # "Raid category": "Legacy Tier 5",  # Here, "Tier 5" has only current bosses
         "Filters": {  # Only those without # at the start are applied
-            "Weak to contender types": ["Dragon"],
+            "Weak to contender types": ["Grass"],
             #"Evolution stage": "Final",  # "Final", "Pre-evolution"
             #"Must be shadow": False,  # This describes BOSSES, not attackers
             #"Must be non shadow": True,
@@ -214,23 +214,23 @@ CONFIG_ESTIMATOR_SCALING_SETTINGS = {
     # This is also why the "Baseline chosen before filter" is necessary, to make sure comparisons
     # of attackers of one type (water) don't become skewed by better attackers from other types (Mewtwo).
     #
-    # "Baseline boss moveset" can be either "Random", "Easiest" or "Hardest".
+    # "Baseline boss moveset" can be either "random", "easiest" or "hardest".
     # The best attacker against this particular moveset (aka. the smallest estimator value), either
     # before or after filtering, will be used as the baseline.
-    # Here, "Easiest" is defined as the moveset for which the minimum estimator is obtained.
+    # Here, "easiest" is defined as the moveset for which the minimum estimator is obtained.
     #
     # Example: T5 Reshiram, no shadows/megas, no attacker filtering.
     # With random moveset, Rhyperior is #1, estimator 2.26.
     # With DB/DM, Dialga is #1, estimator 2.36. This is the largest #1 estimator for any Reshiram moveset.
     # With FF/Crunch, Rayquaza is #1, estimator 2.07. This is the smallest #1 estimator for any Reshiram moveset.
-    # Baseline chosen with each option: "Random" - 2.26, "Easiest" - 2.07, "Hardest" - 2.36.
+    # Baseline chosen with each option: "random" - 2.26, "easiest" - 2.07, "hardest" - 2.36.
     # Note that once a baseline is chosen, it will be consistent across all boss movesets. For example,
-    # if set to "Easiest", then all attackers against random moveset will have estimator at least 2.26/2.07=1.09.
+    # if set to "easiest", then all attackers against random moveset will have estimator at least 2.26/2.07=1.09.
     #
     # In practice, two options for "Baseline boss moveset" have merit and can be used accordingly:
-    # - Random: This allows the best attacker to consistently have estimator 1.0 for best comparison across bosses.
+    # - random: This allows the best attacker to consistently have estimator 1.0 for best comparison across bosses.
     #           It also gives an easy way to check the difficulty of a boss moveset (below or above 1.0).
-    # - Easiest: This gives greater importance to bosses with "hard" movesets, which are often coverages
+    # - easiest: This gives greater importance to bosses with "hard" movesets, which are often coverages
     #            against its counters. If even the best attacker takes a huge hit (like Rayquaza against
     #            dragons), its scaled estimator against random moveset will be above 1.0. Thus, this raid boss
     #            will matter more when taking averages across bosses.
@@ -239,7 +239,7 @@ CONFIG_ESTIMATOR_SCALING_SETTINGS = {
     #            Example: T5 Palkia. Rayquaza's random estimator is 2.27, but only 1.98 against DT/AT.
     #            With "Easiest", Rayquaza's scaled estimator will become 1.14. The fact that it's significantly
     #            above 1.0 suggests T5 Palkia is a hard boss with a troublesome worst-case moveset.
-    "Enable": True,
-    "Baseline chosen before filter": False,
-    "Baseline boss moveset": "Random",  # "Random", "Easiest", "Hardest"
+    "Enabled": True,  # Default: True
+    "Baseline chosen before filter": False,  # Default: False
+    "Baseline boss moveset": "random",  # "random", "easiest", "hardest"
 }

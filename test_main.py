@@ -14,19 +14,24 @@ if __name__ == "__main__":
     CONFIG = Config(metadata=META,
                     config_attacker_criteria=CONFIG_ATTACKER_CRITERIA,
                     config_raid_ensemble=CONFIG_RAID_BOSS_ENSEMBLE,
-                    config_battle_settings=CONFIG_BATTLE_SETTINGS)
+                    config_battle_settings=CONFIG_BATTLE_SETTINGS,
+                    config_sort_option=CONFIG_SORT_OPTION,
+                    config_scaling_settings=CONFIG_ESTIMATOR_SCALING_SETTINGS)
 
     # --- Comments below were debug statements, newest to oldest.
 
     #CONFIG.raid_ensemble.debug_print_to_csv()
 
-    clre = CountersListsRE(ensemble=CONFIG.raid_ensemble, attacker_criteria_multi=CONFIG.attacker_criteria_multi)
-    clre.load_and_parse_JSON()
+    clre = CountersListsRE(ensemble=CONFIG.raid_ensemble, attacker_criteria_multi=CONFIG.attacker_criteria_multi,
+                           scaling_settings=CONFIG.scaling_settings)
+    """clre.load_and_parse_JSON()
     clre.filter_rankings()
-    clre.write_CSV_list(path=COUNTERS_DATA_PATH, filtered=False,
-                        best_attacker_moveset=True, random_boss_moveset=True, specific_boss_moveset=False)
-    clre.write_CSV_list(path=COUNTERS_DATA_PATH, filtered=True,
-                        best_attacker_moveset=True, random_boss_moveset=True, specific_boss_moveset=False)
+    clre.scale_estimators(baseline_boss_moveset="easiest")"""
+    clre.load_and_process_all_lists()
+    clre.write_CSV_list(path=COUNTERS_DATA_PATH, raw=False,
+                        best_attacker_moveset=True, random_boss_moveset=True, specific_boss_moveset=True)
+    clre.write_CSV_list(path=COUNTERS_DATA_PATH, raw=True,
+                        best_attacker_moveset=True, random_boss_moveset=True, specific_boss_moveset=True)
 
     """ACM = CONFIG.attacker_criteria_multi
     for AC in ACM.sets:

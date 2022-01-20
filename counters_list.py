@@ -14,6 +14,7 @@ Currently, it includes classes for the following:
 This module also includes utilities for dealing with single or multiple counters lists.
 """
 import csv
+import copy
 
 from utils import *
 from params import *
@@ -75,10 +76,10 @@ class CountersListSingle:
             self.boss = raid_boss
             return
         if not raid_boss_pokemon and not raid_boss_codename:
-            print(f"Error (CountersList.__init__): Raid boss, Pokemon or code name not found", file=sys.stderr)
+            print(f"Error (CountersListSingle.__init__): Raid boss, Pokemon or code name not found", file=sys.stderr)
             return
         if not raid_tier:
-            print(f"Error (CountersList.__init__): Raid boss or tier not found", file=sys.stderr)
+            print(f"Error (CountersListSingle.__init__): Raid boss or tier not found", file=sys.stderr)
             return
         raid_tier = parse_raid_tier_str2code(raid_tier)
         self.boss = RaidBoss(pokemon_obj=raid_boss_pokemon, pokemon_codename=raid_boss_codename,
@@ -90,12 +91,12 @@ class CountersListSingle:
         This populates the following fields: attacker_criteria_multi.
         """
         if not attacker_criteria_multi:
-            print(f"Warning (CountersList.__init__): AttackerCriteriaMulti not found. Using default criteria.",
+            print(f"Warning (CountersListSingle.__init__): AttackerCriteriaMulti not found. Using default criteria.",
                   file=sys.stderr)
             attacker_criteria_multi = AttackerCriteriaMulti(sets=[AttackerCriteria(metadata=self.metadata)],
                                                             metadata=self.metadata)
         if type(attacker_criteria_multi) is AttackerCriteria:
-            print(f"Warning (CountersList.__init__): Only a singular AttackerCriteria passed in, "
+            print(f"Warning (CountersListSingle.__init__): Only a singular AttackerCriteria passed in, "
                   f"expected AttackerCriteriaMulti. Packaging it into multi criteria.",
                   file=sys.stderr)
             attacker_criteria_multi = AttackerCriteriaMulti(sets=[attacker_criteria_multi],
@@ -108,11 +109,11 @@ class CountersListSingle:
         This populates the following fields: bottle_settings.
         """
         if not battle_settings:
-            print(f"Warning (CountersList.__init__): BattleSettings not found. Using default settings.",
+            print(f"Warning (CountersListSingle.__init__): BattleSettings not found. Using default settings.",
                   file=sys.stderr)
             battle_settings = BattleSettings()
         if battle_settings.is_multiple():
-            print(f"Warning (CountersList.__init__): BattleSettings includes multiple settings "
+            print(f"Warning (CountersListSingle.__init__): BattleSettings includes multiple settings "
                   f"(this class requires a single setting). Using the first set.",
                   file=sys.stderr)
             battle_settings = battle_settings.indiv_settings[0]
@@ -139,7 +140,8 @@ class CountersListSingle:
         - Only keeping relevant data for each counter
         - Put the counters into correct order (JSON has them reversed)
 
-        After this, self.rankings will be in the following format:
+        After this, both self.rankings_raw and self.rankings will be in the following format.
+        self.rankings will be a copy of self.rankings_raw (different dict objects).
         {
             ('RANDOM', 'RANDOM'): [  # Listed from best to worst (in theory)
                 {
@@ -147,11 +149,13 @@ class CountersListSingle:
                     "LEVEL": "40",  # String because .5
                     "IV": "15/15/15",
                     "ESTIMATOR": 2.9663813,  # Best moveset; keys match sort_options code names
+                    # If estimator has been scaled, an "ESTIMATOR_UNSCALED" key will appear here
                     "TIME": 778.319,  # Converted from milliseconds to seconds
                     "DEATHS": 55.08158337255771,
                     "BY_MOVE": {  # Listed from best to worst (in theory)
                         ('SPARK_FAST', 'FRUSTRATION'): {
                             "ESTIMATOR": 5.7496815,
+                            # If estimator has been scaled, an "ESTIMATOR_UNSCALED" key will appear here
                             "TIME": 1509.393,
                             "DEATHS": 106.56669881823231,
                         },
@@ -203,12 +207,16 @@ class CountersListSingle:
             defenders = [parse_defender(blk) for blk in lst_mvst["defenders"]]
             defenders.reverse()  # Pokebattler lists counters from #30 to #1
             self.rankings_raw[(lst_mvst["move1"], lst_mvst["move2"])] = defenders
+        self.rankings = copy.deepcopy(self.rankings_raw)
 
     def filter_rankings(self):
         """
-        Filter the raw rankings list that has been parsed from JSON, according to
-        AttackerCriteriaMulti.
-        This populates the self.rankings field in the same format as self.rankings_raw.
+        Filter the current rankings list in self.rankings according to AttackerCriteriaMulti.
+        This CHANGES the value of self.rankings such that only attackers that meet
+        AttackerCriteriaMulti are retained.
+
+        In theory, when this function is called, self.rankings should have at least been parsed
+        from JSON, and may or may not have been scaled depending on scaling settings.
         """
         def filter_attacker(atker_dict):
             """
@@ -234,10 +242,67 @@ class CountersListSingle:
             atker_filter.update(atker_filter["BY_MOVE"][best_moveset])
             return atker_filter
 
-        self.rankings = {}
-        for mvst_key, mvst_val in self.rankings_raw.items():
-            self.rankings[mvst_key] = [filter_attacker(atker_dict) for atker_dict in mvst_val]
-            self.rankings[mvst_key] = [atker_filter for atker_filter in self.rankings[mvst_key] if atker_filter]
+        new_rankings = {}
+        for mvst_key, mvst_val in self.rankings.items():
+            new_rankings[mvst_key] = [filter_attacker(atker_dict) for atker_dict in mvst_val]
+            new_rankings[mvst_key] = [atker_filter for atker_filter in new_rankings[mvst_key]
+                                      if atker_filter]  # Remove Nones
+        self.rankings = new_rankings
+
+    def scale_estimators(self, baseline_boss_moveset="random", scaling_factor=None):
+        """
+        Scale the estimators of all attackers currently stored in self.rankings, such that
+        the best attacker gets an estimator of 1.0, and all others scaled proportionally.
+
+        This CHANGES the value of self.rankings, specifically all estimator values.
+        Keeps the original values with key "ESTIMATOR_UNSCALED".
+        This function does not consider whether self.rankings has been filtered based on
+        AttackerCriteriaMulti.
+
+        For details on how scaling works, refer to CONFIG_ESTIMATOR_SCALING_SETTINGS in config.py.
+
+        This function also allows a specific scaling factor, but it's only for internal use
+        once the required scaling factor is computed.
+
+        :param baseline_boss_moveset: The boss moveset that should be used to set the baseline,
+            should be one of "random", "easiest" and "hardest".
+            The minimum estimator across all attackers against this specific boss moveset will
+            be used as the baseline, and will be scaled to 1.0.
+        :param scaling_factor: A specific scaling factor to be applied to all estimators, if applicable.
+            If None, the scaling factor will be computed based on the data and baseline options.
+            This is for internal use only. When called elsewhere, always set it to None.
+        """
+        if scaling_factor is not None:
+            for mvst_key, atkers_list in self.rankings.items():
+                for atker_dict in atkers_list:
+                    atker_dict["ESTIMATOR_UNSCALED"] = atker_dict["ESTIMATOR"]
+                    atker_dict["ESTIMATOR"] *= scaling_factor
+                    for (fast_codename, charged_codename), timings_dict in atker_dict["BY_MOVE"].items():
+                        timings_dict["ESTIMATOR_UNSCALED"] = timings_dict["ESTIMATOR"]
+                        timings_dict["ESTIMATOR"] *= scaling_factor
+            return
+
+        # Scaling factor not given, first parse baseline setting
+        baseline_boss_moveset = baseline_boss_moveset.lower()
+        if baseline_boss_moveset not in ["random", "easiest", "hardest"]:
+            print(f"Error (CountersListSingle.scale_estimators): Boss moveset option {baseline_boss_moveset} is invalid. "
+                  f"Using 'random' as default.",
+                  file=sys.stderr)
+            baseline_boss_moveset = "random"
+
+        # Determine baseline
+        baselines_per_boss_moveset = {
+            mvst_key: min(atker_dict["ESTIMATOR"] for atker_dict in atkers_list)
+            for mvst_key, atkers_list in self.rankings.items()
+        }
+        baseline = baselines_per_boss_moveset[("RANDOM", "RANDOM")]
+        if baseline_boss_moveset == "easiest":
+            baseline = min(min_est for mvst, min_est in baselines_per_boss_moveset.items()
+                           if mvst != ("RANDOM", "RANDOM"))
+        elif baseline_boss_moveset == "hardest":
+            baseline = max(min_est for mvst, min_est in baselines_per_boss_moveset.items()
+                           if mvst != ("RANDOM", "RANDOM"))
+        self.scale_estimators(scaling_factor=1.0 / baseline)
 
     def get_best_moveset_for_attacker(self, attacker_data=None,
                                       boss_moveset=None, attacker_codename=None, attacker=None,
@@ -265,12 +330,12 @@ class CountersListSingle:
             # Attempt to find attacker data from overall rankings
             ranking_use = self.rankings if filtered_data else self.rankings_raw
             if boss_moveset not in ranking_use:
-                print(f"Error (CountersList.get_best_moveset_for_attacker): "
+                print(f"Error (CountersListSingle.get_best_moveset_for_attacker): "
                       f"Boss moveset {boss_moveset} not found.",
                       file=sys.stderr)
                 return None, None
             if not attacker_codename and not attacker:
-                print(f"Error (CountersList.get_best_moveset_for_attacker): No attacker specified.",
+                print(f"Error (CountersListSingle.get_best_moveset_for_attacker): No attacker specified.",
                       file=sys.stderr)
                 return None, None
 
@@ -285,12 +350,13 @@ class CountersListSingle:
         return min(attacker_data["BY_MOVE"].keys(),
                    key=lambda mvst: attacker_data["BY_MOVE"][mvst][self.sort_option])
 
-    def write_CSV_list(self, path, filtered=True,
+    def write_CSV_list(self, path, raw=True,
                        best_attacker_moveset=True, random_boss_moveset=True, specific_boss_moveset=False):
         """
         Write the counters list to CSV in list format, with the following headers:
         Attacker, Attacker Fast Move, Attacker Charged Move, Attacker Level, Attacker IV,
-        Boss, Boss Fast Move, Boss Charged Move, Estimator, Time to Win, Deaths
+        Boss, Boss Fast Move, Boss Charged Move, Estimator, Time to Win, Deaths,
+        Estimator Unscaled (if applicable)
         All fields are code names.
 
         The file will be stored in the following location:
@@ -302,8 +368,8 @@ class CountersListSingle:
         # Remove level from header
 
         :param path: Root path that stores all CSV file outputs
-        :param filtered: If True, use filtered data that only contain attackers that meet criteria.
-            If False, use raw data that contains all attackers.
+        :param raw: If True, use final self.rankings after scaling and filtering.
+            If False, use raw data (self.rankings_raw) without scaling and filtering.
         :param best_attacker_moveset: If True, only the best moveset for each attacker will be written
         :param random_boss_moveset: If True, results for the random boss moveset will be included
         :param specific_boss_moveset: If True, results for specific boss movesets will be included
@@ -316,7 +382,7 @@ class CountersListSingle:
             :param atk_mvst_key: Tuple with boss moveset, as key from BY_MOVE dicts
             :param atk_mvst_val: Dict , as key from BY_MOVE dicts
             """
-            return {
+            ret = {
                 "Attacker": atk_dict["POKEMON_CODENAME"],
                 "Attacker Fast Move": atk_mvst_key[0],
                 "Attacker Charged Move": atk_mvst_key[1],
@@ -329,6 +395,9 @@ class CountersListSingle:
                 "Time to Win": atk_mvst_val["TIME"],
                 "Deaths": atk_mvst_val["DEATHS"],
             }
+            if "ESTIMATOR_UNSCALED" in atk_mvst_val:
+                ret["Estimator Unscaled"] = atk_mvst_val["ESTIMATOR_UNSCALED"]
+            return ret
 
         def get_rows_attacker(boss_mvst_key, atk_dict):
             """
@@ -357,16 +426,16 @@ class CountersListSingle:
             writer.writerows(rows)
 
         if not random_boss_moveset and not specific_boss_moveset:
-            print(f"Warning (CountersList.write_CSV_list): Neither random boss moveset nor specific boss moveset "
+            print(f"Warning (CountersListSingle.write_CSV_list): Neither random boss moveset nor specific boss moveset "
                   f"are chosen. Nothing written.",
                   file=sys.stderr)
             return
-        rankings_use = self.rankings if filtered else self.rankings_raw
+        rankings_use = self.rankings if raw else self.rankings_raw
 
         filename = os.path.join(
             path, "Lists", self.boss.tier, self.boss.pokemon_codename,
             "{}Level {},{},{},{},{},{}.csv".format(
-                "Filtered," if filtered else "",
+                "Filtered," if raw else "",
                 self.attacker_level,
                 parse_sort_option_code2str(self.sort_option),
                 parse_weather_code2str(self.battle_settings.weather_code),
@@ -380,7 +449,7 @@ class CountersListSingle:
             fieldnames = ["Attacker", "Attacker Fast Move", "Attacker Charged Move",
                           "Attacker Level", "Attacker IV",
                           "Boss", "Boss Fast Move", "Boss Charged Move",
-                          "Estimator", "Time to Win", "Deaths"]
+                          "Estimator", "Time to Win", "Deaths", "Estimator Unscaled"]
             writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
             writer.writeheader()
             if random_boss_moveset:
@@ -439,10 +508,10 @@ class CountersListsMultiBSLevel:
             self.boss = raid_boss
             return
         if not raid_boss_pokemon and not raid_boss_codename:
-            print(f"Error (CountersList.__init__): Raid boss, Pokemon or code name not found", file=sys.stderr)
+            print(f"Error (CountersListsMultiBSLevel.__init__): Raid boss, Pokemon or code name not found", file=sys.stderr)
             return
         if not raid_tier:
-            print(f"Error (CountersList.__init__): Raid boss or tier not found", file=sys.stderr)
+            print(f"Error (CountersListsMultiBSLevel.__init__): Raid boss or tier not found", file=sys.stderr)
             return
         raid_tier = parse_raid_tier_str2code(raid_tier)
         self.boss = RaidBoss(pokemon_obj=raid_boss_pokemon, pokemon_codename=raid_boss_codename,
@@ -517,7 +586,28 @@ class CountersListsMultiBSLevel:
             for lst in lvl_to_lst.values():
                 lst.filter_rankings()
 
-    def write_CSV_list(self, path, filtered=True,
+    def scale_estimators(self, baseline_boss_moveset="random"):
+        """
+        Scale the estimators of all attackers currently stored in self.rankings of each
+        member CountersListSingle object, such that the best attacker gets an estimator of 1.0,
+        and all others scaled proportionally.
+
+        This CHANGES the value of self.rankings, specifically all estimator values.
+        This function does not consider whether self.rankings has been filtered based on
+        AttackerCriteriaMulti.
+
+        For details on how scaling works, refer to CONFIG_ESTIMATOR_SCALING_SETTINGS in config.py.
+
+        :param baseline_boss_moveset: The boss moveset that should be used to set the baseline,
+            should be one of "random", "easiest" and "hardest".
+            The minimum estimator across all attackers against this specific boss moveset will
+            be used as the baseline, and will be scaled to 1.0.
+        """
+        for lvl_to_lst in self.lists_by_bs_by_level.values():
+            for lst in lvl_to_lst.values():
+                lst.scale_estimators(baseline_boss_moveset=baseline_boss_moveset)
+
+    def write_CSV_list(self, path, raw=True,
                        best_attacker_moveset=True, random_boss_moveset=True, specific_boss_moveset=False):
         """
         Write the counters lists to CSV in list format, with the following headers:
@@ -530,15 +620,15 @@ class CountersListsMultiBSLevel:
         Level <level>,<sort option str>,<weather str>,<friendship str>,<attack strategy str>,<dodge strategy str>.csv
 
         :param path: Root path that stores all CSV file outputs
-        :param filtered: If True, use filtered data that only contain attackers that meet criteria.
-            If False, use raw data that contains all attackers.
+        :param raw: If True, use final self.rankings after scaling and filtering.
+            If False, use raw data (self.rankings_raw) without scaling and filtering.
         :param best_attacker_moveset: If True, only the best moveset for each attacker will be written
         :param random_boss_moveset: If True, results for the random boss moveset will be included
         :param specific_boss_moveset: If True, results for specific boss movesets will be included
         """
         for lvl_to_lst in self.lists_by_bs_by_level.values():
             for lst in lvl_to_lst.values():
-                lst.write_CSV_list(path, filtered=filtered, best_attacker_moveset=best_attacker_moveset,
+                lst.write_CSV_list(path, raw=raw, best_attacker_moveset=best_attacker_moveset,
                                    random_boss_moveset=random_boss_moveset, specific_boss_moveset=specific_boss_moveset)
 
 
@@ -550,18 +640,21 @@ class CountersListsRE:
     not included in this object.
     """
     def __init__(self, ensemble, metadata=None,
-                 attacker_criteria_multi=None, sort_option="Estimator"):
+                 attacker_criteria_multi=None,
+                 sort_option="Estimator", scaling_settings=None):
         """
         Initialize the attributes, create individual CountersListsByLevel objects, and get the JSON rankings.
         :param ensemble: RaidBoss object
         :param metadata: Current Metadata object
         :param attacker_criteria_multi: AttackerCriteriaMulti object describing attackers to be used
         :param sort_option: Sorting option, as shown on Pokebattler (natural language or code name)
+        :param scaling_settings: Dict describing settings for estimator scaling (from config.py)
         """
         self.ensemble = ensemble
         self.attacker_criteria_multi = None
         self.results = None
         self.sort_option = parse_sort_option_str2code(sort_option)
+        self.scaling_settings = scaling_settings
         self.JSON = None
         self.metadata = metadata
 
@@ -628,7 +721,41 @@ class CountersListsRE:
         for lst in self.lists_for_bosses:
             lst.filter_rankings()
 
-    def write_CSV_list(self, path, filtered=True,
+    def scale_estimators(self, baseline_boss_moveset="random"):
+        """
+        Scale the estimators of all attackers currently stored in self.rankings of each
+        member CountersListSingle object, such that the best attacker gets an estimator of 1.0,
+        and all others scaled proportionally.
+
+        This CHANGES the value of self.rankings, specifically all estimator values.
+        This function does not consider whether self.rankings has been filtered based on
+        AttackerCriteriaMulti.
+
+        For details on how scaling works, refer to CONFIG_ESTIMATOR_SCALING_SETTINGS in config.py.
+
+        :param baseline_boss_moveset: The boss moveset that should be used to set the baseline,
+            should be one of "random", "easiest" and "hardest".
+            The minimum estimator across all attackers against this specific boss moveset will
+            be used as the baseline, and will be scaled to 1.0.
+        """
+        for lst in self.lists_for_bosses:
+            lst.scale_estimators(baseline_boss_moveset=baseline_boss_moveset)
+
+    def load_and_process_all_lists(self):
+        """
+        Pull all Pokebattler counters lists and process them (filtering, scaling)
+        for each member CountersListSingle object.
+        Uses scaling settings stored in this object.
+        In practice, you only need to call this to get all data.
+        """
+        self.load_and_parse_JSON()
+        if self.scaling_settings["Enabled"] and self.scaling_settings["Baseline chosen before filter"]:
+            self.scale_estimators(baseline_boss_moveset=self.scaling_settings["Baseline boss moveset"])
+        self.filter_rankings()
+        if self.scaling_settings["Enabled"] and not self.scaling_settings["Baseline chosen before filter"]:
+            self.scale_estimators(baseline_boss_moveset=self.scaling_settings["Baseline boss moveset"])
+
+    def write_CSV_list(self, path, raw=True,
                        best_attacker_moveset=True, random_boss_moveset=True, specific_boss_moveset=False):
         """
         Write the counters lists to CSV in list format, with the following headers:
@@ -641,12 +768,12 @@ class CountersListsRE:
         Level <level>,<sort option str>,<weather str>,<friendship str>,<attack strategy str>,<dodge strategy str>.csv
 
         :param path: Root path that stores all CSV file outputs
-        :param filtered: If True, use filtered data that only contain attackers that meet criteria.
-            If False, use raw data that contains all attackers.
+        :param raw: If True, use final self.rankings after scaling and filtering.
+            If False, use raw data (self.rankings_raw) without scaling and filtering.
         :param best_attacker_moveset: If True, only the best moveset for each attacker will be written
         :param random_boss_moveset: If True, results for the random boss moveset will be included
         :param specific_boss_moveset: If True, results for specific boss movesets will be included
         """
         for lst in self.lists_for_bosses:
-            lst.write_CSV_list(path, filtered=filtered, best_attacker_moveset=best_attacker_moveset,
+            lst.write_CSV_list(path, raw=raw, best_attacker_moveset=best_attacker_moveset,
                                random_boss_moveset=random_boss_moveset, specific_boss_moveset=specific_boss_moveset)

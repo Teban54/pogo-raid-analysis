@@ -17,14 +17,19 @@ class Config:
     """
     Class for a configuration of a particular run.
     """
-    def __init__(self, metadata, config_attacker_criteria=None, config_raid_ensemble=None, config_battle_settings=None):
+    def __init__(self, metadata, config_attacker_criteria=None,
+                 config_raid_ensemble=None, config_battle_settings=None,
+                 config_sort_option=None, config_scaling_settings=None):
         """
         Initialize the configuration.
 
-        There are 3 main components of a config:
+        There are 3 major components of a config:
         - Attacker criteria: Sets of criteria for attackers, such as types, min/max levels, etc.
         - Raid boss ensemble: List of bosses and their weights.
         - Battle settings: Weather, friendship, etc.
+        Additionally, there are 2 minor components:
+        - Sorting option
+        - Estimator scaling settings: Enabled, baseline timing, baseline boss moveset.
 
         This constructor takes in config.py settings for each of the 3 components,
         then construct the corresponding objects (AttackerCriteriaMulti, RaidEnsemble, BattleSettings).
@@ -33,11 +38,15 @@ class Config:
         :param config_attacker_criteria: Config for attacker criteria from config.py
         :param config_raid_ensemble: Config for raid ensemble from config.py
         :param config_battle_settings: Config for battle settings from config.py
+        :param config_sort_option: Config for sorting option from config.py
+        :param config_scaling_settings: Config for estimator scaling settings from config.py
         """
         self.meta = metadata
         self.attacker_criteria_multi = None
         self.raid_ensemble = None
         self.battle_settings = None
+        self.sort_option = config_sort_option
+        self.scaling_settings = None  # Dict, filled in later
 
         if config_attacker_criteria:
             self.attacker_criteria_multi = self.parse_attacker_criteria_config(config_attacker_criteria)
@@ -47,6 +56,7 @@ class Config:
         )  # Parse battle settings first, so that it can be used as default for raid ensemble
         if config_raid_ensemble:
             self.raid_ensemble = self.parse_raid_ensemble_config(config_raid_ensemble)
+        self.scaling_settings = self.format_scaling_settings_config(config_scaling_settings)
 
     def parse_attacker_criteria_config(self, config):
         """
@@ -273,3 +283,25 @@ class Config:
         dodge_strategy_str = config.get("Dodge strategy", "Realistic Dodging")
         return BattleSettings(weather_str=weather_str, friendship_str=friendship_str,
                               attack_strategy_str=attack_strategy_str,dodge_strategy_str=dodge_strategy_str)
+
+    def format_scaling_settings_config(self, config):
+        """
+        Format the dict of scaling options from config.py.
+        :param config: Dict describing scaling settings config
+                (Typically from config.py)
+        :return: Dict with properly formatted values (default values added in)
+        """
+        cfg = config.copy()
+        if "Enabled" not in cfg:
+            cfg["Enabled"] = True
+        if "Baseline chosen before filter" not in cfg:
+            cfg["Baseline chosen before filter"] = False
+        if "Baseline boss moveset" not in cfg:
+            cfg["Baseline boss moveset"] = "random"
+        elif cfg["Baseline boss moveset"].lower() not in ["random", "easiest", "hardest"]:
+            print(f"Error (Config.format_scaling_settings_config): Boss moveset option {cfg['Baseline boss moveset']} "
+                  f"for estimator scaling is invalid. Using 'random' as default.",
+                  file=sys.stderr)
+            cfg["Baseline boss moveset"] = "random"
+        cfg["Baseline boss moveset"] = cfg["Baseline boss moveset"].lower()
+        return cfg
