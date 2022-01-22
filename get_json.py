@@ -36,8 +36,8 @@ def get_pokebattler_metadata(metadata_name, write_file=False):
 
 def get_pokebattler_raid_counters(raid_boss=None, raid_boss_codename=None, raid_tier="Tier 5",
                                   attacker_level=40, trainer_id=None,
+                                  attacker_criteria_multi=None,
                                   battle_settings=None,
-                                  legendary=True, shadow=True, mega=True,
                                   sort_option="Estimator"):
     """
     Get the list of best attackers from Pokebattler and return it as JSON.
@@ -49,14 +49,14 @@ def get_pokebattler_raid_counters(raid_boss=None, raid_boss_codename=None, raid_
     :param int attacker_level: Attacker level.
     :param int trainer_id: Pokebattler Trainer ID if a trainer's own Pokebox is used.
             If None, use all attackers by level.
+    :param attacker_criteria_multi: AttackerCriteriaMulti object describing attackers to be used.
+            This will be used for shadow/mega/legendary toggles, Pokemon types and Trainer ID.
     :param battle_settings: BattleSettings object, including friendship, weather, and attack/dodge strategies.
             Must be for a single set of settings.
-    :param legendary: If True, include Legendary Pokemon.
-    :param shadow: If True, include Shadow Pokemon.
-    :param mega: If True, include Mega Evolutions.
     :param sort_option: Sorting option for Pokebattler counters list.
     :return: Pokebattler ranking results parsed as JSON, or an error string or None if applicable
     """
+    # TODO: Add sanity check for attacker criteria
     if not battle_settings:
         print(f"Warning (get_pokebattler_raid_counters): BattleSettings not found. Using default settings.",
               file=sys.stderr)
@@ -66,18 +66,18 @@ def get_pokebattler_raid_counters(raid_boss=None, raid_boss_codename=None, raid_
               file=sys.stderr)
         battle_settings = battle_settings.indiv_settings[0]
 
-    # TODO: Replace the remaining payload and parameters with AttackerCriteria object
+    attacker_types = attacker_criteria_multi.pokebattler_pokemon_types()
     payload = {
         "sort": parse_sort_option_str2code(sort_option),
         "weatherCondition": battle_settings.weather_code,
         "dodgeStrategy": battle_settings.dodge_strategy_code,
         "aggregation": "AVERAGE",
-        "includeLegendary": legendary,
-        "includeShadow": shadow,
-        "includeMegas": mega,
+        "includeLegendary": attacker_criteria_multi.pokebattler_legendary(),
+        "includeShadow": attacker_criteria_multi.pokebattler_shadow(),
+        "includeMegas": attacker_criteria_multi.pokebattler_mega(),
         "randomAssistants": "-1",
         "friendLevel": battle_settings.friendship_code,
-        "attackerTypes": "POKEMON_TYPE_ALL"  # ["POKEMON_TYPE_ICE","POKEMON_TYPE_FIRE"]
+        "attackerTypes": "POKEMON_TYPE_ALL" if not attacker_types else attacker_types  # ["POKEMON_TYPE_ICE","POKEMON_TYPE_FIRE"]
     }
     if raid_boss:
         raid_boss_codename = raid_boss.pokemon_codename

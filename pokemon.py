@@ -331,7 +331,7 @@ def criterion_weak_to_contender_types(pokemon, attack_types=[]):
     """
     Return True if any of the attacking types is a contender type against the Pokemon.
     E.g. If the given attacking type is Ice, returns True if the Pokemon is
-    a mono grass/flying/dragon types, or Rayquaza, Landorus, etc.
+    a mono grass/flying/dragon type, or Rayquaza, Landorus, etc.
     If there are no types given, return False.
 
     :param pokemon: Defending Pokemon object to be evaluated on
@@ -341,6 +341,22 @@ def criterion_weak_to_contender_types(pokemon, attack_types=[]):
     if not attack_types:
         return False
     return any(is_contender_type(attack_type, pokemon.types) for attack_type in attack_types)
+
+
+def criterion_weak_to_contender_types_simult(pokemon, attack_types=[]):
+    """
+    Return True if ALL of the attacking types is a contender type against the Pokemon.
+    E.g. If the given attacking types are Grass and Water, returns True if the Pokemon is
+    weak to both but not double weak to either of them, or double weak to both (Rhydon).
+    If there are no types given, return False.
+
+    :param pokemon: Defending Pokemon object to be evaluated on
+    :param attack_types: List of attacking types, as either natural language or code name
+    :return: True if ALL of the attacking types is a contender type against the given defending Pokemon
+    """
+    if not attack_types:
+        return False
+    return all(is_contender_type(attack_type, pokemon.types) for attack_type in attack_types)
 
 
 def criterion_evo_stage(pokemon, keep_final_stage=True, keep_pre_evo=False):

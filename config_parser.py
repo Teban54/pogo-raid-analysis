@@ -173,6 +173,9 @@ class Config:
             if filter_key == "weak to contender types":
                 return filter_raids_by_criteria(raids_list, criterion_pokemon=criterion_weak_to_contender_types,
                                                 attack_types=filter_val)
+            if filter_key == "weak to contender types simultaneously":
+                return filter_raids_by_criteria(raids_list, criterion_pokemon=criterion_weak_to_contender_types_simult,
+                                                attack_types=filter_val)
             if filter_key == "evolution stage":
                 return filter_raids_by_criteria(raids_list, criterion_pokemon=criterion_evo_stage,
                                                 keep_final_stage=(filter_val.lower() == 'final'),

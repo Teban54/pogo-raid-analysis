@@ -119,6 +119,18 @@ class Metadata:
         lst = [self.find_move(name) for name in codenames]
         return [move for move in lst if move is not None]
 
+    def move_codename_to_displayname(self, codename):
+        """
+        Convert a move codename to display name.
+        :param codename: Pokebattler code name of move (e.g. RAZOR_LEAF_FAST)
+        :return: Move display name
+        """
+        move = self.find_move(codename)
+        if not move:
+            print(f"Error (Metadata.move_codename_to_displayname): Move {codename} not found", file=sys.stderr)
+            return None
+        return move.displayname
+
     def debug_print_moves_to_csv(self, filename="data/metadata/moves.csv"):
         """
         Debug function that outputs all moves to CSV.
@@ -222,6 +234,18 @@ class Metadata:
         if remove_ignored:
             lst = remove_pokemon_to_ignore(lst)
         return lst
+
+    def pokemon_codename_to_displayname(self, codename):
+        """
+        Convert a Pokemon codename to display name.
+        :param codename: Pokebattler code name of Pokemon (e.g. BULBASAUR_SHADOW_FORM)
+        :return: Pokemon display name
+        """
+        pkm = self.find_pokemon(codename)
+        if not pkm:
+            print(f"Error (Metadata.pokemon_codename_to_displayname): Pokemon {codename} not found", file=sys.stderr)
+            return None
+        return pkm.displayname
 
     def debug_print_pokemon_to_csv(self, filename="data/metadata/pokemon.csv"):
         """

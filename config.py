@@ -14,7 +14,7 @@ CONFIG_BATTLE_SETTINGS = {
     # All battle settings that are allowed on Pokebattler counters list page, EXCEPT attacker level.
     # Can accept lists instead of a single value, e.g. "Weather": ["Extreme", "Rainy"],
     # In that case, simulations for all combinations of all specified options will be generated.
-    "Weather": "Extreme",  # Extreme/No Weather/Neutral, Sunny/Clear, Rainy, Partly Cloudy, Cloudy, Windy, Snow, Fog
+    "Weather": "Extreme",  # "Extreme",  # Extreme/No Weather/Neutral, Sunny/Clear, Rainy, Partly Cloudy, Cloudy, Windy, Snow, Fog
                            # Default: Extreme
     "Friendship": "Best",  # No Friend, Good Friend, Great Friend, Ultra Friend, Best Friend (can omit "Friend")
                            # Default: Best Friend
@@ -37,11 +37,11 @@ CONFIG_ATTACKER_CRITERIA = [
     {
         # Each block contains several filters. To meet the criteria for this particular {} block,
         # an attacker needs to pass all the filters (example: Ice charged move, levels 30-50, AND non-shadow).
-        "Charged move types": ["Grass"],  # This is an approximation for "attacker type",
+        "Charged move types": ["Grass", "Steel", "Fighting", "Water"],  # This is an approximation for "attacker type",
                                           # and should be used primarily for type-based filtering.
                                           # Always put "" around type names!
         "Min level": 40,
-        "Max level": 50,
+        "Max level": 40,
         "Level step size": 10,  # Can be as low as 0.5, but recommend 5 for efficiency
         # "Pokemon code names": [],  # Specific Pokemon to be considered,
             # e.g. "MEWTWO", "VENUSAUR_SHADOW_FORM", "RAICHU_ALOLA_FORM",
@@ -52,16 +52,16 @@ CONFIG_ATTACKER_CRITERIA = [
         # "Trainer ID": 52719,  # Pokebattler trainer ID
         #                       # If this is provided, only Pokemon from that Trainer's Pokebox are used
         # "Must be shadow": False,  # This describes attackers, not bosses
-        # "Must be non shadow": False,
-        # "Must be mega": False,
-        # "Must be non mega": False,
+        # "Must be non shadow": True,
+        # "Must be mega": True,
+        # "Must be non mega": True,
         # "Must be legendary": False,
         # "Must be non legendary": True,
         # "Must be mythical": False,
         # "Must be non mythical": True,
         # "Must be legendary or mythical": False,
         # "Must be non legendary or mythical": False,
-        # "Pokemon types": [],  # Only use this if you know what you're doing
+        # "Pokemon types": ["Grass"],  # Only use this if you know what you're doing
         # "Fast move types": [],  # Only use this if you know what you're doing
     },
     # Add more {} blocks here if needed
@@ -122,7 +122,8 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
         "Raid tier": "Tier 5",  # Here, "Tier 5" has all past/present/future bosses
         # "Raid category": "Legacy Tier 5",  # Here, "Tier 5" has only current bosses
         "Filters": {  # Only those without # at the start are applied
-            "Weak to contender types": ["Grass"],
+            "Weak to contender types": ["Water"],
+            #"Weak to contender types simultaneously": ["Grass", "Water"],
             #"Evolution stage": "Final",  # "Final", "Pre-evolution"
             #"Must be shadow": False,  # This describes BOSSES, not attackers
             #"Must be non shadow": True,
@@ -141,35 +142,42 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
         "Forms weight strategy": "combine",  # "combine" or "separate"
         "Battle settings": {  # Write group-specific battle settings, in the same format as CONFIG_BATTLE_SETTINGS
             # If absent, CONFIG_BATTLE_SETTINGS will be used
+            # TODO: Make these override default battle settings only if necessary, not outright replace whole dict
             "Friendship": "Best",
-            "Weather": "Extreme",
+            "Weather": "Sunny",
             "Attack strategy": "No Dodging",
             "Dodge strategy": "Realistic Dodging"
         },
     },
-    # {
-    #     "Pokemon pool": "By raid tier",
-    #     "Raid tier": "Mega Tier",
-    #     "Filters": {
-    #         "Weak to contender types": ["Fire"],
-    #     },
-    #     "Weight of each Pokemon": 1,
-    #     "Weight of whole group": 25,
-    #     "Forms weight strategy": "combine",
-    # },
-    # {
-    #     "Pokemon pool": "By raid tier",
-    #     "Raid tier": "Tier 3",
-    #     "Filters": {
-    #         "Weak to contender types": ["Grass"],
-    #     },
-    #     "Weight of each Pokemon": 1,
-    #     "Weight of whole group": 15,
-    #     "Forms weight strategy": "combine",
-    #     "Battle settings": {
-    #         "Friendship": "No",
-    #     },
-    # },
+    {
+        "Pokemon pool": "By raid tier",
+        "Raid tier": "Mega Tier",
+        "Filters": {
+            "Weak to contender types": ["Water"],
+            # "Weak to contender types simultaneously": ["Grass", "Water"],
+        },
+        "Weight of each Pokemon": 1,
+        "Weight of whole group": 35,  #25,
+        "Forms weight strategy": "combine",
+        "Battle settings": {
+            "Weather": "Sunny",
+        },
+    },
+    {
+        "Pokemon pool": "By raid tier",
+        "Raid tier": "Tier 3",
+        "Filters": {
+            "Weak to contender types": ["Water"],
+            # "Weak to contender types simultaneously": ["Grass", "Water"],
+        },
+        "Weight of each Pokemon": 1,
+        "Weight of whole group": 15,  #25,
+        "Forms weight strategy": "combine",
+        "Battle settings": {
+            "Friendship": "No",
+            "Weather": "Sunny",
+        },
+    },
     # {
     #     "Pokemon pool": "All Pokemon except above",
     #     "Raid tier": "Tier 3",

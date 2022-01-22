@@ -60,6 +60,7 @@ class CountersListSingle:
         # For list format, see documentation for parse_JSON
         self.rankings_raw = {}  # Before filtering by attackers
         self.rankings = {}  # After filtering by attackers
+        self.scaling_baseline = 1  # For recovering originals
 
         self.init_raid_boss(raid_boss, raid_boss_pokemon, raid_boss_codename, raid_tier)
         self.init_attacker_criteria(attacker_criteria_multi)
@@ -129,6 +130,7 @@ class CountersListSingle:
             raid_boss=self.boss,
             attacker_level=self.attacker_level,
             trainer_id=self.trainer_id,
+            attacker_criteria_multi=self.attacker_criteria_multi,
             battle_settings=self.battle_settings,
             sort_option=self.sort_option
         )
@@ -302,6 +304,7 @@ class CountersListSingle:
         elif baseline_boss_moveset == "hardest":
             baseline = max(min_est for mvst, min_est in baselines_per_boss_moveset.items()
                            if mvst != ("RANDOM", "RANDOM"))
+        self.scaling_baseline = baseline
         self.scale_estimators(scaling_factor=1.0 / baseline)
 
     def get_best_moveset_for_attacker(self, attacker_data=None,
@@ -493,6 +496,7 @@ class CountersListsMultiBSLevel:
         # {<BattleSettings 1>: {20: <CountersListSingle>, 21: <CountersListSingle>, ...},
         #  <BattleSettings 2>: {20: <CountersListSingle>, 21: <CountersListSingle>, ...},
         #  ...}
+        # TODO: Trainer ID
 
         self.init_raid_boss(raid_boss, raid_boss_pokemon, raid_boss_codename, raid_tier)
         self.init_attacker_criteria(attacker_criteria_multi)
@@ -777,3 +781,150 @@ class CountersListsRE:
         for lst in self.lists_for_bosses:
             lst.write_CSV_list(path, raw=raw, best_attacker_moveset=best_attacker_moveset,
                                random_boss_moveset=random_boss_moveset, specific_boss_moveset=specific_boss_moveset)
+
+    def temp_write_table(self, path,
+                         combine_attacker_movesets=True,
+                         random_boss_moveset=True, specific_boss_moveset=False,
+                         write_unscaled=True):
+        # Temporary method for Bulbasaur CD analysis.
+        # TODO: Clean up.
+
+        attackers_boss_dict = {}
+        # {("VENUSAUR_MEGA", "VINE_WHIP_FAST", "FRENZY_PLANT", "40"):
+        #     {
+        #         ("GROUDON", "DRAGON_TAIL_FAST", "SOLAR_BEAM", "RAID_LEVEL_5", <Battle Settings object>, weight): {
+        #             "ESTIMATOR": 1.0,
+        #             "ESTIMATOR_UNSCALED": 2.5,
+        #             "TIME": 1509.393,
+        #             "DEATHS": 106.56669881823231,
+        #         }, ...
+        #     }, ...
+        # }
+        boss_keys = set()
+
+        for i, lst_bslvl in enumerate(self.lists_for_bosses):
+            boss, weight = self.ensemble.bosses[i]
+            for bs, lvl_to_lst in lst_bslvl.lists_by_bs_by_level.items():
+                for lvl, lst in lvl_to_lst.items():
+                    for boss_mvst, atkers_list in lst.rankings.items():
+                        for atker_dict in atkers_list:
+                            for atker_mvst, timings in atker_dict["BY_MOVE"].items():
+                                atker_key = (atker_dict["POKEMON_CODENAME"], atker_mvst[0], atker_mvst[1], lvl)
+                                boss_key = (boss.pokemon_codename, boss_mvst[0], boss_mvst[1], boss.tier, bs, weight)
+                                if atker_key not in attackers_boss_dict:
+                                    attackers_boss_dict[atker_key] = {}
+                                attackers_boss_dict[atker_key][boss_key] = copy.deepcopy(timings)
+                                boss_keys.add(boss_key)
+
+        # Filter boss keys according to settings
+        boss_keys = list(boss_keys)
+        boss_keys = [boss for boss in boss_keys
+                     if (random_boss_moveset and boss[1] == "RANDOM"
+                         or specific_boss_moveset and boss[1] != "RANDOM")]
+        boss_keys.sort(key=lambda boss: (boss[0], "" if boss[1] == "RANDOM" else boss[1],  # Prioritize random
+                                         "" if boss[2] == "RANDOM" else boss[2], boss[3], boss[4], boss[5]))
+        # Reorder boss keys to restore their order in raid ensemble
+        # TODO: Terribly inefficient.
+        new_boss_keys = []
+        for boss, weight in self.ensemble.bosses:
+            boss_keys_add = [k for k in boss_keys if k[0] == boss.pokemon_codename and k[3] == boss.tier]
+            new_boss_keys.extend(boss_keys_add)
+        boss_keys = new_boss_keys
+
+        # Estimate blank values
+        # for atker_key, atker_values in attackers_boss_dict.items():
+        #     for boss_key in boss_keys:
+        #         if boss_key not in atker_values:
+        #             print(f"Value not found: Attacker key = {atker_key}, Boss key = {boss_key}")
+        # Too many blanks, need sysmetic ways of doing this
+
+        # Combine attacker moves (e.g. FS/BB and Counter/BB Blaziken)
+        if combine_attacker_movesets:
+            new_atk_boss_dict = {}  # Same format
+            atker_names_lvls = set((atker_key[0], atker_key[3]) for atker_key in attackers_boss_dict.keys())
+            for atker, atker_lvl in atker_names_lvls:
+                atker_curr_vals = {}  # Map boss keys to timings
+                atker_curr_mvsts = {}  # Map boss keys to attacker movesets (fast, charged)
+                for atker_mvst_key, atker_mvst_vals in attackers_boss_dict.items():
+                    if not (atker_mvst_key[0] == atker and atker_mvst_key[3] == atker_lvl):
+                        continue
+                    fast, charged = atker_mvst_key[1], atker_mvst_key[2]
+                    for boss_key in boss_keys:
+                        if boss_key not in atker_mvst_vals:
+                            continue
+                        timings = atker_mvst_vals[boss_key]
+                        add = (boss_key not in atker_curr_vals
+                               or timings[self.sort_option] < atker_curr_vals[boss_key][self.sort_option])
+                        if add:
+                            atker_curr_vals[boss_key] = timings
+                            atker_curr_mvsts[boss_key] = (fast, charged)
+                if not atker_curr_mvsts:
+                    # This attacker doesn't show up in any of the boss movesets we're interested in
+                    # Therefore, it no longer has to be in the output
+                    continue
+                best_fast = list(set(mvst[0] for mvst in atker_curr_mvsts.values()))
+                best_charged = list(set(mvst[1] for mvst in atker_curr_mvsts.values()))
+                new_atker_key = (atker, "Unknown" if not best_fast else " or ".join(best_fast),
+                                 "Unknown" if not best_charged else " or ".join(best_charged), atker_lvl)
+                new_atk_boss_dict[new_atker_key] = atker_curr_vals
+            attackers_boss_dict = new_atk_boss_dict
+
+        # Convert boss keys to headers
+        boss_headers = [
+            "{0}{1}, {2}".format(
+                self.metadata.pokemon_codename_to_displayname(boss_key[0]),
+                " ({0}/{1})".format(self.metadata.move_codename_to_displayname(boss_key[1]),
+                                    self.metadata.move_codename_to_displayname(boss_key[2]))
+                if boss_key[1] != 'RANDOM' else '',
+                parse_raid_tier_code2str(boss_key[3])
+            )
+            for boss_key in boss_keys
+        ]
+
+        # Print what we have
+        filename = os.path.join(path, "table.csv")
+        os.makedirs(os.path.dirname(filename), exist_ok=True)
+        with open(filename, mode='w') as csv_file:
+            fieldnames = ["Attacker", "Fast Move", "Charged Move", "Level"]
+            fieldnames += boss_headers
+            writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+            writer.writeheader()
+
+            # Write battle settings
+            weights_row = {"Attacker": "(Battle settings)"}
+            for i, boss_key in enumerate(boss_keys):
+                weights_row[boss_headers[i]] = boss_key[4]
+            writer.writerow(weights_row)
+
+            # Write weights
+            weights_row = {"Attacker": "(Boss weights)"}
+            for i, boss_key in enumerate(boss_keys):
+                weights_row[boss_headers[i]] = boss_key[5]
+            writer.writerow(weights_row)
+
+            for atker_key, atker_values in attackers_boss_dict.items():
+                atker_row = {"Attacker": self.metadata.pokemon_codename_to_displayname(atker_key[0]),
+                             "Fast Move": (
+                                 "Unknown" if atker_key[1] == "Unknown"
+                                 else " or ".join([self.metadata.move_codename_to_displayname(code)
+                                                   for code in atker_key[1].split(" or ")])),
+                             "Charged Move": (
+                                 "Unknown" if atker_key[2] == "Unknown"
+                                 else " or ".join([self.metadata.move_codename_to_displayname(code)
+                                                   for code in atker_key[2].split(" or ")])),
+                             "Level": atker_key[3]}
+                for i, boss_key in enumerate(boss_keys):
+                    if boss_key in atker_values:
+                        atker_row[boss_headers[i]] = atker_values[boss_key][self.sort_option]
+                writer.writerow(atker_row)
+
+                if write_unscaled:
+                    unscaled_row = {"Attacker": atker_row["Attacker"] + "(Unscaled)",
+                                    "Fast Move": atker_row["Fast Move"],
+                                    "Charged Move": atker_row["Charged Move"],
+                                    "Level": atker_row["Level"]}
+                    for i, boss_key in enumerate(boss_keys):
+                        if boss_key in atker_values:
+                            unscaled_row[boss_headers[i]] = atker_values[boss_key][self.sort_option + "_UNSCALED"]
+                    writer.writerow(unscaled_row)
+
