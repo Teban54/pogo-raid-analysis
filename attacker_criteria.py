@@ -226,7 +226,9 @@ class AttackerCriteriaMulti:
         all_levels = list(set([
             lvl
             for criteria in self.sets
-            for lvl in get_levels_in_range(criteria.min_level, criteria.max_level, criteria.level_step)]))
+            for lvl in get_levels_in_range(criteria.min_level, criteria.max_level, criteria.level_step)
+            if not criteria.trainer_id
+        ]))
         return sorted(all_levels)
 
     def min_level(self):
@@ -282,8 +284,29 @@ class AttackerCriteriaMulti:
     def pokebattler_trainer_ids(self):
         """
         Return all Pokebattler Trainer IDs that will possibly be needed for simulations.
+        Excludes all None values.
         :return: List of Pokebattler trainer IDs in all sets of criteria.
-                 If it includes None, simulations by level will be needed.
         """
-        return list(set([criteria.trainer_id  # Includes None
-                         for criteria in self.sets for tp in criteria.pokemon_types]))
+        return list(set([criteria.trainer_id
+                         for criteria in self.sets for tp in criteria.pokemon_types
+                         if criteria.trainer_id]))
+
+    def get_subset_no_trainer_ids(self):
+        """
+        Get a new AttackerCriteriaMulti object that contains all AttackerCriteria without
+        trainer IDs, i.e. all criteria with attacker levels.
+        :return: AttackerCriteriaMulti object that contains all AttackerCriteria without
+        trainer IDs
+        """
+        return AttackerCriteriaMulti([criteria for criteria in self.sets if not criteria.trainer_id],
+                                     metadata=self.metadata)
+
+    def get_subset_trainer_ids(self):
+        """
+        Get a new AttackerCriteriaMulti object that contains all AttackerCriteria with
+        trainer IDs.
+        :return: AttackerCriteriaMulti object that contains all AttackerCriteria with
+        trainer IDs
+        """
+        return AttackerCriteriaMulti([criteria for criteria in self.sets if criteria.trainer_id],
+                                     metadata=self.metadata)

@@ -124,8 +124,12 @@ class CountersListSingle:
         """
         Pull the Pokebattler JSON and store it in the object.
         """
-        print(f"Loading: {parse_raid_tier_code2str(self.boss.tier)} {self.boss.pokemon_codename}, "
-              f"Level {self.attacker_level}, {self.battle_settings}")
+        if self.trainer_id:
+            print(f"Loading: {parse_raid_tier_code2str(self.boss.tier)} {self.boss.pokemon_codename}, "
+                  f"Trainer ID {self.trainer_id}, {self.battle_settings}")
+        else:
+            print(f"Loading: {parse_raid_tier_code2str(self.boss.tier)} {self.boss.pokemon_codename}, "
+                  f"Level {self.attacker_level}, {self.battle_settings}")
         self.JSON = get_pokebattler_raid_counters(
             raid_boss=self.boss,
             attacker_level=self.attacker_level,
@@ -465,18 +469,32 @@ class CountersListSingle:
             return
         rankings_use = self.rankings if raw else self.rankings_raw
 
-        filename = os.path.join(
-            path, "Lists", self.boss.tier, self.boss.pokemon_codename,
-            "{}Level {},{},{},{},{},{}.csv".format(
-                "Filtered," if raw else "",
-                self.attacker_level,
-                parse_sort_option_code2str(self.sort_option),
-                parse_weather_code2str(self.battle_settings.weather_code),
-                parse_friendship_code2str(self.battle_settings.friendship_code),
-                parse_attack_strategy_code2str(self.battle_settings.attack_strategy_code),
-                parse_dodge_strategy_code2str(self.battle_settings.dodge_strategy_code),
+        if self.trainer_id:
+            filename = os.path.join(
+                path, "Lists", self.boss.tier, self.boss.pokemon_codename,
+                "{}Trainer ID {},{},{},{},{},{}.csv".format(
+                    "Filtered," if raw else "",
+                    self.trainer_id,
+                    parse_sort_option_code2str(self.sort_option),
+                    parse_weather_code2str(self.battle_settings.weather_code),
+                    parse_friendship_code2str(self.battle_settings.friendship_code),
+                    parse_attack_strategy_code2str(self.battle_settings.attack_strategy_code),
+                    parse_dodge_strategy_code2str(self.battle_settings.dodge_strategy_code),
+                )
             )
-        )
+        else:
+            filename = os.path.join(
+                path, "Lists", self.boss.tier, self.boss.pokemon_codename,
+                "{}Level {},{},{},{},{},{}.csv".format(
+                    "Filtered," if raw else "",
+                    self.attacker_level,
+                    parse_sort_option_code2str(self.sort_option),
+                    parse_weather_code2str(self.battle_settings.weather_code),
+                    parse_friendship_code2str(self.battle_settings.friendship_code),
+                    parse_attack_strategy_code2str(self.battle_settings.attack_strategy_code),
+                    parse_dodge_strategy_code2str(self.battle_settings.dodge_strategy_code),
+                )
+            )
         os.makedirs(os.path.dirname(filename), exist_ok=True)
         with open(filename, mode='w') as csv_file:
             fieldnames = ["Attacker", "Attacker Fast Move", "Attacker Charged Move",
@@ -515,6 +533,8 @@ class CountersListsMultiBSLevel:
         """
         self.boss = None
         self.attacker_criteria_multi = None
+        self.attacker_criteria_multi_levels = None  # All criteria by levels
+        self.attacker_criteria_multi_ids = None  # All criteria by ids
         self.battle_settings = None
         self.results = None
         self.sort_option = parse_sort_option_str2code(sort_option)
@@ -526,7 +546,9 @@ class CountersListsMultiBSLevel:
         # {<BattleSettings 1>: {20: <CountersListSingle>, 21: <CountersListSingle>, ...},
         #  <BattleSettings 2>: {20: <CountersListSingle>, 21: <CountersListSingle>, ...},
         #  ...}
-        # TODO: Trainer ID
+        self.lists_by_bs_by_trainer_id = {}
+        # {<BattleSettings 1>: {52719: <CountersListSingle>, ...},
+        #  ...}
 
         self.init_raid_boss(raid_boss, raid_boss_pokemon, raid_boss_codename, raid_tier)
         self.init_attacker_criteria(attacker_criteria_multi)
@@ -569,6 +591,8 @@ class CountersListsMultiBSLevel:
             attacker_criteria_multi = AttackerCriteriaMulti(sets=[attacker_criteria_multi],
                                                             metadata=self.metadata)
         self.attacker_criteria_multi = attacker_criteria_multi
+        self.attacker_criteria_multi_levels = attacker_criteria_multi.get_subset_no_trainer_ids()
+        self.attacker_criteria_multi_ids = attacker_criteria_multi.get_subset_trainer_ids()
 
     def init_battle_settings(self, battle_settings=None):
         """
@@ -595,10 +619,19 @@ class CountersListsMultiBSLevel:
         """
         for bs in self.battle_settings.get_indiv_settings():
             self.lists_by_bs_by_level[bs] = {}
+            self.lists_by_bs_by_trainer_id[bs] = {}
             for level in self.attacker_criteria_multi.all_levels():
                 self.lists_by_bs_by_level[bs][level] = CountersListSingle(
                     raid_boss=self.boss, metadata=self.metadata, attacker_level=level,
-                    attacker_criteria_multi=self.attacker_criteria_multi, battle_settings=bs,
+                    attacker_criteria_multi=self.attacker_criteria_multi_levels,  # self.attacker_criteria_multi,
+                    battle_settings=bs,
+                    sort_option=self.sort_option
+                )
+            for id in self.attacker_criteria_multi.pokebattler_trainer_ids():
+                self.lists_by_bs_by_trainer_id[bs][id] = CountersListSingle(
+                    raid_boss=self.boss, metadata=self.metadata, trainer_id=id,
+                    attacker_criteria_multi=self.attacker_criteria_multi_ids,  # self.attacker_criteria_multi,
+                    battle_settings=bs,
                     sort_option=self.sort_option
                 )
 
@@ -610,6 +643,10 @@ class CountersListsMultiBSLevel:
             for lst in lvl_to_lst.values():
                 lst.load_JSON()
                 lst.parse_JSON()
+        for id_to_lst in self.lists_by_bs_by_trainer_id.values():
+            for lst in id_to_lst.values():
+                lst.load_JSON()
+                lst.parse_JSON()
 
     def filter_rankings(self):
         """
@@ -618,6 +655,9 @@ class CountersListsMultiBSLevel:
         """
         for lvl_to_lst in self.lists_by_bs_by_level.values():
             for lst in lvl_to_lst.values():
+                lst.filter_rankings()
+        for id_to_lst in self.lists_by_bs_by_trainer_id.values():
+            for lst in id_to_lst.values():
                 lst.filter_rankings()
 
     def get_estimator_baselines(self, baseline_boss_moveset="random", baseline_attacker_level="by level"):
@@ -645,12 +685,16 @@ class CountersListsMultiBSLevel:
             If the value is "by level", -1 or None, this is turned off, and compute baseline
             separately for each individual list.
             Should be a number (either numeric or string), "min", "max", "average" or "by level".
-        :return: A 2D dict mapping BattleSettings and then attacker level to the baseline value.
-            (Same format as self.lists_by_bs_by_level)
+        :return: A tuple with two 2D dicts, the first mapping BattleSettings and then attacker level
+            to the baseline value, the second mapping BattleSettings and then Trainer ID to baseline value.
+            (Same format as (self.lists_by_bs_by_level, self.lists_by_bs_by_trainer_id))
         """
-        ret = {}
+        # TODO: Add an option to get baseline by trainer ID?
+        ret, ret_id = {}, {}
         for bs, lvl_to_list in self.lists_by_bs_by_level.items():
             ret[bs] = {}
+            ret_id[bs] = {}
+            # Find baseline level
             base_lvl = -1  # -1 for "by level"
             if baseline_attacker_level:
                 if type(baseline_attacker_level) in [int, float] and baseline_attacker_level > 0:
@@ -673,14 +717,18 @@ class CountersListsMultiBSLevel:
                     baseline = lvl_to_list[base_lvl].get_estimator_baseline(
                         baseline_boss_moveset=baseline_boss_moveset)
                     ret[bs] = {lvl: baseline for lvl in lvl_to_list.keys()}
+                    ret_id[bs] = {id: baseline for id in self.lists_by_bs_by_trainer_id[bs].keys()}
                     continue  # Next BS
             # Baseline level not specified or failed, scale each level independently
             ret[bs] = {
                 lvl: lst.get_estimator_baseline(baseline_boss_moveset=baseline_boss_moveset)
                 for lvl, lst in lvl_to_list.items()}
-        return ret
+            ret_id[bs] = {
+                id: lst.get_estimator_baseline(baseline_boss_moveset=baseline_boss_moveset)
+                for id, lst in self.lists_by_bs_by_trainer_id[bs].items()}
+        return ret, ret_id
 
-    def scale_estimators(self, baselines_dict=None,
+    def scale_estimators(self, baselines_dict=None, baselines_id_dict=None,
                          baseline_boss_moveset="random", baseline_attacker_level="by level"):
         """
         Scale the estimators of all attackers currently stored in self.rankings of each
@@ -701,6 +749,8 @@ class CountersListsMultiBSLevel:
 
         :param baselines_dict: 2D dict mapping BattleSettings and then attacker levels to the
             baseline value for that member CountersListSingle object.
+        :param baselines_id_dict: 2D dict mapping BattleSettings and then trainer IDs to the
+            baseline value for that member CountersListSingle object.
         :param baseline_boss_moveset: The boss moveset that should be used to set the baseline,
             should be one of "random", "easiest" and "hardest".
             The minimum estimator across all attackers against this specific boss moveset will
@@ -713,12 +763,15 @@ class CountersListsMultiBSLevel:
             Should be a number (either numeric or string), "min", "max", "average" or "by level".
             Only used if baselines_dict is None.
         """
-        if not baselines_dict:
-            baselines_dict = self.get_estimator_baselines(baseline_boss_moveset=baseline_boss_moveset,
-                                                          baseline_attacker_level=baseline_attacker_level)
+        if not baselines_dict or not baselines_id_dict:
+            baselines_dict, baselines_id_dict = self.get_estimator_baselines(
+                baseline_boss_moveset=baseline_boss_moveset, baseline_attacker_level=baseline_attacker_level)
         for bs, lvl_to_lst in self.lists_by_bs_by_level.items():
             for lvl, lst in lvl_to_lst.items():
                 lst.scale_estimators(baseline_value=baselines_dict[bs][lvl])
+        for bs, id_to_lst in self.lists_by_bs_by_trainer_id.items():
+            for id, lst in id_to_lst.items():
+                lst.scale_estimators(baseline_value=baselines_id_dict[bs][id])
 
     def write_CSV_list(self, path, raw=True,
                        best_attacker_moveset=True, random_boss_moveset=True, specific_boss_moveset=False):
@@ -741,6 +794,10 @@ class CountersListsMultiBSLevel:
         """
         for lvl_to_lst in self.lists_by_bs_by_level.values():
             for lst in lvl_to_lst.values():
+                lst.write_CSV_list(path, raw=raw, best_attacker_moveset=best_attacker_moveset,
+                                   random_boss_moveset=random_boss_moveset, specific_boss_moveset=specific_boss_moveset)
+        for id_to_lst in self.lists_by_bs_by_trainer_id.values():
+            for lst in id_to_lst.values():
                 lst.write_CSV_list(path, raw=raw, best_attacker_moveset=best_attacker_moveset,
                                    random_boss_moveset=random_boss_moveset, specific_boss_moveset=specific_boss_moveset)
 
@@ -854,7 +911,8 @@ class CountersListsRE:
             If the value is "by level", -1 or None, this is turned off, and compute baseline
             separately for each individual list.
             Should be a number (either numeric or string), "min", "max", "average" or "by level".
-        :return: A list of dicts of baseline values for each member list, in the same order as the ensemble.
+        :return: A list of tuples of two dicts of baseline values for each member list,
+            in the same order as the ensemble.
             (Same format as self.lists_for_bosses)
         """
         return [lst.get_estimator_baselines(
@@ -880,8 +938,8 @@ class CountersListsRE:
 
         For details on how scaling works, refer to CONFIG_ESTIMATOR_SCALING_SETTINGS in config.py.
 
-        :param baselines_list: List of dicts of baseline values for each member list, in the same order
-            as the ensemble.
+        :param baselines_list: List of tuples of 2 dicts of baseline values for each member list,
+            in the same order as the ensemble.
         :param baseline_boss_moveset: The boss moveset that should be used to set the baseline,
             should be one of "random", "easiest" and "hardest".
             The minimum estimator across all attackers against this specific boss moveset will
@@ -898,7 +956,8 @@ class CountersListsRE:
             baselines_list = self.get_estimator_baselines(baseline_boss_moveset=baseline_boss_moveset,
                                                           baseline_attacker_level=baseline_attacker_level)
         for i, lst in enumerate(self.lists_for_bosses):
-            lst.scale_estimators(baselines_dict=baselines_list[i])
+            baselines, baselines_id = baselines_list[i]
+            lst.scale_estimators(baselines_dict=baselines, baselines_id_dict=baselines_id)
 
     def load_and_process_all_lists(self):
         """
@@ -942,13 +1001,13 @@ class CountersListsRE:
     def temp_write_table(self, path,
                          combine_attacker_movesets=True,
                          random_boss_moveset=True, specific_boss_moveset=False,
-                         write_unscaled=True,
+                         write_unscaled=True, write_iv=False,
                          exclude=[]):
         # Temporary method for Bulbasaur CD analysis.
         # TODO: Clean up.
 
         attackers_boss_dict = {}
-        # {("VENUSAUR_MEGA", "VINE_WHIP_FAST", "FRENZY_PLANT", "40"):
+        # {("VENUSAUR_MEGA", "VINE_WHIP_FAST", "FRENZY_PLANT", "40", "15/15/15"):
         #     {
         #         ("GROUDON", "DRAGON_TAIL_FAST", "SOLAR_BEAM", "RAID_LEVEL_5", <Battle Settings object>, weight): {
         #             "ESTIMATOR": 1.0,
@@ -960,19 +1019,34 @@ class CountersListsRE:
         # }
         boss_keys = set()
 
+        def update_single_list(lst, bs, boss, weight):
+            """
+            Update attackers_boss_dict and boss_keys using values from a CountersListSingle.
+            This applies to both lists by level and by trainer IDs.
+            :param lst: CountersListSingle to be used
+            :param bs: BattleSettings object
+            :param boss: RaidBoss object
+            :param weight: Weight of the boss
+            """
+            for boss_mvst, atkers_list in lst.rankings.items():
+                for atker_dict in atkers_list:
+                    for atker_mvst, timings in atker_dict["BY_MOVE"].items():
+                        atker_key = (atker_dict["POKEMON_CODENAME"], atker_mvst[0], atker_mvst[1],
+                                     atker_dict["LEVEL"], atker_dict["IV"])
+                        boss_key = (boss.pokemon_codename, boss_mvst[0], boss_mvst[1], boss.tier, bs, weight)
+                        if atker_key not in attackers_boss_dict:
+                            attackers_boss_dict[atker_key] = {}
+                        attackers_boss_dict[atker_key][boss_key] = copy.deepcopy(timings)
+                        boss_keys.add(boss_key)
+
         for i, lst_bslvl in enumerate(self.lists_for_bosses):
             boss, weight = self.ensemble.bosses[i]
             for bs, lvl_to_lst in lst_bslvl.lists_by_bs_by_level.items():
                 for lvl, lst in lvl_to_lst.items():
-                    for boss_mvst, atkers_list in lst.rankings.items():
-                        for atker_dict in atkers_list:
-                            for atker_mvst, timings in atker_dict["BY_MOVE"].items():
-                                atker_key = (atker_dict["POKEMON_CODENAME"], atker_mvst[0], atker_mvst[1], lvl)
-                                boss_key = (boss.pokemon_codename, boss_mvst[0], boss_mvst[1], boss.tier, bs, weight)
-                                if atker_key not in attackers_boss_dict:
-                                    attackers_boss_dict[atker_key] = {}
-                                attackers_boss_dict[atker_key][boss_key] = copy.deepcopy(timings)
-                                boss_keys.add(boss_key)
+                    update_single_list(lst, bs, boss, weight)
+            for bs, id_to_lst in lst_bslvl.lists_by_bs_by_trainer_id.items():
+                for id, lst in id_to_lst.items():
+                    update_single_list(lst, bs, boss, weight)
 
         # Exclude certain attackers as specified (e.g. Black Kyurem against itself)
         attackers_boss_dict = {atker_key: val for atker_key, val in attackers_boss_dict.items()
@@ -1003,12 +1077,14 @@ class CountersListsRE:
         # Combine attacker moves (e.g. FS/BB and Counter/BB Blaziken)
         if combine_attacker_movesets:
             new_atk_boss_dict = {}  # Same format
-            atker_names_lvls = set((atker_key[0], atker_key[3]) for atker_key in attackers_boss_dict.keys())
-            for atker, atker_lvl in atker_names_lvls:
+            atker_names_lvls_ivs = set((atker_key[0], atker_key[3], atker_key[4])
+                                       for atker_key in attackers_boss_dict.keys())
+            for atker, atker_lvl, atker_iv in atker_names_lvls_ivs:
                 atker_curr_vals = {}  # Map boss keys to timings
                 atker_curr_mvsts = {}  # Map boss keys to attacker movesets (fast, charged)
                 for atker_mvst_key, atker_mvst_vals in attackers_boss_dict.items():
-                    if not (atker_mvst_key[0] == atker and atker_mvst_key[3] == atker_lvl):
+                    if not (atker_mvst_key[0] == atker and atker_mvst_key[3] == atker_lvl
+                            and atker_mvst_key[4] == atker_iv):
                         continue
                     fast, charged = atker_mvst_key[1], atker_mvst_key[2]
                     for boss_key in boss_keys:
@@ -1027,7 +1103,7 @@ class CountersListsRE:
                 best_fast = list(set(mvst[0] for mvst in atker_curr_mvsts.values()))
                 best_charged = list(set(mvst[1] for mvst in atker_curr_mvsts.values()))
                 new_atker_key = (atker, "Unknown" if not best_fast else " or ".join(best_fast),
-                                 "Unknown" if not best_charged else " or ".join(best_charged), atker_lvl)
+                                 "Unknown" if not best_charged else " or ".join(best_charged), atker_lvl, atker_iv)
                 new_atk_boss_dict[new_atker_key] = atker_curr_vals
             attackers_boss_dict = new_atk_boss_dict
 
@@ -1048,6 +1124,8 @@ class CountersListsRE:
         os.makedirs(os.path.dirname(filename), exist_ok=True)
         with open(filename, mode='w') as csv_file:
             fieldnames = ["Attacker", "Fast Move", "Charged Move", "Level"]
+            if write_iv:
+                fieldnames.append("IV")
             fieldnames += boss_headers
             writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
             writer.writeheader()
@@ -1075,16 +1153,16 @@ class CountersListsRE:
                                  else " or ".join([self.metadata.move_codename_to_displayname(code)
                                                    for code in atker_key[2].split(" or ")])),
                              "Level": atker_key[3]}
+                if write_iv:
+                    atker_row["IV"] = atker_key[4]
                 for i, boss_key in enumerate(boss_keys):
                     if boss_key in atker_values:
                         atker_row[boss_headers[i]] = atker_values[boss_key][self.sort_option]
                 writer.writerow(atker_row)
 
                 if write_unscaled:
-                    unscaled_row = {"Attacker": atker_row["Attacker"] + "(Unscaled)",
-                                    "Fast Move": atker_row["Fast Move"],
-                                    "Charged Move": atker_row["Charged Move"],
-                                    "Level": atker_row["Level"]}
+                    unscaled_row = atker_row.copy()
+                    unscaled_row["Attacker"] = atker_row["Attacker"] + " (Unscaled)"
                     for i, boss_key in enumerate(boss_keys):
                         if boss_key in atker_values:
                             unscaled_row[boss_headers[i]] = atker_values[boss_key][self.sort_option + "_UNSCALED"]

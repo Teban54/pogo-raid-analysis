@@ -66,6 +66,12 @@ CONFIG_ATTACKER_CRITERIA = [
         "Exclude": ["KYUREM_BLACK_FORM", "KYUREM_WHITE_FORM", "LATIAS_MEGA", "LATIOS_MEGA"],  # Specific Pokemon to be excluded,
             # in the same format as "Pokemon code names", e.g. "VENUSAUR_SHADOW_FORM"
     },
+    {
+        "Trainer ID": 52719,
+        "Charged move types": ["Dragon"],
+        "Pokemon types": ["Dragon"],  # Only use this if you know what you're doing
+        "Fast move types": ["Dragon"],  # Only use this if you know what you're doing
+    },
     # Add more {} blocks here if needed
     # {
     #     "Charged move types": ["Ice"],

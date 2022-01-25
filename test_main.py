@@ -33,7 +33,8 @@ if __name__ == "__main__":
     clre.write_CSV_list(path=COUNTERS_DATA_PATH, raw=True,
                         best_attacker_moveset=False, random_boss_moveset=True, specific_boss_moveset=True)
     clre.temp_write_table(path=COUNTERS_DATA_PATH, write_unscaled=False,
-                          combine_attacker_movesets=False, specific_boss_moveset=True)  #,
+                          combine_attacker_movesets=False, specific_boss_moveset=True,
+                          write_iv=True)  #,
                           #exclude=["KYUREM_BLACK_FORM", "KYUREM_WHITE_FORM", "LATIAS_MEGA", "LATIOS_MEGA"])
 
     """ACM = CONFIG.attacker_criteria_multi
