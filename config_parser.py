@@ -92,7 +92,8 @@ class Config:
                 is_shadow=cfg.get("Must be shadow", False),
                 is_not_shadow=cfg.get("Must be non shadow", cfg.get("Must be non-shadow", False)),
                 is_mega=cfg.get("Must be mega", False),
-                is_not_mega=cfg.get("Must be non mega", cfg.get("Must be non-mega", False))
+                is_not_mega=cfg.get("Must be non mega", cfg.get("Must be non-mega", False)),
+                exclude_codenames=cfg.get("Exclude", None),
             ))
         return AttackerCriteriaMulti(sets, metadata=self.meta)
 

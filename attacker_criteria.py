@@ -58,7 +58,8 @@ class AttackerCriteria:
                  is_mythical=False, is_not_mythical=False,
                  is_legendary_or_mythical=False, is_not_legendary_or_mythical=False,
                  is_shadow=False, is_not_shadow=False,
-                 is_mega=False, is_not_mega=False):
+                 is_mega=False, is_not_mega=False,
+                 exclude_codenames=None):
         """
         Initialize all filters.
 
@@ -88,6 +89,7 @@ class AttackerCriteria:
         :param is_not_shadow: If True, only consider non-shadow attackers
         :param is_mega: If True, only consider mega attackers
         :param is_not_mega: If True, only consider non-mega attackers
+        :param exclude_codenames: List of codenames of all Pokemon to be excluded, regardless of other filters.
         """
         def parse_types(types):
             """
@@ -121,6 +123,12 @@ class AttackerCriteria:
         self.is_mega = is_mega
         self.is_not_mega = is_not_mega
         self.metadata = metadata
+        self.exclude_codenames = exclude_codenames
+
+        if self.pokemon_codenames and type(self.pokemon_codenames) is str:
+            self.pokemon_codenames = [self.pokemon_codenames]
+        if self.exclude_codenames and type(self.exclude_codenames) is str:
+            self.exclude_codenames = [self.exclude_codenames]
 
     def check_attacker(self, pokemon=None, pokemon_codename=None, level=None,
                        fast=None, fast_codename=None,
@@ -175,6 +183,7 @@ class AttackerCriteria:
             criterion_legendary_or_mythical(pokemon, self.is_legendary_or_mythical, self.is_not_legendary_or_mythical),
             criterion_shadow(pokemon, self.is_shadow, self.is_not_shadow),
             criterion_mega(pokemon, self.is_mega, self.is_not_mega),
+            not self.exclude_codenames or pokemon.name not in self.exclude_codenames
         ])
 
 
