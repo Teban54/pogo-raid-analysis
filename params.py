@@ -230,6 +230,7 @@ SPECIAL_MOVE_DISPLAY_NAMES = {
     'LOCK_ON_FAST': 'Lock-On',
     'V_CREATE': 'V-Create',
     'TRI_ATTACK': 'Tri-Attack',
+    'FUTURESIGHT': 'Future Sight',
 }
 
 
