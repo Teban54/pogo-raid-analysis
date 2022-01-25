@@ -22,17 +22,19 @@ if __name__ == "__main__":
 
     CONFIG.raid_ensemble.debug_print_to_csv()
 
-    # clre = CountersListsRE(
-    #     metadata=META,
-    #     ensemble=CONFIG.raid_ensemble,
-    #     attacker_criteria_multi=CONFIG.attacker_criteria_multi,
-    #     scaling_settings=CONFIG.scaling_settings)
-    # clre.load_and_process_all_lists()
-    # clre.write_CSV_list(path=COUNTERS_DATA_PATH, raw=False,
-    #                     best_attacker_moveset=True, random_boss_moveset=True, specific_boss_moveset=True)
-    # clre.write_CSV_list(path=COUNTERS_DATA_PATH, raw=True,
-    #                     best_attacker_moveset=True, random_boss_moveset=True, specific_boss_moveset=True)
-    # clre.temp_write_table(path=COUNTERS_DATA_PATH, write_unscaled=True)
+    clre = CountersListsRE(
+        metadata=META,
+        ensemble=CONFIG.raid_ensemble,
+        attacker_criteria_multi=CONFIG.attacker_criteria_multi,
+        scaling_settings=CONFIG.scaling_settings)
+    clre.load_and_process_all_lists()
+    clre.write_CSV_list(path=COUNTERS_DATA_PATH, raw=False,
+                        best_attacker_moveset=False, random_boss_moveset=True, specific_boss_moveset=True)
+    clre.write_CSV_list(path=COUNTERS_DATA_PATH, raw=True,
+                        best_attacker_moveset=False, random_boss_moveset=True, specific_boss_moveset=True)
+    clre.temp_write_table(path=COUNTERS_DATA_PATH, write_unscaled=True,
+                          combine_attacker_movesets=False, specific_boss_moveset=True,
+                          exclude=["KYUREM_BLACK_FORM", "KYUREM_WHITE_FORM", "LATIAS_MEGA", "LATIOS_MEGA"])
 
     """ACM = CONFIG.attacker_criteria_multi
     for AC in ACM.sets:

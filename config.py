@@ -37,12 +37,12 @@ CONFIG_ATTACKER_CRITERIA = [
     {
         # Each block contains several filters. To meet the criteria for this particular {} block,
         # an attacker needs to pass all the filters (example: Ice charged move, levels 30-50, AND non-shadow).
-        "Charged move types": ["Grass", "Steel", "Fighting", "Water"],  # This is an approximation for "attacker type",
+        "Charged move types": ["Dragon"],  # This is an approximation for "attacker type",
                                           # and should be used primarily for type-based filtering.
                                           # Always put "" around type names!
-        "Min level": 40,
-        "Max level": 40,
-        "Level step size": 10,  # Can be as low as 0.5, but recommend 5 for efficiency
+        "Min level": 30,
+        "Max level": 50,
+        "Level step size": 5,  # Can be as low as 0.5, but recommend 5 for efficiency
         # "Pokemon code names": [],  # Specific Pokemon to be considered,
             # e.g. "MEWTWO", "VENUSAUR_SHADOW_FORM", "RAICHU_ALOLA_FORM",
             # "SLOWBRO_GALARIAN_FORM", "CHARIZARD_MEGA_Y"
@@ -61,7 +61,7 @@ CONFIG_ATTACKER_CRITERIA = [
         # "Must be non mythical": True,
         # "Must be legendary or mythical": False,
         # "Must be non legendary or mythical": False,
-        # "Pokemon types": ["Grass"],  # Only use this if you know what you're doing
+        "Pokemon types": ["Dragon"],  # Only use this if you know what you're doing
         # "Fast move types": [],  # Only use this if you know what you're doing
     },
     # Add more {} blocks here if needed
@@ -122,7 +122,7 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
         "Raid tier": "Tier 5",  # Here, "Tier 5" has all past/present/future bosses
         # "Raid category": "Legacy Tier 5",  # Here, "Tier 5" has only current bosses
         "Filters": {  # Only those without # at the start are applied
-            "Weak to contender types": ["Water"],
+            "Weak to contender types": ["Dragon"],
             #"Weak to contender types simultaneously": ["Grass", "Water"],
             #"Evolution stage": "Final",  # "Final", "Pre-evolution"
             #"Must be shadow": False,  # This describes BOSSES, not attackers
@@ -144,7 +144,7 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
             # If absent, CONFIG_BATTLE_SETTINGS will be used
             # TODO: Make these override default battle settings only if necessary, not outright replace whole dict
             "Friendship": "Best",
-            "Weather": "Sunny",
+            "Weather": "Extreme",
             "Attack strategy": "No Dodging",
             "Dodge strategy": "Realistic Dodging"
         },
@@ -153,21 +153,21 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
         "Pokemon pool": "By raid tier",
         "Raid tier": "Mega Tier",
         "Filters": {
-            "Weak to contender types": ["Water"],
+            "Weak to contender types": ["Dragon"],
             # "Weak to contender types simultaneously": ["Grass", "Water"],
         },
         "Weight of each Pokemon": 1,
         "Weight of whole group": 35,  #25,
         "Forms weight strategy": "combine",
         "Battle settings": {
-            "Weather": "Sunny",
+            "Weather": "Extreme",
         },
     },
     {
         "Pokemon pool": "By raid tier",
         "Raid tier": "Tier 3",
         "Filters": {
-            "Weak to contender types": ["Water"],
+            "Weak to contender types": ["Dragon"],
             # "Weak to contender types simultaneously": ["Grass", "Water"],
         },
         "Weight of each Pokemon": 1,
@@ -175,7 +175,7 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
         "Forms weight strategy": "combine",
         "Battle settings": {
             "Friendship": "No",
-            "Weather": "Sunny",
+            "Weather": "Extreme",
         },
     },
     # {
@@ -247,7 +247,21 @@ CONFIG_ESTIMATOR_SCALING_SETTINGS = {
     #            Example: T5 Palkia. Rayquaza's random estimator is 2.27, but only 1.98 against DT/AT.
     #            With "Easiest", Rayquaza's scaled estimator will become 1.14. The fact that it's significantly
     #            above 1.0 suggests T5 Palkia is a hard boss with a troublesome worst-case moveset.
+    #
+    # If you have multiple attacker levels, "Baseline attacker level" allows you to choose a standard level
+    # to determine a baseline, and apply the same baseline to attackers of all levels.
+    # Possible options include: A specific level, "min" (minimum level across all attackers), "max",
+    # "average" (average level across all attackers).
+    # To turn this feature off, set it to "by level", -1 or None.
+    # Default is "by level" or turned off.
+    #
+    # Example: Suppose against a particular boss, L40 Zekrom's estimator is 2.0 and L50 is 1.75.
+    # Without a standard baseline attacker level, both will be chosen as the baseline for all L40 attackers
+    # and L50 attackers respectively, thus both are scaled to 1.0.
+    # With baseline attacker level at 40, L40 Zekrom will be scaled to 1.0, and L50 Zekrom will be scaled
+    # to 1.75/2=0.875.
     "Enabled": True,  # Default: True
     "Baseline chosen before filter": False,  # Default: False
     "Baseline boss moveset": "random",  # "random", "easiest", "hardest"
+    "Baseline attacker level": 40,  # Specific level, "min", "max", "average", "by level"/-1/None
 }

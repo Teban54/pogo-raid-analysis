@@ -251,44 +251,27 @@ class CountersListSingle:
                                       if atker_filter]  # Remove Nones
         self.rankings = new_rankings
 
-    def scale_estimators(self, baseline_boss_moveset="random", scaling_factor=None):
+    def get_estimator_baseline(self, baseline_boss_moveset="random"):
         """
-        Scale the estimators of all attackers currently stored in self.rankings, such that
-        the best attacker gets an estimator of 1.0, and all others scaled proportionally.
+        Get the value of the estimator baseline from all attackers currently stored in self.rankings.
+        This value will be scaled to 1.0, and all other estimators scaled proportionally.
 
-        This CHANGES the value of self.rankings, specifically all estimator values.
-        Keeps the original values with key "ESTIMATOR_UNSCALED".
+        This is a query function that does not change the value of self.rankings.
         This function does not consider whether self.rankings has been filtered based on
         AttackerCriteriaMulti.
 
         For details on how scaling works, refer to CONFIG_ESTIMATOR_SCALING_SETTINGS in config.py.
 
-        This function also allows a specific scaling factor, but it's only for internal use
-        once the required scaling factor is computed.
-
         :param baseline_boss_moveset: The boss moveset that should be used to set the baseline,
             should be one of "random", "easiest" and "hardest".
             The minimum estimator across all attackers against this specific boss moveset will
             be used as the baseline, and will be scaled to 1.0.
-        :param scaling_factor: A specific scaling factor to be applied to all estimators, if applicable.
-            If None, the scaling factor will be computed based on the data and baseline options.
-            This is for internal use only. When called elsewhere, always set it to None.
+        :return: Value of estimator baseline.
         """
-        if scaling_factor is not None:
-            for mvst_key, atkers_list in self.rankings.items():
-                for atker_dict in atkers_list:
-                    atker_dict["ESTIMATOR_UNSCALED"] = atker_dict["ESTIMATOR"]
-                    atker_dict["ESTIMATOR"] *= scaling_factor
-                    for (fast_codename, charged_codename), timings_dict in atker_dict["BY_MOVE"].items():
-                        timings_dict["ESTIMATOR_UNSCALED"] = timings_dict["ESTIMATOR"]
-                        timings_dict["ESTIMATOR"] *= scaling_factor
-            return
-
-        # Scaling factor not given, first parse baseline setting
         baseline_boss_moveset = baseline_boss_moveset.lower()
         if baseline_boss_moveset not in ["random", "easiest", "hardest"]:
-            print(f"Error (CountersListSingle.scale_estimators): Boss moveset option {baseline_boss_moveset} is invalid. "
-                  f"Using 'random' as default.",
+            print(f"Error (CountersListSingle.get_estimator_baseline): "
+                  f"Boss moveset option {baseline_boss_moveset} is invalid. Using 'random' as default.",
                   file=sys.stderr)
             baseline_boss_moveset = "random"
 
@@ -304,8 +287,55 @@ class CountersListSingle:
         elif baseline_boss_moveset == "hardest":
             baseline = max(min_est for mvst, min_est in baselines_per_boss_moveset.items()
                            if mvst != ("RANDOM", "RANDOM"))
-        self.scaling_baseline = baseline
-        self.scale_estimators(scaling_factor=1.0 / baseline)
+        return baseline
+
+    def scale_estimators(self, baseline_value=None, scaling_factor=None, baseline_boss_moveset="random"):
+        """
+        Scale the estimators of all attackers currently stored in self.rankings, such that
+        the baseline (typically best attacker) gets an estimator of 1.0, and all others scaled
+        proportionally.
+
+        This function allows a specific baseline or scaling factor. Typical usage is to call
+        get_estimator_baseline() first, then pass in its value as baseline_value.
+        If the baseline and scaling factor are both unspecified, the function will call
+        get_estimator_baseline() as the default option. This will use the baseline_boss_moveset
+        parameter.
+
+        This CHANGES the value of self.rankings, specifically all estimator values.
+        Keeps the original values with key "ESTIMATOR_UNSCALED".
+        This function does not consider whether self.rankings has been filtered based on
+        AttackerCriteriaMulti.
+
+        For details on how scaling works, refer to CONFIG_ESTIMATOR_SCALING_SETTINGS in config.py.
+
+        :param baseline_value: A specific baseline value to be used for scaling of all estimators.
+            Supersedes scaling_factor. In practice, do not give both parameters.
+        :param scaling_factor: A specific scaling factor to be applied to all estimators.
+            Only used if baseline_value is None.
+            If both baseline_value and scaling_factor are None, the scaling factor will be computed
+            based on the data and baseline options.
+        :param baseline_boss_moveset: The boss moveset that should be used to set the baseline,
+            should be one of "random", "easiest" and "hardest".
+            The minimum estimator across all attackers against this specific boss moveset will
+            be used as the baseline, and will be scaled to 1.0.
+            Only used if both baseline_value and scaling_factor are None.
+        """
+        if baseline_value is None and scaling_factor is None:
+            baseline_value = self.get_estimator_baseline(baseline_boss_moveset=baseline_boss_moveset)
+
+        if baseline_value is not None:
+            scaling_factor = 1.0 / baseline_value
+            self.scaling_baseline = baseline_value
+        else:
+            self.scaling_baseline = 1.0 / scaling_factor
+
+        for mvst_key, atkers_list in self.rankings.items():
+            for atker_dict in atkers_list:
+                atker_dict["ESTIMATOR_UNSCALED"] = atker_dict["ESTIMATOR"]
+                atker_dict["ESTIMATOR"] *= scaling_factor
+                for (fast_codename, charged_codename), timings_dict in atker_dict["BY_MOVE"].items():
+                    timings_dict["ESTIMATOR_UNSCALED"] = timings_dict["ESTIMATOR"]
+                    timings_dict["ESTIMATOR"] *= scaling_factor
 
     def get_best_moveset_for_attacker(self, attacker_data=None,
                                       boss_moveset=None, attacker_codename=None, attacker=None,
@@ -590,13 +620,17 @@ class CountersListsMultiBSLevel:
             for lst in lvl_to_lst.values():
                 lst.filter_rankings()
 
-    def scale_estimators(self, baseline_boss_moveset="random"):
+    def get_estimator_baselines(self, baseline_boss_moveset="random", baseline_attacker_level="by level"):
         """
-        Scale the estimators of all attackers currently stored in self.rankings of each
-        member CountersListSingle object, such that the best attacker gets an estimator of 1.0,
-        and all others scaled proportionally.
+        Get the value of the estimator baselines for each member CountersListSingle object.
+        This value will be scaled to 1.0, and all other estimators scaled proportionally.
 
-        This CHANGES the value of self.rankings, specifically all estimator values.
+        baseline_attacker_level specifies a baseline level if applicable. The same baseline
+        will be used for all member lists with a particular BattleSettings.
+        If not specified, a baseline will be computed for each individual list with specific
+        BattleSettings and level.
+
+        This is a query function that does not change the value of self.rankings.
         This function does not consider whether self.rankings has been filtered based on
         AttackerCriteriaMulti.
 
@@ -606,10 +640,85 @@ class CountersListsMultiBSLevel:
             should be one of "random", "easiest" and "hardest".
             The minimum estimator across all attackers against this specific boss moveset will
             be used as the baseline, and will be scaled to 1.0.
+        :param baseline_attacker_level: Baseline attacker level to determine estimators, or
+            a criterion for the baseline level.
+            If the value is "by level", -1 or None, this is turned off, and compute baseline
+            separately for each individual list.
+            Should be a number (either numeric or string), "min", "max", "average" or "by level".
+        :return: A 2D dict mapping BattleSettings and then attacker level to the baseline value.
+            (Same format as self.lists_by_bs_by_level)
         """
-        for lvl_to_lst in self.lists_by_bs_by_level.values():
-            for lst in lvl_to_lst.values():
-                lst.scale_estimators(baseline_boss_moveset=baseline_boss_moveset)
+        ret = {}
+        for bs, lvl_to_list in self.lists_by_bs_by_level.items():
+            ret[bs] = {}
+            base_lvl = -1  # -1 for "by level"
+            if baseline_attacker_level:
+                if type(baseline_attacker_level) in [int, float] and baseline_attacker_level > 0:
+                    base_lvl = baseline_attacker_level
+                elif type(baseline_attacker_level) is str:
+                    baseline_attacker_level = baseline_attacker_level.lower()
+                    if baseline_attacker_level == "min":
+                        base_lvl = min(lvl_to_list.keys())
+                    elif baseline_attacker_level == "max":
+                        base_lvl = max(lvl_to_list.keys())
+                    elif baseline_attacker_level == "average":
+                        base_lvl = sum(lvl_to_list.keys()) / len(lvl_to_list.keys())
+            if base_lvl > 0:
+                if base_lvl not in lvl_to_list:
+                    print(f"Error (CountersListsMultiBSLevel.get_estimator_baselines): "
+                          f"Baseline level {base_lvl} (parsed or computed) is invalid for battle settings {bs}.\n"
+                          f"Falling back on default option: scale each level independently.",
+                          file=sys.stderr)
+                else:
+                    baseline = lvl_to_list[base_lvl].get_estimator_baseline(
+                        baseline_boss_moveset=baseline_boss_moveset)
+                    ret[bs] = {lvl: baseline for lvl in lvl_to_list.keys()}
+                    continue  # Next BS
+            # Baseline level not specified or failed, scale each level independently
+            ret[bs] = {
+                lvl: lst.get_estimator_baseline(baseline_boss_moveset=baseline_boss_moveset)
+                for lvl, lst in lvl_to_list.items()}
+        return ret
+
+    def scale_estimators(self, baselines_dict=None,
+                         baseline_boss_moveset="random", baseline_attacker_level="by level"):
+        """
+        Scale the estimators of all attackers currently stored in self.rankings of each
+        member CountersListSingle object, such that the baseline (typically best attacker) gets
+        an estimator of 1.0, and all others scaled proportionally.
+
+        This function allows a specific dict of baseline values for each member list.
+        Typical usage is to call get_estimator_baselines() first, then pass in its value as baselines_dict.
+        If baselines_dict is unspecified, the function will call get_estimator_baselines() as the
+        default option. This will use the baseline_boss_moveset and baseline_attacker_level parameters.
+
+        This CHANGES the value of self.rankings, specifically all estimator values.
+        Keeps the original values with key "ESTIMATOR_UNSCALED".
+        This function does not consider whether self.rankings has been filtered based on
+        AttackerCriteriaMulti.
+
+        For details on how scaling works, refer to CONFIG_ESTIMATOR_SCALING_SETTINGS in config.py.
+
+        :param baselines_dict: 2D dict mapping BattleSettings and then attacker levels to the
+            baseline value for that member CountersListSingle object.
+        :param baseline_boss_moveset: The boss moveset that should be used to set the baseline,
+            should be one of "random", "easiest" and "hardest".
+            The minimum estimator across all attackers against this specific boss moveset will
+            be used as the baseline, and will be scaled to 1.0.
+            Only used if baselines_dict is None.
+        :param baseline_attacker_level: Baseline attacker level to determine estimators, or
+            a criterion for the baseline level.
+            If the value is "by level", -1 or None, this is turned off, and compute baseline
+            separately for each individual list.
+            Should be a number (either numeric or string), "min", "max", "average" or "by level".
+            Only used if baselines_dict is None.
+        """
+        if not baselines_dict:
+            baselines_dict = self.get_estimator_baselines(baseline_boss_moveset=baseline_boss_moveset,
+                                                          baseline_attacker_level=baseline_attacker_level)
+        for bs, lvl_to_lst in self.lists_by_bs_by_level.items():
+            for lvl, lst in lvl_to_lst.items():
+                lst.scale_estimators(baseline_value=baselines_dict[bs][lvl])
 
     def write_CSV_list(self, path, raw=True,
                        best_attacker_moveset=True, random_boss_moveset=True, specific_boss_moveset=False):
@@ -725,15 +834,14 @@ class CountersListsRE:
         for lst in self.lists_for_bosses:
             lst.filter_rankings()
 
-    def scale_estimators(self, baseline_boss_moveset="random"):
+    def get_estimator_baselines(self, baseline_boss_moveset="random", baseline_attacker_level="by level"):
         """
-        Scale the estimators of all attackers currently stored in self.rankings of each
-        member CountersListSingle object, such that the best attacker gets an estimator of 1.0,
-        and all others scaled proportionally.
+        Get the value of the estimator baselines for each member CountersListsMultiBSLevel object.
+        This value will be scaled to 1.0, and all other estimators scaled proportionally.
 
-        This CHANGES the value of self.rankings, specifically all estimator values.
-        This function does not consider whether self.rankings has been filtered based on
-        AttackerCriteriaMulti.
+        Since member lists have different bosses, they will always be scaled separately.
+        The baseline_boss_moveset and baseline_attacker_level parameters are supplied to
+        each member list. For more info, see documentation for CountersListsMultiBSLevel.get_estimator_baselines.
 
         For details on how scaling works, refer to CONFIG_ESTIMATOR_SCALING_SETTINGS in config.py.
 
@@ -741,9 +849,56 @@ class CountersListsRE:
             should be one of "random", "easiest" and "hardest".
             The minimum estimator across all attackers against this specific boss moveset will
             be used as the baseline, and will be scaled to 1.0.
+        :param baseline_attacker_level: Baseline attacker level to determine estimators, or
+            a criterion for the baseline level.
+            If the value is "by level", -1 or None, this is turned off, and compute baseline
+            separately for each individual list.
+            Should be a number (either numeric or string), "min", "max", "average" or "by level".
+        :return: A list of dicts of baseline values for each member list, in the same order as the ensemble.
+            (Same format as self.lists_for_bosses)
         """
-        for lst in self.lists_for_bosses:
-            lst.scale_estimators(baseline_boss_moveset=baseline_boss_moveset)
+        return [lst.get_estimator_baselines(
+                    baseline_boss_moveset=baseline_boss_moveset,baseline_attacker_level=baseline_attacker_level)
+                for lst in self.lists_for_bosses]
+
+    def scale_estimators(self, baselines_list=None,
+                         baseline_boss_moveset="random", baseline_attacker_level="by level"):
+        """
+        Scale the estimators of all attackers currently stored in self.rankings of each
+        member CountersListsMultiBSLevel object, such that the baseline (typically best attacker) gets
+        an estimator of 1.0, and all others scaled proportionally.
+
+        This function allows a specific list of baseline values for each member list.
+        Typical usage is to call get_estimator_baselines() first, then pass in its value as baselines_list.
+        If baselines_list is unspecified, the function will call get_estimator_baselines() as the
+        default option. This will use the baseline_boss_moveset and baseline_attacker_level parameters.
+
+        This CHANGES the value of self.rankings, specifically all estimator values.
+        Keeps the original values with key "ESTIMATOR_UNSCALED".
+        This function does not consider whether self.rankings has been filtered based on
+        AttackerCriteriaMulti.
+
+        For details on how scaling works, refer to CONFIG_ESTIMATOR_SCALING_SETTINGS in config.py.
+
+        :param baselines_list: List of dicts of baseline values for each member list, in the same order
+            as the ensemble.
+        :param baseline_boss_moveset: The boss moveset that should be used to set the baseline,
+            should be one of "random", "easiest" and "hardest".
+            The minimum estimator across all attackers against this specific boss moveset will
+            be used as the baseline, and will be scaled to 1.0.
+            Only used if baselines_list is None.
+        :param baseline_attacker_level: Baseline attacker level to determine estimators, or
+            a criterion for the baseline level.
+            If the value is "by level", -1 or None, this is turned off, and compute baseline
+            separately for each individual list.
+            Should be a number (either numeric or string), "min", "max", "average" or "by level".
+            Only used if baselines_list is None.
+        """
+        if not baselines_list:
+            baselines_list = self.get_estimator_baselines(baseline_boss_moveset=baseline_boss_moveset,
+                                                          baseline_attacker_level=baseline_attacker_level)
+        for i, lst in enumerate(self.lists_for_bosses):
+            lst.scale_estimators(baselines_dict=baselines_list[i])
 
     def load_and_process_all_lists(self):
         """
@@ -754,10 +909,12 @@ class CountersListsRE:
         """
         self.load_and_parse_JSON()
         if self.scaling_settings["Enabled"] and self.scaling_settings["Baseline chosen before filter"]:
-            self.scale_estimators(baseline_boss_moveset=self.scaling_settings["Baseline boss moveset"])
+            self.scale_estimators(baseline_boss_moveset=self.scaling_settings["Baseline boss moveset"],
+                                  baseline_attacker_level=self.scaling_settings["Baseline attacker level"])
         self.filter_rankings()
         if self.scaling_settings["Enabled"] and not self.scaling_settings["Baseline chosen before filter"]:
-            self.scale_estimators(baseline_boss_moveset=self.scaling_settings["Baseline boss moveset"])
+            self.scale_estimators(baseline_boss_moveset=self.scaling_settings["Baseline boss moveset"],
+                                  baseline_attacker_level=self.scaling_settings["Baseline attacker level"])
 
     def write_CSV_list(self, path, raw=True,
                        best_attacker_moveset=True, random_boss_moveset=True, specific_boss_moveset=False):
@@ -785,7 +942,8 @@ class CountersListsRE:
     def temp_write_table(self, path,
                          combine_attacker_movesets=True,
                          random_boss_moveset=True, specific_boss_moveset=False,
-                         write_unscaled=True):
+                         write_unscaled=True,
+                         exclude=[]):
         # Temporary method for Bulbasaur CD analysis.
         # TODO: Clean up.
 
@@ -815,6 +973,10 @@ class CountersListsRE:
                                     attackers_boss_dict[atker_key] = {}
                                 attackers_boss_dict[atker_key][boss_key] = copy.deepcopy(timings)
                                 boss_keys.add(boss_key)
+
+        # Exclude certain attackers as specified (e.g. Black Kyurem against itself)
+        attackers_boss_dict = {atker_key: val for atker_key, val in attackers_boss_dict.items()
+                               if atker_key[0] not in exclude}
 
         # Filter boss keys according to settings
         boss_keys = list(boss_keys)

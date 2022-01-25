@@ -307,4 +307,8 @@ class Config:
                   file=sys.stderr)
             cfg["Baseline boss moveset"] = "random"
         cfg["Baseline boss moveset"] = cfg["Baseline boss moveset"].lower()
+        if "Baseline attacker level" not in cfg or cfg["Baseline attacker level"] == -1:
+            cfg["Baseline attacker level"] = "by level"
+        if type(cfg["Baseline attacker level"]) is str:
+            cfg["Baseline boss moveset"] = cfg["Baseline boss moveset"].lower()
         return cfg
