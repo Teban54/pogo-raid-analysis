@@ -48,7 +48,7 @@ def write_json_to_file(data, filename):
     :param filename: Path and name of output file
     """
     os.makedirs(os.path.dirname(filename), exist_ok=True)
-    with open(filename, 'w+') as fout:
+    with open(filename, 'w+', newline='', encoding='UTF-8') as fout:
         json.dump(data, fout)
 
 
@@ -59,7 +59,7 @@ def load_json_from_file(filename):
     :param filename: Path and name of input file
     :return: Data as Python object
     """
-    with open(filename, 'r') as fin:
+    with open(filename, 'r', newline='', encoding='UTF-8') as fin:
         data = json.load(fin)
     return data
 

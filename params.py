@@ -232,6 +232,10 @@ SPECIAL_MOVE_DISPLAY_NAMES = {
     'V_CREATE': 'V-Create',
     #'TRI_ATTACK': 'Tri-Attack',
     'FUTURESIGHT': 'Future Sight',
+    'AEROBLAST_PLUS': 'Aeroblast+',
+    'AEROBLAST_PLUS_PLUS': 'Aeroblast++',
+    'SACRED_FIRE_PLUS': 'Sacred Fire+',
+    'SACRED_FIRE_PLUS_PLUS': 'Sacred Fire++',
 }
 
 

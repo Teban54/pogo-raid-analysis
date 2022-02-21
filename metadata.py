@@ -136,7 +136,7 @@ class Metadata:
         Debug function that outputs all moves to CSV.
         """
         os.makedirs(os.path.dirname(filename), exist_ok=True)
-        with open(filename, mode='w') as csv_file:
+        with open(filename, mode='w', newline='', encoding='UTF-8') as csv_file:
             fieldnames = ['Code name', 'Display name', 'Type', 'Is fast', 'Power', 'Energy delta',
                           'Duration', 'Window start', 'Window end']
             writer = csv.writer(csv_file)
@@ -252,7 +252,7 @@ class Metadata:
         Debug function that outputs all Pokemon to CSV.
         """
         os.makedirs(os.path.dirname(filename), exist_ok=True)
-        with open(filename, mode='w') as csv_file:
+        with open(filename, mode='w', newline='', encoding='UTF-8') as csv_file:
             fieldnames = ['Code name', 'Type 1', 'Type 2', 'Attack', 'Defense', 'Stamina',
                           'Pre-evolution', 'Evolutions', 'Is legendary', 'Is mythical', 'Is shadow', 'Is mega',
                           'Base code name', 'Base display name',
@@ -337,7 +337,7 @@ class Metadata:
         Debug function that outputs all raids (RaidBoss objects) to CSV.
         """
         os.makedirs(os.path.dirname(filename), exist_ok=True)
-        with open(filename, mode='w') as csv_file:
+        with open(filename, mode='w', newline='', encoding='UTF-8') as csv_file:
             fieldnames = ['Tier', 'Category', 'Pokemon codename', 'Base', 'Form', 'Is mega']
             writer = csv.writer(csv_file)
             writer.writerow(fieldnames)

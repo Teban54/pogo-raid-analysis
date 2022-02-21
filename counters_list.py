@@ -496,7 +496,7 @@ class CountersListSingle:
                 )
             )
         os.makedirs(os.path.dirname(filename), exist_ok=True)
-        with open(filename, mode='w') as csv_file:
+        with open(filename, mode='w', newline='', encoding='UTF-8') as csv_file:
             fieldnames = ["Attacker", "Attacker Fast Move", "Attacker Charged Move",
                           "Attacker Level", "Attacker IV",
                           "Boss", "Boss Fast Move", "Boss Charged Move",
@@ -1122,7 +1122,7 @@ class CountersListsRE:
         # Print what we have
         filename = os.path.join(path, "table.csv")
         os.makedirs(os.path.dirname(filename), exist_ok=True)
-        with open(filename, mode='w') as csv_file:
+        with open(filename, mode='w', newline='', encoding='UTF-8') as csv_file:
             fieldnames = ["Attacker", "Fast Move", "Charged Move", "Level"]
             if write_iv:
                 fieldnames.append("IV")
