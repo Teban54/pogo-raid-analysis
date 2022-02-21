@@ -313,7 +313,7 @@ if __name__ == "__main__":
     """
 
 
-    data = get_pokebattler_raid_counters(raid_boss_codename="KYOGRE", raid_tier=5)
+    data = await get_pokebattler_raid_counters(raid_boss_codename="KYOGRE", raid_tier=5)
     with open("data/json/CountersList_example_Kyogre.json", "w") as fout:
         json.dump(data, fout)
 

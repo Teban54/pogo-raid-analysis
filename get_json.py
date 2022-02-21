@@ -16,7 +16,7 @@ from utils import *
 from battle_settings import *
 
 
-def get_pokebattler_metadata(metadata_name, write_file=False):
+async def get_pokebattler_metadata(metadata_name, write_file=False):
     """
     Get the Pokebattler metadata JSON files (moves, Pokemon, raids).
     The files are obtained from https://fight.pokebattler.com/<metadata_name>.
@@ -28,13 +28,13 @@ def get_pokebattler_metadata(metadata_name, write_file=False):
             data/json/<metadata_name>.json
     :return: Requested JSON data as Python object
     """
-    data = do_http_request(f"https://fight.pokebattler.com/{metadata_name}")
+    data = await do_http_request(f"https://fight.pokebattler.com/{metadata_name}")
     if write_file:
         write_json_to_file(data, f"data/json/{metadata_name}.json")
     return data
 
 
-def get_pokebattler_raid_counters(raid_boss=None, raid_boss_codename=None, raid_tier="Tier 5",
+async def get_pokebattler_raid_counters(raid_boss=None, raid_boss_codename=None, raid_tier="Tier 5",
                                   attacker_level=40, trainer_id=None,
                                   attacker_criteria_multi=None,
                                   battle_settings=None,
@@ -98,74 +98,19 @@ def get_pokebattler_raid_counters(raid_boss=None, raid_boss_codename=None, raid_
         url = f'https://fight.pokebattler.com/raids/defenders/{raid_boss_codename}/' \
               f'levels/{raid_tier}/attackers/levels/{attacker_level}/' \
               f'strategies/{battle_settings.attack_strategy_code}/DEFENSE_RANDOM_MC'
-    return do_http_request(url, payload)
+
+    # aiohttp doesn't allow payload with True/False values, so convert to string
+    for k, v in payload.items():
+        if type(v) is bool:
+            payload[k] = str(v)
+
+    return await do_http_request(url, payload)
 
 
-# TODO: Remove everything below
+async def get_json_main():
+    for metadata_name in ["raids", "pokemon", "moves"]:
+        await get_pokebattler_metadata(metadata_name, write_file=True)
 
-
-def load_raid_info(filename='raids.json', raid_type="RAID_LEVEL_5_LEGACY"):
-    """
-    Extract all raid bosses of a certain tier listed in raids.json from Pokebattler.
-    This pokemon_names_list.json can be used later to get simulations against all raid bosses.
-
-    :param filename: Filename of raids information
-    :param raid_type: Raid types
-        Future raid: "RAID_LEVEL_5_FUTURE" / "RAID_LEVEL_MEGA_FUTURE"
-        Legacy raid: "RAID_LEVEL_5_LEGACY" / "RAID_LEVEL_MEGA_LEGACY"
-        Current raid: "RAID_LEVEL_5" / "RAID_LEVEL_MEGA"
-    """
-    data = load_json_from_file(filename)
-    # data:
-    result = []
-    for tier in data['tiers']:
-        if tier['tier'] == raid_type:
-            raids = tier['raids']
-    for raid in raids:
-        result.append(raid['pokemon'])
-    return result
-
-
-def download_data(raid_level=5, pkm_level=40, trainer_id=None, raid_type='RAID_LEVEL_5'):
-    """
-    Download the rankings lists of all raids of a certain tier from Pokebattler.
-    Writes them to JSON files.
-
-    :param raid_level: Raid tier, in integer (to setup the simulations)
-    :param pkm_level: Level of Pokemon used
-    :param trainer_id: ID of user whose Pokebox will be used for simulations.
-                    If None, all attackers by level will be used.
-    :param raid_type: Raid types
-        Future raid: "RAID_LEVEL_5_FUTURE" / "RAID_LEVEL_MEGA_FUTURE"
-        Legacy raid: "RAID_LEVEL_5_LEGACY" / "RAID_LEVEL_MEGA_LEGACY"
-        Current raid: "RAID_LEVEL_5" / "RAID_LEVEL_MEGA"
-    """
-    #
-    pokemon_list = load_raid_info(raid_type=raid_type)
-    print(f"{len(pokemon_list)} Pokemon found. Downloading data. ")
-    for pkm in pokemon_list:
-        try:
-            if (trainer_id):
-                data = get_pokebattler_raid_counters(raid_boss_codename=pkm,
-                                                     raid_tier=raid_type,
-                                                     attacker_level=pkm_level,
-                                                     trainer_id=trainer_id)
-            else:
-                data = get_pokebattler_raid_counters(raid_boss_codename=pkm,
-                                                     raid_tier=raid_type,
-                                                     attacker_level=pkm_level)
-        except Exception as e:
-            print(e)
-        if (data):
-            print(f"Downloading {pkm} data. ")
-            filename = f"{pkm}_no_weather.json"
-            with open(filename, 'w') as fout:
-                json.dump(data, fout)
-
-
-#def play(**kwargs):
-#    print(kwargs.get("qwe", 3))
 
 if __name__ == "__main__":
-    for metadata_name in ["raids", "pokemon", "moves"]:
-        get_pokebattler_metadata(metadata_name, write_file=True)
+    asyncio.run(get_json_main())

@@ -19,16 +19,11 @@ class Metadata:
     Metadata object that's used in all modules.
     Stores the original Pokebattler JSON files, as well as processed data (e.g. list of Pokemon).
     """
-    def __init__(self, init_from_pokebattler=True, init_from_JSON=False, init_from_GM=True):
+    def __init__(self):
         """
         Initialize the Metadata.
-        Prioritizes initialization from Pokebattler, and if it fails, initialize from local JSON.
-
-        :param init_from_pokebattler: If True, initialize with current JSON from Pokebattler
-        :param init_from_JSON: If True, initialize with local JSON from data/json/, but
-                only if init_from_pokebattler is False or initialization
-        :param init_from_GM: If True, also load local GM data from data/json/latest.json,
-                which would be used to complement the Pokebattler data
+        This only creates the fields and initialize them to empty values. To download data, use the
+        async function init().
         """
         self.raids_JSON = None
         self.Pokemon_JSON = None
@@ -46,10 +41,21 @@ class Metadata:
         self.raids_by_tier = {}  # {"RAID_LEVEL_5": [list of RaidBoss objects, current, legacy, future], ...}
         self.raid_categories_by_tier = {}  # {"RAID_LEVEL_5": set("RAID_LEVEL_5_LEGACY", ...), ...}
 
+    async def init(self, init_from_pokebattler=True, init_from_JSON=False, init_from_GM=True):
+        """
+        Initialize the Metadata.
+        Prioritizes initialization from Pokebattler, and if it fails, initialize from local JSON.
+
+        :param init_from_pokebattler: If True, initialize with current JSON from Pokebattler
+        :param init_from_JSON: If True, initialize with local JSON from data/json/, but
+                only if init_from_pokebattler is False or initialization
+        :param init_from_GM: If True, also load local GM data from data/json/latest.json,
+                which would be used to complement the Pokebattler data
+        """
         if init_from_pokebattler:
-            self.raids_JSON = get_pokebattler_metadata("raids", write_file=False)
-            self.Pokemon_JSON = get_pokebattler_metadata("pokemon", write_file=False)
-            self.moves_JSON = get_pokebattler_metadata("moves", write_file=False)
+            self.raids_JSON = await get_pokebattler_metadata("raids", write_file=False)
+            self.Pokemon_JSON = await get_pokebattler_metadata("pokemon", write_file=False)
+            self.moves_JSON = await get_pokebattler_metadata("moves", write_file=False)
         if self.raids_JSON is None:
             if init_from_JSON:
                 # TODO: Add a warning if local JSON is too old
@@ -351,8 +357,9 @@ class Metadata:
                 ])
 
 
-if __name__ == "__main__":
-    META = Metadata(init_from_pokebattler=True, init_from_JSON=False,
+async def metadata_main():
+    META = Metadata()
+    await META.init(init_from_pokebattler=True, init_from_JSON=False,
                     init_from_GM=True)
 
     META.debug_print_moves_to_csv()
@@ -432,3 +439,6 @@ if __name__ == "__main__":
     ensemble.debug_print_to_csv()
     """
 
+
+if __name__ == "__main__":
+    asyncio.run(metadata_main())

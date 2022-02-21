@@ -3,8 +3,10 @@ from config import *
 from config_parser import *
 from counters_list import *
 
-if __name__ == "__main__":
-    META = Metadata(init_from_pokebattler=True, init_from_JSON=False,
+
+async def main():
+    META = Metadata()
+    await META.init(init_from_pokebattler=True, init_from_JSON=False,
                     init_from_GM=True)
 
     META.debug_print_moves_to_csv()
@@ -27,15 +29,15 @@ if __name__ == "__main__":
         ensemble=CONFIG.raid_ensemble,
         attacker_criteria_multi=CONFIG.attacker_criteria_multi,
         scaling_settings=CONFIG.scaling_settings)
-    clre.load_and_process_all_lists()
+    await clre.load_and_process_all_lists()
     clre.write_CSV_list(path=COUNTERS_DATA_PATH, raw=False,
                         best_attacker_moveset=False, random_boss_moveset=True, specific_boss_moveset=True)
     clre.write_CSV_list(path=COUNTERS_DATA_PATH, raw=True,
                         best_attacker_moveset=False, random_boss_moveset=True, specific_boss_moveset=True)
     clre.temp_write_table(path=COUNTERS_DATA_PATH, write_unscaled=False,
                           combine_attacker_movesets=True, specific_boss_moveset=False,
-                          write_iv=False)  #,
-                          #exclude=["KYUREM_BLACK_FORM", "KYUREM_WHITE_FORM", "LATIAS_MEGA", "LATIOS_MEGA"])
+                          write_iv=False)  # ,
+    # exclude=["KYUREM_BLACK_FORM", "KYUREM_WHITE_FORM", "LATIAS_MEGA", "LATIOS_MEGA"])
 
     """ACM = CONFIG.attacker_criteria_multi
     for AC in ACM.sets:
@@ -59,3 +61,7 @@ if __name__ == "__main__":
     #print(cl.rankings)
     cl.write_CSV_list(path=COUNTERS_DATA_PATH, best_attacker_moveset=True,
                        random_boss_moveset=True, specific_boss_moveset=True)"""
+
+
+if __name__ == "__main__":
+    asyncio.run(main())

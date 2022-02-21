@@ -120,7 +120,7 @@ class CountersListSingle:
             battle_settings = battle_settings.indiv_settings[0]
         self.battle_settings = battle_settings
 
-    def load_JSON(self):
+    async def load_JSON(self):
         """
         Pull the Pokebattler JSON and store it in the object.
         """
@@ -130,7 +130,7 @@ class CountersListSingle:
         else:
             print(f"Loading: {parse_raid_tier_code2str(self.boss.tier)} {self.boss.pokemon_codename}, "
                   f"Level {self.attacker_level}, {self.battle_settings}")
-        self.JSON = get_pokebattler_raid_counters(
+        self.JSON = await get_pokebattler_raid_counters(
             raid_boss=self.boss,
             attacker_level=self.attacker_level,
             trainer_id=self.trainer_id,
@@ -635,18 +635,23 @@ class CountersListsMultiBSLevel:
                     sort_option=self.sort_option
                 )
 
-    def load_and_parse_JSON(self):
+    async def load_and_parse_JSON(self):
         """
         Pull the Pokebattler JSON for all CountersListSingle objects and parse them.
         """
-        for lvl_to_lst in self.lists_by_bs_by_level.values():
-            for lst in lvl_to_lst.values():
-                lst.load_JSON()
-                lst.parse_JSON()
-        for id_to_lst in self.lists_by_bs_by_trainer_id.values():
-            for lst in id_to_lst.values():
-                lst.load_JSON()
-                lst.parse_JSON()
+        async def task_per_list(lst):
+            await lst.load_JSON()
+            lst.parse_JSON()
+
+        await asyncio.gather(*(
+            asyncio.create_task(task_per_list(lst))
+            for lvl_to_lst in self.lists_by_bs_by_level.values()
+            for lst in lvl_to_lst.values()
+        ), *(
+            asyncio.create_task(task_per_list(lst))
+            for id_to_lst in self.lists_by_bs_by_trainer_id.values()
+            for lst in id_to_lst.values()
+        ))
 
     def filter_rankings(self):
         """
@@ -876,12 +881,14 @@ class CountersListsRE:
         return [(boss, weight, self.ensemble.battle_settings[i], self.lists_for_bosses[i])
                 for i, (boss, weight) in enumerate(self.ensemble.bosses)]
 
-    def load_and_parse_JSON(self):
+    async def load_and_parse_JSON(self):
         """
         Pull the Pokebattler JSON for all CountersListMultiBSLevel objects and parse them.
         """
-        for lst in self.lists_for_bosses:
-            lst.load_and_parse_JSON()
+        await asyncio.gather(*(
+            asyncio.create_task(lst.load_and_parse_JSON())
+            for lst in self.lists_for_bosses
+        ))
 
     def filter_rankings(self):
         """
@@ -959,14 +966,14 @@ class CountersListsRE:
             baselines, baselines_id = baselines_list[i]
             lst.scale_estimators(baselines_dict=baselines, baselines_id_dict=baselines_id)
 
-    def load_and_process_all_lists(self):
+    async def load_and_process_all_lists(self):
         """
         Pull all Pokebattler counters lists and process them (filtering, scaling)
         for each member CountersListSingle object.
         Uses scaling settings stored in this object.
         In practice, you only need to call this to get all data.
         """
-        self.load_and_parse_JSON()
+        await self.load_and_parse_JSON()
         if self.scaling_settings["Enabled"] and self.scaling_settings["Baseline chosen before filter"]:
             self.scale_estimators(baseline_boss_moveset=self.scaling_settings["Baseline boss moveset"],
                                   baseline_attacker_level=self.scaling_settings["Baseline attacker level"])

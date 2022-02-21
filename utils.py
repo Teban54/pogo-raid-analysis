@@ -11,13 +11,18 @@ import os
 import sys
 import re
 import numpy as np
+import asyncio
+import aiohttp
+import ssl
+import certifi
+import traceback
 
 from params import *
 
 # ----------------- HTTP -----------------
 
 
-def do_http_request(url, payload={}):
+async def do_http_request(url, payload={}):
     """
     Send an HTTP request and return the results as JSON.
 
@@ -25,16 +30,24 @@ def do_http_request(url, payload={}):
     :param payload: Payload parameters
     :return: Results parsed as JSON, or None if an error occurred
     """
-    try:
-        r = requests.get(url, params=payload)
-        if r.ok:
-            return r.json()
-        else:
-            print("Error with HTTP request: " + str(r), file=sys.stderr)
-            return None
-    except Exception as e:
-        print(e, file=sys.stderr)
-        return None
+    for i in range(CONNECTION_RETRIES):
+        try:
+            ssl_context = ssl.create_default_context(cafile=certifi.where())
+            async with aiohttp.ClientSession() as session:
+                async with session.get(url, params=payload, ssl=ssl_context) as r:
+                    r.encoding = 'utf-8'  # 解码汉字
+                    if r.ok:
+                        txt = await(r.text())
+                        return json.loads(txt)
+                    else:
+                        print("Error with HTTP request: " + str(r), file=sys.stderr)
+                        return None
+        except Exception as e:
+            if i == CONNECTION_RETRIES - 1:
+                traceback.print_exc()
+                return None
+            continue
+    return None
 
 
 # ----------------- JSON -----------------
