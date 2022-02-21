@@ -19,7 +19,7 @@ OUTPUTS_DATA_PATH = "data/outputs/"
 # instead of all forms of the base Pokemon sharing a weight of 1 (e.g. Arceus).
 # The only place where this is utilized is when assigning weights.
 FORMS_AS_SEPARATE_POKEMON_UNIVERSAL = [
-    'ALOLA', 'GALARIAN'
+    'ALOLA', 'GALARIAN', 'HISUIAN'
 ]
 FORMS_AS_SEPARATE_POKEMON_PER_POKEMON = {
     # <base codename>: [<form to be considered as separate>, (<two forms to be>, <combined as single pokemon>)]
@@ -44,7 +44,8 @@ FORMS_AS_SEPARATE_POKEMON_PER_POKEMON = {
 
 IGNORED_RAID_BOSSES = {  # Keys are raid tiers, no "legacy"
     "RAID_LEVEL_5": ['ZACIAN_HERO_FORM', 'ZAMAZENTA_HERO_FORM',  # Zacian and Zamazenta with no forms are already under future T5s
-                    'MELOETTA_ARIA_FORM', 'MELOETTA_PIROUETTE_FORM']  # Already got from special research
+                     'MELOETTA_ARIA_FORM', 'MELOETTA_PIROUETTE_FORM',  # Already got from special research
+                     'BIDOOF'],
 }
 
 IGNORED_FORMS = {  # Forms and Pokemon that should not exist
@@ -229,7 +230,7 @@ SPECIAL_MOVE_DISPLAY_NAMES = {
     'POWER_UP_PUNCH': 'Power-Up Punch',
     'LOCK_ON_FAST': 'Lock-On',
     'V_CREATE': 'V-Create',
-    'TRI_ATTACK': 'Tri-Attack',
+    #'TRI_ATTACK': 'Tri-Attack',
     'FUTURESIGHT': 'Future Sight',
 }
 

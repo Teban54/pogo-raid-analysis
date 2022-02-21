@@ -37,11 +37,11 @@ CONFIG_ATTACKER_CRITERIA = [
     {
         # Each block contains several filters. To meet the criteria for this particular {} block,
         # an attacker needs to pass all the filters (example: Ice charged move, levels 30-50, AND non-shadow).
-        "Charged move types": ["Dragon"],  # This is an approximation for "attacker type",
+        "Charged move types": ["Fighting"],  # This is an approximation for "attacker type",
                                           # and should be used primarily for type-based filtering.
                                           # Always put "" around type names!
-        "Min level": 30,
-        "Max level": 50,
+        "Min level": 40,
+        "Max level": 40,
         "Level step size": 5,  # Can be as low as 0.5, but recommend 5 for efficiency
         # "Pokemon code names": [],  # Specific Pokemon to be considered,
             # e.g. "MEWTWO", "VENUSAUR_SHADOW_FORM", "RAICHU_ALOLA_FORM",
@@ -61,17 +61,17 @@ CONFIG_ATTACKER_CRITERIA = [
         # "Must be non mythical": True,
         # "Must be legendary or mythical": False,
         # "Must be non legendary or mythical": False,
-        "Pokemon types": ["Dragon"],  # Only use this if you know what you're doing
-        "Fast move types": ["Dragon"],  # Only use this if you know what you're doing
-        "Exclude": ["KYUREM_BLACK_FORM", "KYUREM_WHITE_FORM", "LATIAS_MEGA", "LATIOS_MEGA"],  # Specific Pokemon to be excluded,
+        "Pokemon types": ["Fighting"],  # Only use this if you know what you're doing
+        "Fast move types": ["Fighting"],  # Only use this if you know what you're doing
+        "Exclude": ["LUCARIO_MEGA"],  # Specific Pokemon to be excluded,
             # in the same format as "Pokemon code names", e.g. "VENUSAUR_SHADOW_FORM"
     },
-    {
-        "Trainer ID": 52719,
-        "Charged move types": ["Dragon"],
-        "Pokemon types": ["Dragon"],  # Only use this if you know what you're doing
-        "Fast move types": ["Dragon"],  # Only use this if you know what you're doing
-    },
+    # {
+    #     "Trainer ID": 52719,
+    #     "Charged move types": ["Dragon"],
+    #     "Pokemon types": ["Dragon"],  # Only use this if you know what you're doing
+    #     # "Fast move types": ["Fire"],  # Only use this if you know what you're doing
+    # },
     # Add more {} blocks here if needed
     # {
     #     "Charged move types": ["Ice"],
@@ -130,7 +130,7 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
         "Raid tier": "Tier 5",  # Here, "Tier 5" has all past/present/future bosses
         # "Raid category": "Legacy Tier 5",  # Here, "Tier 5" has only current bosses
         "Filters": {  # Only those without # at the start are applied
-            "Weak to contender types": ["Dragon"],
+            "Weak to contender types": ["Fighting"],
             #"Weak to contender types simultaneously": ["Grass", "Water"],
             #"Evolution stage": "Final",  # "Final", "Pre-evolution"
             #"Must be shadow": False,  # This describes BOSSES, not attackers
@@ -161,7 +161,7 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
         "Pokemon pool": "By raid tier",
         "Raid tier": "Mega Tier",
         "Filters": {
-            "Weak to contender types": ["Dragon"],
+            "Weak to contender types": ["Fighting"],
             # "Weak to contender types simultaneously": ["Grass", "Water"],
         },
         "Weight of each Pokemon": 1,
@@ -175,7 +175,7 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
         "Pokemon pool": "By raid tier",
         "Raid tier": "Tier 3",
         "Filters": {
-            "Weak to contender types": ["Dragon"],
+            "Weak to contender types": ["Fighting"],
             # "Weak to contender types simultaneously": ["Grass", "Water"],
         },
         "Weight of each Pokemon": 1,
