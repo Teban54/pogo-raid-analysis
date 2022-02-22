@@ -62,6 +62,11 @@ class CountersListSingle:
         self.rankings = {}  # After filtering by attackers
         self.scaling_baseline = 1  # For recovering originals
 
+        # Attackers dict (cache)
+        # For more details, see get_attackers_with_movesets_bs
+        self.attackers = {}
+        self.attackers_per_boss_mvst = {}
+
         self.init_raid_boss(raid_boss, raid_boss_pokemon, raid_boss_codename, raid_tier)
         self.init_attacker_criteria(attacker_criteria_multi)
         self.init_battle_settings(battle_settings)
@@ -254,6 +259,216 @@ class CountersListSingle:
             new_rankings[mvst_key] = [atker_filter for atker_filter in new_rankings[mvst_key]
                                       if atker_filter]  # Remove Nones
         self.rankings = new_rankings
+
+    def get_attackers_with_movesets_bs(self, random_boss_moveset=True, specific_boss_moveset=False):
+        """
+        Get a dict of all attackers contained in this CountersListSingle and their possible movesets
+        and battle settings, as a dict in the following format:
+        {
+            ("MAGNETON_SHADOW_FORM", 40, "15/15/15", <BattleSettings object>): [
+                ('SPARK_FAST', 'FRUSTRATION'),  # Only movesets included in this counters list
+                ...
+            ], ...
+        }
+        This is used primarily to feed all information to CountersListRE, so that it can identify
+        "blanks" in each individual CountersListSingle.
+
+        :param random_boss_moveset: Whether attackers in the counters list with random boss moveset
+            should be included in the return value
+        :param specific_boss_moveset: Whether attackers in the counters list with specific boss movesets
+            should be included in the return value
+        :return: Dict of all attackers in the format above
+        """
+        ret = {}
+        ret_per_boss_mvst = {}
+        boss_mvst_keys = []
+        if random_boss_moveset:
+            boss_mvst_keys.append(('RANDOM', 'RANDOM'))
+        if specific_boss_moveset:
+            boss_mvst_keys.extend([mvst for mvst in self.rankings.keys() if mvst != ('RANDOM', 'RANDOM')])
+
+        for boss_mvst in boss_mvst_keys:
+            ret_per_boss_mvst[boss_mvst] = {}  # Same format as ret
+            atkers_with_time = self.rankings[boss_mvst]
+            for atker_time_dict in atkers_with_time:
+                atker_key = (atker_time_dict["POKEMON_CODENAME"],
+                             parse_level_str2num(atker_time_dict["LEVEL"]),
+                             atker_time_dict["IV"],
+                             self.battle_settings)
+                atker_moves = list(atker_time_dict["BY_MOVE"].keys())
+
+                for dct2add in [ret, ret_per_boss_mvst[boss_mvst]]:
+                    if atker_key not in dct2add:
+                        dct2add[atker_key] = []
+                    dct2add[atker_key] = list(set(dct2add[atker_key] + atker_moves))
+
+        self.attackers = ret
+        self.attackers_per_boss_mvst = ret_per_boss_mvst
+        return ret
+
+    async def fill_blanks(self, target_atkers=None, random_boss_moveset=True, specific_boss_moveset=False):
+        """
+        Fill all "blanks" in the table: For each attacker that is passed down from CountersListsRE
+        (contained in counter lists against some but not all bosses), get its estimator and timings
+        against all bosses (by adjusting payloads to restrict attackers to only that type).
+        These timings are added to self.rankings of this object.
+
+        This is performed before estimator scaling.
+
+        Methodology:
+        - Filter only the attackers that are relevant to this object (level, battle settings).
+        - Filter only the "missing" attackers that does not exist in this object yet.
+        - Create a list of alternative AttackerCriteria that can possibly give these missing attackers.
+            (e.g. non-legendary, only this type)
+        - Build new CountersListSingle objects for these AttackerCriteria.
+        - Update this object with info from the other list (only use those listed in target_atkers).
+
+        :param target_atkers: Attackers to be added (from CountersListRE)
+        :param random_boss_moveset: Whether attackers in target_atkers need to have values against
+            random boss movesets
+        :param specific_boss_moveset: Whether attackers in target_atkers need to have values against
+            all specific boss movesets
+        """
+        if not target_atkers:
+            return
+
+        boss_mvst_keys = []
+        if random_boss_moveset:
+            boss_mvst_keys.append(('RANDOM', 'RANDOM'))
+        if specific_boss_moveset:
+            boss_mvst_keys.extend([mvst for mvst in self.rankings.keys() if mvst != ('RANDOM', 'RANDOM')])
+
+        # 1. Filter only the attackers that are relevant to this object (level, battle settings)
+        target_atkers = {
+            (pokemon_codename, level, iv, bs): mvsts
+            for (pokemon_codename, level, iv, bs), mvsts in target_atkers.items()
+            if level == self.attacker_level and bs == self.battle_settings
+        }
+        # 2. Filter only the "missing" attackers that does not exist in this object yet
+        # (Do this on a per-boss-moveset basis)
+        target_atkers_per_boss_mvst = {
+            boss_mvst: {
+                atker_key: mvsts
+                for atker_key, mvsts in target_atkers.items()
+                if atker_key not in self.attackers_per_boss_mvst[boss_mvst]
+            }
+            for boss_mvst in boss_mvst_keys
+        }
+        if all(not atkers for mvst, atkers in target_atkers_per_boss_mvst.items()):
+            return
+        # print(self.boss.pokemon_codename)
+        # print(target_atkers_per_boss_mvst)
+
+        # 3. Create a list of alternative AttackerCriteria that can possibly give these missing attackers
+        # Do this implicitly by generating tuples that represent each AC's crucial information:
+        # (type name, T/F (is not legendary/mythical), T/F (is not shadow), T/F (is not mega))
+        # TODO: Check if it works for specific movesets
+        types_and_modifiers = {}  # {(type name, T/F (is not legendary/mythical), T/F (is not shadow), T/F (is not mega)): number of missing attackers with this key}
+                                  # Note that number of blanks is summed across all boss movesets
+        pkm_to_types_and_modifiers = {}
+            # {("RANDOM", "RANDOM"): {"TOGEKISS": [(("Fairy", True, True, True)), ...]}}
+            # To reduce values in types_and_modifiers when the Pokemon gets found
+        pokemon_codenames = set(pokemon_codename
+                                for boss_mvst, atkers in target_atkers_per_boss_mvst.items()
+                                for pokemon_codename, _, _, _ in atkers.keys())
+        pokemons = [self.metadata.find_pokemon(pokemon_codename) for pokemon_codename in pokemon_codenames]
+        has_legendary_or_mythical = any(pokemon.is_legendary or pokemon.is_mythical for pokemon in pokemons)
+        has_shadow = any(pokemon.is_shadow for pokemon in pokemons)
+        has_mega = any(pokemon.is_mega for pokemon in pokemons)
+        pkm_to_types_and_modifiers = {pokemon_codename: [] for pokemon_codename in pokemon_codenames}
+        for boss_mvst, atkers in target_atkers_per_boss_mvst.items():
+            pkm_to_types_and_modifiers[boss_mvst] = {}
+            pokemons = [self.metadata.find_pokemon(pokemon_codename) for pokemon_codename, _, _, _ in atkers.keys()]
+            for pokemon in pokemons:  # Regenerate this list to count a Pokemon multiple times if under several movesets
+                pkm_to_types_and_modifiers[boss_mvst][pokemon.name] = []
+                is_not_legendary_or_mythical = not (pokemon.is_legendary or pokemon.is_mythical)
+                is_not_shadow = not pokemon.is_shadow
+                is_not_mega = not pokemon.is_mega
+                for pkm_type in pokemon.types:
+                    for legendary_flag in ([True] if not has_legendary_or_mythical
+                                           else [True, False] if is_not_legendary_or_mythical else [False]):
+                        for shadow_flag in ([True] if not has_shadow
+                                            else [True, False] if is_not_shadow else [False]):
+                            for mega_flag in ([True] if not has_mega
+                                              else [True, False] if is_not_mega else [False]):
+                                key = (pkm_type, legendary_flag, shadow_flag, mega_flag)
+                                if key not in types_and_modifiers:
+                                    types_and_modifiers[key] = 0
+                                types_and_modifiers[key] = types_and_modifiers[key] + 1
+                                pkm_to_types_and_modifiers[boss_mvst][pokemon.name].append(key)
+
+        # Sort by decreasing value
+        types_and_modifiers = dict(sorted(types_and_modifiers.items(), key=lambda item: -item[1]))
+        # print(types_and_modifiers)
+        # print(pkm_to_types_and_modifiers)
+        # print()
+
+        tam_avg = sum(count for key, count in types_and_modifiers.items()) / len(types_and_modifiers)
+
+        # 4. Build new CountersListSingle objects for these AttackerCriteria
+        # 5. Update this object with info from the other list (only use those listed in target_atkers)
+        # Build all above-average ones concurrently, then all below-average ones
+        # Stop inbetween if all pokemon are filled
+        async def build_one_counters_list(key):
+            pkm_type, is_not_legendary_or_mythical, is_not_shadow, is_not_mega = key
+            ac = AttackerCriteria(
+                pokemon_types=pkm_type, is_not_legendary_or_mythical=is_not_legendary_or_mythical,
+                is_not_shadow=is_not_shadow, is_not_mega=is_not_mega,
+                min_level=self.attacker_level, max_level=self.attacker_level, metadata=self.metadata
+            )
+
+            new_list = CountersListSingle(
+                raid_boss=self.boss, attacker_criteria_multi=AttackerCriteriaMulti([ac], metadata=self.metadata),
+                attacker_level=self.attacker_level, battle_settings=self.battle_settings, sort_option=self.sort_option,
+                metadata=self.metadata
+            )
+            await new_list.load_JSON()
+            new_list.parse_JSON()
+            return new_list
+
+        async def add_counters_lists_group(keys):
+            if not keys:
+                return
+            lists = await asyncio.gather(*(asyncio.create_task(build_one_counters_list(key)) for key in keys))
+            for lst in lists:  # Process these in sequence, not async
+                lst.get_attackers_with_movesets_bs(random_boss_moveset=random_boss_moveset,
+                                                   specific_boss_moveset=specific_boss_moveset)
+                for boss_mvst in boss_mvst_keys:
+                    lst_atkers = lst.attackers_per_boss_mvst[boss_mvst].keys()
+                    atkers_needed = set(lst_atkers).intersection(set(target_atkers_per_boss_mvst[boss_mvst].keys()))
+                    atkers_new = atkers_needed - set(self.attackers_per_boss_mvst[boss_mvst].keys())
+                    if not atkers_new:
+                        continue
+                    # Now atkers_new contains all relevant attackers that can be updated and are useful
+                    for atker_key in atkers_new:
+                        atker_codename, level, iv, bs = atker_key
+                        atker_time_dicts = [
+                            atker_dict
+                            for atker_dict in lst.rankings[boss_mvst]
+                            if atker_dict['POKEMON_CODENAME'] == atker_codename
+                               and parse_level_str2num(atker_dict['LEVEL']) == level and atker_dict['IV'] == iv
+                        ]  # Should be just 1 element usually
+                        # Assume self.rankings does not contain this attacker (as long as we keep everything updated)
+                        self.rankings[boss_mvst].extend(atker_time_dicts)
+                        if atker_key not in self.attackers:
+                            self.attackers[atker_key] = lst.attackers_per_boss_mvst[boss_mvst][atker_key]
+                        self.attackers_per_boss_mvst[boss_mvst][atker_key] = (
+                            lst.attackers_per_boss_mvst[boss_mvst][atker_key])
+                        # Clear t&m counts
+                        for tam_key in pkm_to_types_and_modifiers[boss_mvst][atker_codename]:
+                            if tam_key in types_and_modifiers:
+                                types_and_modifiers[tam_key] = types_and_modifiers[tam_key] - 1
+                                if types_and_modifiers[tam_key] == 0:
+                                    del types_and_modifiers[tam_key]
+
+        tams_above_avg = {key: count for key, count in types_and_modifiers.items()
+                          if count >= tam_avg}
+        tams_below_avg = {key: count for key, count in types_and_modifiers.items()
+                          if count < tam_avg}  # Generate this first so that nothing gets skipped when counts change
+        await add_counters_lists_group(tams_above_avg.keys())
+        tams_below_avg = {key: count for key, count in tams_below_avg.items()
+                          if key in types_and_modifiers}  # Some may have their weights reduced to 0 (no longer needed)
+        await add_counters_lists_group(tams_below_avg.keys())
 
     def get_estimator_baseline(self, baseline_boss_moveset="random"):
         """
@@ -550,6 +765,10 @@ class CountersListsMultiBSLevel:
         # {<BattleSettings 1>: {52719: <CountersListSingle>, ...},
         #  ...}
 
+        # Attackers dict (cache)
+        # For more details, see get_attackers_by_all_levels
+        self.attackers = {}
+
         self.init_raid_boss(raid_boss, raid_boss_pokemon, raid_boss_codename, raid_tier)
         self.init_attacker_criteria(attacker_criteria_multi)
         self.init_battle_settings(battle_settings)
@@ -664,6 +883,65 @@ class CountersListsMultiBSLevel:
         for id_to_lst in self.lists_by_bs_by_trainer_id.values():
             for lst in id_to_lst.values():
                 lst.filter_rankings()
+
+    def get_attackers_by_all_levels(self, random_boss_moveset=True, specific_boss_moveset=False):
+        """
+        Get a dict of all attackers contained in each CountersListSingle BY LEVEL and their possible
+        movesets and battle settings, as a dict in the following format:
+        {
+            ("MAGNETON_SHADOW_FORM", 40, "15/15/15", <BattleSettings object>): [
+                ('SPARK_FAST', 'FRUSTRATION'),  # Only movesets included in this counters list
+                ...
+            ], ...
+        }
+        This is used primarily to feed all information to CountersListRE, so that it can identify
+        "blanks" in each individual CountersListSingle.
+
+        Only counter lists BY LEVEL are collected. Counters in Trainer Boxes (by ID) are NOT included,
+        since they're typically already obtained for each boss and are unlikely to be blanks.
+
+        :param random_boss_moveset: Whether attackers in the counters list with random boss moveset
+            should be included in the return value
+        :param specific_boss_moveset: Whether attackers in the counters list with specific boss movesets
+            should be included in the return value
+        :return: Dict of all attackers in the format above
+        """
+        ret = {}
+        for lvl_to_lst in self.lists_by_bs_by_level.values():
+            for lst in lvl_to_lst.values():
+                atkers_dict = lst.get_attackers_with_movesets_bs(random_boss_moveset=random_boss_moveset,
+                                                                 specific_boss_moveset=specific_boss_moveset)
+                for atker_key, atker_moves in atkers_dict.items():
+                    if atker_key not in ret:
+                        ret[atker_key] = []
+                    ret[atker_key] = list(set(ret[atker_key] + atker_moves))
+        self.attackers = ret
+        return ret
+
+    async def fill_blanks(self, target_atkers=None, random_boss_moveset=True, specific_boss_moveset=False):
+        """
+        Fill all "blanks" in the table: For each attacker that is passed down from CountersListsRE
+        (contained in counter lists against some but not all bosses), get its estimator and timings
+        against all bosses (by adjusting payloads to restrict attackers to only that type).
+        These timings are added to each CountersListSingle.
+
+        This is performed before estimator scaling.
+
+        :param target_atkers: Attackers to be added (from CountersListRE)
+        :param random_boss_moveset: Whether attackers in target_atkers need to have values against
+            random boss movesets
+        :param specific_boss_moveset: Whether attackers in target_atkers need to have values against
+            all specific boss movesets
+        """
+        if not target_atkers:
+            return
+        # Distribute these attackers to each CountersListSingle (by level only)
+        await asyncio.gather(*(
+            asyncio.create_task(lst.fill_blanks(target_atkers, random_boss_moveset=random_boss_moveset,
+                                                specific_boss_moveset=specific_boss_moveset))
+            for lvl_to_lst in self.lists_by_bs_by_level.values()
+            for lst in lvl_to_lst.values()
+        ))
 
     def get_estimator_baselines(self, baseline_boss_moveset="random", baseline_attacker_level="by level"):
         """
@@ -816,7 +1094,7 @@ class CountersListsRE:
     """
     def __init__(self, ensemble, metadata=None,
                  attacker_criteria_multi=None,
-                 sort_option="Estimator", scaling_settings=None):
+                 sort_option="Estimator", scaling_settings=None, processing_settings=None):
         """
         Initialize the attributes, create individual CountersListsByLevel objects, and get the JSON rankings.
         :param ensemble: RaidBoss object
@@ -824,14 +1102,20 @@ class CountersListsRE:
         :param attacker_criteria_multi: AttackerCriteriaMulti object describing attackers to be used
         :param sort_option: Sorting option, as shown on Pokebattler (natural language or code name)
         :param scaling_settings: Dict describing settings for estimator scaling (from config.py)
+        :param processing_settings: Dict describing settings for data processing and CSV writing (from config.py)
         """
         self.ensemble = ensemble
         self.attacker_criteria_multi = None
         self.results = None
         self.sort_option = parse_sort_option_str2code(sort_option)
         self.scaling_settings = scaling_settings
+        self.processing_settings = processing_settings
         self.JSON = None
         self.metadata = metadata
+
+        # Attackers dict (cache)
+        # For more details, see get_attackers_by_all_levels
+        self.attackers = {}
 
         self.init_attacker_criteria(attacker_criteria_multi)
         self.lists_for_bosses = []  # List of CountersLists objects for each boss,
@@ -897,6 +1181,61 @@ class CountersListsRE:
         """
         for lst in self.lists_for_bosses:
             lst.filter_rankings()
+
+    def get_attackers_by_all_levels(self, random_boss_moveset=True, specific_boss_moveset=False):
+        """
+        Get a dict of all attackers contained in each CountersListSingle BY LEVEL and their possible
+        movesets and battle settings, as a dict in the following format:
+        {
+            ("MAGNETON_SHADOW_FORM", 40, "15/15/15", <BattleSettings object>): [
+                ('SPARK_FAST', 'FRUSTRATION'),  # Only movesets included in this counters list
+                ...
+            ], ...
+        }
+        This is used primarily to feed all information to CountersListRE, so that it can identify
+        "blanks" in each individual CountersListSingle.
+
+        Only counter lists BY LEVEL are collected. Counters in Trainer Boxes (by ID) are NOT included,
+        since they're typically already obtained for each boss and are unlikely to be blanks.
+
+        :param random_boss_moveset: Whether attackers in the counters list with random boss moveset
+            should be included in the return value
+        :param specific_boss_moveset: Whether attackers in the counters list with specific boss movesets
+            should be included in the return value
+        :return: Dict of all attackers in the format above
+        """
+        ret = {}
+        for lst in self.lists_for_bosses:
+            atkers_dict = lst.get_attackers_by_all_levels(random_boss_moveset=random_boss_moveset,
+                                                          specific_boss_moveset=specific_boss_moveset)
+            for atker_key, atker_moves in atkers_dict.items():
+                if atker_key not in ret:
+                    ret[atker_key] = []
+                ret[atker_key] = list(set(ret[atker_key] + atker_moves))
+        self.attackers = ret
+        return ret
+
+    async def fill_blanks(self):
+        """
+        Fill all "blanks" in the table: For each attacker that is contained in counter lists against
+        some but not all bosses (by level), get its estimator and timings against all bosses (by adjusting
+        payloads to restrict attackers to only that type).
+        These timings are added to each CountersListSingle.
+
+        This is performed before estimator scaling.
+        """
+        all_atkers = self.get_attackers_by_all_levels(
+            random_boss_moveset=self.processing_settings["Include random boss movesets"],
+            specific_boss_moveset=self.processing_settings["Include specific boss movesets"]
+        )  # Only include attackers in the by-level lists
+
+        # Distribute these attackers to each CountersListsMultiBSLevel
+        await asyncio.gather(*(
+            asyncio.create_task(lst.fill_blanks(
+                all_atkers, random_boss_moveset=self.processing_settings["Include random boss movesets"],
+                specific_boss_moveset=self.processing_settings["Include specific boss movesets"]))
+            for lst in self.lists_for_bosses
+        ))
 
     def get_estimator_baselines(self, baseline_boss_moveset="random", baseline_attacker_level="by level"):
         """
@@ -975,12 +1314,16 @@ class CountersListsRE:
         """
         await self.load_and_parse_JSON()
         if self.scaling_settings["Enabled"] and self.scaling_settings["Baseline chosen before filter"]:
+            await self.fill_blanks()
             self.scale_estimators(baseline_boss_moveset=self.scaling_settings["Baseline boss moveset"],
                                   baseline_attacker_level=self.scaling_settings["Baseline attacker level"])
         self.filter_rankings()
         if self.scaling_settings["Enabled"] and not self.scaling_settings["Baseline chosen before filter"]:
+            await self.fill_blanks()
             self.scale_estimators(baseline_boss_moveset=self.scaling_settings["Baseline boss moveset"],
                                   baseline_attacker_level=self.scaling_settings["Baseline attacker level"])
+        elif not self.scaling_settings["Enabled"]:  # Without scaling, still fill blanks after filtering
+            await self.fill_blanks()
 
     def write_CSV_list(self, path, raw=True,
                        best_attacker_moveset=True, random_boss_moveset=True, specific_boss_moveset=False):
@@ -1005,13 +1348,15 @@ class CountersListsRE:
             lst.write_CSV_list(path, raw=raw, best_attacker_moveset=best_attacker_moveset,
                                random_boss_moveset=random_boss_moveset, specific_boss_moveset=specific_boss_moveset)
 
-    def temp_write_table(self, path,
-                         combine_attacker_movesets=True,
-                         random_boss_moveset=True, specific_boss_moveset=False,
-                         write_unscaled=True, write_iv=False,
-                         exclude=[]):
+    def temp_write_table(self, path):
         # Temporary method for Bulbasaur CD analysis.
         # TODO: Clean up.
+
+        combine_attacker_movesets = self.processing_settings["Combine attacker movesets"]
+        random_boss_moveset = self.processing_settings["Include random boss movesets"]
+        specific_boss_moveset = self.processing_settings["Include specific boss movesets"]
+        write_unscaled = self.processing_settings["Include unscaled estimators"]
+        write_iv = self.processing_settings["Include attacker IVs"]
 
         attackers_boss_dict = {}
         # {("VENUSAUR_MEGA", "VINE_WHIP_FAST", "FRENZY_PLANT", "40", "15/15/15"):
@@ -1056,8 +1401,9 @@ class CountersListsRE:
                     update_single_list(lst, bs, boss, weight)
 
         # Exclude certain attackers as specified (e.g. Black Kyurem against itself)
-        attackers_boss_dict = {atker_key: val for atker_key, val in attackers_boss_dict.items()
-                               if atker_key[0] not in exclude}
+        # attackers_boss_dict = {atker_key: val for atker_key, val in attackers_boss_dict.items()
+        #                        if atker_key[0] not in exclude}
+        # ^ Replaced by "exclude" in attacker criteria itself
 
         # Filter boss keys according to settings
         boss_keys = list(boss_keys)
@@ -1071,7 +1417,9 @@ class CountersListsRE:
         # TODO: Terribly inefficient.
         new_boss_keys = []
         for boss, weight in self.ensemble.bosses:
-            boss_keys_add = [k for k in boss_keys if k[0] == boss.pokemon_codename and k[3] == boss.tier]
+            boss_keys_add = [k for k in boss_keys
+                             if k[0] == boss.pokemon_codename and k[3] == boss.tier
+                             and k not in new_boss_keys]
             new_boss_keys.extend(boss_keys_add)
         boss_keys = new_boss_keys
 

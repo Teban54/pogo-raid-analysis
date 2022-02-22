@@ -156,45 +156,74 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
         #     "Dodge strategy": "Realistic Dodging"
         # },
     },
-    # {
-    #     "Pokemon pool": "By raid tier",
-    #     "Raid tier": "Tier 5",
-    #     "Filters": {
-    #         "Weak to contender types": ["Flying"],
-    #         # "Weak to contender types simultaneously": ["Grass", "Water"],
-    #     },
-    #     "Weight of each Pokemon": 1,
-    #     "Weight of whole group": 0,
-    #     "Forms weight strategy": "combine",
-    #     "Battle settings": {
-    #         "Attack strategy": "Dodge Specials PRO",
-    #     },
-    # },
-    # {
-    #     "Pokemon pool": "By raid tier",
-    #     "Raid tier": "Mega Tier",
-    #     "Filters": {
-    #         "Weak to contender types": ["Flying"],
-    #         # "Weak to contender types simultaneously": ["Grass", "Water"],
-    #     },
-    #     "Weight of each Pokemon": 1,
-    #     "Weight of whole group": 35,  #25,
-    #     "Forms weight strategy": "combine",
-    # },
-    # {
-    #     "Pokemon pool": "By raid tier",
-    #     "Raid tier": "Tier 3",
-    #     "Filters": {
-    #         "Weak to contender types": ["Flying"],
-    #         # "Weak to contender types simultaneously": ["Grass", "Water"],
-    #     },
-    #     "Weight of each Pokemon": 1,
-    #     "Weight of whole group": 15,  #25,
-    #     "Forms weight strategy": "combine",
-    #     "Battle settings": {
-    #         "Friendship": "No",
-    #     },
-    # },
+    {
+        "Pokemon pool": "By raid tier",
+        "Raid tier": "Tier 5",
+        "Filters": {
+            "Weak to contender types": ["Flying"],
+            # "Weak to contender types simultaneously": ["Grass", "Water"],
+        },
+        "Weight of each Pokemon": 1,
+        "Weight of whole group": 0,
+        "Forms weight strategy": "combine",
+        "Battle settings": {
+            "Attack strategy": "Dodge Specials PRO",
+        },
+    },
+    {
+        "Pokemon pool": "By raid tier",
+        "Raid tier": "Mega Tier",
+        "Filters": {
+            "Weak to contender types": ["Flying"],
+            # "Weak to contender types simultaneously": ["Grass", "Water"],
+        },
+        "Weight of each Pokemon": 1,
+        "Weight of whole group": 35,  #25,
+        "Forms weight strategy": "combine",
+    },
+    {
+        "Pokemon pool": "By raid tier",
+        "Raid tier": "Mega Tier",
+        "Filters": {
+            "Weak to contender types": ["Flying"],
+            # "Weak to contender types simultaneously": ["Grass", "Water"],
+        },
+        "Weight of each Pokemon": 1,
+        "Weight of whole group": 0,
+        "Forms weight strategy": "combine",
+        "Battle settings": {
+            "Attack strategy": "Dodge Specials PRO",
+        },
+    },
+    {
+        "Pokemon pool": "By raid tier",
+        "Raid tier": "Tier 3",
+        "Filters": {
+            "Weak to contender types": ["Flying"],
+            # "Weak to contender types simultaneously": ["Grass", "Water"],
+        },
+        "Weight of each Pokemon": 1,
+        "Weight of whole group": 15,  #25,
+        "Forms weight strategy": "combine",
+        "Battle settings": {
+            "Friendship": "No",
+        },
+    },
+    {
+        "Pokemon pool": "By raid tier",
+        "Raid tier": "Tier 3",
+        "Filters": {
+            "Weak to contender types": ["Flying"],
+            # "Weak to contender types simultaneously": ["Grass", "Water"],
+        },
+        "Weight of each Pokemon": 1,
+        "Weight of whole group": 0,
+        "Forms weight strategy": "combine",
+        "Battle settings": {
+            "Friendship": "No",
+            "Attack strategy": "Dodge Specials PRO",
+        },
+    },
     # {
     #     "Pokemon pool": "All Pokemon except above",
     #     "Raid tier": "Tier 3",
@@ -288,4 +317,19 @@ CONFIG_ESTIMATOR_SCALING_SETTINGS = {
     "Baseline chosen before filter": False,  # Default: False
     "Baseline boss moveset": "random",  # "random", "easiest", "hardest"
     "Baseline attacker level": 40,  # Specific level, "min", "max", "average", "by level"/-1/None
+}
+
+
+CONFIG_PROCESSING_SETTINGS = {
+    # TODO: Documentation
+    # "Write lists for each boss unfiltered": False,
+    # "Write lists for each boss filtered": False,
+    # Other options for write_CSV_list to be included
+
+    # CSV table settings
+    "Include unscaled estimators": True,  # Default: False
+    "Combine attacker movesets": True,  # Combine attacker moves (e.g. FS/BB and Counter/BB Blaziken), Default: True
+    "Include random boss movesets": True,  # Default: True
+    "Include specific boss movesets": False,  # Default: False
+    "Include attacker IVs": True,  # Default: False
 }

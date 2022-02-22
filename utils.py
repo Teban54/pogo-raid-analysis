@@ -30,7 +30,9 @@ async def do_http_request(url, payload={}):
     :param payload: Payload parameters
     :return: Results parsed as JSON, or None if an error occurred
     """
-    for i in range(CONNECTION_RETRIES):
+    #for i in range(CONNECTION_RETRIES):
+    i = 0
+    while True:
         try:
             ssl_context = ssl.create_default_context(cafile=certifi.where())
             async with aiohttp.ClientSession() as session:
@@ -41,11 +43,16 @@ async def do_http_request(url, payload={}):
                         return json.loads(txt)
                     else:
                         print("Error with HTTP request: " + str(r), file=sys.stderr)
-                        return None
+                        i += 1
+                        print(i)
+                        #return None
+                        continue
         except Exception as e:
-            if i == CONNECTION_RETRIES - 1:
-                traceback.print_exc()
-                return None
+            i += 1
+            print(i)
+            # if i == CONNECTION_RETRIES - 1:
+            #     traceback.print_exc()
+            #     return None
             continue
     return None
 
@@ -927,6 +934,17 @@ def is_level_in_range(level, min_level, max_level):
     if type(level) is str:
         level = float(level)  # Float because .5
     return min_level <= level <= max_level
+
+
+def parse_level_str2num(level_str: str):
+    """
+    Parse a Pokemon level from a string to a number, either int or float.
+    :param level_str: Pokemon level as string
+    :return: Pokemon level as int or float
+    """
+    if level_str.isdigit():
+        return int(level_str)
+    return float(level_str)
 
 
 # ----------------- Miscellaneous -----------------

@@ -186,6 +186,34 @@ class AttackerCriteria:
             not self.exclude_codenames or pokemon.name not in self.exclude_codenames
         ])
 
+    def copy(self):
+        """
+        Create a deep copy of this AttackerCriteria object.
+        :return: Copy of this AttackerCriteria object.
+        """
+        cp = AttackerCriteria()
+        cp.pokemon_types = self.pokemon_types.copy() if self.pokemon_types is not None else None
+        cp.fast_types = self.fast_types.copy() if self.fast_types is not None else None
+        cp.charged_types = self.charged_types.copy() if self.charged_types is not None else None
+        cp.min_level = self.min_level
+        cp.max_level = self.max_level
+        cp.level_step = self.level_step
+        cp.pokemon_codenames = self.pokemon_codenames.copy() if self.pokemon_codenames is not None else None
+        cp.trainer_id = self.trainer_id
+        cp.is_legendary = self.is_legendary
+        cp.is_not_legendary = self.is_not_legendary
+        cp.is_mythical = self.is_mythical
+        cp.is_not_mythical = self.is_not_mythical
+        cp.is_legendary_or_mythical = self.is_legendary_or_mythical
+        cp.is_not_legendary_or_mythical = self.is_not_legendary_or_mythical
+        cp.is_shadow = self.is_shadow
+        cp.is_not_shadow = self.is_not_shadow
+        cp.is_mega = self.is_mega
+        cp.is_not_mega = self.is_not_mega
+        cp.metadata = self.metadata
+        cp.exclude_codenames = self.exclude_codenames.copy() if self.exclude_codenames is not None else None
+        return cp
+
 
 class AttackerCriteriaMulti:
     """
@@ -309,4 +337,13 @@ class AttackerCriteriaMulti:
         trainer IDs
         """
         return AttackerCriteriaMulti([criteria for criteria in self.sets if criteria.trainer_id],
+                                     metadata=self.metadata)
+
+    def copy(self):
+        """
+        Create a deep copy of this AttackerCriteriaMulti object.
+        Each individual AttackerCriteria will also be copied.
+        :return: Copy of this AttackerCriteriaMulti object.
+        """
+        return AttackerCriteriaMulti([criteria.copy() for criteria in self.sets],
                                      metadata=self.metadata)

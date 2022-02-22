@@ -19,7 +19,7 @@ class Config:
     """
     def __init__(self, metadata, config_attacker_criteria=None,
                  config_raid_ensemble=None, config_battle_settings=None,
-                 config_sort_option=None, config_scaling_settings=None):
+                 config_sort_option=None, config_scaling_settings=None, config_processing_settings=None):
         """
         Initialize the configuration.
 
@@ -27,9 +27,11 @@ class Config:
         - Attacker criteria: Sets of criteria for attackers, such as types, min/max levels, etc.
         - Raid boss ensemble: List of bosses and their weights.
         - Battle settings: Weather, friendship, etc.
-        Additionally, there are 2 minor components:
+        Additionally, there are 3 minor components:
         - Sorting option
         - Estimator scaling settings: Enabled, baseline timing, baseline boss moveset.
+        - Processing settings: How data should be processed (e.g. which attackers/bosses to keep),
+            and what details to be included in the CSV
 
         This constructor takes in config.py settings for each of the 3 components,
         then construct the corresponding objects (AttackerCriteriaMulti, RaidEnsemble, BattleSettings).
@@ -40,6 +42,7 @@ class Config:
         :param config_battle_settings: Config for battle settings from config.py
         :param config_sort_option: Config for sorting option from config.py
         :param config_scaling_settings: Config for estimator scaling settings from config.py
+        :param config_processing_settings: Config for data processing and CSV writing settings from config.py
         """
         self.meta = metadata
         self.attacker_criteria_multi = None
@@ -47,6 +50,7 @@ class Config:
         self.battle_settings = None
         self.sort_option = config_sort_option
         self.scaling_settings = None  # Dict, filled in later
+        self.processing_settings = None  # Dict, filled in later
 
         if config_attacker_criteria:
             self.attacker_criteria_multi = self.parse_attacker_criteria_config(config_attacker_criteria)
@@ -57,6 +61,7 @@ class Config:
         if config_raid_ensemble:
             self.raid_ensemble = self.parse_raid_ensemble_config(config_raid_ensemble)
         self.scaling_settings = self.format_scaling_settings_config(config_scaling_settings)
+        self.processing_settings = self.format_processing_settings_config(config_processing_settings)
 
     def parse_attacker_criteria_config(self, config):
         """
@@ -316,4 +321,27 @@ class Config:
             cfg["Baseline attacker level"] = "by level"
         if type(cfg["Baseline attacker level"]) is str:
             cfg["Baseline boss moveset"] = cfg["Baseline boss moveset"].lower()
+        return cfg
+
+    def format_processing_settings_config(self, config):
+        """
+        Format the dict of processing options from config.py.
+        :param config: Dict describing processing settings config
+                (Typically from config.py)
+        :return: Dict with properly formatted values (default values added in)
+        """
+        cfg = config.copy()
+        # TODO: List settings not parsed yet
+
+        # CSV Table settings
+        if "Include unscaled estimators" not in cfg:
+            cfg["Include unscaled estimators"] = False
+        if "Combine attacker movesets" not in cfg:
+            cfg["Combine attacker movesets"] = True
+        if "Include random boss movesets" not in cfg:
+            cfg["Include random boss movesets"] = True
+        if "Include specific boss movesets" not in cfg:
+            cfg["Include specific boss movesets"] = False
+        if "Include attacker IVs" not in cfg:
+            cfg["Include attacker IVs"] = False
         return cfg
