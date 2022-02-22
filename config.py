@@ -148,44 +148,53 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
         "Weight of each Pokemon": 1,
         "Weight of whole group": 50,
         "Forms weight strategy": "combine",  # "combine" or "separate"
-        "Battle settings": {  # Write group-specific battle settings, in the same format as CONFIG_BATTLE_SETTINGS
-            # If absent, CONFIG_BATTLE_SETTINGS will be used
-            # TODO: Make these override default battle settings only if necessary, not outright replace whole dict
-            "Friendship": "Best",
-            "Weather": "Extreme",
-            "Attack strategy": "No Dodging",
-            "Dodge strategy": "Realistic Dodging"
-        },
+        # "Battle settings": {  # Write group-specific battle settings, in the same format as CONFIG_BATTLE_SETTINGS
+        #     # If absent, CONFIG_BATTLE_SETTINGS will be used
+        #     "Friendship": "Best",
+        #     "Weather": "Extreme",
+        #     "Attack strategy": "No Dodging",
+        #     "Dodge strategy": "Realistic Dodging"
+        # },
     },
-    {
-        "Pokemon pool": "By raid tier",
-        "Raid tier": "Mega Tier",
-        "Filters": {
-            "Weak to contender types": ["Flying"],
-            # "Weak to contender types simultaneously": ["Grass", "Water"],
-        },
-        "Weight of each Pokemon": 1,
-        "Weight of whole group": 35,  #25,
-        "Forms weight strategy": "combine",
-        "Battle settings": {
-            "Weather": "Extreme",
-        },
-    },
-    {
-        "Pokemon pool": "By raid tier",
-        "Raid tier": "Tier 3",
-        "Filters": {
-            "Weak to contender types": ["Flying"],
-            # "Weak to contender types simultaneously": ["Grass", "Water"],
-        },
-        "Weight of each Pokemon": 1,
-        "Weight of whole group": 15,  #25,
-        "Forms weight strategy": "combine",
-        "Battle settings": {
-            "Friendship": "No",
-            "Weather": "Extreme",
-        },
-    },
+    # {
+    #     "Pokemon pool": "By raid tier",
+    #     "Raid tier": "Tier 5",
+    #     "Filters": {
+    #         "Weak to contender types": ["Flying"],
+    #         # "Weak to contender types simultaneously": ["Grass", "Water"],
+    #     },
+    #     "Weight of each Pokemon": 1,
+    #     "Weight of whole group": 0,
+    #     "Forms weight strategy": "combine",
+    #     "Battle settings": {
+    #         "Attack strategy": "Dodge Specials PRO",
+    #     },
+    # },
+    # {
+    #     "Pokemon pool": "By raid tier",
+    #     "Raid tier": "Mega Tier",
+    #     "Filters": {
+    #         "Weak to contender types": ["Flying"],
+    #         # "Weak to contender types simultaneously": ["Grass", "Water"],
+    #     },
+    #     "Weight of each Pokemon": 1,
+    #     "Weight of whole group": 35,  #25,
+    #     "Forms weight strategy": "combine",
+    # },
+    # {
+    #     "Pokemon pool": "By raid tier",
+    #     "Raid tier": "Tier 3",
+    #     "Filters": {
+    #         "Weak to contender types": ["Flying"],
+    #         # "Weak to contender types simultaneously": ["Grass", "Water"],
+    #     },
+    #     "Weight of each Pokemon": 1,
+    #     "Weight of whole group": 15,  #25,
+    #     "Forms weight strategy": "combine",
+    #     "Battle settings": {
+    #         "Friendship": "No",
+    #     },
+    # },
     # {
     #     "Pokemon pool": "All Pokemon except above",
     #     "Raid tier": "Tier 3",
@@ -230,6 +239,8 @@ CONFIG_ESTIMATOR_SCALING_SETTINGS = {
     # This is also why the "Baseline chosen before filter" is necessary, to make sure comparisons
     # of attackers of one type (water) don't become skewed by better attackers from other types (Mewtwo).
     #
+    # [Baseline boss moveset]
+    #
     # "Baseline boss moveset" can be either "random", "easiest" or "hardest".
     # The best attacker against this particular moveset (aka. the smallest estimator value), either
     # before or after filtering, will be used as the baseline.
@@ -256,6 +267,8 @@ CONFIG_ESTIMATOR_SCALING_SETTINGS = {
     #            With "Easiest", Rayquaza's scaled estimator will become 1.14. The fact that it's significantly
     #            above 1.0 suggests T5 Palkia is a hard boss with a troublesome worst-case moveset.
     #
+    # [Baseline attacker level]
+    #
     # If you have multiple attacker levels, "Baseline attacker level" allows you to choose a standard level
     # to determine a baseline, and apply the same baseline to attackers of all levels.
     # Possible options include: A specific level, "min" (minimum level across all attackers), "max",
@@ -268,6 +281,9 @@ CONFIG_ESTIMATOR_SCALING_SETTINGS = {
     # and L50 attackers respectively, thus both are scaled to 1.0.
     # With baseline attacker level at 40, L40 Zekrom will be scaled to 1.0, and L50 Zekrom will be scaled
     # to 1.75/2=0.875.
+    #
+    # ----- End of documentation for this section -----
+
     "Enabled": True,  # Default: True
     "Baseline chosen before filter": False,  # Default: False
     "Baseline boss moveset": "random",  # "random", "easiest", "hardest"

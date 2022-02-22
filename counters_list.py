@@ -1066,6 +1066,7 @@ class CountersListsRE:
                          or specific_boss_moveset and boss[1] != "RANDOM")]
         boss_keys.sort(key=lambda boss: (boss[0], "" if boss[1] == "RANDOM" else boss[1],  # Prioritize random
                                          "" if boss[2] == "RANDOM" else boss[2], boss[3], boss[4], boss[5]))
+
         # Reorder boss keys to restore their order in raid ensemble
         # TODO: Terribly inefficient.
         new_boss_keys = []
@@ -1133,45 +1134,68 @@ class CountersListsRE:
             fieldnames = ["Attacker", "Fast Move", "Charged Move", "Level"]
             if write_iv:
                 fieldnames.append("IV")
-            fieldnames += boss_headers
-            writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-            writer.writeheader()
+            row_boss_offset = len(fieldnames)  # Add this to boss index
 
-            # Write battle settings
-            weights_row = {"Attacker": "(Battle settings)"}
-            for i, boss_key in enumerate(boss_keys):
-                weights_row[boss_headers[i]] = boss_key[4]
-            writer.writerow(weights_row)
+            fieldnames += boss_headers
+            row_len = len(fieldnames)  # Length of each row
+
+            writer = csv.writer(csv_file)
+            writer.writerow(fieldnames)
 
             # Write weights
-            weights_row = {"Attacker": "(Boss weights)"}
+            weights_row = [None,] * row_len
+            weights_row[0] = "(Boss weights)"
             for i, boss_key in enumerate(boss_keys):
-                weights_row[boss_headers[i]] = boss_key[5]
+                weights_row[i + row_boss_offset] = boss_key[5]
             writer.writerow(weights_row)
 
+            # Write battle settings in 4 separate rows
+            bs_row = [None,] * row_len
+            bs_row[0] = "(Weather)"
+            for i, boss_key in enumerate(boss_keys):
+                bs_row[i + row_boss_offset] = parse_weather_code2str(boss_key[4].weather_code)
+            writer.writerow(bs_row)
+            bs_row = [None,] * row_len
+            bs_row[0] = "(Friendship)"
+            for i, boss_key in enumerate(boss_keys):
+                bs_row[i + row_boss_offset] = parse_friendship_code2str(boss_key[4].friendship_code)
+            writer.writerow(bs_row)
+            bs_row = [None,] * row_len
+            bs_row[0] = "(Attack Strategy)"
+            for i, boss_key in enumerate(boss_keys):
+                bs_row[i + row_boss_offset] = parse_attack_strategy_code2str(boss_key[4].attack_strategy_code)
+            writer.writerow(bs_row)
+            bs_row = [None,] * row_len
+            bs_row[0] = "(Dodge Strategy)"
+            for i, boss_key in enumerate(boss_keys):
+                bs_row[i + row_boss_offset] = parse_dodge_strategy_code2str(boss_key[4].dodge_strategy_code)
+            writer.writerow(bs_row)
+
             for atker_key, atker_values in attackers_boss_dict.items():
-                atker_row = {"Attacker": self.metadata.pokemon_codename_to_displayname(atker_key[0]),
-                             "Fast Move": (
-                                 "Unknown" if atker_key[1] == "Unknown"
-                                 else " or ".join([self.metadata.move_codename_to_displayname(code)
-                                                   for code in atker_key[1].split(" or ")])),
-                             "Charged Move": (
+                atker_row = [None,] * row_len
+                atker_row[0] = self.metadata.pokemon_codename_to_displayname(atker_key[0])  # Attacker
+                atker_row[1] = (  # Fast Move
+                    "Unknown" if atker_key[1] == "Unknown"
+                    else " or ".join([self.metadata.move_codename_to_displayname(code)
+                                      for code in atker_key[1].split(" or ")]))
+                atker_row[2] = (  # Charged Move
                                  "Unknown" if atker_key[2] == "Unknown"
                                  else " or ".join([self.metadata.move_codename_to_displayname(code)
-                                                   for code in atker_key[2].split(" or ")])),
-                             "Level": atker_key[3]}
+                                                   for code in atker_key[2].split(" or ")]))
+                atker_row[3] = atker_key[3]  # Level
                 if write_iv:
-                    atker_row["IV"] = atker_key[4]
+                    atker_row[4] = atker_key[4]  # IV
+
                 for i, boss_key in enumerate(boss_keys):
                     if boss_key in atker_values:
-                        atker_row[boss_headers[i]] = atker_values[boss_key][self.sort_option]
+                        atker_row[i + row_boss_offset] = atker_values[boss_key][self.sort_option]
                 writer.writerow(atker_row)
 
                 if write_unscaled:
                     unscaled_row = atker_row.copy()
-                    unscaled_row["Attacker"] = atker_row["Attacker"] + " (Unscaled)"
+                    unscaled_row[0] = atker_row[0] + " (Unscaled)"
                     for i, boss_key in enumerate(boss_keys):
                         if boss_key in atker_values:
-                            unscaled_row[boss_headers[i]] = atker_values[boss_key][self.sort_option + "_UNSCALED"]
+                            unscaled_row[i + row_boss_offset] = atker_values[boss_key][self.sort_option + "_UNSCALED"]
                     writer.writerow(unscaled_row)
 

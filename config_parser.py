@@ -248,9 +248,13 @@ class Config:
                 raids = apply_filter(raids, fkey, fval)
 
             # Parse group-specific battle settings if given
-            settings = (self.parse_battle_settings_config(cfg["Battle settings"])
-                        if "Battle settings" in cfg
-                        else self.battle_settings)
+            # settings = (self.parse_battle_settings_config(cfg["Battle settings"])
+            #             if "Battle settings" in cfg
+            #             else self.battle_settings)
+            settings = self.battle_settings
+            if "Battle settings" in cfg:
+                settings = settings.copy()
+                settings.override_with_dict(cfg["Battle settings"])
 
             ens = RaidEnsemble(raid_bosses=raids,
                                weight_multiplier=weight, forms_weight_strategy=forms_weight_strategy,

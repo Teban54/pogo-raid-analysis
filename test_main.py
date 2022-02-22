@@ -34,7 +34,7 @@ async def main():
                         best_attacker_moveset=False, random_boss_moveset=True, specific_boss_moveset=True)
     clre.write_CSV_list(path=COUNTERS_DATA_PATH, raw=True,
                         best_attacker_moveset=False, random_boss_moveset=True, specific_boss_moveset=True)
-    clre.temp_write_table(path=COUNTERS_DATA_PATH, write_unscaled=False,
+    clre.temp_write_table(path=COUNTERS_DATA_PATH, write_unscaled=True,
                           combine_attacker_movesets=True, specific_boss_moveset=False,
                           write_iv=False)  # ,
     # exclude=["KYUREM_BLACK_FORM", "KYUREM_WHITE_FORM", "LATIAS_MEGA", "LATIOS_MEGA"])
@@ -64,4 +64,5 @@ async def main():
 
 
 if __name__ == "__main__":
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
     asyncio.run(main())

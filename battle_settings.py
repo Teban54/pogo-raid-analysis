@@ -55,6 +55,7 @@ class BattleSettings:
         """
         Given (a) natural language name(s) of one setting (friendship, weather, or attack/dodge strategy),
         convert to code name.
+        If name_str is None, do nothing.
         :param name_str: One or more names in natural language, as either string or list
         :param str2code_func: Function that converts a natural name to a code name, taking in a single parameter
         :return: A single string with code name, or a list if multiple options are provided
@@ -122,7 +123,7 @@ class BattleSettings:
             ])
         return multiple_settings_delimiter.join(indiv.to_string(delimiter) for indiv in self.indiv_settings)
 
-    def __str__(self):
+    def __repr__(self):
         return self.to_string()
 
     def __hash__(self):
@@ -139,6 +140,42 @@ class BattleSettings:
         if self.is_multiple() and other.is_multiple():
             return self.indiv_settings == other.indiv_settings
 
+    def __lt__(self, other):
+        weather_order = ["NO_WEATHER", "CLEAR", "RAINY", "PARTLY_CLOUDY", "CLOUDY", "WINDY", "SNOW", "FOG"]
+        friendship_order = [f"FRIENDSHIP_LEVEL_{x}" for x in range(5)]
+        attack_strategy_order = ["CINEMATIC_ATTACK_WHEN_POSSIBLE", "DODGE_SPECIALS", "DODGE_WEAVE_CAUTIOUS"]
+        dodge_strategy_order = ["DODGE_100", "DODGE_REACTION_TIME", "DODGE_REACTION_TIME2", "DODGE_25"]
+
+        def comp_one_setting(sf, ot, order: list):
+            if type(sf) is str and type(ot) is str:
+                if order.index(sf) < order.index(ot):
+                    return -1
+                if order.index(sf) > order.index(ot):
+                    return 1
+                return 0
+            if type(sf) is list and type(ot) is list:
+                for i in range(min(len(sf), len(ot))):
+                    cp = comp_one_setting(sf[i], ot[i], order)
+                    if cp != 0:
+                        return cp
+                return len(sf) - len(ot)
+            if type(sf) is str and type(ot) is list:
+                return -1
+            if type(sf) is list and type(ot) is str:
+                return 1
+            return 0
+
+        comp = comp_one_setting(self.weather_code, other.weather_code, weather_order)
+        if comp != 0:
+            return comp < 0
+        comp = comp_one_setting(self.friendship_code, other.friendship_code, friendship_order)
+        if comp != 0:
+            return comp < 0
+        comp = comp_one_setting(self.attack_strategy_code, other.attack_strategy_code, attack_strategy_order)
+        if comp != 0:
+            return comp < 0
+        return comp_one_setting(self.dodge_strategy_code, other.dodge_strategy_code, dodge_strategy_order) < 0
+
     def debug_print(self):
         """
         Debug function that prints the settings to stdout.
@@ -148,6 +185,58 @@ class BattleSettings:
         else:
             for indiv in self.indiv_settings:
                 indiv.debug_print()
+
+    def copy(self):
+        """
+        Create a deep copy of this BattleSettings object.
+        If this contains multiple battle settings, each individual setting will also be copied.
+        :return: Copy of this BattleSettings object.
+        """
+        cp = BattleSettings()
+        cp.weather_code = self.weather_code
+        cp.friendship_code = self.friendship_code
+        cp.attack_strategy_code = self.attack_strategy_code
+        cp.dodge_strategy_code = self.dodge_strategy_code
+
+        cp.multiple = self.multiple
+        cp.indiv_settings = []
+        if self.multiple:
+            cp.indiv_settings = [indiv.copy() for indiv in self.indiv_settings]
+        return cp
+
+    def override_with_dict(self, new_bs_dict):
+        """
+        Update this BattleSettings object with contents from the new dict if specified.
+        Items not contained in the new dict remains unchanged.
+
+        Resets self.multiple and self.indiv_settings.
+
+        This is being used for the battle settings dicts for specific raid bosses,
+        such that the boss-specific dicts only override the listed keys, and not
+        outright replace the entire dict of default battle settings.
+
+        :param new_bs_dict: New dict (offers final values)
+        """
+        changed = False
+        if "Weather" in new_bs_dict:
+            changed = True
+            self.weather_code = self.init_one_setting(new_bs_dict["Weather"], parse_weather_str2code)
+        if "Friendship" in new_bs_dict:
+            changed = True
+            self.friendship_code = self.init_one_setting(new_bs_dict["Friendship"], parse_friendship_str2code)
+        if "Attack strategy" in new_bs_dict:
+            changed = True
+            self.attack_strategy_code = self.init_one_setting(new_bs_dict["Attack strategy"], parse_attack_strategy_str2code)
+        if "Dodge strategy" in new_bs_dict:
+            changed = True
+            self.dodge_strategy_code = self.init_one_setting(new_bs_dict["Dodge strategy"], parse_dodge_strategy_str2code)
+
+        if changed:
+            self.multiple = any(type(setting) is list for setting in [
+                self.weather_code, self.friendship_code, self.attack_strategy_code, self.dodge_strategy_code])
+            self.indiv_settings = []  # Stores list of individual BattleSettings if this has multiple sets of options
+            if self.multiple:
+                self.indiv_settings = self.break_down_multiple()
 
 
 """BS = BattleSettings(friendship_str=['no', 'ultra'],

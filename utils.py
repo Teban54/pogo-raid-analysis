@@ -927,3 +927,34 @@ def is_level_in_range(level, min_level, max_level):
     if type(level) is str:
         level = float(level)  # Float because .5
     return min_level <= level <= max_level
+
+
+# ----------------- Miscellaneous -----------------
+
+
+# def dict_override(old_dict: dict, new_dict: dict):
+#     """
+#     Create a dict that's based on the old dict, but overridden with contents
+#     from the new dict.
+#
+#     This is being used for the battle settings dicts for specific raid bosses,
+#     such that the boss-specific dicts only override the listed keys, and not
+#     outright replace the entire dict of default battle settings.
+#
+#     :param old_dict: Old dict (offers default values)
+#     :param new_dict: New dict (offers final values)
+#     :return: A separate dict object where the value of each key is taken from
+#         the new dict if applicable, or old dict if it's not contained in the
+#         new dict.
+#         If only one dict is specified, returns the other dict.
+#     """
+#     if not new_dict and not old_dict:
+#         return {}
+#     if not new_dict:
+#         return old_dict.copy()
+#     if not old_dict:
+#         return new_dict.copy()
+#     ret = old_dict.copy()
+#     ret.update(new_dict)
+#     return ret
+
