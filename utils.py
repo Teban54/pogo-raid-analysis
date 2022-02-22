@@ -30,7 +30,6 @@ async def do_http_request(url, payload={}):
     :param payload: Payload parameters
     :return: Results parsed as JSON, or None if an error occurred
     """
-    #for i in range(CONNECTION_RETRIES):
     i = 0
     while True:
         try:
@@ -42,17 +41,16 @@ async def do_http_request(url, payload={}):
                         txt = await(r.text())
                         return json.loads(txt)
                     else:
-                        print("Error with HTTP request: " + str(r), file=sys.stderr)
                         i += 1
-                        print(i)
-                        #return None
+                        if i == CONNECTION_RETRIES:
+                            print("Error with HTTP request: " + str(r), file=sys.stderr)
+                            return None
                         continue
         except Exception as e:
             i += 1
-            print(i)
-            # if i == CONNECTION_RETRIES - 1:
-            #     traceback.print_exc()
-            #     return None
+            if i == CONNECTION_RETRIES:
+                traceback.print_exc()
+                return None
             continue
     return None
 
