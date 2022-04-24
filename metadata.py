@@ -310,6 +310,8 @@ class Metadata:
             for boss_JSON in category_JSON['raids']:
                 boss = RaidBoss(pokebattler_JSON=boss_JSON, tier_codename=tier, category_codename=category,
                                 metadata=self)
+                if IGNORE_INVALID_RAID_BOSSES and not boss.pokemon:
+                    continue
                 self.raids.append(boss)
                 self.raids_by_category[category].append(boss)
                 self.raids_by_tier[tier].append(boss)

@@ -11,6 +11,7 @@ COUNTERS_DATA_PATH = "data/counters/"
 OUTPUTS_DATA_PATH = "data/outputs/"
 
 CONNECTION_RETRIES = 30  # In case aiohttp.get() fails
+CONCURRENCY = 500
 
 
 # ----------------- Ensembles -----------------
@@ -20,6 +21,7 @@ CONNECTION_RETRIES = 30  # In case aiohttp.get() fails
 # Therefore, they will receive a weight of 1 on their own,
 # instead of all forms of the base Pokemon sharing a weight of 1 (e.g. Arceus).
 # The only place where this is utilized is when assigning weights.
+# Note: Shadows have not been considered in this, as shadows are not raid bosses yet.
 FORMS_AS_SEPARATE_POKEMON_UNIVERSAL = [
     'ALOLA', 'GALARIAN', 'HISUIAN'
 ]
@@ -45,8 +47,7 @@ FORMS_AS_SEPARATE_POKEMON_PER_POKEMON = {
 
 
 IGNORED_RAID_BOSSES = {  # Keys are raid tiers, no "legacy"
-    "RAID_LEVEL_5": ['ZACIAN_HERO_FORM', 'ZAMAZENTA_HERO_FORM',  # Zacian and Zamazenta with no forms are already under future T5s
-                     'MELOETTA_ARIA_FORM', 'MELOETTA_PIROUETTE_FORM',  # Already got from special research
+    "RAID_LEVEL_5": ['MELOETTA_ARIA_FORM', 'MELOETTA_PIROUETTE_FORM',  # Already got from special research
                      'BIDOOF'],
 }
 
@@ -107,6 +108,9 @@ COSMETIC_FORMS_PER_POKEMON = {  # These specific Pokemon have these cosmetic for
 # [Reminder] When using any Pokemon above, make sure only their regular forms are considered
 #  (and not considered again if one of the cosmetic forms already is)
 
+IGNORE_INVALID_RAID_BOSSES = True  # Remove a raid boss listed on Pokebattler automatically when
+                                   # the corresponding Pokemon object does not exist (e.g. Giratina-Altered)
+
 
 # ----------------- Types -----------------
 
@@ -159,6 +163,7 @@ SPECIAL_BASE_DISPLAY_NAMES = {  # Default: Replace _ with space (Tapu Koko)
     'FARFETCHD': 'Farfetch\'d',
     'SIRFETCHD': 'Sirfetch\'d',
     'FLABEBE': 'Flabébé',
+    'KOMMO_O': 'Kommo-o',
 }
 SPECIAL_FORM_DISPLAY_NAMES = {
     'A': 'Armored',

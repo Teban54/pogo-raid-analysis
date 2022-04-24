@@ -34,18 +34,21 @@ async def do_http_request(url, payload={}):
     while True:
         try:
             ssl_context = ssl.create_default_context(cafile=certifi.where())
-            async with aiohttp.ClientSession() as session:
-                async with session.get(url, params=payload, ssl=ssl_context) as r:
-                    r.encoding = 'utf-8'  # 解码汉字
-                    if r.ok:
-                        txt = await(r.text())
-                        return json.loads(txt)
-                    else:
-                        i += 1
-                        if i == CONNECTION_RETRIES:
-                            print("Error with HTTP request: " + str(r), file=sys.stderr)
-                            return None
-                        continue
+            async with SEMAPHORE:
+                # async with aiohttp.TCPConnector(limit=500) as connector:  # https://stackoverflow.com/questions/47675410/python-asyncio-aiohttp-valueerror-too-many-file-descriptors-in-select-on-win
+                #     async with aiohttp.ClientSession(connector=connector) as session:
+                    async with aiohttp.ClientSession() as session:
+                        async with session.get(url, params=payload, ssl=ssl_context) as r:
+                            r.encoding = 'utf-8'  # 解码汉字
+                            if r.ok:
+                                txt = await(r.text())
+                                return json.loads(txt)
+                            else:
+                                i += 1
+                                if i == CONNECTION_RETRIES:
+                                    print("Error with HTTP request: " + str(r), file=sys.stderr)
+                                    return None
+                                continue
         except Exception as e:
             i += 1
             if i == CONNECTION_RETRIES:
@@ -946,6 +949,18 @@ def parse_level_str2num(level_str: str):
 
 
 # ----------------- Miscellaneous -----------------
+
+
+SEMAPHORE = asyncio.Semaphore(CONCURRENCY)
+
+
+async def gather_with_concurrency(n, *tasks):
+    # https://stackoverflow.com/questions/48483348/how-to-limit-concurrency-with-python-asyncio/61478547#61478547
+
+    async def sem_task(task):
+        async with SEMAPHORE:
+            return await task
+    return await asyncio.gather(*(sem_task(task) for task in tasks))
 
 
 # def dict_override(old_dict: dict, new_dict: dict):

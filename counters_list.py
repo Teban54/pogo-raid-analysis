@@ -143,6 +143,12 @@ class CountersListSingle:
             battle_settings=self.battle_settings,
             sort_option=self.sort_option
         )
+        if self.trainer_id:
+            print(f"Finished Loading: {parse_raid_tier_code2str(self.boss.tier)} {self.boss.pokemon_codename}, "
+                  f"Trainer ID {self.trainer_id}, {self.battle_settings}")
+        else:
+            print(f"Finished Loading: {parse_raid_tier_code2str(self.boss.tier)} {self.boss.pokemon_codename}, "
+                  f"Level {self.attacker_level}, {self.battle_settings}")
 
     def parse_JSON(self):
         """
@@ -331,6 +337,7 @@ class CountersListSingle:
         """
         if not target_atkers:
             return
+        #return
 
         boss_mvst_keys = []
         if random_boss_moveset:
@@ -411,6 +418,7 @@ class CountersListSingle:
         # Stop inbetween if all pokemon are filled
         async def build_one_counters_list(key):
             pkm_type, is_not_legendary_or_mythical, is_not_shadow, is_not_mega = key
+            print(self.boss.pokemon_codename, pkm_type, is_not_legendary_or_mythical, is_not_shadow, is_not_mega)
             ac = AttackerCriteria(
                 pokemon_types=pkm_type, is_not_legendary_or_mythical=is_not_legendary_or_mythical,
                 is_not_shadow=is_not_shadow, is_not_mega=is_not_mega,
@@ -429,7 +437,9 @@ class CountersListSingle:
         async def add_counters_lists_group(keys):
             if not keys:
                 return
-            lists = await asyncio.gather(*(asyncio.create_task(build_one_counters_list(key)) for key in keys))
+            #lists = await asyncio.gather(*(asyncio.create_task(build_one_counters_list(key)) for key in keys))
+            lists = await gather_with_concurrency(
+                CONCURRENCY, *(asyncio.create_task(build_one_counters_list(key)) for key in keys))
             for lst in lists:  # Process these in sequence, not async
                 lst.get_attackers_with_movesets_bs(random_boss_moveset=random_boss_moveset,
                                                    specific_boss_moveset=specific_boss_moveset)
@@ -498,7 +508,13 @@ class CountersListSingle:
         baselines_per_boss_moveset = {
             mvst_key: min(atker_dict["ESTIMATOR"] for atker_dict in atkers_list)
             for mvst_key, atkers_list in self.rankings.items()
+            if atkers_list
         }
+        if ("RANDOM", "RANDOM") not in baselines_per_boss_moveset:
+            print(f"Warning (CountersListSingle.get_estimator_baseline): "
+                  f"Boss moveset option {('RANDOM', 'RANDOM')} does not have any attackers. Returning 1.",
+                  file=sys.stderr)
+            return 1
         baseline = baselines_per_boss_moveset[("RANDOM", "RANDOM")]
         if baseline_boss_moveset == "easiest":
             baseline = min(min_est for mvst, min_est in baselines_per_boss_moveset.items()
@@ -862,7 +878,8 @@ class CountersListsMultiBSLevel:
             await lst.load_JSON()
             lst.parse_JSON()
 
-        await asyncio.gather(*(
+        #await asyncio.gather(*(
+        await gather_with_concurrency(CONCURRENCY, *(
             asyncio.create_task(task_per_list(lst))
             for lvl_to_lst in self.lists_by_bs_by_level.values()
             for lst in lvl_to_lst.values()
@@ -871,6 +888,13 @@ class CountersListsMultiBSLevel:
             for id_to_lst in self.lists_by_bs_by_trainer_id.values()
             for lst in id_to_lst.values()
         ))
+
+        # for lvl_to_lst in self.lists_by_bs_by_level.values():
+        #     for lst in lvl_to_lst.values():
+        #         await task_per_list(lst)
+        # for id_to_lst in self.lists_by_bs_by_trainer_id.values():
+        #     for lst in id_to_lst.values():
+        #         await task_per_list(lst)
 
     def filter_rankings(self):
         """
@@ -936,7 +960,8 @@ class CountersListsMultiBSLevel:
         if not target_atkers:
             return
         # Distribute these attackers to each CountersListSingle (by level only)
-        await asyncio.gather(*(
+        #await asyncio.gather(*(
+        await gather_with_concurrency(CONCURRENCY, *(
             asyncio.create_task(lst.fill_blanks(target_atkers, random_boss_moveset=random_boss_moveset,
                                                 specific_boss_moveset=specific_boss_moveset))
             for lvl_to_lst in self.lists_by_bs_by_level.values()
@@ -1169,7 +1194,8 @@ class CountersListsRE:
         """
         Pull the Pokebattler JSON for all CountersListMultiBSLevel objects and parse them.
         """
-        await asyncio.gather(*(
+        #await asyncio.gather(*(
+        await gather_with_concurrency(CONCURRENCY, *(
             asyncio.create_task(lst.load_and_parse_JSON())
             for lst in self.lists_for_bosses
         ))
@@ -1230,7 +1256,8 @@ class CountersListsRE:
         )  # Only include attackers in the by-level lists
 
         # Distribute these attackers to each CountersListsMultiBSLevel
-        await asyncio.gather(*(
+        #await asyncio.gather(*(
+        await gather_with_concurrency(CONCURRENCY, *(
             asyncio.create_task(lst.fill_blanks(
                 all_atkers, random_boss_moveset=self.processing_settings["Include random boss movesets"],
                 specific_boss_moveset=self.processing_settings["Include specific boss movesets"]))

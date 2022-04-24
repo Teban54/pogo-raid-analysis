@@ -33,10 +33,10 @@ async def main():
         processing_settings=CONFIG.processing_settings
     )
     await clre.load_and_process_all_lists()
-    clre.write_CSV_list(path=COUNTERS_DATA_PATH, raw=False,
-                        best_attacker_moveset=False, random_boss_moveset=True, specific_boss_moveset=True)
-    clre.write_CSV_list(path=COUNTERS_DATA_PATH, raw=True,
-                        best_attacker_moveset=False, random_boss_moveset=True, specific_boss_moveset=True)
+    # clre.write_CSV_list(path=COUNTERS_DATA_PATH, raw=False,
+    #                     best_attacker_moveset=False, random_boss_moveset=True, specific_boss_moveset=True)
+    # clre.write_CSV_list(path=COUNTERS_DATA_PATH, raw=True,
+    #                     best_attacker_moveset=False, random_boss_moveset=True, specific_boss_moveset=True)
     clre.temp_write_table(path=COUNTERS_DATA_PATH)
         # , write_unscaled=True,
         #                   combine_attacker_movesets=True, specific_boss_moveset=False,
@@ -68,5 +68,11 @@ async def main():
 
 
 if __name__ == "__main__":
-    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+    if sys.platform == 'win32':
+        loop = asyncio.ProactorEventLoop()
+        asyncio.set_event_loop(loop)
+        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
     asyncio.run(main())
+    # loop = asyncio.get_event_loop()
+    # loop.run_until_complete(main())
+    # loop.close()

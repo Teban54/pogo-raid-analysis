@@ -316,7 +316,7 @@ class AttackerCriteriaMulti:
         :return: List of Pokebattler trainer IDs in all sets of criteria.
         """
         return list(set([criteria.trainer_id
-                         for criteria in self.sets for tp in criteria.pokemon_types
+                         for criteria in self.sets
                          if criteria.trainer_id]))
 
     def get_subset_no_trainer_ids(self):
