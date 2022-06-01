@@ -91,11 +91,19 @@ def pokemon_list_to_raid_boss_list(pokemon_list, tier):
     """
     Convert a list of Pokemon objects to a list of RaidBoss objects.
     :param pokemon_list: List of Pokemon bosses
-    :param tier: Tier name, either natural language or code name
+    :param tier: Tier name or list of tier names, either natural language or code name
     :return; RaidBoss objects
     """
-    tier = parse_raid_tier_str2code(tier)
-    return [RaidBoss(pokemon_obj=pkm, tier_codename=tier) for pkm in pokemon_list]
+    tiers = [tier]
+    if type(tier) is list:
+        tiers = tier
+    # tiers = [parse_raid_tier_str2code(tier) for tier in tiers]
+    raid_bosses = []
+    for tier in tiers:
+        raid_bosses += [RaidBoss(pokemon_obj=pkm, tier_codename=parse_raid_tier_str2code(tier)) for pkm in pokemon_list]
+    return raid_bosses
+    # tier = parse_raid_tier_str2code(tier)
+    # return [RaidBoss(pokemon_obj=pkm, tier_codename=tier) for pkm in pokemon_list]
 
 
 def raid_boss_list_to_pokemon_list(raid_list):

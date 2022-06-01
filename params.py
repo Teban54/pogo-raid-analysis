@@ -104,6 +104,7 @@ COSMETIC_FORMS_PER_POKEMON = {  # These specific Pokemon have these cosmetic for
     'PUMPKABOO': ['SMALL'],
     'GOURGEIST': ['SMALL'],
     'HOOPA': ['CONFINED'],
+    'ORICORIO': [''],
 }
 # [Reminder] When using any Pokemon above, make sure only their regular forms are considered
 #  (and not considered again if one of the cosmetic forms already is)
@@ -163,11 +164,16 @@ SPECIAL_BASE_DISPLAY_NAMES = {  # Default: Replace _ with space (Tapu Koko)
     'FARFETCHD': 'Farfetch\'d',
     'SIRFETCHD': 'Sirfetch\'d',
     'FLABEBE': 'Flabébé',
+    'JANGMO_O': 'Jangmo-o',
+    'HAKAMO_O': 'Hakamo-o',
     'KOMMO_O': 'Kommo-o',
 }
 SPECIAL_FORM_DISPLAY_NAMES = {
     'A': 'Armored',
     'VS_2019': 'Libre',
+    'S': 'Apex',  # Not accurate for legendary beasts, but whatever
+    'POMPOM': 'Pom-Pom',
+    'PAU': 'Pa\'u',
 }
 
 
@@ -183,6 +189,8 @@ RAID_TIERS_CODE2STR = {
     "RAID_LEVEL_5": "Tier 5",
     "RAID_LEVEL_6": "Tier 6",
     "RAID_LEVEL_MEGA": "Mega Tier",
+    "RAID_LEVEL_MEGA_5": "Mega Legendary Tier",
+    "RAID_LEVEL_ULTRA_BEAST": "Ultra Beast Tier",
 }
 RAID_CATEGORIES_CODE2STR = {  # Shouldn't be needed for this project, but just in case
     "RAID_LEVEL_1": "Tier 1",
@@ -209,6 +217,12 @@ RAID_CATEGORIES_CODE2STR = {  # Shouldn't be needed for this project, but just i
     "RAID_LEVEL_MEGA": "Mega Tier",
     "RAID_LEVEL_MEGA_LEGACY": "Legacy Mega Tier",
     "RAID_LEVEL_MEGA_FUTURE": "Future Mega Tier",
+    "RAID_LEVEL_MEGA_5": "Mega Legendary Tier",
+    "RAID_LEVEL_MEGA_5_LEGACY": "Legacy Mega Legendary Tier",
+    "RAID_LEVEL_MEGA_5_FUTURE": "Future Mega Legendary Tier",
+    "RAID_LEVEL_ULTRA_BEAST": "Ultra Beast Tier",
+    "RAID_LEVEL_ULTRA_BEAST_LEGACY": "Legacy Ultra Beast Tier",
+    "RAID_LEVEL_ULTRA_BEAST_FUTURE": "Future Ultra Beast Tier",
     "RAID_LEVEL_UNSET": "Tier ?",  # Should be ignored when reading JSON
 }
 # Reminder - If encountered a tier not listed above, do not report an error, only a warning!!

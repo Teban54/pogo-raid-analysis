@@ -10,7 +10,7 @@ from params import *
 
 #CONFIG_WRITE_ALL_COUNTERS = True
 
-SINGLE_TYPE_ATTACKER = ["Psychic"]
+SINGLE_TYPE_ATTACKER = ["Dragon"]
 MULTI_TYPE_ATTACKERS_COMPARE = ["Bug", "Ghost", "Dark"]
 
 CONFIG_BATTLE_SETTINGS = {
@@ -137,7 +137,8 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
 
     {
         "Pokemon pool": "By raid tier",  # "All Pokemon", "All Pokemon except above", "By raid tier" or "By raid category"
-        "Raid tier": "Tier 5",  # Here, "Tier 5" has all past/present/future bosses
+        #"Raid tier": "Tier 5",  # Here, "Tier 5" has all past/present/future bosses
+        "Raid tiers": ["Tier 5", "Ultra Beast Tier"],
         # "Raid category": "Legacy Tier 5",  # Here, "Tier 5" has only current bosses
         "Filters": {  # Only those without # at the start are applied
             "Weak to contender types": SINGLE_TYPE_ATTACKER,
@@ -165,10 +166,16 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
         #     "Attack strategy": "No Dodging",
         #     "Dodge strategy": "Realistic Dodging"
         # },
+        # "Baseline battle settings": {
+        #     "Weather": "Extreme",
+        #     "Friendship": "Best",
+        #     "Attack strategy": "No Dodging",
+        #     "Dodge strategy": "Realistic Dodging",
+        # }
     },
     {
         "Pokemon pool": "By raid tier",
-        "Raid tier": "Tier 5",
+        "Raid tiers": ["Tier 5", "Ultra Beast Tier"],
         "Filters": {
             "Weak to contender types": SINGLE_TYPE_ATTACKER,
             #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
@@ -183,7 +190,7 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
 
     {
         "Pokemon pool": "By raid tier",
-        "Raid tier": "Mega Tier",
+        "Raid tiers": ["Mega Tier", "Mega Legendary Tier"],
         "Filters": {
             "Weak to contender types": SINGLE_TYPE_ATTACKER,
             #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
@@ -194,7 +201,7 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
     },
     {
         "Pokemon pool": "By raid tier",
-        "Raid tier": "Mega Tier",
+        "Raid tiers": ["Mega Tier", "Mega Legendary Tier"],
         "Filters": {
             "Weak to contender types": SINGLE_TYPE_ATTACKER,
             #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
@@ -220,6 +227,9 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
         "Battle settings": {
             "Friendship": "No",
         },
+        "Baseline battle settings": {
+            "Friendship": "No",
+        }
     },
     {
         "Pokemon pool": "By raid tier",
@@ -235,6 +245,9 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
             "Friendship": "No",
             "Attack strategy": "Dodge Specials PRO",
         },
+        "Baseline battle settings": {
+            "Friendship": "No",
+        }
     },
 
     # {
@@ -255,6 +268,25 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
     #         "Friendship": "No",
     #     },
     # },
+
+    {
+        "Pokemon pool": "All Pokemon except above",
+        "Raid tiers": ["Tier 3", "Tier 5"],
+        # "Raid category": "Legacy Tier 5",
+        "Filters": {
+            "Weak to contender types": ["Dragon"],
+            "Evolution stage": "Final",  # "Final", "Pre-evolution"
+            "Must be non shadow": True,
+            "Must be non mega": True,
+            "Must be non legendary or mythical": True,  # Ignores Glastrier etc
+        },
+        "Weight of each Pokemon": 1,
+        "Weight of whole group": 10,
+        "Forms weight strategy": "combine",
+        "Battle settings": {
+            "Friendship": "No",
+        },
+    },
 ]
 
 CONFIG_ESTIMATOR_SCALING_SETTINGS = {
@@ -324,12 +356,34 @@ CONFIG_ESTIMATOR_SCALING_SETTINGS = {
     # With baseline attacker level at 40, L40 Zekrom will be scaled to 1.0, and L50 Zekrom will be scaled
     # to 1.75/2=0.875.
     #
+    # [Baseline battle settings]
+    #
+    # Similar to baseline attacker level, but for a standard battle setting.
+    # Specified as a dict similar to CONFIG_BATTLE_SETTINGS. Multiple options in any fields are not allowed.
+    #
+    # Practical usages: Specifying baseline weather conditions or dodge settings, to compare the improvement
+    # of weather boost or dodging.
+    # In this case, the best attacker with dodging may be scaled to below 1.0.
+    #
+    # This field can be overridden in each RaidEnsemble with its own baseline battle settings (as long as that
+    # battle settings is being run somewhere).
+    # Example: Suppose the raid ensembles are T5 raids (BF, no dodging), T5 raids (BF, dodging), T3 raids
+    # (NF, no dodging), T3 raids (NF, dodging).
+    # We want to use BF as the baseline battle settings for both T5s, and NF for both T3s.
+    # In this case, the baseline settings for T3s can be specified in CONFIG_RAID_BOSS_ENSEMBLE.
+    #
     # ----- End of documentation for this section -----
 
     "Enabled": True,  # Default: True
     "Baseline chosen before filter": False,  # Default: False
     "Baseline boss moveset": "random",  # "random", "easiest", "hardest"
     "Baseline attacker level": 40,  # Specific level, "min", "max", "average", "by level"/-1/None
+    "Baseline battle settings": {
+        "Weather": "Extreme",
+        "Friendship": "Best",
+        "Attack strategy": "No Dodging",
+        "Dodge strategy": "Realistic Dodging",
+    }
 }
 
 

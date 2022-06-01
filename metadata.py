@@ -328,6 +328,21 @@ class Metadata:
             lst = remove_raids_to_ignore(lst)
         return lst
 
+    def get_raid_bosses_by_tiers(self, tiers, remove_ignored=True):
+        """
+        Get all raid bosses of a list of raid tiers (e.g. Mega Tier, Mega Legenadry Tier)
+        recorded on Pokebattler.
+        :param tiers: List of raid tiers, either as natural language or code name
+        :param remove_ignored: If True, raids that should be ignored will not be included.
+        :return: List of RaidBoss objects describing all bosses of that tier
+        """
+        lst = []
+        for tier in tiers:
+            lst += self.raids_by_tier.get(parse_raid_tier_str2code(tier), [])
+        if remove_ignored:
+            lst = remove_raids_to_ignore(lst)
+        return lst
+
     def get_raid_bosses_by_category(self, category, remove_ignored=True):
         """
         Get all raid bosses of a certain raid category (e.g. Legacy Tier 5) recorded on Pokebattler.
@@ -336,6 +351,21 @@ class Metadata:
         :return: List of RaidBoss objects describing all bosses of that category
         """
         lst =  self.raids_by_category.get(parse_raid_category_str2code(category), [])
+        if remove_ignored:
+            lst = remove_raids_to_ignore(lst)
+        return lst
+
+    def get_raid_bosses_by_categories(self, categories, remove_ignored=True):
+        """
+        Get all raid bosses of a list of raid categories (e.g. Legacy Mega Tier,
+        Legacy Mega Legendary Tier) recorded on Pokebattler.
+        :param categories: List of raid categories, either as natural language or code name
+        :param remove_ignored: If True, raids that should be ignored will not be included.
+        :return: List of RaidBoss objects describing all bosses of that category
+        """
+        lst = []
+        for category in categories:
+            lst += self.raids_by_category.get(parse_raid_category_str2code(category), [])
         if remove_ignored:
             lst = remove_raids_to_ignore(lst)
         return lst

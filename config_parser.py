@@ -131,41 +131,71 @@ class Config:
                       file=sys.stderr)
                 pool = "all pokemon"
 
+            # Note: Config now supports specifying several raid tiers or categories at once.
+            # If the Pokemon pool is determined by raid tier or category, pre-made RaidBoss objects
+            # will be used (those were created when initializing the metadata).
+            # If the Pokemon pool is all Pokemon (possibly except those used above), the list of
+            # Pokemon will be pulled first, and then a RaidBoss object is created for each combination
+            # of Pokemon and tier. (e.g. T1 Ferroseed, T3 Ferroseed, T1 Chansey, T3 Chansey, etc)
             raids = None
             pokemon = None
             tier = None
             if pool == "by raid tier" or pool == "by tier":
-                if 'Raid tier' not in cfg:
+                tiers = []
+                if 'Raid tier' not in cfg and 'Raid tiers' not in cfg:
                     print(f"Error (Config.parse_raid_ensemble_config): "
-                          f"'Raid tier' does not exist in raid ensemble config.\n"
+                          f"'Raid tier' or 'Raid tiers' do not exist in raid ensemble config.\n"
                           f"Using T3 as default.",
                           file=sys.stderr)
-                tier = cfg.get('Raid tier', "Tier 3")
-                raids = self.meta.get_raid_bosses_by_tier(tier, remove_ignored=True)
+                    tiers.append("Tier 3")
+                else:
+                    if 'Raid tier' in cfg:
+                        tiers.append(cfg['Raid tier'])
+                    if 'Raid tiers' in cfg:
+                        tiers += cfg['Raid tiers']
+                #tier = cfg.get('Raid tier', "Tier 3")
+                raids = self.meta.get_raid_bosses_by_tiers(tiers, remove_ignored=True)  # pre-built from metadata
+                return raids
             elif pool == "by raid category" or pool == "by category":
-                if 'Raid category' not in cfg:
+                categories = []
+                if 'Raid category' not in cfg and 'Raid categories' not in cfg:
                     print(f"Error (Config.parse_raid_ensemble_config): "
-                          f"'Raid category' does not exist in raid ensemble config.\n"
+                          f"'Raid category' or 'Raid categories' does not exist in raid ensemble config.\n"
                           f"Using T3 as default.",
                           file=sys.stderr)
-                category = cfg.get('Raid category', "Tier 3")
-                raids = self.meta.get_raid_bosses_by_category(category, remove_ignored=True)
+                    categories.append("Tier 3")
+                else:
+                    if 'Raid category' in cfg:
+                        categories.append(cfg['Raid category'])
+                    if 'Raid categories' in cfg:
+                        categories += cfg['Raid categories']
+                #category = cfg.get('Raid category', "Tier 3")
+                raids = self.meta.get_raid_bosses_by_categories(categories, remove_ignored=True)  # pre-built from metadata
+                return raids
             elif pool == "all pokemon" or pool == "all pokemon except above":
-                if 'Raid tier' not in cfg:
+                tiers = []
+                if 'Raid tier' not in cfg and 'Raid tiers' not in cfg:
                     print(f"Error (Config.parse_raid_ensemble_config): "
-                          f"'Raid tier' does not exist in raid ensemble config.\n"
-                          f"(Even if your Pokemon pool is all Pokemon, you still need to specify a raid tier for all of them.)\n"
+                          f"'Raid tier' or 'Raid tiers' does not exist in raid ensemble config.\n"
+                          f"(Even if your Pokemon pool is all Pokemon, you still need to specify (a) raid tier(s) for all of them.)\n"
                           f"Using T3 as default.",
                           file=sys.stderr)
-                tier = cfg.get('Raid tier', "Tier 3")
+                    tiers.append("Tier 3")
+                else:
+                    if 'Raid tier' in cfg:
+                        tiers.append(cfg['Raid tier'])
+                    if 'Raid tiers' in cfg:
+                        tiers += cfg['Raid tiers']
+                #tier = cfg.get('Raid tier', "Tier 3")
                 pokemon = self.meta.get_all_pokemon(remove_ignored=True)
                 if pool == "all pokemon except above":
                     pokemon = subtract_from_pokemon_list(pokemon, pokemon_used)
-            tier = parse_raid_tier_str2code(tier)
+                tiers = [parse_raid_tier_str2code(tier) for tier in tiers]
+                return pokemon_list_to_raid_boss_list(pokemon, tiers)
 
-            if raids is not None:
-                return raids
-            return pokemon_list_to_raid_boss_list(pokemon, tier)
+            # if raids is not None:
+            #     return raids
+            # return pokemon_list_to_raid_boss_list(pokemon, tier)
 
         def apply_filter(raids_list, filter_key, filter_val):
             """
