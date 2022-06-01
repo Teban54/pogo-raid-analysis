@@ -269,24 +269,6 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
     #     },
     # },
 
-    {
-        "Pokemon pool": "All Pokemon except above",
-        "Raid tiers": ["Tier 3", "Tier 5"],
-        # "Raid category": "Legacy Tier 5",
-        "Filters": {
-            "Weak to contender types": ["Dragon"],
-            "Evolution stage": "Final",  # "Final", "Pre-evolution"
-            "Must be non shadow": True,
-            "Must be non mega": True,
-            "Must be non legendary or mythical": True,  # Ignores Glastrier etc
-        },
-        "Weight of each Pokemon": 1,
-        "Weight of whole group": 10,
-        "Forms weight strategy": "combine",
-        "Battle settings": {
-            "Friendship": "No",
-        },
-    },
 ]
 
 CONFIG_ESTIMATOR_SCALING_SETTINGS = {
@@ -371,6 +353,15 @@ CONFIG_ESTIMATOR_SCALING_SETTINGS = {
     # (NF, no dodging), T3 raids (NF, dodging).
     # We want to use BF as the baseline battle settings for both T5s, and NF for both T3s.
     # In this case, the baseline settings for T3s can be specified in CONFIG_RAID_BOSS_ENSEMBLE.
+    #
+    # While this dict supports multiple sets of settings (multiple values for each parameter), a singular value
+    # is strongly suggested (i.e. only one baseline), so that only one baseline exists for estimator scaling.
+    # Currently, if the baseline BS for a single boss consists of multiple sets, they will be matched with the
+    # corresponding multiple battle settings for that boss (wrap around) - see CountersListsMultiBSLevel.
+    # For multiple baselines, consider using CONFIG_RAID_BOSS_ENSEMBLE.
+    #
+    # (Technical note: Unlike the other baseline items here, baseline battle settings are pushed directly
+    # to each RaidEnsemble object, just like each raid's battle settings.)
     #
     # ----- End of documentation for this section -----
 

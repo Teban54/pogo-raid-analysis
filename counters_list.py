@@ -30,7 +30,8 @@ class CountersListSingle:
     """
     def __init__(self, raid_boss=None, raid_boss_pokemon=None, raid_boss_codename=None, raid_tier="Tier 5",
                  metadata=None, attacker_level=40, trainer_id=None,
-                 attacker_criteria_multi=None, battle_settings=None, sort_option="Estimator"):
+                 attacker_criteria_multi=None, battle_settings=None, baseline_battle_settings=None,
+                 sort_option="Estimator"):
         """
         Initialize the attributes and get the JSON rankings.
         :param raid_boss: RaidBoss object
@@ -45,11 +46,13 @@ class CountersListSingle:
                 If None, use all attackers by level.
         :param attacker_criteria_multi: AttackerCriteriaMulti object describing attackers to be used
         :param battle_settings: BattleSettings object
+        :param baseline_battle_settings: BattleSettings object, describes baseline for estimator scaling
         :param sort_option: Sorting option, as shown on Pokebattler (natural language or code name)
         """
         self.boss = None
         self.attacker_criteria_multi = None
         self.battle_settings = None
+        self.baseline_battle_settings = None
         self.attacker_level = attacker_level
         self.trainer_id = trainer_id
         self.sort_option = parse_sort_option_str2code(sort_option)
@@ -70,6 +73,7 @@ class CountersListSingle:
         self.init_raid_boss(raid_boss, raid_boss_pokemon, raid_boss_codename, raid_tier)
         self.init_attacker_criteria(attacker_criteria_multi)
         self.init_battle_settings(battle_settings)
+        self.init_baseline_battle_settings(baseline_battle_settings)
         #self.load_JSON()
         #self.parse_JSON()
 
@@ -115,15 +119,32 @@ class CountersListSingle:
         This populates the following fields: bottle_settings.
         """
         if not battle_settings:
-            print(f"Warning (CountersListSingle.__init__): BattleSettings not found. Using default settings.",
+            print(f"Warning (CountersListSingle.init_battle_settings): BattleSettings not found. Using default settings.",
                   file=sys.stderr)
             battle_settings = BattleSettings()
         if battle_settings.is_multiple():
-            print(f"Warning (CountersListSingle.__init__): BattleSettings includes multiple settings "
+            print(f"Warning (CountersListSingle.init_battle_settings): BattleSettings includes multiple settings "
                   f"(this class requires a single setting). Using the first set.",
                   file=sys.stderr)
             battle_settings = battle_settings.indiv_settings[0]
         self.battle_settings = battle_settings
+
+    def init_baseline_battle_settings(self, baseline_battle_settings=None):
+        """
+        Loads the BattleSettings object for estimator scaling baseline, and handles exceptions.
+        This populates the following fields: baseline_bottle_settings.
+        """
+        if not baseline_battle_settings:
+            print(f"Warning (CountersListSingle.init_baseline_battle_settings): Baseline BattleSettings not found. "
+                  f"Using battle settings.",
+                  file=sys.stderr)
+            baseline_battle_settings = self.battle_settings
+        if baseline_battle_settings.is_multiple():
+            print(f"Warning (CountersListSingle.init_baseline_battle_settings): BattleSettings includes multiple settings "
+                  f"(this class requires a single setting). Using the first set.",
+                  file=sys.stderr)
+            baseline_battle_settings = baseline_battle_settings.indiv_settings[0]
+        self.baseline_battle_settings = baseline_battle_settings
 
     async def load_JSON(self):
         """
@@ -131,10 +152,10 @@ class CountersListSingle:
         """
         if self.trainer_id:
             print(f"Loading: {parse_raid_tier_code2str(self.boss.tier)} {self.boss.pokemon_codename}, "
-                  f"Trainer ID {self.trainer_id}, {self.battle_settings}")
+                  f"Trainer ID {self.trainer_id}, {self.battle_settings}, <baseline> {self.baseline_battle_settings}")
         else:
             print(f"Loading: {parse_raid_tier_code2str(self.boss.tier)} {self.boss.pokemon_codename}, "
-                  f"Level {self.attacker_level}, {self.battle_settings}")
+                  f"Level {self.attacker_level}, {self.battle_settings}, <baseline> {self.baseline_battle_settings}")
         self.JSON = await get_pokebattler_raid_counters(
             raid_boss=self.boss,
             attacker_level=self.attacker_level,
@@ -427,7 +448,8 @@ class CountersListSingle:
 
             new_list = CountersListSingle(
                 raid_boss=self.boss, attacker_criteria_multi=AttackerCriteriaMulti([ac], metadata=self.metadata),
-                attacker_level=self.attacker_level, battle_settings=self.battle_settings, sort_option=self.sort_option,
+                attacker_level=self.attacker_level, battle_settings=self.battle_settings,
+                baseline_battle_settings=self.baseline_battle_settings, sort_option=self.sort_option,
                 metadata=self.metadata
             )
             await new_list.load_JSON()
@@ -748,7 +770,8 @@ class CountersListsMultiBSLevel:
     against a particular raid boss.
     """
     def __init__(self, raid_boss=None, raid_boss_pokemon=None, raid_boss_codename=None, raid_tier="Tier 5",
-                 metadata=None, attacker_criteria_multi=None, battle_settings=None, sort_option="Estimator"):
+                 metadata=None, attacker_criteria_multi=None, battle_settings=None, baseline_battle_settings=None,
+                 sort_option="Estimator"):
         """
         Initialize the attributes, create individual CountersList objects, and get the JSON rankings.
         :param raid_boss: RaidBoss object
@@ -760,6 +783,18 @@ class CountersListsMultiBSLevel:
         :param metadata: Current Metadata object
         :param attacker_criteria_multi: AttackerCriteriaMulti object describing attackers to be used
         :param battle_settings: BattleSettings object, with one or multiple sets of battle settings.
+        :param baseline_battle_settings: BattleSettings object, with one or multiple sets of baseline battle settings.
+                If there are multiple sets of battle settings, they will be matched with the corresponding
+                multiple battle settings for that boss (wrap around).
+                For example, suppose battle_settings has "Extreme" and "Sunny" for weather, as well as "No Dodging"
+                and "Realistic Dodging". baseline_battle_settings has "Extreme" and "Sunny", but only "No Dodging".
+                Suppose their individual settings are: E/ND, S/ND, E/RD, S/RD for BS; E/ND, S/ND for BBS.
+                When broken down into CountersListSingle, the 4 objects will have:
+                - BS E/ND, BBS E/ND
+                - BS S/ND, BBS S/ND (These two can potentially be screwed up)
+                - BS E/RD, BBS E/ND (These two can potentially be screwed up)
+                - BS S/RD, BBS S/ND
+                [TODO: Clean this up. Current arrangement is mostly for when no baselines are specified.]
         :param sort_option: Sorting option, as shown on Pokebattler (natural language or code name)
         """
         self.boss = None
@@ -767,6 +802,7 @@ class CountersListsMultiBSLevel:
         self.attacker_criteria_multi_levels = None  # All criteria by levels
         self.attacker_criteria_multi_ids = None  # All criteria by ids
         self.battle_settings = None
+        self.baseline_battle_settings = None
         self.results = None
         self.sort_option = parse_sort_option_str2code(sort_option)
         self.has_multiple_battle_settings = False
@@ -788,6 +824,7 @@ class CountersListsMultiBSLevel:
         self.init_raid_boss(raid_boss, raid_boss_pokemon, raid_boss_codename, raid_tier)
         self.init_attacker_criteria(attacker_criteria_multi)
         self.init_battle_settings(battle_settings)
+        self.init_baseline_battle_settings(baseline_battle_settings)
         self.create_individual_lists()
 
     def init_raid_boss(self, raid_boss=None, raid_boss_pokemon=None, raid_boss_codename=None, raid_tier="Tier 5"):
@@ -835,7 +872,7 @@ class CountersListsMultiBSLevel:
         This populates the following fields: bottle_settings, has_multiple_battle_settings.
         """
         if not battle_settings:
-            print(f"Warning (CountersListsByLevel.__init__): BattleSettings not found. Using default settings.",
+            print(f"Warning (CountersListsMultiBSLevel.init_battle_settings): BattleSettings not found. Using default settings.",
                   file=sys.stderr)
             battle_settings = BattleSettings()
         # if battle_settings.is_multiple():
@@ -846,27 +883,49 @@ class CountersListsMultiBSLevel:
         self.battle_settings = battle_settings
         self.has_multiple_battle_settings = battle_settings.is_multiple()
 
+    def init_baseline_battle_settings(self, baseline_battle_settings=None):
+        """
+        Loads the BattleSettings object that describes the baseline for estimator scaling,
+        and handles exceptions.
+        This populates the following field: baseline_bottle_settings.
+        """
+        if not baseline_battle_settings:
+            print(f"Warning (CountersListsMultiBSLevel.init_baseline_battle_settings): BattleSettings not found. "
+                  f"Using battle settings.",
+                  file=sys.stderr)
+            baseline_battle_settings = self.battle_settings
+        # if baseline_battle_settings.is_multiple():
+        #     print(f"Warning (CountersListsMultiBSLevel.init_baseline_battle_settings): "
+        #           f"Baseline BattleSettings includes multiple settings (this class requires a single setting). "
+        #           f"Using the first set.",
+        #           file=sys.stderr)
+        #     baseline_battle_settings = baseline_battle_settings.indiv_settings[0]
+        self.baseline_battle_settings = baseline_battle_settings
+        # self.has_multiple_battle_settings = baseline_battle_settings.is_multiple()
+
     def create_individual_lists(self):
         """
         Create individual CounterList objects that store rankings for a particular
         battle setting and level.
         This populates the field lists_by_bs_by_level.
         """
-        for bs in self.battle_settings.get_indiv_settings():
+        baseline_bs_indivs = self.baseline_battle_settings.get_indiv_settings()
+        for i, bs in enumerate(self.battle_settings.get_indiv_settings()):
+            baseline_bs = baseline_bs_indivs[i % len(baseline_bs_indivs)]
             self.lists_by_bs_by_level[bs] = {}
             self.lists_by_bs_by_trainer_id[bs] = {}
             for level in self.attacker_criteria_multi.all_levels():
                 self.lists_by_bs_by_level[bs][level] = CountersListSingle(
                     raid_boss=self.boss, metadata=self.metadata, attacker_level=level,
                     attacker_criteria_multi=self.attacker_criteria_multi_levels,  # self.attacker_criteria_multi,
-                    battle_settings=bs,
+                    battle_settings=bs, baseline_battle_settings=baseline_bs,
                     sort_option=self.sort_option
                 )
             for id in self.attacker_criteria_multi.pokebattler_trainer_ids():
                 self.lists_by_bs_by_trainer_id[bs][id] = CountersListSingle(
                     raid_boss=self.boss, metadata=self.metadata, trainer_id=id,
                     attacker_criteria_multi=self.attacker_criteria_multi_ids,  # self.attacker_criteria_multi,
-                    battle_settings=bs,
+                    battle_settings=bs, baseline_battle_settings=baseline_bs,
                     sort_option=self.sort_option
                 )
 
@@ -1122,11 +1181,12 @@ class CountersListsRE:
                  sort_option="Estimator", scaling_settings=None, processing_settings=None):
         """
         Initialize the attributes, create individual CountersListsByLevel objects, and get the JSON rankings.
-        :param ensemble: RaidBoss object
+        :param ensemble: RaidEnsemble object
         :param metadata: Current Metadata object
         :param attacker_criteria_multi: AttackerCriteriaMulti object describing attackers to be used
         :param sort_option: Sorting option, as shown on Pokebattler (natural language or code name)
         :param scaling_settings: Dict describing settings for estimator scaling (from config.py)
+                (Note that baseline battle settings are not here, but pushed directly to the raid ensemble)
         :param processing_settings: Dict describing settings for data processing and CSV writing (from config.py)
         """
         self.ensemble = ensemble
@@ -1174,9 +1234,11 @@ class CountersListsRE:
         """
         for i, (boss, weight) in enumerate(self.ensemble.bosses):
             bs = self.ensemble.battle_settings[i]
+            baseline_bs = self.ensemble.baseline_battle_settings[i]
             self.lists_for_bosses.append(CountersListsMultiBSLevel(
                 raid_boss=boss, metadata=self.metadata,
-                attacker_criteria_multi=self.attacker_criteria_multi, battle_settings=bs,
+                attacker_criteria_multi=self.attacker_criteria_multi,
+                battle_settings=bs, baseline_battle_settings=baseline_bs,
                 sort_option=self.sort_option
             ))
 

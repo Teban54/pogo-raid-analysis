@@ -33,7 +33,7 @@ class RaidEnsemble:
     def __init__(self, raid_bosses=None, pokemons=None, tier=None,
                  weight_multiplier=1,
                  forms_weight_strategy="combine", separate_shadows=True, separate_megas=True,
-                 remove_dupes=True, battle_settings=None):
+                 remove_dupes=True, battle_settings=None, baseline_battle_settings=None):
         """
         Initialize the raid ensemble.
 
@@ -86,9 +86,21 @@ class RaidEnsemble:
             This will be applied to all bosses in the ensemble. For different settings for each boss,
             use extend() instead.
             This BattleSettings can include multiple sets of settings.
+        :param baseline_battle_settings: Optional BattleSettings object describing battle settings for
+            the estimator scaling baseline.
+            e.g. If this raid is T5 Dialga with dodging and the baseline battle settings is "no dodging",
+            when estimators are scaled, they will be based on T5 Dialga without dodging
+            (if such simulations exist).
+            This will be applied to all bosses in the ensemble. For different settings for each boss,
+            use extend() instead.
+            While this BattleSettings can include multiple sets of settings, this functionality should be
+            used with extreme caution. Currently, if the baseline BS for a single boss consists of multiple
+            sets, they will be matched with the corresponding multiple battle settings for that boss (wrap around)
+             - see CountersListsMultiBSLevel.
         """
         self.bosses = []  # List of tuples: [(RaidBoss object with Pokemon and tier, Weight)]
         self.battle_settings = None
+        self.baseline_battle_settings = None
 
         if ((raid_bosses is None or type(raid_bosses) not in [list, dict])
                 and (pokemons is None or type(pokemons) not in [list, dict] or not tier)):
@@ -102,6 +114,7 @@ class RaidEnsemble:
             raid_dict, weight_multiplier=weight_multiplier, forms_weight_strategy=forms_weight_strategy)
 
         self.battle_settings = [battle_settings,] * len(self.bosses)
+        self.baseline_battle_settings = [baseline_battle_settings,] * len(self.bosses)
 
     def build_raid_dict(self, raid_bosses=None, pokemons=None, tier=None,
                         separate_shadows=True, separate_megas=True, remove_dupes=True):
@@ -225,6 +238,7 @@ class RaidEnsemble:
         """
         self.bosses.extend(ensemble2.bosses)
         self.battle_settings.extend(ensemble2.battle_settings)
+        self.baseline_battle_settings.extend(ensemble2.baseline_battle_settings)
 
     def apply_multiplier(self, multiplier):
         """
@@ -313,4 +327,5 @@ def filter_ensemble_by_criteria(ensemble, criterion_raid=None, criterion_pokemon
     new_ens = RaidEnsemble([])
     new_ens.bosses = [ensemble.bosses[i] for i in new_list]
     new_ens.battle_settings = [ensemble.battle_settings[i] for i in new_list]
+    new_ens.baseline_battle_settings = [ensemble.baseline_battle_settings[i] for i in new_list]
     return new_ens

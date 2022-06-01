@@ -54,14 +54,16 @@ class Config:
 
         if config_attacker_criteria:
             self.attacker_criteria_multi = self.parse_attacker_criteria_config(config_attacker_criteria)
+        # Parse battle and scaling settings first, so that it can be used as default for raid ensemble
         self.battle_settings = self.parse_battle_settings_config(
             config_battle_settings if config_battle_settings
             else {}  # No battle settings specified, use default values
-        )  # Parse battle settings first, so that it can be used as default for raid ensemble
-        if config_raid_ensemble:
-            self.raid_ensemble = self.parse_raid_ensemble_config(config_raid_ensemble)
+        )
         self.scaling_settings = self.format_scaling_settings_config(config_scaling_settings)
         self.processing_settings = self.format_processing_settings_config(config_processing_settings)
+
+        if config_raid_ensemble:
+            self.raid_ensemble = self.parse_raid_ensemble_config(config_raid_ensemble)
 
     def parse_attacker_criteria_config(self, config):
         """
@@ -291,9 +293,19 @@ class Config:
                 settings = settings.copy()
                 settings.override_with_dict(cfg["Battle settings"])
 
+            # Parse group-specific baseline battle settings (for estimator scaling)
+            baseline_bs = (
+                self.scaling_settings["Baseline battle settings"]
+                if self.scaling_settings and "Baseline battle settings" in self.scaling_settings
+                else settings  # Default: Battle settings for this RaidBoss
+            )
+            if "Baseline battle settings" in cfg:
+                baseline_bs = baseline_bs.copy()
+                baseline_bs.override_with_dict(cfg["Baseline battle settings"])
+
             ens = RaidEnsemble(raid_bosses=raids,
                                weight_multiplier=weight, forms_weight_strategy=forms_weight_strategy,
-                               battle_settings=settings)
+                               battle_settings=settings, baseline_battle_settings=baseline_bs)
 
             if weight_group >= 0:
                 cur_weight = ens.get_weight_sum()
@@ -332,7 +344,8 @@ class Config:
         Format the dict of scaling options from config.py.
         :param config: Dict describing scaling settings config
                 (Typically from config.py)
-        :return: Dict with properly formatted values (default values added in)
+        :return: Dict with properly formatted values (default values added in).
+                Note that baseline battle settings (if specified) is parsed into a BattleSettings object.
         """
         cfg = config.copy()
         if "Enabled" not in cfg:
@@ -350,7 +363,10 @@ class Config:
         if "Baseline attacker level" not in cfg or cfg["Baseline attacker level"] == -1:
             cfg["Baseline attacker level"] = "by level"
         if type(cfg["Baseline attacker level"]) is str:
-            cfg["Baseline boss moveset"] = cfg["Baseline boss moveset"].lower()
+            cfg["Baseline attacker level"] = cfg["Baseline attacker level"].lower()
+
+        if "Baseline battle settings" in cfg:
+            cfg["Baseline battle settings"] = self.parse_battle_settings_config(cfg["Baseline battle settings"])
         return cfg
 
     def format_processing_settings_config(self, config):
