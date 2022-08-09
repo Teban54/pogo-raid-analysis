@@ -44,6 +44,10 @@ async def do_http_request(url, payload={}):
                                 txt = await(r.text())
                                 return json.loads(txt)
                             else:
+                                print(i)
+                                # txt = await(r.text())
+                                # print(txt)
+                                await asyncio.sleep(2)
                                 i += 1
                                 if i == CONNECTION_RETRIES:
                                     print("Error with HTTP request: " + str(r), file=sys.stderr)

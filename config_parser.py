@@ -390,4 +390,6 @@ class Config:
             cfg["Include specific boss movesets"] = False
         if "Include attacker IVs" not in cfg:
             cfg["Include attacker IVs"] = False
+        if "Attackers that should not be combined" not in cfg:
+            cfg["Attackers that should not be combined"] = []
         return cfg

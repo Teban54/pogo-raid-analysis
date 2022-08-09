@@ -771,7 +771,7 @@ class CountersListsMultiBSLevel:
     """
     def __init__(self, raid_boss=None, raid_boss_pokemon=None, raid_boss_codename=None, raid_tier="Tier 5",
                  metadata=None, attacker_criteria_multi=None, battle_settings=None, baseline_battle_settings=None,
-                 sort_option="Estimator"):
+                 sort_option="Estimator", parent=None):
         """
         Initialize the attributes, create individual CountersList objects, and get the JSON rankings.
         :param raid_boss: RaidBoss object
@@ -796,6 +796,7 @@ class CountersListsMultiBSLevel:
                 - BS S/RD, BBS S/ND
                 [TODO: Clean this up. Current arrangement is mostly for when no baselines are specified.]
         :param sort_option: Sorting option, as shown on Pokebattler (natural language or code name)
+        :param parent: Parent CountersListsRE object
         """
         self.boss = None
         self.attacker_criteria_multi = None
@@ -808,6 +809,7 @@ class CountersListsMultiBSLevel:
         self.has_multiple_battle_settings = False
         self.JSON = None
         self.metadata = metadata
+        self.parent = parent
 
         self.lists_by_bs_by_level = {}
         # {<BattleSettings 1>: {20: <CountersListSingle>, 21: <CountersListSingle>, ...},
@@ -929,6 +931,26 @@ class CountersListsMultiBSLevel:
                     sort_option=self.sort_option
                 )
 
+    def lookup_individual_list(self, battle_settings, level, id):
+        """
+        Lookup an individual CountersListSingle object by the battle settings (single set),
+        and either attacker level or Trainer ID.
+        :param battle_settings: BattleSettings object (a single set of settings)
+        :param level: Attacker level (number), if applicable
+        :param id: Pokebattler Trainer ID, if applicable
+        :return: List of all CountersListSingle objects that satisfy the given criteria (can be empty)
+        """
+        ret = []
+        if (level is not None
+                and battle_settings in self.lists_by_bs_by_level.keys()
+                and level in self.lists_by_bs_by_level[battle_settings]):
+            ret.append(self.lists_by_bs_by_level[battle_settings][level])
+        if (id is not None
+                and battle_settings in self.lists_by_bs_by_trainer_id.keys()
+                and id in self.lists_by_bs_by_trainer_id[battle_settings]):
+            ret.append(self.lists_by_bs_by_trainer_id[battle_settings][id])
+        return ret
+
     async def load_and_parse_JSON(self):
         """
         Pull the Pokebattler JSON for all CountersListSingle objects and parse them.
@@ -1037,6 +1059,9 @@ class CountersListsMultiBSLevel:
         If not specified, a baseline will be computed for each individual list with specific
         BattleSettings and level.
 
+        Note this function also uses the baseline_battle_settings field of each CountersListSingle
+        object, which specifies a baseline battle setting for each individual list.
+
         This is a query function that does not change the value of self.rankings.
         This function does not consider whether self.rankings has been filtered based on
         AttackerCriteriaMulti.
@@ -1057,16 +1082,35 @@ class CountersListsMultiBSLevel:
             (Same format as (self.lists_by_bs_by_level, self.lists_by_bs_by_trainer_id))
         """
         # TODO: Add an option to get baseline by trainer ID?
-        ret, ret_id = {}, {}
-        for bs, lvl_to_list in self.lists_by_bs_by_level.items():
-            ret[bs] = {}
-            ret_id[bs] = {}
-            # Find baseline level
+
+        # Step 1: For each individual CountersListSingle with its BS and level/ID (called "source lists"),
+        # find the (BS, level/ID) info for another list where the baseline should be obtained from ("target lists")
+        # Also collect all CountersListSingle that correspond to target lists (they might not be under this object)
+        # Step 2: For each list that has been involved as a target list at least once, calculate its
+        # estimator baseline (using baseline_boss_moveset)
+        # Step 3: For each source list, read the calculated baseline of its target list, and return them
+
+        # Step 1: Build source->target edges
+        target_bs_lvl_id = {}  # {(source info): (target info), ...}
+                               # Where each info tuple is in the form (BS, 'level'/'id', level/id value)
+        target_objects = {}  # {(target info): <target CountersListSingle>, ...}
+        source_tuples = [(bs, 'level', lvl, lst)
+                         for bs, lvl_to_list in self.lists_by_bs_by_level.items()
+                         for lvl, lst in lvl_to_list.items()
+                         ] + [(bs, 'id', id, lst)
+                         for bs, id_to_list in self.lists_by_bs_by_trainer_id.items()
+                         for id, lst in id_to_list.items()]
+        for bs, lvlid_type, lvlid_val, lst in source_tuples:
+            base_bs = lst.baseline_battle_settings
+            # Parse baseline level
             base_lvl = -1  # -1 for "by level"
             if baseline_attacker_level:
                 if type(baseline_attacker_level) in [int, float] and baseline_attacker_level > 0:
                     base_lvl = baseline_attacker_level
                 elif type(baseline_attacker_level) is str:
+                    # If the raid uses Trainers' Pokebox, "min", "max" and "average" are chosen using the by-level
+                    # simulations of this raid boss with **current** battle settings (not baseline battle settings).
+                    lvl_to_list = self.lists_by_bs_by_level[bs]  # CURRENT BS
                     baseline_attacker_level = baseline_attacker_level.lower()
                     if baseline_attacker_level == "min":
                         base_lvl = min(lvl_to_list.keys())
@@ -1074,26 +1118,157 @@ class CountersListsMultiBSLevel:
                         base_lvl = max(lvl_to_list.keys())
                     elif baseline_attacker_level == "average":
                         base_lvl = sum(lvl_to_list.keys()) / len(lvl_to_list.keys())
-            if base_lvl > 0:
-                if base_lvl not in lvl_to_list:
-                    print(f"Error (CountersListsMultiBSLevel.get_estimator_baselines): "
-                          f"Baseline level {base_lvl} (parsed or computed) is invalid for battle settings {bs}.\n"
-                          f"Falling back on default option: scale each level independently.",
-                          file=sys.stderr)
-                else:
-                    baseline = lvl_to_list[base_lvl].get_estimator_baseline(
-                        baseline_boss_moveset=baseline_boss_moveset)
-                    ret[bs] = {lvl: baseline for lvl in lvl_to_list.keys()}
-                    ret_id[bs] = {id: baseline for id in self.lists_by_bs_by_trainer_id[bs].keys()}
-                    continue  # Next BS
-            # Baseline level not specified or failed, scale each level independently
-            ret[bs] = {
-                lvl: lst.get_estimator_baseline(baseline_boss_moveset=baseline_boss_moveset)
-                for lvl, lst in lvl_to_list.items()}
-            ret_id[bs] = {
-                id: lst.get_estimator_baseline(baseline_boss_moveset=baseline_boss_moveset)
-                for id, lst in self.lists_by_bs_by_trainer_id[bs].items()}
+
+            # Verify validity of baseline BS and level for this specific list
+            matches = self.parent.lookup_individual_list(
+                self.boss, base_bs,
+                (base_lvl if base_lvl > 0 else lvlid_val if lvlid_type == 'level' else None),
+                (lvlid_val if base_lvl <= 0 and lvlid_type == 'id' else None)
+            )
+            if not matches:
+                print(f"[{self.boss.pokemon_codename}] Error (CountersListsMultiBSLevel.get_estimator_baselines): "
+                      f"Baseline battle settings {base_bs} and baseline attacker level {base_lvl} is not simulated.\n"
+                      f"Falling back on default option: use current battle settings, {bs}, and scale each level independently.",
+                      file=sys.stderr)
+                # TODO: Better error handling
+                base_bs = bs
+                base_lvl = -1
+
+
+            # if base_bs not in self.lists_by_bs_by_level.keys():
+            #     print(f"[{self.boss.pokemon_codename}] Error (CountersListsMultiBSLevel.get_estimator_baselines): "
+            #           f"Baseline battle settings {base_bs} (parsed or computed) is not simulated.\n"
+            #           f"Falling back on default option: use current battle settings,{bs}.",
+            #           file=sys.stderr)
+            #     base_bs = bs
+            # if base_lvl > 0:
+            #     lvl_to_list = self.lists_by_bs_by_level[base_bs]  # BASELINE BS
+            #     if base_lvl not in lvl_to_list:
+            #         print(f"Error (CountersListsMultiBSLevel.get_estimator_baselines): "
+            #               f"Baseline level {base_lvl} (parsed or computed) is invalid for battle settings {bs}.",
+            #               file=sys.stderr)
+            #         if base_bs != bs and base_lvl in self.lists_by_bs_by_level[bs]:
+            #             print(f"Falling back on default option: use current battle settings.",
+            #                   file=sys.stderr)
+            #             base_bs = bs
+            #         elif ((lvlid_type == 'level' and lvlid_val in self.lists_by_bs_by_level[base_bs])
+            #               or (lvlid_type == 'id' and lvlid_val in self.lists_by_bs_by_trainer_id[base_bs])):
+            #             print(f"Falling back on default option: scale each level independently.",
+            #                   file=sys.stderr)
+            #             base_lvl = -1
+            #         else:
+            #             print(f"Falling back on default option: use current battle settings, "
+            #                   f"and scale each level independently.",
+            #                   file=sys.stderr)
+            #             base_bs = bs
+            #             base_lvl = -1
+            target_lvlidtype = 'level' if base_lvl > 0 else lvlid_type
+            target_lvlidval = base_lvl if base_lvl > 0 else lvlid_val
+            target_bs_lvl_id[(bs, lvlid_type, lvlid_val)] = (base_bs, target_lvlidtype, target_lvlidval)
+            target_objects[(base_bs, target_lvlidtype, target_lvlidval)] = matches[0]
+
+        # Step 2: Calculate baselines for target lists
+        target_estimators = {}  # {(target info): baseline value, ...}
+                                # Where each info tuple is in the form (BS, 'level'/'id', level/id value)
+        #for bs, lvlid_type, lvlid_val in target_bs_lvl_id.values():
+        for (bs, lvlid_type, lvlid_val), lst in target_objects.items():
+            # if (bs, lvlid_type, lvlid_val) in target_estimators:
+            #     continue
+            # lst = (self.lists_by_bs_by_level[bs][lvlid_val]
+            #        if lvlid_type == 'level'
+            #        else self.lists_by_bs_by_trainer_id[bs][lvlid_val])
+            baseline_val = lst.get_estimator_baseline(baseline_boss_moveset=baseline_boss_moveset)
+            target_estimators[(bs, lvlid_type, lvlid_val)] = baseline_val
+
+        # Step 3: Get baselines for source lists
+        ret, ret_id = {}, {}
+        for bs, lvlid_type, lvlid_val in target_bs_lvl_id.keys():
+            if lvlid_type == 'level':
+                if bs not in ret:
+                    ret[bs] = {}
+                ret[bs][lvlid_val] = target_estimators[target_bs_lvl_id[(bs, lvlid_type, lvlid_val)]]
+            else:
+                if bs not in ret_id:
+                    ret_id[bs] = {}
+                ret_id[bs][lvlid_val] = target_estimators[target_bs_lvl_id[(bs, lvlid_type, lvlid_val)]]
         return ret, ret_id
+
+
+        # for bs, lvl_to_list in self.lists_by_bs_by_level.items():
+        #     ret[bs] = {}
+        #     ret_id[bs] = {}
+        #     # Find baseline level
+        #     base_lvl = -1  # -1 for "by level"
+        #     if baseline_attacker_level:
+        #         if type(baseline_attacker_level) in [int, float] and baseline_attacker_level > 0:
+        #             base_lvl = baseline_attacker_level
+        #         elif type(baseline_attacker_level) is str:
+        #             baseline_attacker_level = baseline_attacker_level.lower()
+        #             if baseline_attacker_level == "min":
+        #                 base_lvl = min(lvl_to_list.keys())
+        #             elif baseline_attacker_level == "max":
+        #                 base_lvl = max(lvl_to_list.keys())
+        #             elif baseline_attacker_level == "average":
+        #                 base_lvl = sum(lvl_to_list.keys()) / len(lvl_to_list.keys())
+        #     if base_lvl > 0:
+        #         if base_lvl not in lvl_to_list:
+        #             print(f"Error (CountersListsMultiBSLevel.get_estimator_baselines): "
+        #                   f"Baseline level {base_lvl} (parsed or computed) is invalid for battle settings {bs}.\n"
+        #                   f"Falling back on default option: scale each level independently.",
+        #                   file=sys.stderr)
+        #         else:
+        #             baseline = lvl_to_list[base_lvl].get_estimator_baseline(
+        #                 baseline_boss_moveset=baseline_boss_moveset)
+        #             ret[bs] = {lvl: baseline for lvl in lvl_to_list.keys()}
+        #             ret_id[bs] = {id: baseline for id in self.lists_by_bs_by_trainer_id[bs].keys()}
+        #             continue  # Next BS
+        #     # Baseline level not specified or failed, scale each level independently
+        #     ret[bs] = {
+        #         lvl: lst.get_estimator_baseline(baseline_boss_moveset=baseline_boss_moveset)
+        #         for lvl, lst in lvl_to_list.items()}
+        #     ret_id[bs] = {
+        #         id: lst.get_estimator_baseline(baseline_boss_moveset=baseline_boss_moveset)
+        #         for id, lst in self.lists_by_bs_by_trainer_id[bs].items()}
+        #
+        #
+        #
+        # ret, ret_id = {}, {}
+        # for bs, lvl_to_list in self.lists_by_bs_by_level.items():
+        #     ret[bs] = {}
+        #     ret_id[bs] = {}
+        #     # Find baseline level
+        #     base_lvl = -1  # -1 for "by level"
+        #     if baseline_attacker_level:
+        #         if type(baseline_attacker_level) in [int, float] and baseline_attacker_level > 0:
+        #             base_lvl = baseline_attacker_level
+        #         elif type(baseline_attacker_level) is str:
+        #             baseline_attacker_level = baseline_attacker_level.lower()
+        #             if baseline_attacker_level == "min":
+        #                 base_lvl = min(lvl_to_list.keys())
+        #             elif baseline_attacker_level == "max":
+        #                 base_lvl = max(lvl_to_list.keys())
+        #             elif baseline_attacker_level == "average":
+        #                 base_lvl = sum(lvl_to_list.keys()) / len(lvl_to_list.keys())
+        #     if base_lvl > 0:
+        #         if base_lvl not in lvl_to_list:
+        #             print(f"Error (CountersListsMultiBSLevel.get_estimator_baselines): "
+        #                   f"Baseline level {base_lvl} (parsed or computed) is invalid for battle settings {bs}.\n"
+        #                   f"Falling back on default option: scale each level independently.",
+        #                   file=sys.stderr)
+        #         else:
+        #             baseline = lvl_to_list[base_lvl].get_estimator_baseline(
+        #                 baseline_boss_moveset=baseline_boss_moveset)
+        #             ret[bs] = {lvl: baseline for lvl in lvl_to_list.keys()}
+        #             ret_id[bs] = {id: baseline for id in self.lists_by_bs_by_trainer_id[bs].keys()}
+        #             continue  # Next BS
+        #     # Baseline level not specified or failed, scale each level independently
+        #     ret[bs] = {
+        #         lvl: lst.get_estimator_baseline(baseline_boss_moveset=baseline_boss_moveset)
+        #         for lvl, lst in lvl_to_list.items()}
+        #     ret_id[bs] = {
+        #         id: lst.get_estimator_baseline(baseline_boss_moveset=baseline_boss_moveset)
+        #         for id, lst in self.lists_by_bs_by_trainer_id[bs].items()}
+        # return ret, ret_id
 
     def scale_estimators(self, baselines_dict=None, baselines_id_dict=None,
                          baseline_boss_moveset="random", baseline_attacker_level="by level"):
@@ -1130,7 +1305,8 @@ class CountersListsMultiBSLevel:
             Should be a number (either numeric or string), "min", "max", "average" or "by level".
             Only used if baselines_dict is None.
         """
-        if not baselines_dict or not baselines_id_dict:
+        #if not baselines_dict or not baselines_id_dict:
+        if not baselines_dict and not baselines_id_dict:
             baselines_dict, baselines_id_dict = self.get_estimator_baselines(
                 baseline_boss_moveset=baseline_boss_moveset, baseline_attacker_level=baseline_attacker_level)
         for bs, lvl_to_lst in self.lists_by_bs_by_level.items():
@@ -1239,8 +1415,24 @@ class CountersListsRE:
                 raid_boss=boss, metadata=self.metadata,
                 attacker_criteria_multi=self.attacker_criteria_multi,
                 battle_settings=bs, baseline_battle_settings=baseline_bs,
-                sort_option=self.sort_option
+                sort_option=self.sort_option, parent=self
             ))
+
+    def lookup_individual_list(self, boss, battle_settings, level, id):
+        """
+        Lookup an individual CountersListSingle object by the raid boss (Pokemon codename
+        and raid tier), battle settings (single set), and either attacker level or Trainer ID.
+        :param boss: RaidBoss object
+        :param battle_settings: BattleSettings object (a single set of settings)
+        :param level: Attacker level (number), if applicable
+        :param id: Pokebattler Trainer ID, if applicable
+        :return: List of all CountersListSingle objects that satisfy the given criteria (can be empty)
+        """
+        ret = []
+        for lst in self.lists_for_bosses:  # CountersListsMultiBSLevel
+            if lst.boss.pokemon_codename == boss.pokemon_codename and lst.boss.tier == boss.tier:
+                ret += lst.lookup_individual_list(battle_settings, level, id)
+        return ret
 
     def get_boss_weights_bs_counters_list(self):
         """
@@ -1390,6 +1582,7 @@ class CountersListsRE:
         if not baselines_list:
             baselines_list = self.get_estimator_baselines(baseline_boss_moveset=baseline_boss_moveset,
                                                           baseline_attacker_level=baseline_attacker_level)
+        #print(baselines_list)
         for i, lst in enumerate(self.lists_for_bosses):
             baselines, baselines_id = baselines_list[i]
             lst.scale_estimators(baselines_dict=baselines, baselines_id_dict=baselines_id)
@@ -1525,6 +1718,15 @@ class CountersListsRE:
             atker_names_lvls_ivs = set((atker_key[0], atker_key[3], atker_key[4])
                                        for atker_key in attackers_boss_dict.keys())
             for atker, atker_lvl, atker_iv in atker_names_lvls_ivs:
+                if atker in self.processing_settings["Attackers that should not be combined"]:
+                    # Do not combine different moves, keep separate
+                    for atker_mvst_key, atker_mvst_vals in attackers_boss_dict.items():
+                        if not (atker_mvst_key[0] == atker and atker_mvst_key[3] == atker_lvl
+                                and atker_mvst_key[4] == atker_iv):
+                            continue
+                        new_atk_boss_dict[atker_mvst_key] = atker_mvst_vals
+                    continue
+
                 atker_curr_vals = {}  # Map boss keys to timings
                 atker_curr_mvsts = {}  # Map boss keys to attacker movesets (fast, charged)
                 for atker_mvst_key, atker_mvst_vals in attackers_boss_dict.items():

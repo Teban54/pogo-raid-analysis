@@ -10,8 +10,8 @@ JSON_DATA_PATH = "data/json/"
 COUNTERS_DATA_PATH = "data/counters/"
 OUTPUTS_DATA_PATH = "data/outputs/"
 
-CONNECTION_RETRIES = 30  # In case aiohttp.get() fails
-CONCURRENCY = 500
+CONNECTION_RETRIES = 20000  # In case aiohttp.get() fails
+CONCURRENCY = 1000
 
 
 # ----------------- Ensembles -----------------
@@ -47,7 +47,7 @@ FORMS_AS_SEPARATE_POKEMON_PER_POKEMON = {
 
 
 IGNORED_RAID_BOSSES = {  # Keys are raid tiers, no "legacy"
-    "RAID_LEVEL_5": ['MELOETTA_ARIA_FORM', 'MELOETTA_PIROUETTE_FORM',  # Already got from special research
+    "RAID_LEVEL_5": [#'MELOETTA_ARIA_FORM', 'MELOETTA_PIROUETTE_FORM',  # Already got from special research
                      'BIDOOF'],
 }
 
@@ -57,6 +57,11 @@ IGNORED_FORMS = {  # Forms and Pokemon that should not exist
     'DOUBLADE': [''],
     'AEGISLASH': [''],
     'ZYGARDE': [''],  # Zygarde has no stats yet in either GM or Pokebattler
+    'RAIKOU': ['S'],
+    'ENTEI': ['S'],
+    'SUICUNE': ['S'],
+    'LUGIA': ['S'],
+    'HO_OH': ['S'],
 }
 # [Reminder] When using any Pokemon above, make sure these forms are ignored
 
