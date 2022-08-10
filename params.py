@@ -11,7 +11,7 @@ COUNTERS_DATA_PATH = "data/counters/"
 OUTPUTS_DATA_PATH = "data/outputs/"
 
 CONNECTION_RETRIES = 20000  # In case aiohttp.get() fails
-CONCURRENCY = 1000
+CONCURRENCY = 1 #1000
 
 
 # ----------------- Ensembles -----------------
