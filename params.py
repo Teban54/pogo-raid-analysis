@@ -10,8 +10,8 @@ JSON_DATA_PATH = "data/json/"
 COUNTERS_DATA_PATH = "data/counters/"
 OUTPUTS_DATA_PATH = "data/outputs/"
 
-CONNECTION_RETRIES = 20000  # In case aiohttp.get() fails
-CONCURRENCY = 1 #1000
+CONNECTION_RETRIES = 5 #20000  # In case aiohttp.get() fails
+CONCURRENCY = 20 #1000  # Now only for filling blanks
 
 
 # ----------------- Ensembles -----------------

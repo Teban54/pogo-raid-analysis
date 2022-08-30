@@ -10,10 +10,10 @@ from params import *
 
 #CONFIG_WRITE_ALL_COUNTERS = True
 
-SINGLE_TYPE_ATTACKER = ["Bug"]
+SINGLE_TYPE_ATTACKER = ["Poison"]
 MULTI_TYPE_ATTACKERS_COMPARE = ["Bug", "Ghost", "Dark"]
 EXTRA_TYPE_ATTACKER = ["Psychic"]  # Attacker types that use non-STAB moves (e.g. Ice Beam Mewtwo), doesn't apply to moves
-MODE = "MULTI"  # SINGLE, SINGLE+, MULTI, MULTI+
+MODE = "SINGLE"  # SINGLE, SINGLE+, MULTI, MULTI+
 
 def get_move_types():
     return SINGLE_TYPE_ATTACKER if "SINGLE" in MODE else MULTI_TYPE_ATTACKERS_COMPARE
@@ -160,60 +160,60 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
     #
     # ----- End of documentation for this section -----
 
-    # {
-    #     "Pokemon pool": "By raid tier",  # "All Pokemon", "All Pokemon except above", "By raid tier" or "By raid category"
-    #     #"Raid tier": "Tier 5",  # Here, "Tier 5" has all past/present/future bosses
-    #     "Raid tiers": ["Tier 5", "Ultra Beast Tier"],
-    #     # "Raid category": "Legacy Tier 5",  # Here, "Tier 5" has only current bosses
-    #     "Filters": {  # Only those without # at the start are applied
-    #         #"Weak to contender types": SINGLE_TYPE_ATTACKER,
-    #         #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
-    #         get_ensemble_weak_key(): get_move_types(),
-    #         #"Evolution stage": "Final",  # "Final", "Pre-evolution"
-    #         #"Must be shadow": False,  # This describes BOSSES, not attackers
-    #         #"Must be non shadow": True,
-    #         #"Must be mega": False,
-    #         #"Must be non mega": True,
-    #         #"Must be legendary": False,
-    #         #"Must be non legendary": False,
-    #         #"Must be mythical": False,
-    #         #"Must be non mythical": False,
-    #         #"Must be legendary or mythical": False,
-    #         #"Must be non legendary or mythical": False,
-    #         # TODO: Add a filter for ignoring certain Pokemon or raids, identified by user
-    #     },
-    #     "Weight of each Pokemon": 1,
-    #     "Weight of whole group": 50,
-    #     "Forms weight strategy": "combine",  # "combine" or "separate"
-    #     # "Battle settings": {  # Write group-specific battle settings, in the same format as CONFIG_BATTLE_SETTINGS
-    #     #     # If absent, CONFIG_BATTLE_SETTINGS will be used
-    #     #     "Friendship": "Best",
-    #     #     "Weather": "Extreme",
-    #     #     "Attack strategy": "No Dodging",
-    #     #     "Dodge strategy": "Realistic Dodging"
-    #     # },
-    #     # "Baseline battle settings": {
-    #     #     "Weather": "Extreme",
-    #     #     "Friendship": "Best",
-    #     #     "Attack strategy": "No Dodging",
-    #     #     "Dodge strategy": "Realistic Dodging",
-    #     # }
-    # },
-    # {
-    #     "Pokemon pool": "By raid tier",
-    #     "Raid tiers": ["Tier 5", "Ultra Beast Tier"],
-    #     "Filters": {
-    #         #"Weak to contender types": SINGLE_TYPE_ATTACKER,
-    #         #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
-    #         get_ensemble_weak_key(): get_move_types(),
-    #     },
-    #     "Weight of each Pokemon": 1,
-    #     "Weight of whole group": 0,
-    #     "Forms weight strategy": "combine",
-    #     "Battle settings": {
-    #         "Attack strategy": "Dodge Specials PRO",
-    #     },
-    # },
+    {
+        "Pokemon pool": "By raid tier",  # "All Pokemon", "All Pokemon except above", "By raid tier" or "By raid category"
+        #"Raid tier": "Tier 5",  # Here, "Tier 5" has all past/present/future bosses
+        "Raid tiers": ["Tier 5", "Ultra Beast Tier"],
+        # "Raid category": "Legacy Tier 5",  # Here, "Tier 5" has only current bosses
+        "Filters": {  # Only those without # at the start are applied
+            #"Weak to contender types": SINGLE_TYPE_ATTACKER,
+            #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
+            get_ensemble_weak_key(): get_move_types(),
+            #"Evolution stage": "Final",  # "Final", "Pre-evolution"
+            #"Must be shadow": False,  # This describes BOSSES, not attackers
+            #"Must be non shadow": True,
+            #"Must be mega": False,
+            #"Must be non mega": True,
+            #"Must be legendary": False,
+            #"Must be non legendary": False,
+            #"Must be mythical": False,
+            #"Must be non mythical": False,
+            #"Must be legendary or mythical": False,
+            #"Must be non legendary or mythical": False,
+            # TODO: Add a filter for ignoring certain Pokemon or raids, identified by user
+        },
+        "Weight of each Pokemon": 1,
+        "Weight of whole group": 50,
+        "Forms weight strategy": "combine",  # "combine" or "separate"
+        # "Battle settings": {  # Write group-specific battle settings, in the same format as CONFIG_BATTLE_SETTINGS
+        #     # If absent, CONFIG_BATTLE_SETTINGS will be used
+        #     "Friendship": "Best",
+        #     "Weather": "Extreme",
+        #     "Attack strategy": "No Dodging",
+        #     "Dodge strategy": "Realistic Dodging"
+        # },
+        # "Baseline battle settings": {
+        #     "Weather": "Extreme",
+        #     "Friendship": "Best",
+        #     "Attack strategy": "No Dodging",
+        #     "Dodge strategy": "Realistic Dodging",
+        # }
+    },
+    {
+        "Pokemon pool": "By raid tier",
+        "Raid tiers": ["Tier 5", "Ultra Beast Tier"],
+        "Filters": {
+            #"Weak to contender types": SINGLE_TYPE_ATTACKER,
+            #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
+            get_ensemble_weak_key(): get_move_types(),
+        },
+        "Weight of each Pokemon": 1,
+        "Weight of whole group": 0,
+        "Forms weight strategy": "combine",
+        "Battle settings": {
+            "Attack strategy": "Dodge Specials PRO",
+        },
+    },
     # {
     #     "Pokemon pool": "By raid tier",
     #     "Raid tiers": ["Tier 5", "Ultra Beast Tier"],
@@ -242,21 +242,21 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
         "Weight of whole group": 35,  #25,
         "Forms weight strategy": "combine",
     },
-    # {
-    #     "Pokemon pool": "By raid tier",
-    #     "Raid tiers": ["Mega Tier", "Mega Legendary Tier"],
-    #     "Filters": {
-    #         #"Weak to contender types": SINGLE_TYPE_ATTACKER,
-    #         #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
-    #         get_ensemble_weak_key(): get_move_types(),
-    #     },
-    #     "Weight of each Pokemon": 1,
-    #     "Weight of whole group": 0,
-    #     "Forms weight strategy": "combine",
-    #     "Battle settings": {
-    #         "Attack strategy": "Dodge Specials PRO",
-    #     },
-    # },
+    {
+        "Pokemon pool": "By raid tier",
+        "Raid tiers": ["Mega Tier", "Mega Legendary Tier"],
+        "Filters": {
+            #"Weak to contender types": SINGLE_TYPE_ATTACKER,
+            #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
+            get_ensemble_weak_key(): get_move_types(),
+        },
+        "Weight of each Pokemon": 1,
+        "Weight of whole group": 0,
+        "Forms weight strategy": "combine",
+        "Battle settings": {
+            "Attack strategy": "Dodge Specials PRO",
+        },
+    },
     # {
     #     "Pokemon pool": "By raid tier",
     #     "Raid tiers": ["Mega Tier", "Mega Legendary Tier"],
@@ -273,24 +273,43 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
     #     },
     # },
 
-    # {
-    #     "Pokemon pool": "By raid tier",
-    #     "Raid tier": "Tier 3",
-    #     "Filters": {
-    #         #"Weak to contender types": SINGLE_TYPE_ATTACKER,
-    #         #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
-    #         get_ensemble_weak_key(): get_move_types(),
-    #     },
-    #     "Weight of each Pokemon": 1,
-    #     "Weight of whole group": 15,  #25,
-    #     "Forms weight strategy": "combine",
-    #     "Battle settings": {
-    #         "Friendship": "No",
-    #     },
-    #     "Baseline battle settings": {
-    #         "Friendship": "No",
-    #     }
-    # },
+    {
+        "Pokemon pool": "By raid tier",
+        "Raid tier": "Tier 3",
+        "Filters": {
+            #"Weak to contender types": SINGLE_TYPE_ATTACKER,
+            #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
+            get_ensemble_weak_key(): get_move_types(),
+        },
+        "Weight of each Pokemon": 1,
+        "Weight of whole group": 15,  #25,
+        "Forms weight strategy": "combine",
+        "Battle settings": {
+            "Friendship": "Not",
+        },
+        "Baseline battle settings": {
+            "Friendship": "Not",
+        }
+    },
+    {
+        "Pokemon pool": "By raid tier",
+        "Raid tier": "Tier 3",
+        "Filters": {
+            #"Weak to contender types": SINGLE_TYPE_ATTACKER,
+            #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
+            get_ensemble_weak_key(): get_move_types(),
+        },
+        "Weight of each Pokemon": 1,
+        "Weight of whole group": 0,
+        "Forms weight strategy": "combine",
+        "Battle settings": {
+            "Friendship": "Not",
+            "Attack strategy": "Dodge Specials PRO",
+        },
+        "Baseline battle settings": {
+            "Friendship": "Not",
+        }
+    },
     # {
     #     "Pokemon pool": "By raid tier",
     #     "Raid tier": "Tier 3",
@@ -303,30 +322,11 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
     #     "Weight of whole group": 0,
     #     "Forms weight strategy": "combine",
     #     "Battle settings": {
-    #         "Friendship": "No",
-    #         "Attack strategy": "Dodge Specials PRO",
-    #     },
-    #     "Baseline battle settings": {
-    #         "Friendship": "No",
-    #     }
-    # },
-    # {
-    #     "Pokemon pool": "By raid tier",
-    #     "Raid tier": "Tier 3",
-    #     "Filters": {
-    #         #"Weak to contender types": SINGLE_TYPE_ATTACKER,
-    #         #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
-    #         get_ensemble_weak_key(): get_move_types(),
-    #     },
-    #     "Weight of each Pokemon": 1,
-    #     "Weight of whole group": 0,
-    #     "Forms weight strategy": "combine",
-    #     "Battle settings": {
-    #         "Friendship": "No",
+    #         "Friendship": "Not",
     #         "Weather": "Rainy",
     #     },
     #     "Baseline battle settings": {
-    #         "Friendship": "No",
+    #         "Friendship": "Not",
     #     }
     # },
 
@@ -345,7 +345,7 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
     #     "Weight of whole group": 10,
     #     "Forms weight strategy": "combine",
     #     "Battle settings": {
-    #         "Friendship": "No",
+    #         "Friendship": "Not",
     #     },
     # },
 
@@ -479,7 +479,10 @@ CONFIG_PROCESSING_SETTINGS = {
     "Attackers that should not be combined": [  # Will not combine these attackers' different movesets,
         # displaying each moveset separately. (Remember to INCLUDE SHADOWS & MEGAS separately here!!!)
         # "STARAPTOR", "STARAPTOR_SHADOW_FORM",
-        "BEEDRILL", # Bug Bite legacy
-        "VIKAVOLT", "GOLISOPOD"
+        "BEEDRILL_MEGA", # Bug Bite legacy
+        #"VIKAVOLT", "GOLISOPOD",
+        #"ZERAORA", "TAPU_KOKO", "THUNDURUS_THERIAN_FORM", "XURKITREE"
+        "BLAZIKEN_MEGA", "BLAZIKEN", "MEWTWO_MEGA_X", "GALLADE_MEGA", "LOPUNNY_MEGA", "KELDEO",
+        "GENGAR", "GENGAR_MEGA", "ETERNATUS", "SALAZZLE", "SNEASLER",
     ],
 }

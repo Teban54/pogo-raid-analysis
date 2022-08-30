@@ -368,7 +368,7 @@ def is_friendship_str(friendship):
     :param friendship: Friendship string to be checked.
     :return: Whether the string is natural language.
     """
-    return any(x in friendship.lower() for x in ['no', 'good', 'great', 'ultra', 'best'])
+    return any(x in friendship.lower() for x in ['no', 'new', 'good', 'great', 'ultra', 'best'])  # "no" includes "not"
 
 
 def is_friendship_code(friendship):
@@ -378,7 +378,7 @@ def is_friendship_code(friendship):
     :param friendship: Friendship string to be checked.
     :return: Whether the string is code name.
     """
-    return friendship.lower() in [f"friendship_level_{x}" for x in range(5)]
+    return friendship.lower() in [f"friendship_level_{x}" for x in range(5)] + ["friendship_level_unset"]
 
 
 def parse_friendship_str2code(friendship_str):
@@ -387,9 +387,9 @@ def parse_friendship_str2code(friendship_str):
     to code name (e.g. "FRIENDSHIP_LEVEL_4").
 
     :param friendship_str: Friendship in natural language,
-        includes "no", "good", "great", "ultra" or "best" in it (case-insensitive)
+        includes "no"/"not", "new", "good", "great", "ultra" or "best" in it (case-insensitive)
     :return: Friendship in Pokebattler code name,
-        in the form of "FRIENDSHIP_LEVEL_<x>" where x is 0,1,2,3 or 4
+        in the form of "FRIENDSHIP_LEVEL_<x>" where x is UNSET,0,1,2,3 or 4
     """
     if not is_friendship_str(friendship_str) and not is_friendship_code(friendship_str):
         print(f"Warning (parse_friendship_str2code): Friendship string {friendship_str} is invalid", file=sys.stderr)
@@ -397,7 +397,8 @@ def parse_friendship_str2code(friendship_str):
     if is_friendship_code(friendship_str):
         return friendship_str
     conv = {
-        'no': 0,
+        'no': 'UNSET',  # includes "not"
+        'new': 0,
         'good': 1,
         'great': 2,
         'ultra': 3,
@@ -415,24 +416,25 @@ def parse_friendship_code2str(friendship_code):
     to natural word (e.g. "Best Friend").
 
     :param friendship_code: Friendship in Pokebattler code name,
-        in the form of "FRIENDSHIP_LEVEL_<x>" where x is 0,1,2,3 or 4
+        in the form of "FRIENDSHIP_LEVEL_<x>" where x is UNSET,0,1,2,3 or 4
     :return: Friendship in natural language,
-        in the form of "<x> Friend" where x is "No", "Good", "Great", "Ultra" or "Best"
+        in the form of "<x> Friend" where x is "Not", "New", "Good", "Great", "Ultra" or "Best"
     """
     if not is_friendship_str(friendship_code) and not is_friendship_code(friendship_code):
         print(f"Warning (parse_friendship_code2str): Friendship string {friendship_code} is invalid", file=sys.stderr)
-        return "FRIENDSHIP_LEVEL_0"
+        return "FRIENDSHIP_LEVEL_UNSET"
     if is_friendship_str(friendship_code):
         return friendship_code
     conv = {
-        0: 'No',
-        1: 'Good',
-        2: 'Great',
-        3: 'Ultra',
-        4: 'Best'
+        'unset': 'Not',
+        '0': 'New',
+        '1': 'Good',
+        '2': 'Great',
+        '3': 'Ultra',
+        '4': 'Best'
     }
-    intstr = friendship_code[-1]
-    return conv[int(intstr)] + " Friend"
+    intstr = friendship_code.lower().split('_')[-1]
+    return conv[intstr] + " Friend"
 
 
 def is_sort_option_str(sort_option):
