@@ -10,9 +10,9 @@ from params import *
 
 #CONFIG_WRITE_ALL_COUNTERS = True
 
-SINGLE_TYPE_ATTACKER = ["Poison"]
-MULTI_TYPE_ATTACKERS_COMPARE = ["Bug", "Ghost", "Dark"]
-EXTRA_TYPE_ATTACKER = ["Psychic"]  # Attacker types that use non-STAB moves (e.g. Ice Beam Mewtwo), doesn't apply to moves
+SINGLE_TYPE_ATTACKER = ["Steel"]
+MULTI_TYPE_ATTACKERS_COMPARE = ["Grass", "Electric"]
+EXTRA_TYPE_ATTACKER = ["Electric"]  # Attacker types that use non-STAB moves (Mewtwo, Xurkitree, Mega Alakazam, Landorus-I), doesn't apply to moves
 MODE = "SINGLE"  # SINGLE, SINGLE+, MULTI, MULTI+
 
 def get_move_types():
@@ -36,7 +36,7 @@ CONFIG_BATTLE_SETTINGS = {
     # In that case, simulations for all combinations of all specified options will be generated.
     "Weather": "Extreme",  # "Extreme",  # Extreme/No Weather/Neutral, Sunny/Clear, Rainy, Partly Cloudy, Cloudy, Windy, Snow, Fog
                            # Default: Extreme
-    "Friendship": "Best",  # No Friend, Good Friend, Great Friend, Ultra Friend, Best Friend (can omit "Friend")
+    "Friendship": "Best",  # Not Friend, New Friend, Good Friend, Great Friend, Ultra Friend, Best Friend (can omit "Friend")
                            # Default: Best Friend
     "Attack strategy": "No Dodging",  # No Dodging, Dodge Specials PRO, Dodge All Weave
                                       # Default: No Dodging
@@ -226,7 +226,7 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
     #     "Weight of whole group": 0,
     #     "Forms weight strategy": "combine",
     #     "Battle settings": {
-    #         "Weather": "Rainy",
+    #         "Weather": "Sunny",
     #     },
     # },
 
@@ -269,7 +269,7 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
     #     "Weight of whole group": 0,
     #     "Forms weight strategy": "combine",
     #     "Battle settings": {
-    #         "Weather": "Rainy",
+    #         "Weather": "Sunny",
     #     },
     # },
 
@@ -323,7 +323,7 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
     #     "Forms weight strategy": "combine",
     #     "Battle settings": {
     #         "Friendship": "Not",
-    #         "Weather": "Rainy",
+    #         "Weather": "Sunny",
     #     },
     #     "Baseline battle settings": {
     #         "Friendship": "Not",
@@ -475,14 +475,27 @@ CONFIG_PROCESSING_SETTINGS = {
     "Include random boss movesets": True,  # Default: True
     "Include specific boss movesets": False,  # Default: False
     "Include attacker IVs": False,  # Default: False
+    "Fill blanks": True,  # Default: True
 
     "Attackers that should not be combined": [  # Will not combine these attackers' different movesets,
         # displaying each moveset separately. (Remember to INCLUDE SHADOWS & MEGAS separately here!!!)
         # "STARAPTOR", "STARAPTOR_SHADOW_FORM",
-        "BEEDRILL_MEGA", # Bug Bite legacy
+        #"BEEDRILL_MEGA", # Bug Bite legacy
+        #"ALAKAZAM_MEGA", "ALAKAZAM", "ALAKAZAM_SHADOW_FORM",  # Psychic legacy
+
         #"VIKAVOLT", "GOLISOPOD",
         #"ZERAORA", "TAPU_KOKO", "THUNDURUS_THERIAN_FORM", "XURKITREE"
-        "BLAZIKEN_MEGA", "BLAZIKEN", "MEWTWO_MEGA_X", "GALLADE_MEGA", "LOPUNNY_MEGA", "KELDEO",
-        "GENGAR", "GENGAR_MEGA", "ETERNATUS", "SALAZZLE", "SNEASLER",
+        #"BLAZIKEN_MEGA", "BLAZIKEN", "MEWTWO_MEGA_X", "GALLADE_MEGA", "LOPUNNY_MEGA", "KELDEO", "PHEROMOSA",
+        #"GENGAR", "GENGAR_MEGA", "ETERNATUS", "SALAZZLE", "SNEASLER", "GENGAR_SHADOW_FORM",
+        #"TOGEKISS", "FLORGES", "TAPU_KOKO", "SYLVEON", "XERNEAS", "DIANCIE_MEGA"
+        #"ALAKAZAM_MEGA", "ALAKAZAM", "ALAKAZAM_SHADOW_FORM", "NECROZMA_DAWN_WINGS_FORM", "NECROZMA_DUSK_MANE_FORM", "NECROZMA_ULTRA_FORM"
+        # "RHYPERIOR", "RHYPERIOR_SHADOW_FORM", "ARCHEOPS", "AERODACTYL", "AERODACTYL_SHADOW_FORM", "AERODACTYL_MEGA",
+        # "OMASTAR", "OMASTAR_SHADOW_FORM", "TYRANTRUM", "STONJOURNER", "STAKATAKA", "DIANCIE_MEGA", "TYRANITAR",
+        # "TYRANITAR_SHADOW_FORM", "TYRANITAR_MEGA", "GOLEM_SHADOW_FORM", "GOLEM", "GOLEM_ALOLA_FORM", "LYCANROC_MIDDAY_FORM",
+        # "GIGALITH"  # CSV 1 combines Gigalith
+        # "CHESNAUGHT", "DECIDUEYE", "ABOMASNOW_MEGA", "SCEPTILE", "VENUSAUR_MEGA", "RILLABOOM", "ROSERADE", "ROSERADE_SHADOW_FORM",
+        # "SCEPTILE_SHADOW_FORM", "SCEPTILE_MEGA", "VENUSAUR_SHADOW_FORM", "SHAYMIN_SKY_FORM", "ZARUDE"
+        "AGGRON_MEGA", "SOLGALEO", "NECROZMA_DUSK_MANE_FORM", "LUCARIO", "LUCARIO_MEGA", "GENESECT", "SCIZOR",
+        "SCIZOR_MEGA", "DIALGA", "EXCADRILL", "MELMETAL"
     ],
 }

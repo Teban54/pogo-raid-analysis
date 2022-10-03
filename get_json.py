@@ -19,7 +19,7 @@ from battle_settings import *
 async def get_pokebattler_metadata(metadata_name, write_file=False):
     """
     Get the Pokebattler metadata JSON files (moves, Pokemon, raids).
-    The files are obtained from https://fight.pokebattler.com/<metadata_name>.
+    The files are obtained from https://fight-beta.pokebattler.com/<metadata_name>.
     More info: https://www.reddit.com/r/pokebattler/comments/b876tq/pokebattler_api_usage_instructions/
 
     :param metadata_name: Name of the metadata file to be obtained.
@@ -28,7 +28,7 @@ async def get_pokebattler_metadata(metadata_name, write_file=False):
             data/json/<metadata_name>.json
     :return: Requested JSON data as Python object
     """
-    data = await do_http_request(f"https://fight.pokebattler.com/{metadata_name}")
+    data = await do_http_request(f"https://fight-beta.pokebattler.com/{metadata_name}")
     if write_file:
         write_json_to_file(data, f"data/json/{metadata_name}.json")
     return data
@@ -91,11 +91,11 @@ async def get_pokebattler_raid_counters(raid_boss=None, raid_boss_codename=None,
     # &weatherCondition=CLEAR&dodgeStrategy=DODGE_REACTION_TIME&aggregation=AVERAGE
     # &includeMegas=true&randomAssistants=-1&numMegas=0#raid-estimator
     if trainer_id:
-        url = f'https://fight.pokebattler.com/raids/defenders/{raid_boss_codename}/' \
+        url = f'https://fight-beta.pokebattler.com/raids/defenders/{raid_boss_codename}/' \
               f'levels/{raid_tier}/attackers/users/{trainer_id}/' \
               f'strategies/{battle_settings.attack_strategy_code}/DEFENSE_RANDOM_MC'
     else:
-        url = f'https://fight.pokebattler.com/raids/defenders/{raid_boss_codename}/' \
+        url = f'https://fight-beta.pokebattler.com/raids/defenders/{raid_boss_codename}/' \
               f'levels/{raid_tier}/attackers/levels/{attacker_level}/' \
               f'strategies/{battle_settings.attack_strategy_code}/DEFENSE_RANDOM_MC'
 
@@ -187,11 +187,11 @@ async def get_pokebattler_single_battle(attacker=None, attacker_codename=None,
     # &randomAssistants=-1&numMegas=0&monteCarlo=DEFENSE_RANDOM_MC&seed=1660095119751
 
     # if trainer_id:
-    #     url = f'https://fight.pokebattler.com/raids/defenders/{raid_boss_codename}/' \
+    #     url = f'https://fight-beta.pokebattler.com/raids/defenders/{raid_boss_codename}/' \
     #           f'levels/{raid_tier}/attackers/users/{trainer_id}/' \
     #           f'strategies/{battle_settings.attack_strategy_code}/DEFENSE_RANDOM_MC'
     # else:
-    url = f'https://fight.pokebattler.com/fights/attackers/{attacker_codename}/' \
+    url = f'https://fight-beta.pokebattler.com/fights/attackers/{attacker_codename}/' \
           f'quickMoves/{attacker_fast_move}/cinMoves/{attacker_charged_move},MOVE_NONE/' \
           f'levels/{attacker_level}/ivs/{ivs_pokebattler}/' \
           f'defenders/{raid_boss_codename}/' \

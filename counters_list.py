@@ -1715,6 +1715,10 @@ class CountersListsRE:
 
         This is performed before estimator scaling.
         """
+        if not self.processing_settings["Fill blanks"]:
+            print("Skipped filling blanks.")
+            return
+
         print("Filling blanks......")
         all_atkers = self.get_attackers_by_all_levels(
             random_boss_moveset=self.processing_settings["Include random boss movesets"],
