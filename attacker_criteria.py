@@ -53,7 +53,7 @@ class AttackerCriteria:
     """
     def __init__(self, metadata=None, pokemon_types=None, fast_types=None, charged_types=None,
                  min_level=MIN_LEVEL_DEFAULT, max_level=MAX_LEVEL_DEFAULT, level_step=LEVEL_STEP_DEFAULT,
-                 pokemon_codenames=None, trainer_id=None,
+                 pokemon_codenames=None, pokemon_codenames_and_moves=None, trainer_id=None,
                  is_legendary=False, is_not_legendary=False,
                  is_mythical=False, is_not_mythical=False,
                  is_legendary_or_mythical=False, is_not_legendary_or_mythical=False,
@@ -77,6 +77,17 @@ class AttackerCriteria:
         :param pokemon_codenames: List of codenames of all Pokemon so that attackers are restricted to
             these options, if necessary. Still subject to other filters.
             If None, all attackers will be considered.
+        :param pokemon_codenames_and_moves: List of tuples of Pokemon codenames and movesets
+            so that attackers are restricted to these options, if necessary. Still subject to other filters.
+            If None, all attackers will be considered.
+            Format:
+            [
+                ("URSALUNA", "MUD_SHOT_FAST", "HIGH_HORSEPOWER"),
+                ("URSALUNA", "TACKLE_FAST", "HIGH_HORSEPOWER"),
+                ("GOLURK_SHADOW_FORM", "MUD_SLAP_FAST", "EARTH_POWER"),
+                ("GARCHOMP_MEGA", "MUD_SHOT_FAST", "EARTH_POWER"),
+                ...
+            ]
         :param trainer_id: Pokebattler Trainer ID if a trainer's own Pokebox is used.
             If None, use all attackers by level.
         :param is_legendary: If True, only consider legendary attackers
@@ -111,6 +122,7 @@ class AttackerCriteria:
         self.max_level = max_level
         self.level_step = level_step
         self.pokemon_codenames = pokemon_codenames
+        self.pokemon_codenames_and_moves = pokemon_codenames_and_moves
         self.trainer_id = trainer_id
         self.is_legendary = is_legendary
         self.is_not_legendary = is_not_legendary
@@ -127,6 +139,8 @@ class AttackerCriteria:
 
         if self.pokemon_codenames and type(self.pokemon_codenames) is str:
             self.pokemon_codenames = [self.pokemon_codenames]
+        if self.pokemon_codenames_and_moves and type(self.pokemon_codenames_and_moves) is tuple:
+            self.pokemon_codenames_and_moves = [self.pokemon_codenames_and_moves]
         if self.exclude_codenames and type(self.exclude_codenames) is str:
             self.exclude_codenames = [self.exclude_codenames]
 
@@ -155,29 +169,31 @@ class AttackerCriteria:
                       file=sys.stderr)
                 return False
             pokemon = self.metadata.find_pokemon(pokemon_codename)
-        ignore_fast = not self.fast_types
-        if self.fast_types and not fast:
+        fast_not_given = False
+        if (self.fast_types or self.pokemon_codenames_and_moves) and not fast:
             if not fast_codename:
                 print(f"Warning (AttackerCriteria.check_attacker): Neither fast move object nor codename provided. "
-                      f"IGNORING the fast move typing check.",
+                      f"IGNORING the fast move typing and/or specific Pokemon check.",
                       file=sys.stderr)
-                ignore_fast = True
+                fast_not_given = True
             fast = self.metadata.find_move(fast_codename)
-        ignore_charged = not self.charged_types
-        if self.charged_types and not charged:
+        charged_not_given = False
+        if (self.charged_types or self.pokemon_codenames_and_moves) and not charged:
             if not charged_codename:
                 print(f"Warning (AttackerCriteria.check_attacker): Neither charged move object nor codename provided. "
-                      f"IGNORING the charged move typing check.",
+                      f"IGNORING the charged move typing and/or specific Pokemon check.",
                       file=sys.stderr)
-                ignore_charged = True
+                charged_not_given = True
             charged = self.metadata.find_move(charged_codename)
 
         return all([
             not self.pokemon_types or criterion_is_types(pokemon, self.pokemon_types),
-            ignore_fast or fast.type in self.fast_types,
-            ignore_charged or charged.type in self.charged_types,
+            not self.fast_types or fast_not_given or fast.type in self.fast_types,
+            not self.charged_types or charged_not_given or charged.type in self.charged_types,
             not level or is_level_in_range(level, self.min_level, self.max_level),  # Mostly for Pokebox
             not self.pokemon_codenames or pokemon.name in self.pokemon_codenames,
+            not self.pokemon_codenames_and_moves or (
+                    fast and charged and (pokemon.name, fast.name, charged.name) in self.pokemon_codenames_and_moves),
             criterion_legendary(pokemon, self.is_legendary, self.is_not_legendary),
             criterion_mythical(pokemon, self.is_mythical, self.is_not_mythical),
             criterion_legendary_or_mythical(pokemon, self.is_legendary_or_mythical, self.is_not_legendary_or_mythical),
@@ -199,6 +215,7 @@ class AttackerCriteria:
         cp.max_level = self.max_level
         cp.level_step = self.level_step
         cp.pokemon_codenames = self.pokemon_codenames.copy() if self.pokemon_codenames is not None else None
+        cp.pokemon_codenames_and_moves = self.pokemon_codenames_and_moves.copy() if self.pokemon_codenames_and_moves is not None else None
         cp.trainer_id = self.trainer_id
         cp.is_legendary = self.is_legendary
         cp.is_not_legendary = self.is_not_legendary

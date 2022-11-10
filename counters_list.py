@@ -622,7 +622,8 @@ class CountersListSingle:
 
         # Determine baseline
         baselines_per_boss_moveset = {
-            mvst_key: min(atker_dict["ESTIMATOR"] for atker_dict in atkers_list)
+            #mvst_key: min(atker_dict["ESTIMATOR"] for atker_dict in atkers_list)  # FIXASTTW
+            mvst_key: min(atker_dict[self.sort_option] for atker_dict in atkers_list)  # FIXASTTW
             for mvst_key, atkers_list in self.rankings.items()
             if atkers_list
         }
@@ -682,11 +683,16 @@ class CountersListSingle:
 
         for mvst_key, atkers_list in self.rankings.items():
             for atker_dict in atkers_list:
-                atker_dict["ESTIMATOR_UNSCALED"] = atker_dict["ESTIMATOR"]
-                atker_dict["ESTIMATOR"] *= scaling_factor
+                # atker_dict["ESTIMATOR_UNSCALED"] = atker_dict["ESTIMATOR"] # FIXASTTW
+                # atker_dict["ESTIMATOR"] *= scaling_factor
+                # for (fast_codename, charged_codename), timings_dict in atker_dict["BY_MOVE"].items():
+                #     timings_dict["ESTIMATOR_UNSCALED"] = timings_dict["ESTIMATOR"]
+                #     timings_dict["ESTIMATOR"] *= scaling_factor
+                atker_dict[self.sort_option + "_UNSCALED"] = atker_dict[self.sort_option]  # FIXASTTW
+                atker_dict[self.sort_option] *= scaling_factor
                 for (fast_codename, charged_codename), timings_dict in atker_dict["BY_MOVE"].items():
-                    timings_dict["ESTIMATOR_UNSCALED"] = timings_dict["ESTIMATOR"]
-                    timings_dict["ESTIMATOR"] *= scaling_factor
+                    timings_dict[self.sort_option + "_UNSCALED"] = timings_dict[self.sort_option]
+                    timings_dict[self.sort_option] *= scaling_factor
 
     def get_best_moveset_for_attacker(self, attacker_data=None,
                                       boss_moveset=None, attacker_codename=None, attacker=None,
@@ -781,6 +787,8 @@ class CountersListSingle:
             }
             if "ESTIMATOR_UNSCALED" in atk_mvst_val:
                 ret["Estimator Unscaled"] = atk_mvst_val["ESTIMATOR_UNSCALED"]
+            if "TIME_UNSCALED" in atk_mvst_val:
+                ret["Time to Win Unscaled"] = atk_mvst_val["TIME_UNSCALED"]
             return ret
 
         def get_rows_attacker(boss_mvst_key, atk_dict):
@@ -806,7 +814,7 @@ class CountersListSingle:
             rows = []
             for atk_dict in boss_mvst_val:
                 rows.extend(get_rows_attacker(boss_mvst_key, atk_dict))
-            rows.sort(key=lambda row: row["Time to Win" if self.sort_option == "TIME" else "Estimator"])
+            rows.sort(key=lambda row: row["Time to Win" if self.sort_option == "TIME" else "Estimator"])  # TODO: Potentially fix for other sorting criteria
             writer.writerows(rows)
 
         if not random_boss_moveset and not specific_boss_moveset:
@@ -1879,6 +1887,7 @@ class CountersListsRE:
         combine_attacker_movesets = self.processing_settings["Combine attacker movesets"]
         random_boss_moveset = self.processing_settings["Include random boss movesets"]
         specific_boss_moveset = self.processing_settings["Include specific boss movesets"]
+        weights_to_specific_boss_movesets = self.processing_settings["Assign weights to specific boss movesets"]
         write_unscaled = self.processing_settings["Include unscaled estimators"]
         write_iv = self.processing_settings["Include attacker IVs"]
 
@@ -1909,7 +1918,8 @@ class CountersListsRE:
                     for atker_mvst, timings in atker_dict["BY_MOVE"].items():
                         atker_key = (atker_dict["POKEMON_CODENAME"], atker_mvst[0], atker_mvst[1],
                                      atker_dict["LEVEL"], atker_dict["IV"])
-                        boss_key = (boss.pokemon_codename, boss_mvst[0], boss_mvst[1], boss.tier, bs, weight)
+                        boss_key = (boss.pokemon_codename, boss_mvst[0], boss_mvst[1], boss.tier, bs,
+                                    weight if weights_to_specific_boss_movesets or boss_mvst == ('RANDOM', 'RANDOM') else 0)
                         if atker_key not in attackers_boss_dict:
                             attackers_boss_dict[atker_key] = {}
                         attackers_boss_dict[atker_key][boss_key] = copy.deepcopy(timings)
@@ -1997,16 +2007,18 @@ class CountersListsRE:
             attackers_boss_dict = new_atk_boss_dict
 
         # Convert boss keys to headers
-        boss_headers = [
-            "{0}{1}, {2}".format(
-                self.metadata.pokemon_codename_to_displayname(boss_key[0]),
-                " ({0}/{1})".format(self.metadata.move_codename_to_displayname(boss_key[1]),
-                                    self.metadata.move_codename_to_displayname(boss_key[2]))
-                if boss_key[1] != 'RANDOM' else '',
-                parse_raid_tier_code2str(boss_key[3])
-            )
-            for boss_key in boss_keys
-        ]
+        # boss_headers = [
+        #     "{0}{1}, {2}".format(
+        #         self.metadata.pokemon_codename_to_displayname(boss_key[0]),
+        #         " ({0}/{1})".format(self.metadata.move_codename_to_displayname(boss_key[1]),
+        #                             self.metadata.move_codename_to_displayname(boss_key[2]))
+        #         if boss_key[1] != 'RANDOM' else '',
+        #         parse_raid_tier_code2str(boss_key[3])
+        #     )
+        #     for boss_key in boss_keys
+        # ]
+        boss_headers = [self.metadata.pokemon_codename_to_displayname(boss_key[0])
+                        for boss_key in boss_keys]
 
         # Print what we have
         filename = os.path.join(path, "table.csv")
@@ -2029,6 +2041,22 @@ class CountersListsRE:
             for i, boss_key in enumerate(boss_keys):
                 weights_row[i + row_boss_offset] = boss_key[5]
             writer.writerow(weights_row)
+
+            # Write raid tier and boss moveset
+            tier_row = [None,] * row_len
+            tier_row[0] = "(Raid tier)"
+            for i, boss_key in enumerate(boss_keys):
+                tier_row[i + row_boss_offset] = parse_raid_tier_code2str(boss_key[3])
+            writer.writerow(tier_row)
+            moveset_row = [None,] * row_len
+            moveset_row[0] = "(Boss moveset)"
+            for i, boss_key in enumerate(boss_keys):
+                moveset_row[i + row_boss_offset] = (
+                    "{0}/{1}".format(self.metadata.move_codename_to_displayname(boss_key[1]),
+                                       self.metadata.move_codename_to_displayname(boss_key[2]))
+                    if boss_key[1] != 'RANDOM' else 'Random'
+                )
+            writer.writerow(moveset_row)
 
             # Write battle settings in 4 separate rows
             bs_row = [None,] * row_len

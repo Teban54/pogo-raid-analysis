@@ -88,6 +88,7 @@ class Config:
                 max_level=cfg.get("Max level", MAX_LEVEL_DEFAULT),
                 level_step=cfg.get("Level step size", LEVEL_STEP_DEFAULT),
                 pokemon_codenames=cfg.get("Pokemon code names", None),
+                pokemon_codenames_and_moves=cfg.get("Pokemon code names and moves", None),
                 trainer_id=cfg.get("Trainer ID", None),
                 is_legendary=cfg.get("Must be legendary", False),
                 is_not_legendary=cfg.get("Must be non legendary", cfg.get("Must be non-legendary", False)),
@@ -388,6 +389,8 @@ class Config:
             cfg["Include random boss movesets"] = True
         if "Include specific boss movesets" not in cfg:
             cfg["Include specific boss movesets"] = False
+        if "Assign weights to specific boss movesets" not in cfg:
+            cfg["Assign weights to specific boss movesets"] = False
         if "Include attacker IVs" not in cfg:
             cfg["Include attacker IVs"] = False
         if "Fill blanks" not in cfg:

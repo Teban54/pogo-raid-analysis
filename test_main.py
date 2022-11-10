@@ -30,7 +30,8 @@ async def main():
         ensemble=CONFIG.raid_ensemble,
         attacker_criteria_multi=CONFIG.attacker_criteria_multi,
         scaling_settings=CONFIG.scaling_settings,
-        processing_settings=CONFIG.processing_settings
+        processing_settings=CONFIG.processing_settings,
+        sort_option=CONFIG.sort_option
     )
     await clre.load_and_process_all_lists()
     # clre.write_CSV_list(path=COUNTERS_DATA_PATH, raw=False,

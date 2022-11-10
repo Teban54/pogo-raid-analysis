@@ -486,9 +486,9 @@ def parse_sort_option_str2code(sort_option_str):
     conv = {
         'overall': "OVERALL",
         'power': "POWER",
-        'win': "WIN",
         'time': "TIME",
         'ttw': "TIME",
+        'win': "WIN",
         'potion': "POTIONS",
         'damage': "TDO",
         'tdo': "TDO",
