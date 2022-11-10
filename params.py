@@ -196,6 +196,7 @@ RAID_TIERS_CODE2STR = {
     "RAID_LEVEL_MEGA": "Mega Tier",
     "RAID_LEVEL_MEGA_5": "Mega Legendary Tier",
     "RAID_LEVEL_ULTRA_BEAST": "Ultra Beast Tier",
+    "RAID_LEVEL_ELITE": "Elite Tier",
 }
 RAID_CATEGORIES_CODE2STR = {  # Shouldn't be needed for this project, but just in case
     "RAID_LEVEL_1": "Tier 1",
@@ -228,6 +229,9 @@ RAID_CATEGORIES_CODE2STR = {  # Shouldn't be needed for this project, but just i
     "RAID_LEVEL_ULTRA_BEAST": "Ultra Beast Tier",
     "RAID_LEVEL_ULTRA_BEAST_LEGACY": "Legacy Ultra Beast Tier",
     "RAID_LEVEL_ULTRA_BEAST_FUTURE": "Future Ultra Beast Tier",
+    "RAID_LEVEL_ELITE": "Elite Tier",
+    "RAID_LEVEL_ELITE_LEGACY": "Legacy Elite Tier",  # In case
+    "RAID_LEVEL_ELITE_FUTURE": "Future Elite Tier",  # In case
     "RAID_LEVEL_UNSET": "Tier ?",  # Should be ignored when reading JSON
 }
 # Reminder - If encountered a tier not listed above, do not report an error, only a warning!!

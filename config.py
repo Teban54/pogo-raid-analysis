@@ -10,7 +10,7 @@ from params import *
 
 #CONFIG_WRITE_ALL_COUNTERS = True
 
-SINGLE_TYPE_ATTACKER = ["Fairy"]
+SINGLE_TYPE_ATTACKER = ["Bug"]
 MULTI_TYPE_ATTACKERS_COMPARE = ["Ghost", "Dark"]
 EXTRA_TYPE_ATTACKER = ["Psychic"]  # Attacker types that use non-STAB moves (Mewtwo, Xurkitree, Mega Alakazam, Landorus-I), doesn't apply to moves
 MODE = "SINGLE"  # SINGLE, SINGLE+, MULTI, MULTI+
@@ -183,9 +183,9 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
 
     {
         "Pokemon pool": "By raid category", #"By raid tier",  # "All Pokemon", "All Pokemon except above", "By raid tier" or "By raid category"
-        "Raid tiers": ["Tier 5", "Ultra Beast Tier"],  # Here, "Tier 5" has all past/present/future bosses
+        "Raid tiers": ["Tier 5", "Ultra Beast Tier", "Elite Tier"],  # Here, "Tier 5" has all past/present/future bosses
         # "Raid category": "Legacy Tier 5",  # Here, "Tier 5" has only current bosses
-        "Raid category": "Ultra Beast Tier",  # Here, "Tier 5" has only current bosses
+        "Raid category": "Tier 5",  # Here, "Tier 5" has only current bosses
         "Filters": {  # Only those without # at the start are applied
             #"Weak to contender types": SINGLE_TYPE_ATTACKER,
             #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
@@ -222,7 +222,7 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
     },
     # {
     #     "Pokemon pool": "By raid tier",
-    #     "Raid tiers": ["Tier 5", "Ultra Beast Tier"],
+    #     "Raid tiers": ["Tier 5", "Ultra Beast Tier", "Elite Tier"],
     #     "Filters": {
     #         #"Weak to contender types": SINGLE_TYPE_ATTACKER,
     #         #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
@@ -237,7 +237,7 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
     # },
     # # {
     # #     "Pokemon pool": "By raid tier",
-    # #     "Raid tiers": ["Tier 5", "Ultra Beast Tier"],
+    # #     "Raid tiers": ["Tier 5", "Ultra Beast Tier", "Elite Tier"],
     # #     "Filters": {
     # #         #"Weak to contender types": SINGLE_TYPE_ATTACKER,
     # #         #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
