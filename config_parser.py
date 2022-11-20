@@ -368,6 +368,8 @@ class Config:
 
         if "Baseline battle settings" in cfg:
             cfg["Baseline battle settings"] = self.parse_battle_settings_config(cfg["Baseline battle settings"])
+        if "Consider required attackers" not in cfg:
+            cfg["Consider required attackers"] = False
         return cfg
 
     def format_processing_settings_config(self, config):

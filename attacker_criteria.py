@@ -79,15 +79,16 @@ class AttackerCriteria:
             If None, all attackers will be considered.
         :param pokemon_codenames_and_moves: List of tuples of Pokemon codenames and movesets
             so that attackers are restricted to these options, if necessary. Still subject to other filters.
-            If None, all attackers will be considered.
+            Possibly including IVs.
             Format:
             [
                 ("URSALUNA", "MUD_SHOT_FAST", "HIGH_HORSEPOWER"),
                 ("URSALUNA", "TACKLE_FAST", "HIGH_HORSEPOWER"),
                 ("GOLURK_SHADOW_FORM", "MUD_SLAP_FAST", "EARTH_POWER"),
-                ("GARCHOMP_MEGA", "MUD_SHOT_FAST", "EARTH_POWER"),
+                ("GARCHOMP_MEGA", "MUD_SHOT_FAST", "EARTH_POWER", "10/10/10"),
                 ...
             ]
+            If None, all attackers will be considered.
         :param trainer_id: Pokebattler Trainer ID if a trainer's own Pokebox is used.
             If None, use all attackers by level.
         :param is_legendary: If True, only consider legendary attackers
@@ -144,9 +145,9 @@ class AttackerCriteria:
         if self.exclude_codenames and type(self.exclude_codenames) is str:
             self.exclude_codenames = [self.exclude_codenames]
 
-    def check_attacker(self, pokemon=None, pokemon_codename=None, level=None,
+    def check_attacker(self, pokemon=None, pokemon_codename=None, level=None, iv=None,
                        fast=None, fast_codename=None,
-                       charged=None, charged_codename=None):
+                       charged=None, charged_codename=None, ignore_specific_codenames_and_moves=False):
         """
         Check if a particular attacker with fast and charged moves meets ALL criteria
         in this AttackerCriteria object.
@@ -157,10 +158,20 @@ class AttackerCriteria:
         :param pokemon_codename: Pokemon codename
         :param pokemon: Pokemon object, if codename is not given
         :param level: Level of attacker, as string or numerical value
+        :param iv: IV of attacker, as string "15/15/15"
         :param fast_codename: Fast move codename
         :param fast: Fast Move object, if codename is not given
         :param charged_codename: Charged move codename
         :param charged: Charged Move object, if codename is not given
+        :param ignore_specific_codenames_and_moves: If True, always returns False if this AttackerCriteria includes
+            a check for Pokemon codenames and moves. The effect of this is that an attacker can only pass
+            AttackerCriteriaMulti via single AttackerCriteria objects that do not focus on a whitelist, but
+            on generic criteria (e.g. typing).
+            This is used to determine eligibility for estimator scaling (IN_SCALING): For example, Black Kyurem
+            against itself will not pass the generic AttackerCriteria, but it passes the whitelist AttackerCriteria.
+            We don't want Black Kyurem to participate in estimator scaling, so we need a way to prevent it from
+            passing the whitelist for these purposes.
+            Default to False.
         :return: Whether the attacker meets all criteria
         """
         if not pokemon:
@@ -186,14 +197,26 @@ class AttackerCriteria:
                 charged_not_given = True
             charged = self.metadata.find_move(charged_codename)
 
+        # Check if the given attacker satisfies self.pokemon_codenames_and_moves
+        pass_pokemon_moves_check = True
+        if self.pokemon_codenames_and_moves is not None:  # Empty list will fail all checks
+            if ignore_specific_codenames_and_moves:
+                return False
+            pass_pokemon_moves_check = False
+            if fast and charged:
+                for pkm in self.pokemon_codenames_and_moves:
+                    if (pkm[0] == pokemon.name and pkm[1] == fast.name and pkm[2] == charged.name
+                            and (len(pkm) <= 3 or pkm[3] == iv)):
+                        pass_pokemon_moves_check = True
+                        break
+
         return all([
             not self.pokemon_types or criterion_is_types(pokemon, self.pokemon_types),
             not self.fast_types or fast_not_given or fast.type in self.fast_types,
             not self.charged_types or charged_not_given or charged.type in self.charged_types,
             not level or is_level_in_range(level, self.min_level, self.max_level),  # Mostly for Pokebox
             not self.pokemon_codenames or pokemon.name in self.pokemon_codenames,
-            not self.pokemon_codenames_and_moves or (
-                    fast and charged and (pokemon.name, fast.name, charged.name) in self.pokemon_codenames_and_moves),
+            pass_pokemon_moves_check,
             criterion_legendary(pokemon, self.is_legendary, self.is_not_legendary),
             criterion_mythical(pokemon, self.is_mythical, self.is_not_mythical),
             criterion_legendary_or_mythical(pokemon, self.is_legendary_or_mythical, self.is_not_legendary_or_mythical),
@@ -231,6 +254,52 @@ class AttackerCriteria:
         cp.exclude_codenames = self.exclude_codenames.copy() if self.exclude_codenames is not None else None
         return cp
 
+    def get_required_attackers(self):
+        """
+        Get the list of required attacker codenames, their levels, IVs and movesets specified in this object,
+        specifically the pokemon_codenames_and_moves attribute.
+        These attackers are forced to be included in the output CSV. If they're not in the counters lists, they
+        should be filled during fill_blanks.
+        IV is taken as 15/15/15 by default, unless specified in self.pokemon_codenames_and_moves.
+        This should only be used if this object is by level, not trainer ID. Thus, levels are generated based on
+        the configurations here.
+
+        :return: List of required attacker codenames, their levels, IVs and movesets, Format:
+            [
+                ("URSALUNA", 30, "15/15/15", "MUD_SHOT_FAST", "HIGH_HORSEPOWER"),
+                ("URSALUNA", 40, "15/15/15", "MUD_SHOT_FAST", "HIGH_HORSEPOWER"),
+                ("URSALUNA", 30, "15/15/15", "TACKLE_FAST", "HIGH_HORSEPOWER"),
+                ("URSALUNA", 40, "15/15/15", "TACKLE_FAST", "HIGH_HORSEPOWER"),
+                ("GOLURK_SHADOW_FORM", 30, "15/15/15", "MUD_SLAP_FAST", "EARTH_POWER"),
+                ("GOLURK_SHADOW_FORM", 40, "15/15/15", "MUD_SLAP_FAST", "EARTH_POWER"),
+                ("GARCHOMP_MEGA", 30, "10/10/10", "MUD_SHOT_FAST", "EARTH_POWER"),
+                ("GARCHOMP_MEGA", 40, "10/10/10", "MUD_SHOT_FAST", "EARTH_POWER"),
+                ...
+            ]
+        """
+        # TODO: Consider adding pokemon_codenames?
+        if not self.pokemon_codenames_and_moves:
+            return []
+        ret = []
+        lvl_range = [40]
+        if self.trainer_id:
+            print(f"Warning (AttackerCriteria.get_required_attackers): "
+                  f"Method called on AttackerCriteria based on Trainer IDs. \n"
+                  f"Please only use it on criteria by level.\n"
+                  f"Using Level 40 as default.",
+                  file=sys.stderr)
+        else:
+            lvl_range = get_levels_in_range(self.min_level, self.max_level, self.level_step)
+        for pkm in self.pokemon_codenames_and_moves:
+            for lvl in lvl_range:
+                ret.append((
+                    pkm[0],  # Pokemon codename
+                    lvl,
+                    pkm[3] if len(pkm) >= 4 else "15/15/15",  # IV
+                    pkm[1], pkm[2]  # Fast and charged moves
+                ))
+        return ret
+
 
 class AttackerCriteriaMulti:
     """
@@ -254,10 +323,20 @@ class AttackerCriteriaMulti:
         :param pokemon_codename: Pokemon codename
         :param pokemon: Pokemon object, if codename is not given
         :param level: Level of attacker, as string or numerical value
+        :param iv: IV of attacker, as string "15/15/15"
         :param fast_codename: Fast move codename
         :param fast: Fast Move object, if codename is not given
         :param charged_codename: Charged move codename
         :param charged: Charged Move object, if codename is not given
+        :param ignore_specific_codenames_and_moves: If True, always returns False if this AttackerCriteria includes
+            a check for Pokemon codenames and moves. The effect of this is that an attacker can only pass
+            AttackerCriteriaMulti via single AttackerCriteria objects that do not focus on a whitelist, but
+            on generic criteria (e.g. typing).
+            This is used to determine eligibility for estimator scaling (IN_SCALING): For example, Black Kyurem
+            against itself will not pass the generic AttackerCriteria, but it passes the whitelist AttackerCriteria.
+            We don't want Black Kyurem to participate in estimator scaling, so we need a way to prevent it from
+            passing the whitelist for these purposes.
+            Default to False.
         :return: Whether the attacker meets any individual AttackerCriteria
         """
         return any(criteria.check_attacker(**kwargs) for criteria in self.sets)
@@ -364,3 +443,31 @@ class AttackerCriteriaMulti:
         """
         return AttackerCriteriaMulti([criteria.copy() for criteria in self.sets],
                                      metadata=self.metadata)
+
+    def get_required_attackers(self):
+        """
+        Get the list of required attacker codenames, their levels, IVs and movesets specified in this object,
+        specifically the pokemon_codenames_and_moves attributes of individual AttackerCriteria objects.
+        These attackers are forced to be included in the output CSV. If they're not in the counters lists, they
+        should be filled during fill_blanks.
+        IV is taken as 15/15/15 by default, unless specified in self.pokemon_codenames_and_moves.
+        This should only be used if this object is by level, not trainer ID. Thus, levels are generated based on
+        the configurations here.
+
+        :return: List of required attacker codenames, their levels, IVs and movesets, Format:
+            [
+                ("URSALUNA", 30, "15/15/15", "MUD_SHOT_FAST", "HIGH_HORSEPOWER"),
+                ("URSALUNA", 40, "15/15/15", "MUD_SHOT_FAST", "HIGH_HORSEPOWER"),
+                ("URSALUNA", 30, "15/15/15", "TACKLE_FAST", "HIGH_HORSEPOWER"),
+                ("URSALUNA", 40, "15/15/15", "TACKLE_FAST", "HIGH_HORSEPOWER"),
+                ("GOLURK_SHADOW_FORM", 30, "15/15/15", "MUD_SLAP_FAST", "EARTH_POWER"),
+                ("GOLURK_SHADOW_FORM", 40, "15/15/15", "MUD_SLAP_FAST", "EARTH_POWER"),
+                ("GARCHOMP_MEGA", 30, "10/10/10", "MUD_SHOT_FAST", "EARTH_POWER"),
+                ("GARCHOMP_MEGA", 40, "10/10/10", "MUD_SHOT_FAST", "EARTH_POWER"),
+                ...
+            ]
+        """
+        ret = set()
+        for criteria in self.sets:
+            ret.update(set(criteria.get_required_attackers()))
+        return list(ret)

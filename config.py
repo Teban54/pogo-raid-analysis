@@ -10,12 +10,13 @@ from params import *
 
 #CONFIG_WRITE_ALL_COUNTERS = True
 
-SINGLE_TYPE_ATTACKER = ["Bug"]
+SINGLE_TYPE_ATTACKER = ["Dragon"]
 MULTI_TYPE_ATTACKERS_COMPARE = ["Ghost", "Dark"]
 EXTRA_TYPE_ATTACKER = ["Psychic"]  # Attacker types that use non-STAB moves (Mewtwo, Xurkitree, Mega Alakazam, Landorus-I), doesn't apply to moves
 MODE = "SINGLE"  # SINGLE, SINGLE+, MULTI, MULTI+
 
-CONFIG_SORT_OPTION = "Estimator"
+#CONFIG_SORT_OPTION = "Estimator"
+CONFIG_SORT_OPTIONS = ["Estimator", "TTW"]
 # Sorting option as on Pokebattler:
 # "Overall", "Power", "Win Rate", "Time to Win", "Potions", "Damage (TDO)", "Estimator"
 # Recommended to use either Estimator or TTW; others may not be perfectly supported.
@@ -55,47 +56,59 @@ CONFIG_ATTACKER_CRITERIA = [
     # An attacker will be considered if it satisfies any single {} block.
     # To use a filter, delete the first # at the start of the line, and then change the value as you wish.
     # To drop a filter, add back the # at the start of the line.
-    # {
-    #     # Each block contains several filters. To meet the criteria for this particular {} block,
-    #     # an attacker needs to pass all the filters (example: Ice charged move, levels 30-50, AND non-shadow).
-    #     #"Charged move types": SINGLE_TYPE_ATTACKER,
-    #     #"Charged move types": MULTI_TYPE_ATTACKERS_COMPARE,
-    #     "Charged move types": get_move_types(),
-    #                                       # This is an approximation for "attacker type",
-    #                                       # and should be used primarily for type-based filtering.
-    #                                       # Always put "" around type names!
-    #     "Min level": 30,
-    #     "Max level": 50,
-    #     "Level step size": 5, #5,  # Can be as low as 0.5, but recommend 5 for efficiency
-    #     # "Pokemon code names": [],  # Specific Pokemon to be considered,
-    #         # e.g. "MEWTWO", "VENUSAUR_SHADOW_FORM", "RAICHU_ALOLA_FORM",
-    #         # "SLOWBRO_GALARIAN_FORM", "CHARIZARD_MEGA_Y"
-    #         # NOTE: This does NOT guarantee the required Pokemon will be on the counters list,
-    #         # especially if the Pokemon is too weak to be in top 32 against bosses.
-    #         # To guarantee results, add it to your Pokebox and use "Trainer ID" option instead.
-    #     # "Trainer ID": 52719,  # Pokebattler trainer ID
-    #     #                       # If this is provided, only Pokemon from that Trainer's Pokebox are used
-    #     # "Must be shadow": False,  # This describes attackers, not bosses
-    #     # "Must be non shadow": True,
-    #     # "Must be mega": True,
-    #     # "Must be non mega": True,
-    #     # "Must be legendary": False,
-    #     # "Must be non legendary": True,
-    #     # "Must be mythical": False,
-    #     # "Must be non mythical": True,
-    #     # "Must be legendary or mythical": False,
-    #     # "Must be non legendary or mythical": False,
-    #     #"Pokemon types": SINGLE_TYPE_ATTACKER,  # Only use this if you know what you're doing
-    #     #"Pokemon types": SINGLE_TYPE_ATTACKER + ["Psychic"],  # Only use this if you know what you're doing
-    #     #"Pokemon types": MULTI_TYPE_ATTACKERS_COMPARE,
-    #     #"Pokemon types": MULTI_TYPE_ATTACKERS_COMPARE + ["Psychic"],
-    #     "Pokemon types": get_pokemon_types(),
-    #     # "Fast move types": ["Flying"],  # Only use this if you know what you're doing
-    #     "Exclude": ["LUCARIO_MEGA", "KYUREM_BLACK_FORM", "KYUREM_WHITE_FORM", "MEWTWO_MEGA_X", "MEWTWO_MEGA_Y",
-    #                 "CALYREX_SHADOW_RIDER_FORM", "BLACEPHALON"],
-    #         # Specific Pokemon to be excluded,
-    #         # in the same format as "Pokemon code names", e.g. "VENUSAUR_SHADOW_FORM"
-    # },
+    {
+        # Each block contains several filters. To meet the criteria for this particular {} block,
+        # an attacker needs to pass all the filters (example: Ice charged move, levels 30-50, AND non-shadow).
+        #"Charged move types": SINGLE_TYPE_ATTACKER,
+        #"Charged move types": MULTI_TYPE_ATTACKERS_COMPARE,
+        "Charged move types": get_move_types(),
+                                          # This is an approximation for "attacker type",
+                                          # and should be used primarily for type-based filtering.
+                                          # Always put "" around type names!
+        "Min level": 30,
+        "Max level": 50,
+        "Level step size": 5, #5,  # Can be as low as 0.5, but recommend 5 for efficiency
+        # "Pokemon code names": [],  # Specific Pokemon to be considered,
+            # e.g. "MEWTWO", "VENUSAUR_SHADOW_FORM", "RAICHU_ALOLA_FORM",
+            # "SLOWBRO_GALARIAN_FORM", "CHARIZARD_MEGA_Y"
+            # NOTE: This does NOT guarantee the required Pokemon will be on the counters list,
+            # especially if the Pokemon is too weak to be in top 32 against bosses.
+            # To guarantee results, use "Pokemon code names and moves" instead.
+        #"Pokemon code names and moves": [],
+            # Specific Pokemon and movesets to be considered, as a list of tuples. Possibly including IVs.
+            # e.g. [
+            #     ("URSALUNA", "MUD_SHOT_FAST", "HIGH_HORSEPOWER"),
+            #     ("URSALUNA", "TACKLE_FAST", "HIGH_HORSEPOWER"),
+            #     ("GOLURK_SHADOW_FORM", "MUD_SLAP_FAST", "EARTH_POWER"),
+            #     ("GARCHOMP_MEGA", "MUD_SHOT_FAST", "EARTH_POWER", "10/10/10"),
+            #     ...
+            # ]
+            # This DOES guarantee the required Pokemon will be on the counters list.
+            # Use this option if you want to test unreleased Pokemon or movesets, or Pokemon that are too weak
+            # to appear on any of the top 32 lists.
+        # "Trainer ID": 52719,  # Pokebattler trainer ID
+        #                       # If this is provided, only Pokemon from that Trainer's Pokebox are used
+        # "Must be shadow": False,  # This describes attackers, not bosses
+        # "Must be non shadow": True,
+        # "Must be mega": True,
+        # "Must be non mega": True,
+        # "Must be legendary": False,
+        # "Must be non legendary": True,
+        # "Must be mythical": False,
+        # "Must be non mythical": True,
+        # "Must be legendary or mythical": False,
+        # "Must be non legendary or mythical": False,
+        #"Pokemon types": SINGLE_TYPE_ATTACKER,  # Only use this if you know what you're doing
+        #"Pokemon types": SINGLE_TYPE_ATTACKER + ["Psychic"],  # Only use this if you know what you're doing
+        #"Pokemon types": MULTI_TYPE_ATTACKERS_COMPARE,
+        #"Pokemon types": MULTI_TYPE_ATTACKERS_COMPARE + ["Psychic"],
+        "Pokemon types": get_pokemon_types(),
+        # "Fast move types": ["Flying"],  # Only use this if you know what you're doing
+        "Exclude": ["LUCARIO_MEGA", "KYUREM_BLACK_FORM", "KYUREM_WHITE_FORM", "MEWTWO_MEGA_X", "MEWTWO_MEGA_Y",
+                    "CALYREX_SHADOW_RIDER_FORM", "BLACEPHALON", "ETERNATUS", "ETERNATUS_ETERNAMAX_FORM"],
+            # Specific Pokemon to be excluded,
+            # in the same format as "Pokemon code names", e.g. "VENUSAUR_SHADOW_FORM"
+    },
     # {
     #     "Trainer ID": 52719,
     #     #"Charged move types": SINGLE_TYPE_ATTACKER,
@@ -113,19 +126,157 @@ CONFIG_ATTACKER_CRITERIA = [
         "Max level": 50,
         "Level step size": 5,
         "Pokemon code names and moves": [
-            ("GARDEVOIR_SHADOW_FORM", "CHARM_FAST", "DAZZLING_GLEAM"),
-            ("ALTARIA_MEGA", "PECK_FAST", "MOONBLAST")
-        ],  # Specific Pokemon and movesets to be considered, as a list of tuples
-            # e.g. [
-            #     ("URSALUNA", "MUD_SHOT_FAST", "HIGH_HORSEPOWER"),
-            #     ("URSALUNA", "TACKLE_FAST", "HIGH_HORSEPOWER"),
-            #     ("GOLURK_SHADOW_FORM", "MUD_SLAP_FAST", "EARTH_POWER"),
-            #     ("GARCHOMP_MEGA", "MUD_SHOT_FAST", "EARTH_POWER"),
-            #     ...
-            # ]
-            # This DOES guarantee the required Pokemon will be on the counters list.
-            # Use this option if you want to test unreleased Pokemon or movesets, or Pokemon that are too weak
-            # to appear on any of the top 32 lists.
+            # REMINDER: UPDATE "Attackers that should not be combined"
+
+            # ("RAYQUAZA_SHADOW_FORM", "AIR_SLASH_FAST", "AERIAL_ACE"),
+            # ("RAYQUAZA_SHADOW_FORM", "AIR_SLASH_FAST", "HURRICANE"),
+            # ("RAYQUAZA_SHADOW_FORM", "AIR_SLASH_FAST", "SKY_ATTACK"),
+            # ("RAYQUAZA_SHADOW_FORM", "AIR_SLASH_FAST", "FLY"),
+            # ("RAYQUAZA_SHADOW_FORM", "AIR_SLASH_FAST", "BRAVE_BIRD"),
+            # ("RAYQUAZA_SHADOW_FORM", "AIR_SLASH_FAST", "AEROBLAST"),
+            # ("RAYQUAZA", "AIR_SLASH_FAST", "SKY_ATTACK"),
+            # ("RAYQUAZA", "AIR_SLASH_FAST", "FLY"),
+            # ("RAYQUAZA", "AIR_SLASH_FAST", "BRAVE_BIRD"),
+            # ("RAYQUAZA", "AIR_SLASH_FAST", "AEROBLAST"),
+            # ("ARCHEOPS", "WING_ATTACK_FAST", "SKY_ATTACK"),
+            # ("ARCHEOPS_SHADOW_FORM", "WING_ATTACK_FAST", "SKY_ATTACK"),
+
+            # ("TERRAKION_SHADOW_FORM", "DOUBLE_KICK_FAST", "SACRED_SWORD"),
+            # ("LUCARIO_SHADOW_FORM", "COUNTER_FAST", "AURA_SPHERE"),
+            # ("CONKELDURR_SHADOW_FORM", "COUNTER_FAST", "DYNAMIC_PUNCH"),
+            # ("CONKELDURR_SHADOW_FORM", "COUNTER_FAST", "SACRED_SWORD"),
+
+            # ("DARKRAI_SHADOW_FORM", "SNARL_FAST", "DARK_PULSE"),
+            # ("DARKRAI_SHADOW_FORM", "SNARL_FAST", "SHADOW_BALL"),
+            # ("DARKRAI_SHADOW_FORM", "SNARL_FAST", "FOUL_PLAY"),
+            # ("DARKRAI_SHADOW_FORM", "SNARL_FAST", "BRUTAL_SWING"),
+
+            # ("ZEKROM_SHADOW_FORM", "CHARGE_BEAM_FAST", "WILD_CHARGE"),
+            # ("XURKITREE", "THUNDER_SHOCK_FAST", "WILD_CHARGE"),
+            # ("MEWTWO_MEGA_Y", "PSYCHO_CUT_FAST", "THUNDERBOLT"),
+
+            ("RAYQUAZA_SHADOW_FORM", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            ("HAXORUS_SHADOW_FORM", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            ("PALKIA_SHADOW_FORM", "DRAGON_TAIL_FAST", "DRACO_METEOR"),
+            ("DIALGA_SHADOW_FORM", "DRAGON_BREATH_FAST", "DRACO_METEOR"),
+            ("ZEKROM_SHADOW_FORM", "DRAGON_BREATH_FAST", "OUTRAGE"),
+            ("KYUREM_BLACK_FORM", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            ("PALKIA_SHADOW_FORM", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            ("DIALGA_SHADOW_FORM", "DRAGON_BREATH_FAST", "OUTRAGE"),
+            ("GARCHOMP_SHADOW_FORM", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            ("NECROZMA_ULTRA_FORM", "PSYCHO_CUT_FAST", "OUTRAGE"),
+
+            # ("MEWTWO_SHADOW_FORM", "CONFUSION_FAST", "PSYSTRIKE", "12/15/15"),
+            # ("MEWTWO_SHADOW_FORM", "CONFUSION_FAST", "PSYSTRIKE", "9/15/15"),
+            # ("MEWTWO_SHADOW_FORM", "CONFUSION_FAST", "PSYSTRIKE", "6/15/15"),
+            # ("MEWTWO_SHADOW_FORM", "CONFUSION_FAST", "PSYSTRIKE", "15/12/12"),
+            # ("MEWTWO_SHADOW_FORM", "CONFUSION_FAST", "PSYSTRIKE", "12/12/12"),
+            # ("MEWTWO_SHADOW_FORM", "CONFUSION_FAST", "PSYSTRIKE", "9/12/12"),
+            # ("MEWTWO_SHADOW_FORM", "CONFUSION_FAST", "PSYSTRIKE", "6/12/12"),
+            # ("MEWTWO_SHADOW_FORM", "CONFUSION_FAST", "PSYSTRIKE", "15/9/9"),
+            # ("MEWTWO_SHADOW_FORM", "CONFUSION_FAST", "PSYSTRIKE", "12/9/9"),
+            # ("MEWTWO_SHADOW_FORM", "CONFUSION_FAST", "PSYSTRIKE", "9/9/9"),
+            # ("MEWTWO_SHADOW_FORM", "CONFUSION_FAST", "PSYSTRIKE", "6/9/9"),
+            # ("MEWTWO_SHADOW_FORM", "CONFUSION_FAST", "PSYSTRIKE", "15/6/6"),
+            # ("MEWTWO_SHADOW_FORM", "CONFUSION_FAST", "PSYSTRIKE", "12/6/6"),
+            # ("MEWTWO_SHADOW_FORM", "CONFUSION_FAST", "PSYSTRIKE", "9/6/6"),
+            # ("MEWTWO_SHADOW_FORM", "CONFUSION_FAST", "PSYSTRIKE", "6/6/6"),
+            # ("MEWTWO_SHADOW_FORM", "PSYCHO_CUT_FAST", "PSYSTRIKE", "12/15/15"),
+            # ("MEWTWO_SHADOW_FORM", "PSYCHO_CUT_FAST", "PSYSTRIKE", "9/15/15"),
+            # ("MEWTWO_SHADOW_FORM", "PSYCHO_CUT_FAST", "PSYSTRIKE", "6/15/15"),
+            # ("MEWTWO_SHADOW_FORM", "PSYCHO_CUT_FAST", "PSYSTRIKE", "15/12/12"),
+            # ("MEWTWO_SHADOW_FORM", "PSYCHO_CUT_FAST", "PSYSTRIKE", "12/12/12"),
+            # ("MEWTWO_SHADOW_FORM", "PSYCHO_CUT_FAST", "PSYSTRIKE", "9/12/12"),
+            # ("MEWTWO_SHADOW_FORM", "PSYCHO_CUT_FAST", "PSYSTRIKE", "6/12/12"),
+            # ("MEWTWO_SHADOW_FORM", "PSYCHO_CUT_FAST", "PSYSTRIKE", "15/9/9"),
+            # ("MEWTWO_SHADOW_FORM", "PSYCHO_CUT_FAST", "PSYSTRIKE", "12/9/9"),
+            # ("MEWTWO_SHADOW_FORM", "PSYCHO_CUT_FAST", "PSYSTRIKE", "9/9/9"),
+            # ("MEWTWO_SHADOW_FORM", "PSYCHO_CUT_FAST", "PSYSTRIKE", "6/9/9"),
+            # ("MEWTWO_SHADOW_FORM", "PSYCHO_CUT_FAST", "PSYSTRIKE", "15/6/6"),
+            # ("MEWTWO_SHADOW_FORM", "PSYCHO_CUT_FAST", "PSYSTRIKE", "12/6/6"),
+            # ("MEWTWO_SHADOW_FORM", "PSYCHO_CUT_FAST", "PSYSTRIKE", "9/6/6"),
+            # ("MEWTWO_SHADOW_FORM", "PSYCHO_CUT_FAST", "PSYSTRIKE", "6/6/6"),
+
+            # ("KYOGRE_SHADOW_FORM", "WATERFALL_FAST", "SURF"),
+            # ("KYOGRE_SHADOW_FORM", "WATERFALL_FAST", "ORIGIN_PULSE"),
+            # ("KYOGRE", "WATERFALL_FAST", "ORIGIN_PULSE"),
+            # ("GRENINJA", "BUBBLE_FAST", "HYDRO_CANNON"),
+            # ("PRIMARINA", "WATERFALL_FAST", "HYDRO_CANNON"),
+            # ("INTELEON", "WATER_GUN_FAST", "HYDRO_CANNON"),
+            # ("EMPOLEON_SHADOW_FORM", "WATERFALL_FAST", "HYDRO_CANNON"),
+            # ("SAMUROTT_SHADOW_FORM", "WATERFALL_FAST", "HYDRO_CANNON"),
+            # ("KINGLER_SHADOW_FORM", "BUBBLE_FAST", "CRABHAMMER"),
+            # ("PALKIA", "WATERFALL_FAST", "AQUA_TAIL"),
+            # ("PALKIA", "WATERFALL_FAST", "HYDRO_PUMP"),
+            # ("PALKIA_SHADOW_FORM", "WATERFALL_FAST", "AQUA_TAIL"),
+            # ("PALKIA_SHADOW_FORM", "WATERFALL_FAST", "HYDRO_PUMP"),
+
+            # ("DARMANITAN_GALARIAN_ZEN_FORM", "ICE_FANG_FAST", "AVALANCHE"),
+            # ("KYUREM_BLACK_FORM", "DRAGON_TAIL_FAST", "BLIZZARD"),
+            # ("KYUREM_BLACK_FORM", "SHADOW_CLAW_FAST", "BLIZZARD"),
+
+            # ("URSALUNA", "TACKLE_FAST", "HIGH_HORSEPOWER"),
+            # ("URSALUNA", "ROCK_SMASH_FAST", "HIGH_HORSEPOWER"),
+            # ("URSALUNA", "MUD_SLAP_FAST", "HIGH_HORSEPOWER"),
+            # ("URSALUNA", "MUD_SHOT_FAST", "HIGH_HORSEPOWER"),
+            # ("URSALUNA", "COUNTER_FAST", "HIGH_HORSEPOWER"),
+            # ("URSALUNA_SHADOW_FORM", "TACKLE_FAST", "HIGH_HORSEPOWER"),
+            # ("URSALUNA_SHADOW_FORM", "ROCK_SMASH_FAST", "HIGH_HORSEPOWER"),
+            # ("URSALUNA_SHADOW_FORM", "MUD_SLAP_FAST", "HIGH_HORSEPOWER"),
+            # ("URSALUNA_SHADOW_FORM", "MUD_SHOT_FAST", "HIGH_HORSEPOWER"),
+            # ("URSALUNA_SHADOW_FORM", "COUNTER_FAST", "HIGH_HORSEPOWER"),
+            # ("URSALUNA", "TACKLE_FAST", "EARTH_POWER"),
+            # ("URSALUNA", "ROCK_SMASH_FAST", "EARTH_POWER"),
+            # ("URSALUNA", "MUD_SLAP_FAST", "EARTH_POWER"),
+            # ("URSALUNA", "MUD_SHOT_FAST", "EARTH_POWER"),
+            # ("URSALUNA", "COUNTER_FAST", "EARTH_POWER"),
+            # ("URSALUNA_SHADOW_FORM", "TACKLE_FAST", "EARTH_POWER"),
+            # ("URSALUNA_SHADOW_FORM", "ROCK_SMASH_FAST", "EARTH_POWER"),
+            # ("URSALUNA_SHADOW_FORM", "MUD_SLAP_FAST", "EARTH_POWER"),
+            # ("URSALUNA_SHADOW_FORM", "MUD_SHOT_FAST", "EARTH_POWER"),
+            # ("URSALUNA_SHADOW_FORM", "COUNTER_FAST", "EARTH_POWER"),
+            # ("GOLURK_SHADOW_FORM", "MUD_SLAP_FAST", "EARTH_POWER"),
+            # ("MUDSDALE", "MUD_SLAP_FAST", "EARTHQUAKE"),
+            # ("MUDSDALE", "MUD_SLAP_FAST", "EARTH_POWER"),
+            # ("GROUDON", "MUD_SHOT_FAST", "EARTH_POWER"),
+            # ("GROUDON", "MUD_SHOT_FAST", "PRECIPICE_BLADES"),
+            # ("GROUDON_SHADOW_FORM", "MUD_SHOT_FAST", "EARTHQUAKE"),
+            # ("GROUDON_SHADOW_FORM", "MUD_SHOT_FAST", "EARTH_POWER"),
+            # ("GROUDON_SHADOW_FORM", "MUD_SHOT_FAST", "PRECIPICE_BLADES"),
+            # ("GARCHOMP_SHADOW_FORM", "MUD_SHOT_FAST", "EARTH_POWER"),
+            # ("GARCHOMP_MEGA", "MUD_SHOT_FAST", "EARTH_POWER"),
+            # ("EXCADRILL", "MUD_SLAP_FAST", "EARTH_POWER"),
+            # ("EXCADRILL", "MUD_SHOT_FAST", "EARTH_POWER"),
+            # ("EXCADRILL", "METAL_CLAW_FAST", "EARTH_POWER"),
+            # ("EXCADRILL_SHADOW_FORM", "MUD_SLAP_FAST", "DRILL_RUN"),
+            # ("EXCADRILL_SHADOW_FORM", "MUD_SHOT_FAST", "DRILL_RUN"),
+            # ("EXCADRILL_SHADOW_FORM", "METAL_CLAW_FAST", "DRILL_RUN"),
+            # ("EXCADRILL_SHADOW_FORM", "MUD_SLAP_FAST", "EARTH_POWER"),
+            # ("EXCADRILL_SHADOW_FORM", "MUD_SHOT_FAST", "EARTH_POWER"),
+            # ("EXCADRILL_SHADOW_FORM", "METAL_CLAW_FAST", "EARTH_POWER"),
+            # ("RHYPERIOR", "MUD_SLAP_FAST", "EARTH_POWER"),
+            # ("RHYPERIOR_SHADOW_FORM", "MUD_SLAP_FAST", "EARTHQUAKE"),
+            # ("RHYPERIOR_SHADOW_FORM", "MUD_SLAP_FAST", "EARTH_POWER"),
+            # ("KROOKODILE", "MUD_SLAP_FAST", "EARTH_POWER"),
+            # ("KROOKODILE_SHADOW_FORM", "MUD_SLAP_FAST", "EARTHQUAKE"),
+            # ("KROOKODILE_SHADOW_FORM", "MUD_SLAP_FAST", "EARTH_POWER"),
+            # ("SWAMPERT", "MUD_SHOT_FAST", "EARTH_POWER"),
+            # ("SWAMPERT_SHADOW_FORM", "MUD_SHOT_FAST", "EARTH_POWER"),
+            # ("SWAMPERT_MEGA", "MUD_SHOT_FAST", "EARTHQUAKE"),
+            # ("SWAMPERT_MEGA", "MUD_SHOT_FAST", "EARTH_POWER"),
+            # ("CAMERUPT_MEGA", "MUD_SLAP_FAST", "EARTH_POWER"),
+            # ("CAMERUPT_MEGA", "INCINERATE_FAST", "EARTH_POWER"),
+            # ("CAMERUPT_MEGA", "ROCK_SMASH_FAST", "EARTH_POWER"),
+            # ("MAMOSWINE", "MUD_SLAP_FAST", "EARTH_POWER"),
+            # ("MAMOSWINE_SHADOW_FORM", "MUD_SLAP_FAST", "EARTH_POWER"),
+            # ("LANDORUS_THERIAN_FORM", "MUD_SHOT_FAST", "EARTH_POWER"),
+            # ("GOLEM", "MUD_SLAP_FAST", "EARTH_POWER"),
+            # ("GOLEM_SHADOW_FORM", "MUD_SLAP_FAST", "EARTH_POWER"),
+            # ("STEELIX_MEGA", "MUD_SLAP_FAST", "EARTHQUAKE"),
+            # ("STEELIX_MEGA", "MUD_SLAP_FAST", "EARTH_POWER"),
+            # ("CAMERUPT_MEGA", "EMBER_FAST", "EARTH_POWER"),
+
+        ],
     },
 
     # Add more {} blocks here if needed
@@ -181,11 +332,22 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
     #
     # ----- End of documentation for this section -----
 
+    # [For testing]
+    # {
+    #     "Pokemon pool": "By raid category",
+    #     "Raid categories": ["Future Tier 5"],  # Here, "Tier 5" has only current bosses
+    #     "Weight of each Pokemon": 1,
+    #     "Weight of whole group": 0,
+    #     "Forms weight strategy": "combine",  # "combine" or "separate"
+    #     "Filters": {  # Only those without # at the start are applied
+    #         "Weak to contender types": ["Dragon"],
+    #     }
+    # },
+
     {
-        "Pokemon pool": "By raid category", #"By raid tier",  # "All Pokemon", "All Pokemon except above", "By raid tier" or "By raid category"
+        "Pokemon pool": "By raid tier",  # "All Pokemon", "All Pokemon except above", "By raid tier" or "By raid category"
         "Raid tiers": ["Tier 5", "Ultra Beast Tier", "Elite Tier"],  # Here, "Tier 5" has all past/present/future bosses
-        # "Raid category": "Legacy Tier 5",  # Here, "Tier 5" has only current bosses
-        "Raid category": "Tier 5",  # Here, "Tier 5" has only current bosses
+        #"Raid category": "Ultra Beast Tier",  # Here, "Tier 5" has only current bosses
         "Filters": {  # Only those without # at the start are applied
             #"Weak to contender types": SINGLE_TYPE_ATTACKER,
             #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
@@ -220,6 +382,21 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
         #     "Dodge strategy": "Realistic Dodging",
         # }
     },
+    {
+        "Pokemon pool": "By raid tier",
+        "Raid tiers": ["Tier 5", "Ultra Beast Tier", "Elite Tier"],
+        "Filters": {
+            #"Weak to contender types": SINGLE_TYPE_ATTACKER,
+            #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
+            get_ensemble_weak_key(): get_move_types(),
+        },
+        "Weight of each Pokemon": 1,
+        "Weight of whole group": 0,
+        "Forms weight strategy": "combine",
+        "Battle settings": {
+            "Attack strategy": "Dodge Specials PRO",
+        },
+    },
     # {
     #     "Pokemon pool": "By raid tier",
     #     "Raid tiers": ["Tier 5", "Ultra Beast Tier", "Elite Tier"],
@@ -232,144 +409,128 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
     #     "Weight of whole group": 0,
     #     "Forms weight strategy": "combine",
     #     "Battle settings": {
-    #         "Attack strategy": "Dodge Specials PRO",
+    #         "Weather": "Sunny",
     #     },
     # },
-    # # {
-    # #     "Pokemon pool": "By raid tier",
-    # #     "Raid tiers": ["Tier 5", "Ultra Beast Tier", "Elite Tier"],
-    # #     "Filters": {
-    # #         #"Weak to contender types": SINGLE_TYPE_ATTACKER,
-    # #         #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
-    # #         get_ensemble_weak_key(): get_move_types(),
-    # #     },
-    # #     "Weight of each Pokemon": 1,
-    # #     "Weight of whole group": 0,
-    # #     "Forms weight strategy": "combine",
-    # #     "Battle settings": {
-    # #         "Weather": "Sunny",
-    # #     },
-    # # },
-    #
-    # {
-    #     "Pokemon pool": "By raid tier",
-    #     "Raid tiers": ["Mega Tier", "Mega Legendary Tier"],
-    #     "Filters": {
-    #         #"Weak to contender types": SINGLE_TYPE_ATTACKER,
-    #         #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
-    #         get_ensemble_weak_key(): get_move_types(),
-    #     },
-    #     "Weight of each Pokemon": 1,
-    #     "Weight of whole group": 35,  #25,
-    #     "Forms weight strategy": "combine",
-    # },
-    # {
-    #     "Pokemon pool": "By raid tier",
-    #     "Raid tiers": ["Mega Tier", "Mega Legendary Tier"],
-    #     "Filters": {
-    #         #"Weak to contender types": SINGLE_TYPE_ATTACKER,
-    #         #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
-    #         get_ensemble_weak_key(): get_move_types(),
-    #     },
-    #     "Weight of each Pokemon": 1,
-    #     "Weight of whole group": 0,
-    #     "Forms weight strategy": "combine",
-    #     "Battle settings": {
-    #         "Attack strategy": "Dodge Specials PRO",
-    #     },
-    # },
-    # # {
-    # #     "Pokemon pool": "By raid tier",
-    # #     "Raid tiers": ["Mega Tier", "Mega Legendary Tier"],
-    # #     "Filters": {
-    # #         #"Weak to contender types": SINGLE_TYPE_ATTACKER,
-    # #         #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
-    # #         get_ensemble_weak_key(): get_move_types(),
-    # #     },
-    # #     "Weight of each Pokemon": 1,
-    # #     "Weight of whole group": 0,
-    # #     "Forms weight strategy": "combine",
-    # #     "Battle settings": {
-    # #         "Weather": "Sunny",
-    # #     },
-    # # },
-    #
-    # {
-    #     "Pokemon pool": "By raid tier",
-    #     "Raid tier": "Tier 3",
-    #     "Filters": {
-    #         #"Weak to contender types": SINGLE_TYPE_ATTACKER,
-    #         #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
-    #         get_ensemble_weak_key(): get_move_types(),
-    #     },
-    #     "Weight of each Pokemon": 1,
-    #     "Weight of whole group": 15,  #25,
-    #     "Forms weight strategy": "combine",
-    #     "Battle settings": {
-    #         "Friendship": "Not",
-    #     },
-    #     "Baseline battle settings": {
-    #         "Friendship": "Not",
-    #     }
-    # },
-    # {
-    #     "Pokemon pool": "By raid tier",
-    #     "Raid tier": "Tier 3",
-    #     "Filters": {
-    #         #"Weak to contender types": SINGLE_TYPE_ATTACKER,
-    #         #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
-    #         get_ensemble_weak_key(): get_move_types(),
-    #     },
-    #     "Weight of each Pokemon": 1,
-    #     "Weight of whole group": 0,
-    #     "Forms weight strategy": "combine",
-    #     "Battle settings": {
-    #         "Friendship": "Not",
-    #         "Attack strategy": "Dodge Specials PRO",
-    #     },
-    #     "Baseline battle settings": {
-    #         "Friendship": "Not",
-    #     }
-    # },
-    # # {
-    # #     "Pokemon pool": "By raid tier",
-    # #     "Raid tier": "Tier 3",
-    # #     "Filters": {
-    # #         #"Weak to contender types": SINGLE_TYPE_ATTACKER,
-    # #         #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
-    # #         get_ensemble_weak_key(): get_move_types(),
-    # #     },
-    # #     "Weight of each Pokemon": 1,
-    # #     "Weight of whole group": 0,
-    # #     "Forms weight strategy": "combine",
-    # #     "Battle settings": {
-    # #         "Friendship": "Not",
-    # #         "Weather": "Sunny",
-    # #     },
-    # #     "Baseline battle settings": {
-    # #         "Friendship": "Not",
-    # #     }
-    # # },
-    #
-    # # {
-    # #     "Pokemon pool": "All Pokemon except above",
-    # #     "Raid tier": "Tier 3",
-    # #     # "Raid category": "Legacy Tier 5",
-    # #     "Filters": {
-    # #         "Weak to contender types": ["Grass"],
-    # #         "Evolution stage": "Final",  # "Final", "Pre-evolution"
-    # #         "Must be non shadow": True,
-    # #         "Must be non mega": True,
-    # #         "Must be non legendary or mythical": True,  # Ignores Glastrier etc
-    # #     },
-    # #     "Weight of each Pokemon": 1,
-    # #     "Weight of whole group": 10,
-    # #     "Forms weight strategy": "combine",
-    # #     "Battle settings": {
-    # #         "Friendship": "Not",
-    # #     },
-    # # },
 
+    {
+        "Pokemon pool": "By raid tier",
+        "Raid tiers": ["Mega Tier", "Mega Legendary Tier"],
+        "Filters": {
+            #"Weak to contender types": SINGLE_TYPE_ATTACKER,
+            #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
+            get_ensemble_weak_key(): get_move_types(),
+        },
+        "Weight of each Pokemon": 1,
+        "Weight of whole group": 35,  #25,
+        "Forms weight strategy": "combine",
+    },
+    {
+        "Pokemon pool": "By raid tier",
+        "Raid tiers": ["Mega Tier", "Mega Legendary Tier"],
+        "Filters": {
+            #"Weak to contender types": SINGLE_TYPE_ATTACKER,
+            #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
+            get_ensemble_weak_key(): get_move_types(),
+        },
+        "Weight of each Pokemon": 1,
+        "Weight of whole group": 0,
+        "Forms weight strategy": "combine",
+        "Battle settings": {
+            "Attack strategy": "Dodge Specials PRO",
+        },
+    },
+    # {
+    #     "Pokemon pool": "By raid tier",
+    #     "Raid tiers": ["Mega Tier", "Mega Legendary Tier"],
+    #     "Filters": {
+    #         #"Weak to contender types": SINGLE_TYPE_ATTACKER,
+    #         #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
+    #         get_ensemble_weak_key(): get_move_types(),
+    #     },
+    #     "Weight of each Pokemon": 1,
+    #     "Weight of whole group": 0,
+    #     "Forms weight strategy": "combine",
+    #     "Battle settings": {
+    #         "Weather": "Sunny",
+    #     },
+    # },
+
+    {
+        "Pokemon pool": "By raid tier",
+        "Raid tier": "Tier 3",
+        "Filters": {
+            #"Weak to contender types": SINGLE_TYPE_ATTACKER,
+            #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
+            get_ensemble_weak_key(): get_move_types(),
+        },
+        "Weight of each Pokemon": 1,
+        "Weight of whole group": 15,  #25,
+        "Forms weight strategy": "combine",
+        "Battle settings": {
+            "Friendship": "Not",
+        },
+        "Baseline battle settings": {
+            "Friendship": "Not",
+        }
+    },
+    {
+        "Pokemon pool": "By raid tier",
+        "Raid tier": "Tier 3",
+        "Filters": {
+            #"Weak to contender types": SINGLE_TYPE_ATTACKER,
+            #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
+            get_ensemble_weak_key(): get_move_types(),
+        },
+        "Weight of each Pokemon": 1,
+        "Weight of whole group": 0,
+        "Forms weight strategy": "combine",
+        "Battle settings": {
+            "Friendship": "Not",
+            "Attack strategy": "Dodge Specials PRO",
+        },
+        "Baseline battle settings": {
+            "Friendship": "Not",
+        }
+    },
+    # {
+    #     "Pokemon pool": "By raid tier",
+    #     "Raid tier": "Tier 3",
+    #     "Filters": {
+    #         #"Weak to contender types": SINGLE_TYPE_ATTACKER,
+    #         #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
+    #         get_ensemble_weak_key(): get_move_types(),
+    #     },
+    #     "Weight of each Pokemon": 1,
+    #     "Weight of whole group": 0,
+    #     "Forms weight strategy": "combine",
+    #     "Battle settings": {
+    #         "Friendship": "Not",
+    #         "Weather": "Sunny",
+    #     },
+    #     "Baseline battle settings": {
+    #         "Friendship": "Not",
+    #     }
+    # },
+
+    # {
+    #     "Pokemon pool": "All Pokemon except above",
+    #     "Raid tier": "Tier 3",
+    #     # "Raid category": "Legacy Tier 5",
+    #     "Filters": {
+    #         "Weak to contender types": ["Grass"],
+    #         "Evolution stage": "Final",  # "Final", "Pre-evolution"
+    #         "Must be non shadow": True,
+    #         "Must be non mega": True,
+    #         "Must be non legendary or mythical": True,  # Ignores Glastrier etc
+    #     },
+    #     "Weight of each Pokemon": 1,
+    #     "Weight of whole group": 10,
+    #     "Forms weight strategy": "combine",
+    #     "Battle settings": {
+    #         "Friendship": "Not",
+    #     },
+    # },
 ]
 
 CONFIG_ESTIMATOR_SCALING_SETTINGS = {
@@ -480,7 +641,8 @@ CONFIG_ESTIMATOR_SCALING_SETTINGS = {
         "Friendship": "Best",
         "Attack strategy": "No Dodging",
         "Dodge strategy": "Realistic Dodging",
-    }
+    },
+    "Consider required attackers": False,  # Default: False
 }
 
 
@@ -494,7 +656,7 @@ CONFIG_PROCESSING_SETTINGS = {
     "Include unscaled estimators": False, #False,  # Default: False
     "Combine attacker movesets": True,  # Combine attacker moves (e.g. FS/BB and Counter/BB Blaziken), Default: True
     "Include random boss movesets": True,  # Default: True
-    "Include specific boss movesets": True,  # Default: False
+    "Include specific boss movesets": False,  # Default: False
     "Assign weights to specific boss movesets": False,  # Default: False
     "Include attacker IVs": False,  # Default: False
     "Fill blanks": True,  # Default: True
@@ -521,9 +683,20 @@ CONFIG_PROCESSING_SETTINGS = {
         # "SCIZOR_MEGA", "DIALGA", "EXCADRILL", "MELMETAL"
         # "BLACEPHALON", "DARMANITAN_GALARIAN_ZEN_FORM", "RESHIRAM", "HEATRAN", "CHANDELURE", "ENTEI", "SALAZZLE",
         # "CAMERUPT_MEGA", "ENTEI_SHADOW_FORM", "VOLCARONA"
-        "LUNALA", "MARSHADOW", "BLACEPHALON", "TYRANITAR", "TYRANITAR_SHADOW_FORM", "TYRANITAR_MEGA", "ABSOL_MEGA",
-        "KROOKODILE", "GRENINJA", "INCINEROAR", "ZARUDE", "DARKRAI", "ZOROARK", "PANGORO", "HOOPA_UNBOUND_FORM",
-        "GRIMMSNARL", "URSHIFU_SINGLE_STRIKE_FORM", "CALYREX_SHADOW_RIDER_FORM", "GYARADOS_MEGA",
-        "GIRATINA_ORIGIN_FORM", "DECIDUEYE", "SABLEYE_MEGA"
+        # "LUNALA", "MARSHADOW", "BLACEPHALON", "TYRANITAR", "TYRANITAR_SHADOW_FORM", "TYRANITAR_MEGA", "ABSOL_MEGA",
+        # "KROOKODILE", "GRENINJA", "INCINEROAR", "ZARUDE", "DARKRAI", "ZOROARK", "PANGORO", "HOOPA_UNBOUND_FORM",
+        # "GRIMMSNARL", "URSHIFU_SINGLE_STRIKE_FORM", "CALYREX_SHADOW_RIDER_FORM", "GYARADOS_MEGA",
+        # "GIRATINA_ORIGIN_FORM", "DECIDUEYE", "SABLEYE_MEGA",
+        # "DARKRAI_SHADOW_FORM",
+        # "URSALUNA", "URSALUNA_SHADOW_FORM", "MUDSDALE", "GROUDON", "GROUDON_SHADOW_FORM", "EXCADRILL", "RHYPERIOR",
+        # "KROOKODILE", "KROOKODILE_SHADOW_FORM", "SWAMPERT", "SWAMPERT_SHADOW_FORM", "SWAMPERT_MEGA", "CAMERUPT_MEGA",
+        # "MAMOSWINE", "MAMOSWINE_SHADOW_FORM", "LANDORUS_THERIAN_FORM", "GOLEM", "GOLEM_SHADOW_FORM", "STEELIX_MEGA",
+        # "EXCADRILL_SHADOW_FORM"
+        # "MEWTWO_SHADOW_FORM"
+        # "KYOGRE", "KYOGRE_SHADOW_FORM", "GRENINJA", "PRIMARINA", "INTELEON", "PALKIA", "PALKIA_SHADOW_FORM",
+        "PALKIA_SHADOW_FORM", "DIALGA_SHADOW_FORM",
+        # "XURKITREE",
+        # "CONKELDURR_SHADOW_FORM",
+        # "RAYQUAZA", "RAYQUAZA_SHADOW_FORM"
     ],
 }
