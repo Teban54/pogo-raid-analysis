@@ -124,10 +124,12 @@ class Config:
                 print(f"Error (Config.parse_raid_ensemble_config): "
                       f"'Pokemon pool' does not exist in raid ensemble config. Using All Pokemon as default.",
                       file=sys.stderr)
-            pool = cfg.get('Pokemon pool', 'All Pokemon').lower()
-            if pool not in ["all pokemon", "all pokemon except above",
-                            "by raid tier", "by tier",
-                            "by raid category", "by category"]:
+            pool = cfg.get('Pokemon pool', 'All Pokemon')
+            if type(pool) is str:
+                pool = pool.lower()
+            if type(pool) is str and pool not in ["all pokemon", "all pokemon except above",
+                                                  "by raid tier", "by tier",
+                                                  "by raid category", "by category"]:
                 print(f"Error (Config.parse_raid_ensemble_config): "
                       f"Pokemon pool {cfg.get('Pokemon pool', 'All Pokemon')} does not match one of expected values. "
                       f"Using All Pokemon as default.",
@@ -137,9 +139,10 @@ class Config:
             # Note: Config now supports specifying several raid tiers or categories at once.
             # If the Pokemon pool is determined by raid tier or category, pre-made RaidBoss objects
             # will be used (those were created when initializing the metadata).
-            # If the Pokemon pool is all Pokemon (possibly except those used above), the list of
-            # Pokemon will be pulled first, and then a RaidBoss object is created for each combination
-            # of Pokemon and tier. (e.g. T1 Ferroseed, T3 Ferroseed, T1 Chansey, T3 Chansey, etc)
+            # If the Pokemon pool is all Pokemon (possibly except those used above) or a user-specified
+            # list of Pokemon code names, the list of Pokemon will be pulled first, and then a
+            # RaidBoss object is created for each combination of Pokemon and tier. (e.g. T1 Ferroseed,
+            # T3 Ferroseed, T1 Chansey, T3 Chansey, etc)
             raids = None
             pokemon = None
             tier = None
@@ -175,7 +178,7 @@ class Config:
                 #category = cfg.get('Raid category', "Tier 3")
                 raids = self.meta.get_raid_bosses_by_categories(categories, remove_ignored=True)  # pre-built from metadata
                 return raids
-            elif pool == "all pokemon" or pool == "all pokemon except above":
+            elif pool == "all pokemon" or pool == "all pokemon except above" or type(pool) is list:
                 tiers = []
                 if 'Raid tier' not in cfg and 'Raid tiers' not in cfg:
                     print(f"Error (Config.parse_raid_ensemble_config): "
@@ -189,12 +192,25 @@ class Config:
                         tiers.append(cfg['Raid tier'])
                     if 'Raid tiers' in cfg:
                         tiers += cfg['Raid tiers']
-                #tier = cfg.get('Raid tier', "Tier 3")
-                pokemon = self.meta.get_all_pokemon(remove_ignored=True)
-                if pool == "all pokemon except above":
-                    pokemon = subtract_from_pokemon_list(pokemon, pokemon_used)
+
+                pokemon_list = []
+                if type(pool) is list:
+                    for pkm_codename in pool:
+                        pokemon = self.meta.find_pokemon(pkm_codename)
+                        if pokemon is None:
+                            print(f"Error (Config.parse_raid_ensemble_config): "
+                                  f"Raid boss {pokemon} not found. Make sure you're using code name when specifying the "
+                                  f"Pokemon pool for raid boss ensembles.",
+                                  file=sys.stderr)
+                        else:
+                            pokemon_list.append(pokemon)
+                else:
+                    pokemon_list = self.meta.get_all_pokemon(remove_ignored=True)
+                    if pool == "all pokemon except above":
+                        pokemon_list = subtract_from_pokemon_list(pokemon_list, pokemon_used)
+
                 tiers = [parse_raid_tier_str2code(tier) for tier in tiers]
-                return pokemon_list_to_raid_boss_list(pokemon, tiers)
+                return pokemon_list_to_raid_boss_list(pokemon_list, tiers)
 
             # if raids is not None:
             #     return raids
@@ -256,6 +272,24 @@ class Config:
                   file=sys.stderr)
             return raids_list
 
+        def convert_shadow_tiers(raids_list):
+            """
+            Convert the tiers of raids with a Shadow Pokemon as the raid boss to a shadow raid, if applicable.
+            For example, if a RaidBoss object has tier RAID_LEVEL_5 and boss MEWTWO_SHADOW_FORM, its tier
+            will be changed to RAID_LEVEL_5_SHADOW, by appending _SHADOW to the tier.
+
+            This conversion is only done if the new tier, after appending SHADOW, is listed in
+            RAID_TIERS_CODE2STR in params.py. If not, the tier remains the same.
+
+            :param raids_list: Current list of RaidBoss objects
+            :return: New list of RaidBoss objects, with shadow tiers added when applicable
+            """
+            for raid_boss in raids_list:
+                if raid_boss.pokemon.is_shadow and '_SHADOW' not in raid_boss.tier:
+                    shadow_tier = raid_boss.tier + '_SHADOW'
+                    if shadow_tier in RAID_TIERS_CODE2STR.keys():
+                        raid_boss.tier = shadow_tier
+
         def combine_ensembles(ens_list):
             """
             Combine a list of RaidEnsemble objects into a single RaidEnsemble object,
@@ -284,6 +318,10 @@ class Config:
             # So that weights are only assigned to Pokemon that remain after filters
             for fkey, fval in cfg.get('Filters', {}).items():
                 raids = apply_filter(raids, fkey, fval)
+
+            # Convert the tiers of raids with a Shadow Pokemon as the raid boss to a shadow raid, if applicable
+            if CONVERT_SHADOW_RAID_TIERS:
+                convert_shadow_tiers(raids)
 
             # Parse group-specific battle settings if given
             # settings = (self.parse_battle_settings_config(cfg["Battle settings"])
@@ -387,6 +425,8 @@ class Config:
             cfg["Include unscaled estimators"] = False
         if "Combine attacker movesets" not in cfg:
             cfg["Combine attacker movesets"] = True
+        if "Combine attacker fast moves" not in cfg:
+            cfg["Combine attacker fast moves"] = False
         if "Include random boss movesets" not in cfg:
             cfg["Include random boss movesets"] = True
         if "Include specific boss movesets" not in cfg:
@@ -395,6 +435,10 @@ class Config:
             cfg["Assign weights to specific boss movesets"] = False
         if "Include attacker IVs" not in cfg:
             cfg["Include attacker IVs"] = False
+        if "Include fast move type" not in cfg:
+            cfg["Include fast move type"] = False
+        if "Include charged move type" not in cfg:
+            cfg["Include charged move type"] = False
         if "Fill blanks" not in cfg:
             cfg["Fill blanks"] = True
         if "Attackers that should not be combined" not in cfg:

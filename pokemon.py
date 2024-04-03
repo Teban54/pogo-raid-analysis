@@ -44,6 +44,7 @@ class Pokemon:
         self.is_mythical = False
         self.is_shadow = False
         self.is_mega = False
+        self.is_primal = False
         self.mega_codename = None  # "X", "Y"
         self.mega_displayname = None
 
@@ -97,14 +98,16 @@ class Pokemon:
     def init_forms(self):
         """
         Process the form information of this Pokemon, including shadow.
-        This populates the following fields: base_codename, form_codename, is_shadow, is_mega, mega_codename.
+        This populates the following fields: base_codename, form_codename, is_shadow, is_mega, is_primal, mega_codename.
         """
         self.base_codename = self.JSON['pokedex']['pokemonId']
         if self.base_codename.endswith("_MEGA"):
-            # For unreleased megas, Pokebattler currently has its pokedex pokeminId as "ALAKAZAM_MEGA"
+            # For unreleased megas, Pokebattler currently has its pokedex pokemonId as "ALAKAZAM_MEGA"
             # But released megas have the base form "VENUSAUR" correct
             self.base_codename = self.base_codename[:-5]
         elif self.base_codename.endswith("_MEGA_X") or self.base_codename.endswith("_MEGA_Y"):
+            self.base_codename = self.base_codename[:-7]
+        elif self.base_codename.endswith("_PRIMAL"):
             self.base_codename = self.base_codename[:-7]
 
         if self.JSON.get('form', None):
@@ -120,6 +123,9 @@ class Pokemon:
         elif self.name.endswith("_MEGA_X") or self.name.endswith("_MEGA_Y"):
             self.is_mega = True
             self.mega_codename = self.name[-1:]
+        elif self.name.endswith("_PRIMAL"):
+            self.is_primal = True
+            self.mega_codename = None
 
     def init_display_names(self):
         """
@@ -154,6 +160,8 @@ class Pokemon:
             self.displayname = "Mega " + self.displayname
             if self.mega_displayname:  # X and Y
                 self.displayname += " " + self.mega_displayname
+        if self.is_primal:
+            self.displayname = "Primal " + self.displayname
         if self.form_codename:
             self.displayname += f" ({self.form_displayname})"
 
@@ -396,7 +404,7 @@ def criterion_shadow(pokemon, is_shadow=False, is_not_shadow=False):
 
 def criterion_mega(pokemon, is_mega=False, is_not_mega=False):
     """
-    Return True if the Pokemon matches the given mega requirements: is or is not a mega.
+    Return True if the Pokemon matches the given mega requirements: is or is not a mega or primal.
 
     :param pokemon: Pokemon object to be evaluated on
     :param is_mega: If True, returns True if and only if the Pokemon is a mega.
@@ -406,8 +414,8 @@ def criterion_mega(pokemon, is_mega=False, is_not_mega=False):
         If False, has no effect.
     :return: Whether the Pokemon satisfies the mega requirements
     """
-    return (pokemon.is_mega if is_mega
-            else not pokemon.is_mega if is_not_mega
+    return ((pokemon.is_mega or pokemon.is_primal) if is_mega
+            else not (pokemon.is_mega or pokemon.is_primal) if is_not_mega
             else True)
 
 
@@ -508,7 +516,7 @@ def group_pokemon_by_basename(pkm_list, separate_shadows=True, separate_megas=Tr
         if pkm.is_shadow and separate_shadows:
             base += "_SHADOW_FORM"
             # Need to check shadows with forms (e.g. Shadow Darmanitan Zen) in future, but okay for now
-        if pkm.is_mega and separate_megas:
+        if (pkm.is_mega or pkm.is_primal) and separate_megas:
             base = pkm.name
         if base not in ret:
             ret[base] = []

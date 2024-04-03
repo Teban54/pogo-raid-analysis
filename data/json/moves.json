@@ -1,0 +1,5386 @@
+{
+  "move": [
+    {
+      "moveId": "WRAP",
+      "type": "POKEMON_TYPE_NORMAL",
+      "power": 60.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.06,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "wrap",
+      "durationMs": 2900,
+      "damageWindowStartMs": 2050,
+      "damageWindowEndMs": 2700,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 60.0,
+        "energyDelta": -45
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "HYPER_BEAM",
+      "type": "POKEMON_TYPE_NORMAL",
+      "power": 150.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.15,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "hyper_beam",
+      "durationMs": 3800,
+      "damageWindowStartMs": 3300,
+      "damageWindowEndMs": 3600,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 150.0,
+        "energyDelta": -80
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "DARK_PULSE",
+      "type": "POKEMON_TYPE_DARK",
+      "power": 80.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.08,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "dark_pulse",
+      "durationMs": 3000,
+      "damageWindowStartMs": 1400,
+      "damageWindowEndMs": 2300,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 80.0,
+        "energyDelta": -50
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "SLUDGE",
+      "type": "POKEMON_TYPE_POISON",
+      "power": 50.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.065,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "sludge",
+      "durationMs": 2100,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 1550,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 50.0,
+        "energyDelta": -40
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "VICE_GRIP",
+      "type": "POKEMON_TYPE_NORMAL",
+      "power": 35.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.055,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "vice_grip",
+      "durationMs": 1900,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1500,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 40.0,
+        "energyDelta": -40
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "FLAME_WHEEL",
+      "type": "POKEMON_TYPE_FIRE",
+      "power": 60.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.06,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "flame_wheel",
+      "durationMs": 2700,
+      "damageWindowStartMs": 2100,
+      "damageWindowEndMs": 2400,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 60.0,
+        "energyDelta": -55
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "MEGAHORN",
+      "type": "POKEMON_TYPE_BUG",
+      "power": 110.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.12,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "megahorn",
+      "durationMs": 2200,
+      "damageWindowStartMs": 1700,
+      "damageWindowEndMs": 1900,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 110.0,
+        "energyDelta": -55
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "FLAMETHROWER",
+      "type": "POKEMON_TYPE_FIRE",
+      "power": 70.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.09,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "flamethrower",
+      "durationMs": 2200,
+      "damageWindowStartMs": 1500,
+      "damageWindowEndMs": 1700,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 90.0,
+        "energyDelta": -55
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "DIG",
+      "type": "POKEMON_TYPE_GROUND",
+      "power": 100.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.08,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "dig",
+      "durationMs": 4700,
+      "damageWindowStartMs": 2800,
+      "damageWindowEndMs": 4500,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 100.0,
+        "energyDelta": -80
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "CROSS_CHOP",
+      "type": "POKEMON_TYPE_FIGHTING",
+      "power": 50.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.25,
+      "staminaLossScalar": 0.1,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "cross_chop",
+      "durationMs": 1500,
+      "damageWindowStartMs": 800,
+      "damageWindowEndMs": 1200,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 50.0,
+        "energyDelta": -35
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "PSYBEAM",
+      "type": "POKEMON_TYPE_PSYCHIC",
+      "power": 70.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.065,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "psybeam",
+      "durationMs": 3200,
+      "damageWindowStartMs": 1300,
+      "damageWindowEndMs": 2700,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 70.0,
+        "energyDelta": -60
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "EARTHQUAKE",
+      "type": "POKEMON_TYPE_GROUND",
+      "power": 140.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.1,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "earthquake",
+      "durationMs": 3600,
+      "damageWindowStartMs": 2700,
+      "damageWindowEndMs": 3500,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 120.0,
+        "energyDelta": -65
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "STONE_EDGE",
+      "type": "POKEMON_TYPE_ROCK",
+      "power": 100.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.5,
+      "staminaLossScalar": 0.1,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "stone_edge",
+      "durationMs": 2300,
+      "damageWindowStartMs": 700,
+      "damageWindowEndMs": 2100,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 100.0,
+        "energyDelta": -55
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "ICE_PUNCH",
+      "type": "POKEMON_TYPE_ICE",
+      "power": 50.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.075,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "ice_punch",
+      "durationMs": 1900,
+      "damageWindowStartMs": 1300,
+      "damageWindowEndMs": 1600,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 55.0,
+        "energyDelta": -40
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "HEART_STAMP",
+      "type": "POKEMON_TYPE_PSYCHIC",
+      "power": 40.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.06,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "heart_stamp",
+      "durationMs": 1900,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1600,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 40.0,
+        "energyDelta": -40
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "DISCHARGE",
+      "type": "POKEMON_TYPE_ELECTRIC",
+      "power": 65.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.08,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "discharge",
+      "durationMs": 2500,
+      "damageWindowStartMs": 1700,
+      "damageWindowEndMs": 2100,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 65.0,
+        "energyDelta": -45
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "FLASH_CANNON",
+      "type": "POKEMON_TYPE_STEEL",
+      "power": 100.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.08,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "flash_cannon",
+      "durationMs": 2700,
+      "damageWindowStartMs": 1600,
+      "damageWindowEndMs": 2500,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 110.0,
+        "energyDelta": -70
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "DRILL_PECK",
+      "type": "POKEMON_TYPE_FLYING",
+      "power": 65.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.08,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "drill_peck",
+      "durationMs": 2300,
+      "damageWindowStartMs": 1700,
+      "damageWindowEndMs": 2100,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 65.0,
+        "energyDelta": -40
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "ICE_BEAM",
+      "type": "POKEMON_TYPE_ICE",
+      "power": 90.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.09,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "ice_beam",
+      "durationMs": 3300,
+      "damageWindowStartMs": 1300,
+      "damageWindowEndMs": 2800,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 90.0,
+        "energyDelta": -55
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "BLIZZARD",
+      "type": "POKEMON_TYPE_ICE",
+      "power": 130.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.11,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "blizzard",
+      "durationMs": 3100,
+      "damageWindowStartMs": 1500,
+      "damageWindowEndMs": 2900,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 140.0,
+        "energyDelta": -75
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "HEAT_WAVE",
+      "type": "POKEMON_TYPE_FIRE",
+      "power": 95.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.095,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "heat_wave",
+      "durationMs": 3000,
+      "damageWindowStartMs": 1700,
+      "damageWindowEndMs": 2800,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 95.0,
+        "energyDelta": -75
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "AERIAL_ACE",
+      "type": "POKEMON_TYPE_FLYING",
+      "power": 55.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.06,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "aerial_ace",
+      "durationMs": 2400,
+      "damageWindowStartMs": 1900,
+      "damageWindowEndMs": 2200,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 55.0,
+        "energyDelta": -45
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "DRILL_RUN",
+      "type": "POKEMON_TYPE_GROUND",
+      "power": 80.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.25,
+      "staminaLossScalar": 0.08,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "drill_run",
+      "durationMs": 2800,
+      "damageWindowStartMs": 1700,
+      "damageWindowEndMs": 2600,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 80.0,
+        "energyDelta": -45
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "PETAL_BLIZZARD",
+      "type": "POKEMON_TYPE_GRASS",
+      "power": 110.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.09,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "petal_blizzard",
+      "durationMs": 2600,
+      "damageWindowStartMs": 1700,
+      "damageWindowEndMs": 2300,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 110.0,
+        "energyDelta": -65
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "MEGA_DRAIN",
+      "type": "POKEMON_TYPE_GRASS",
+      "power": 25.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.04,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "mega_drain",
+      "durationMs": 2600,
+      "damageWindowStartMs": 950,
+      "damageWindowEndMs": 2000,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 25.0,
+        "energyDelta": -55
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "BUG_BUZZ",
+      "type": "POKEMON_TYPE_BUG",
+      "power": 100.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.09,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "bug_buzz",
+      "durationMs": 3700,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3100,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 100.0,
+        "energyDelta": -60,
+        "buffs": {
+          "targetDefenseStatStageChange": -1,
+          "buffActivationChance": 0.3
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "POISON_FANG",
+      "type": "POKEMON_TYPE_POISON",
+      "power": 35.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.05,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "poison_fang",
+      "durationMs": 1700,
+      "damageWindowStartMs": 900,
+      "damageWindowEndMs": 1400,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 40.0,
+        "energyDelta": -35,
+        "buffs": {
+          "targetDefenseStatStageChange": -1,
+          "buffActivationChance": 1.0
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "NIGHT_SLASH",
+      "type": "POKEMON_TYPE_DARK",
+      "power": 50.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.25,
+      "staminaLossScalar": 0.07,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "night_slash",
+      "durationMs": 2200,
+      "damageWindowStartMs": 1300,
+      "damageWindowEndMs": 2000,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 50.0,
+        "energyDelta": -35,
+        "buffs": {
+          "attackerAttackStatStageChange": 2,
+          "buffActivationChance": 0.125
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "BUBBLE_BEAM",
+      "type": "POKEMON_TYPE_WATER",
+      "power": 45.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.065,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "bubble_beam",
+      "durationMs": 1900,
+      "damageWindowStartMs": 1450,
+      "damageWindowEndMs": 1700,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 25.0,
+        "energyDelta": -40,
+        "buffs": {
+          "targetAttackStatStageChange": -1,
+          "buffActivationChance": 1.0
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "SUBMISSION",
+      "type": "POKEMON_TYPE_FIGHTING",
+      "power": 60.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.08,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "submission",
+      "durationMs": 2200,
+      "damageWindowStartMs": 1800,
+      "damageWindowEndMs": 2000,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 60.0,
+        "energyDelta": -50
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "LOW_SWEEP",
+      "type": "POKEMON_TYPE_FIGHTING",
+      "power": 40.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.065,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "low_sweep",
+      "durationMs": 1900,
+      "damageWindowStartMs": 1300,
+      "damageWindowEndMs": 1650,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 40.0,
+        "energyDelta": -40
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "AQUA_JET",
+      "type": "POKEMON_TYPE_WATER",
+      "power": 45.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.04,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "aqua_jet",
+      "durationMs": 2600,
+      "damageWindowStartMs": 1700,
+      "damageWindowEndMs": 2100,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 45.0,
+        "energyDelta": -45
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "AQUA_TAIL",
+      "type": "POKEMON_TYPE_WATER",
+      "power": 50.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.09,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "aqua_tail",
+      "durationMs": 1900,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 1650,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 50.0,
+        "energyDelta": -35
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "SEED_BOMB",
+      "type": "POKEMON_TYPE_GRASS",
+      "power": 55.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.08,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "seed_bomb",
+      "durationMs": 2100,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 1900,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 55.0,
+        "energyDelta": -40
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "PSYSHOCK",
+      "type": "POKEMON_TYPE_PSYCHIC",
+      "power": 65.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.08,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "psyshock",
+      "durationMs": 2700,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 2600,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 70.0,
+        "energyDelta": -45
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "ANCIENT_POWER",
+      "type": "POKEMON_TYPE_ROCK",
+      "power": 70.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.06,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "ancient_power",
+      "durationMs": 3500,
+      "damageWindowStartMs": 2850,
+      "damageWindowEndMs": 3100,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 45.0,
+        "energyDelta": -45,
+        "buffs": {
+          "attackerAttackStatStageChange": 2,
+          "attackerDefenseStatStageChange": 2,
+          "buffActivationChance": 0.1
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "ROCK_TOMB",
+      "type": "POKEMON_TYPE_ROCK",
+      "power": 70.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.25,
+      "staminaLossScalar": 0.06,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "rock_tomb",
+      "durationMs": 3200,
+      "damageWindowStartMs": 2250,
+      "damageWindowEndMs": 3000,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 70.0,
+        "energyDelta": -60,
+        "buffs": {
+          "targetAttackStatStageChange": -1,
+          "buffActivationChance": 1.0
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "ROCK_SLIDE",
+      "type": "POKEMON_TYPE_ROCK",
+      "power": 80.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.075,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "rock_slide",
+      "durationMs": 2700,
+      "damageWindowStartMs": 1500,
+      "damageWindowEndMs": 2600,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 75.0,
+        "energyDelta": -45
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "POWER_GEM",
+      "type": "POKEMON_TYPE_ROCK",
+      "power": 80.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.08,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "power_gem",
+      "durationMs": 2900,
+      "damageWindowStartMs": 1950,
+      "damageWindowEndMs": 2700,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 80.0,
+        "energyDelta": -60
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "SHADOW_SNEAK",
+      "type": "POKEMON_TYPE_GHOST",
+      "power": 50.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.04,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "shadow_sneak",
+      "durationMs": 2900,
+      "damageWindowStartMs": 2200,
+      "damageWindowEndMs": 2700,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 50.0,
+        "energyDelta": -45
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "SHADOW_PUNCH",
+      "type": "POKEMON_TYPE_GHOST",
+      "power": 40.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.06,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "shadow_punch",
+      "durationMs": 1700,
+      "damageWindowStartMs": 1300,
+      "damageWindowEndMs": 1500,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 40.0,
+        "energyDelta": -35
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "OMINOUS_WIND",
+      "type": "POKEMON_TYPE_GHOST",
+      "power": 50.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.06,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "ominous_wind",
+      "durationMs": 2300,
+      "damageWindowStartMs": 1850,
+      "damageWindowEndMs": 2100,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 45.0,
+        "energyDelta": -45,
+        "buffs": {
+          "attackerAttackStatStageChange": 2,
+          "attackerDefenseStatStageChange": 2,
+          "buffActivationChance": 0.1
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "SHADOW_BALL",
+      "type": "POKEMON_TYPE_GHOST",
+      "power": 100.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.08,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "shadow_ball",
+      "durationMs": 3000,
+      "damageWindowStartMs": 2400,
+      "damageWindowEndMs": 2800,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 100.0,
+        "energyDelta": -55
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "MAGNET_BOMB",
+      "type": "POKEMON_TYPE_STEEL",
+      "power": 70.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.06,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "magnet_bomb",
+      "durationMs": 2800,
+      "damageWindowStartMs": 2200,
+      "damageWindowEndMs": 2600,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 70.0,
+        "energyDelta": -45
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "IRON_HEAD",
+      "type": "POKEMON_TYPE_STEEL",
+      "power": 60.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.08,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "iron_head",
+      "durationMs": 1900,
+      "damageWindowStartMs": 1300,
+      "damageWindowEndMs": 1700,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 70.0,
+        "energyDelta": -50
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "PARABOLIC_CHARGE",
+      "type": "POKEMON_TYPE_ELECTRIC",
+      "power": 25.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.05,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "parabolic_charge",
+      "durationMs": 2800,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 2400,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 25.0,
+        "energyDelta": -55
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "THUNDER_PUNCH",
+      "type": "POKEMON_TYPE_ELECTRIC",
+      "power": 45.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.075,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "thunder_punch",
+      "durationMs": 1800,
+      "damageWindowStartMs": 1700,
+      "damageWindowEndMs": 1550,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 55.0,
+        "energyDelta": -40
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "THUNDER",
+      "type": "POKEMON_TYPE_ELECTRIC",
+      "power": 100.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.11,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "thunder",
+      "durationMs": 2400,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 2200,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 100.0,
+        "energyDelta": -60
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "THUNDERBOLT",
+      "type": "POKEMON_TYPE_ELECTRIC",
+      "power": 80.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.09,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "thunderbolt",
+      "durationMs": 2500,
+      "damageWindowStartMs": 1800,
+      "damageWindowEndMs": 2300,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 90.0,
+        "energyDelta": -55
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "TWISTER",
+      "type": "POKEMON_TYPE_DRAGON",
+      "power": 45.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.04,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "twister",
+      "durationMs": 2800,
+      "damageWindowStartMs": 950,
+      "damageWindowEndMs": 2600,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 45.0,
+        "energyDelta": -45
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "DRAGON_PULSE",
+      "type": "POKEMON_TYPE_DRAGON",
+      "power": 90.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.085,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "dragon_pulse",
+      "durationMs": 3600,
+      "damageWindowStartMs": 2150,
+      "damageWindowEndMs": 3300,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 90.0,
+        "energyDelta": -60
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "DRAGON_CLAW",
+      "type": "POKEMON_TYPE_DRAGON",
+      "power": 50.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.25,
+      "staminaLossScalar": 0.08,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "dragon_claw",
+      "durationMs": 1700,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1300,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 50.0,
+        "energyDelta": -35
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "DISARMING_VOICE",
+      "type": "POKEMON_TYPE_FAIRY",
+      "power": 70.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.04,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "disarming_voice",
+      "durationMs": 3900,
+      "damageWindowStartMs": 3200,
+      "damageWindowEndMs": 3500,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 70.0,
+        "energyDelta": -45
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "DRAINING_KISS",
+      "type": "POKEMON_TYPE_FAIRY",
+      "power": 60.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.05,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "draining_kiss",
+      "durationMs": 2600,
+      "damageWindowStartMs": 1000,
+      "damageWindowEndMs": 1300,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 60.0,
+        "energyDelta": -55
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "DAZZLING_GLEAM",
+      "type": "POKEMON_TYPE_FAIRY",
+      "power": 100.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.08,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "dazzling_gleam",
+      "durationMs": 3500,
+      "damageWindowStartMs": 2100,
+      "damageWindowEndMs": 3300,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 110.0,
+        "energyDelta": -70
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "MOONBLAST",
+      "type": "POKEMON_TYPE_FAIRY",
+      "power": 130.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.095,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "moonblast",
+      "durationMs": 3900,
+      "damageWindowStartMs": 2200,
+      "damageWindowEndMs": 3700,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 110.0,
+        "energyDelta": -60,
+        "buffs": {
+          "targetAttackStatStageChange": -1,
+          "buffActivationChance": 0.1
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "PLAY_ROUGH",
+      "type": "POKEMON_TYPE_FAIRY",
+      "power": 90.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.1,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "play_rough",
+      "durationMs": 2900,
+      "damageWindowStartMs": 1300,
+      "damageWindowEndMs": 2700,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 90.0,
+        "energyDelta": -60
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "CROSS_POISON",
+      "type": "POKEMON_TYPE_POISON",
+      "power": 40.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.25,
+      "staminaLossScalar": 0.07,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "cross_poison",
+      "durationMs": 1500,
+      "damageWindowStartMs": 900,
+      "damageWindowEndMs": 1300,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 50.0,
+        "energyDelta": -35,
+        "buffs": {
+          "attackerAttackStatStageChange": 2,
+          "buffActivationChance": 0.125
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "SLUDGE_BOMB",
+      "type": "POKEMON_TYPE_POISON",
+      "power": 80.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.09,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "sludge_bomb",
+      "durationMs": 2300,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 2100,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 80.0,
+        "energyDelta": -50
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "SLUDGE_WAVE",
+      "type": "POKEMON_TYPE_POISON",
+      "power": 110.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.095,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "sludge_wave",
+      "durationMs": 3200,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3000,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 110.0,
+        "energyDelta": -65
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "GUNK_SHOT",
+      "type": "POKEMON_TYPE_POISON",
+      "power": 130.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.12,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "gunk_shot",
+      "durationMs": 3100,
+      "damageWindowStartMs": 1700,
+      "damageWindowEndMs": 2700,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 130.0,
+        "energyDelta": -75
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "BONE_CLUB",
+      "type": "POKEMON_TYPE_GROUND",
+      "power": 40.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.065,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "bone_club",
+      "durationMs": 1600,
+      "damageWindowStartMs": 1000,
+      "damageWindowEndMs": 1400,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 40.0,
+        "energyDelta": -35
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "BULLDOZE",
+      "type": "POKEMON_TYPE_GROUND",
+      "power": 80.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.06,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "bulldoze",
+      "durationMs": 3500,
+      "damageWindowStartMs": 2600,
+      "damageWindowEndMs": 3100,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 80.0,
+        "energyDelta": -60
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "MUD_BOMB",
+      "type": "POKEMON_TYPE_GROUND",
+      "power": 55.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.065,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "mud_bomb",
+      "durationMs": 2300,
+      "damageWindowStartMs": 1700,
+      "damageWindowEndMs": 2100,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 55.0,
+        "energyDelta": -40
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "SIGNAL_BEAM",
+      "type": "POKEMON_TYPE_BUG",
+      "power": 75.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.075,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "signal_beam",
+      "durationMs": 2900,
+      "damageWindowStartMs": 1800,
+      "damageWindowEndMs": 2600,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 75.0,
+        "energyDelta": -55,
+        "buffs": {
+          "targetAttackStatStageChange": -1,
+          "targetDefenseStatStageChange": -1,
+          "buffActivationChance": 0.2
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "X_SCISSOR",
+      "type": "POKEMON_TYPE_BUG",
+      "power": 45.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.08,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "x_scissor",
+      "durationMs": 1600,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 1400,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 45.0,
+        "energyDelta": -35
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "FLAME_CHARGE",
+      "type": "POKEMON_TYPE_FIRE",
+      "power": 70.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.05,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "flame_charge",
+      "durationMs": 3800,
+      "damageWindowStartMs": 2900,
+      "damageWindowEndMs": 3450,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 65.0,
+        "energyDelta": -50,
+        "buffs": {
+          "attackerAttackStatStageChange": 1,
+          "buffActivationChance": 1.0
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "FLAME_BURST",
+      "type": "POKEMON_TYPE_FIRE",
+      "power": 70.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.07,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "flame_burst",
+      "durationMs": 2600,
+      "damageWindowStartMs": 1000,
+      "damageWindowEndMs": 2100,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 70.0,
+        "energyDelta": -55
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "FIRE_BLAST",
+      "type": "POKEMON_TYPE_FIRE",
+      "power": 140.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.11,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "fire_blast",
+      "durationMs": 4200,
+      "damageWindowStartMs": 3100,
+      "damageWindowEndMs": 3900,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 140.0,
+        "energyDelta": -80
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "BRINE",
+      "type": "POKEMON_TYPE_WATER",
+      "power": 60.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.065,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "brine",
+      "durationMs": 2300,
+      "damageWindowStartMs": 1500,
+      "damageWindowEndMs": 2100,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 60.0,
+        "energyDelta": -50
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "WATER_PULSE",
+      "type": "POKEMON_TYPE_WATER",
+      "power": 70.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.06,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "water_pulse",
+      "durationMs": 3200,
+      "damageWindowStartMs": 2200,
+      "damageWindowEndMs": 2900,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 70.0,
+        "energyDelta": -60
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "SCALD",
+      "type": "POKEMON_TYPE_WATER",
+      "power": 80.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.08,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "scald",
+      "durationMs": 3700,
+      "damageWindowStartMs": 1300,
+      "damageWindowEndMs": 3400,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 80.0,
+        "energyDelta": -50,
+        "buffs": {
+          "targetAttackStatStageChange": -1,
+          "buffActivationChance": 0.3
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "HYDRO_PUMP",
+      "type": "POKEMON_TYPE_WATER",
+      "power": 130.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.11,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "hydro_pump",
+      "durationMs": 3300,
+      "damageWindowStartMs": 900,
+      "damageWindowEndMs": 3000,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 130.0,
+        "energyDelta": -75
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "PSYCHIC",
+      "type": "POKEMON_TYPE_PSYCHIC",
+      "power": 90.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.09,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "psychic",
+      "durationMs": 2800,
+      "damageWindowStartMs": 1300,
+      "damageWindowEndMs": 2600,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 90.0,
+        "energyDelta": -55,
+        "buffs": {
+          "targetDefenseStatStageChange": -1,
+          "buffActivationChance": 0.1
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "PSYSTRIKE",
+      "type": "POKEMON_TYPE_PSYCHIC",
+      "power": 90.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.1,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "psystrike",
+      "durationMs": 2300,
+      "damageWindowStartMs": 1000,
+      "damageWindowEndMs": 2000,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 90.0,
+        "energyDelta": -45
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "ICY_WIND",
+      "type": "POKEMON_TYPE_ICE",
+      "power": 60.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.055,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "icy_wind",
+      "durationMs": 3300,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 2800,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 60.0,
+        "energyDelta": -45,
+        "buffs": {
+          "targetAttackStatStageChange": -1,
+          "buffActivationChance": 1.0
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "GIGA_DRAIN",
+      "type": "POKEMON_TYPE_GRASS",
+      "power": 50.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.075,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "giga_drain",
+      "durationMs": 3900,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 2200,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 50.0,
+        "energyDelta": -80
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "FIRE_PUNCH",
+      "type": "POKEMON_TYPE_FIRE",
+      "power": 55.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.075,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "fire_punch",
+      "durationMs": 2200,
+      "damageWindowStartMs": 1500,
+      "damageWindowEndMs": 1900,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 55.0,
+        "energyDelta": -40
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "SOLAR_BEAM",
+      "type": "POKEMON_TYPE_GRASS",
+      "power": 180.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.12,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "solar_beam",
+      "durationMs": 4900,
+      "damageWindowStartMs": 2700,
+      "damageWindowEndMs": 4700,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 150.0,
+        "energyDelta": -80
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "LEAF_BLADE",
+      "type": "POKEMON_TYPE_GRASS",
+      "power": 70.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.25,
+      "staminaLossScalar": 0.09,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "leaf_blade",
+      "durationMs": 2400,
+      "damageWindowStartMs": 1250,
+      "damageWindowEndMs": 2200,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 70.0,
+        "energyDelta": -35
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "POWER_WHIP",
+      "type": "POKEMON_TYPE_GRASS",
+      "power": 90.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.12,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "power_whip",
+      "durationMs": 2600,
+      "damageWindowStartMs": 1250,
+      "damageWindowEndMs": 2350,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 90.0,
+        "energyDelta": -50
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "AIR_CUTTER",
+      "type": "POKEMON_TYPE_FLYING",
+      "power": 60.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.25,
+      "staminaLossScalar": 0.06,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "air_cutter",
+      "durationMs": 2700,
+      "damageWindowStartMs": 1800,
+      "damageWindowEndMs": 2500,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 60.0,
+        "energyDelta": -55
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "HURRICANE",
+      "type": "POKEMON_TYPE_FLYING",
+      "power": 110.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.11,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "hurricane",
+      "durationMs": 2700,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 2400,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 110.0,
+        "energyDelta": -65
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "BRICK_BREAK",
+      "type": "POKEMON_TYPE_FIGHTING",
+      "power": 40.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.25,
+      "staminaLossScalar": 0.075,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "brick_break",
+      "durationMs": 1600,
+      "damageWindowStartMs": 800,
+      "damageWindowEndMs": 1400,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 40.0,
+        "energyDelta": -35
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "SWIFT",
+      "type": "POKEMON_TYPE_NORMAL",
+      "power": 60.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.06,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "swift",
+      "durationMs": 2800,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 2600,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 60.0,
+        "energyDelta": -55
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "HORN_ATTACK",
+      "type": "POKEMON_TYPE_NORMAL",
+      "power": 40.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.065,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "horn_attack",
+      "durationMs": 1850,
+      "damageWindowStartMs": 800,
+      "damageWindowEndMs": 1650,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 40.0,
+        "energyDelta": -35
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "STOMP",
+      "type": "POKEMON_TYPE_NORMAL",
+      "power": 55.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.065,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "stomp",
+      "durationMs": 1700,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1500,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 55.0,
+        "energyDelta": -40
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "HYPER_FANG",
+      "type": "POKEMON_TYPE_NORMAL",
+      "power": 80.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.08,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "hyper_fang",
+      "durationMs": 2500,
+      "damageWindowStartMs": 1500,
+      "damageWindowEndMs": 2000,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 80.0,
+        "energyDelta": -50
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "BODY_SLAM",
+      "type": "POKEMON_TYPE_NORMAL",
+      "power": 50.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.085,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "body_slam",
+      "durationMs": 1900,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 1700,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 60.0,
+        "energyDelta": -35
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "REST",
+      "type": "POKEMON_TYPE_NORMAL",
+      "power": 50.0,
+      "accuracyChance": 1.0,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "rest",
+      "durationMs": 1900,
+      "damageWindowStartMs": 1500,
+      "damageWindowEndMs": 1700,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 50.0,
+        "energyDelta": -35
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "STRUGGLE",
+      "type": "POKEMON_TYPE_NORMAL",
+      "power": 35.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.1,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "struggle",
+      "durationMs": 2200,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 2000,
+      "combatMove": {
+        "power": 35.0,
+        "energyDelta": -100
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "SCALD_BLASTOISE",
+      "type": "POKEMON_TYPE_WATER",
+      "power": 50.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.08,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "scald_blastoise",
+      "durationMs": 4700,
+      "damageWindowStartMs": 2500,
+      "damageWindowEndMs": 4600,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 50.0,
+        "energyDelta": -80
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "HYDRO_PUMP_BLASTOISE",
+      "type": "POKEMON_TYPE_WATER",
+      "power": 90.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.11,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "hydro_pump_blastoise",
+      "durationMs": 4500,
+      "damageWindowStartMs": 2200,
+      "damageWindowEndMs": 4300,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 90.0,
+        "energyDelta": -80
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "WRAP_GREEN",
+      "type": "POKEMON_TYPE_NORMAL",
+      "power": 25.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.06,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "wrap_green",
+      "durationMs": 2900,
+      "damageWindowStartMs": 2050,
+      "damageWindowEndMs": 2700,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 25.0,
+        "energyDelta": -45
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "WRAP_PINK",
+      "type": "POKEMON_TYPE_NORMAL",
+      "power": 25.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.06,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "wrap_pink",
+      "durationMs": 2900,
+      "damageWindowStartMs": 2050,
+      "damageWindowEndMs": 2700,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 25.0,
+        "energyDelta": -45
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "FURY_CUTTER_FAST",
+      "type": "POKEMON_TYPE_BUG",
+      "power": 3.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "fury_cutter_fast",
+      "durationMs": 400,
+      "damageWindowStartMs": 100,
+      "damageWindowEndMs": 400,
+      "energyDelta": 6,
+      "combatMove": {
+        "power": 2.0,
+        "energyDelta": 4
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "BUG_BITE_FAST",
+      "type": "POKEMON_TYPE_BUG",
+      "power": 5.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "bug_bite_fast",
+      "durationMs": 500,
+      "damageWindowStartMs": 250,
+      "damageWindowEndMs": 450,
+      "energyDelta": 6,
+      "combatMove": {
+        "power": 3.0,
+        "energyDelta": 3
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "BITE_FAST",
+      "type": "POKEMON_TYPE_DARK",
+      "power": 6.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "bite_fast",
+      "durationMs": 500,
+      "damageWindowStartMs": 300,
+      "damageWindowEndMs": 500,
+      "energyDelta": 4,
+      "combatMove": {
+        "power": 4.0,
+        "energyDelta": 2
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "SUCKER_PUNCH_FAST",
+      "type": "POKEMON_TYPE_DARK",
+      "power": 7.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "sucker_punch_fast",
+      "durationMs": 700,
+      "damageWindowStartMs": 300,
+      "damageWindowEndMs": 700,
+      "energyDelta": 8,
+      "combatMove": {
+        "power": 5.0,
+        "energyDelta": 7,
+        "durationTurns": 1
+      },
+      "pvpDurationMs": 1000
+    },
+    {
+      "moveId": "DRAGON_BREATH_FAST",
+      "type": "POKEMON_TYPE_DRAGON",
+      "power": 6.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "dragon_breath_fast",
+      "durationMs": 500,
+      "damageWindowStartMs": 300,
+      "damageWindowEndMs": 500,
+      "energyDelta": 4,
+      "combatMove": {
+        "power": 4.0,
+        "energyDelta": 3
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "THUNDER_SHOCK_FAST",
+      "type": "POKEMON_TYPE_ELECTRIC",
+      "power": 5.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "thunder_shock_fast",
+      "durationMs": 600,
+      "damageWindowStartMs": 300,
+      "damageWindowEndMs": 600,
+      "energyDelta": 8,
+      "combatMove": {
+        "power": 3.0,
+        "energyDelta": 9,
+        "durationTurns": 1
+      },
+      "pvpDurationMs": 1000
+    },
+    {
+      "moveId": "SPARK_FAST",
+      "type": "POKEMON_TYPE_ELECTRIC",
+      "power": 6.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "spark_fast",
+      "durationMs": 700,
+      "damageWindowStartMs": 300,
+      "damageWindowEndMs": 700,
+      "energyDelta": 9,
+      "combatMove": {
+        "power": 4.0,
+        "energyDelta": 8,
+        "durationTurns": 1
+      },
+      "pvpDurationMs": 1000
+    },
+    {
+      "moveId": "LOW_KICK_FAST",
+      "type": "POKEMON_TYPE_FIGHTING",
+      "power": 6.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "low_kick_fast",
+      "durationMs": 600,
+      "damageWindowStartMs": 300,
+      "damageWindowEndMs": 600,
+      "energyDelta": 6,
+      "combatMove": {
+        "power": 4.0,
+        "energyDelta": 5,
+        "durationTurns": 1
+      },
+      "pvpDurationMs": 1000
+    },
+    {
+      "moveId": "KARATE_CHOP_FAST",
+      "type": "POKEMON_TYPE_FIGHTING",
+      "power": 8.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "karate_chop_fast",
+      "durationMs": 800,
+      "damageWindowStartMs": 600,
+      "damageWindowEndMs": 800,
+      "energyDelta": 10,
+      "combatMove": {
+        "power": 5.0,
+        "energyDelta": 8,
+        "durationTurns": 1
+      },
+      "pvpDurationMs": 1000
+    },
+    {
+      "moveId": "EMBER_FAST",
+      "type": "POKEMON_TYPE_FIRE",
+      "power": 10.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "ember_fast",
+      "durationMs": 1000,
+      "damageWindowStartMs": 600,
+      "damageWindowEndMs": 800,
+      "energyDelta": 10,
+      "combatMove": {
+        "power": 7.0,
+        "energyDelta": 6,
+        "durationTurns": 1
+      },
+      "pvpDurationMs": 1000
+    },
+    {
+      "moveId": "WING_ATTACK_FAST",
+      "type": "POKEMON_TYPE_FLYING",
+      "power": 8.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "wing_attack_fast",
+      "durationMs": 800,
+      "damageWindowStartMs": 550,
+      "damageWindowEndMs": 750,
+      "energyDelta": 9,
+      "combatMove": {
+        "power": 5.0,
+        "energyDelta": 7,
+        "durationTurns": 1
+      },
+      "pvpDurationMs": 1000
+    },
+    {
+      "moveId": "PECK_FAST",
+      "type": "POKEMON_TYPE_FLYING",
+      "power": 10.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "peck_fast",
+      "durationMs": 1000,
+      "damageWindowStartMs": 450,
+      "damageWindowEndMs": 900,
+      "energyDelta": 10,
+      "combatMove": {
+        "power": 6.0,
+        "energyDelta": 5,
+        "durationTurns": 1
+      },
+      "pvpDurationMs": 1000
+    },
+    {
+      "moveId": "LICK_FAST",
+      "type": "POKEMON_TYPE_GHOST",
+      "power": 5.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "lick_fast",
+      "durationMs": 500,
+      "damageWindowStartMs": 200,
+      "damageWindowEndMs": 500,
+      "energyDelta": 6,
+      "combatMove": {
+        "power": 3.0,
+        "energyDelta": 3
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "SHADOW_CLAW_FAST",
+      "type": "POKEMON_TYPE_GHOST",
+      "power": 9.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "shadow_claw_fast",
+      "durationMs": 700,
+      "damageWindowStartMs": 250,
+      "damageWindowEndMs": 500,
+      "energyDelta": 6,
+      "combatMove": {
+        "power": 6.0,
+        "energyDelta": 8,
+        "durationTurns": 1
+      },
+      "pvpDurationMs": 1000
+    },
+    {
+      "moveId": "VINE_WHIP_FAST",
+      "type": "POKEMON_TYPE_GRASS",
+      "power": 7.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "vine_whip_fast",
+      "durationMs": 600,
+      "damageWindowStartMs": 350,
+      "damageWindowEndMs": 600,
+      "energyDelta": 6,
+      "combatMove": {
+        "power": 5.0,
+        "energyDelta": 8,
+        "durationTurns": 1
+      },
+      "pvpDurationMs": 1000
+    },
+    {
+      "moveId": "RAZOR_LEAF_FAST",
+      "type": "POKEMON_TYPE_GRASS",
+      "power": 13.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "razor_leaf_fast",
+      "durationMs": 1000,
+      "damageWindowStartMs": 600,
+      "damageWindowEndMs": 850,
+      "energyDelta": 7,
+      "combatMove": {
+        "power": 10.0,
+        "energyDelta": 4,
+        "durationTurns": 1
+      },
+      "pvpDurationMs": 1000
+    },
+    {
+      "moveId": "MUD_SHOT_FAST",
+      "type": "POKEMON_TYPE_GROUND",
+      "power": 5.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "mud_shot_fast",
+      "durationMs": 600,
+      "damageWindowStartMs": 350,
+      "damageWindowEndMs": 550,
+      "energyDelta": 7,
+      "combatMove": {
+        "power": 3.0,
+        "energyDelta": 9,
+        "durationTurns": 1
+      },
+      "pvpDurationMs": 1000
+    },
+    {
+      "moveId": "ICE_SHARD_FAST",
+      "type": "POKEMON_TYPE_ICE",
+      "power": 12.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "ice_shard_fast",
+      "durationMs": 1200,
+      "damageWindowStartMs": 600,
+      "damageWindowEndMs": 900,
+      "energyDelta": 12,
+      "combatMove": {
+        "power": 9.0,
+        "energyDelta": 10,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "FROST_BREATH_FAST",
+      "type": "POKEMON_TYPE_ICE",
+      "power": 10.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "frost_breath_fast",
+      "durationMs": 900,
+      "damageWindowStartMs": 450,
+      "damageWindowEndMs": 750,
+      "energyDelta": 8,
+      "combatMove": {
+        "power": 7.0,
+        "energyDelta": 5,
+        "durationTurns": 1
+      },
+      "pvpDurationMs": 1000
+    },
+    {
+      "moveId": "QUICK_ATTACK_FAST",
+      "type": "POKEMON_TYPE_NORMAL",
+      "power": 8.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "quick_attack_fast",
+      "durationMs": 800,
+      "damageWindowStartMs": 250,
+      "damageWindowEndMs": 550,
+      "energyDelta": 10,
+      "combatMove": {
+        "power": 5.0,
+        "energyDelta": 7,
+        "durationTurns": 1
+      },
+      "pvpDurationMs": 1000
+    },
+    {
+      "moveId": "SCRATCH_FAST",
+      "type": "POKEMON_TYPE_NORMAL",
+      "power": 6.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "scratch_fast",
+      "durationMs": 500,
+      "damageWindowStartMs": 300,
+      "damageWindowEndMs": 500,
+      "energyDelta": 4,
+      "combatMove": {
+        "power": 4.0,
+        "energyDelta": 2
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "TACKLE_FAST",
+      "type": "POKEMON_TYPE_NORMAL",
+      "power": 5.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "tackle_fast",
+      "durationMs": 500,
+      "damageWindowStartMs": 300,
+      "damageWindowEndMs": 500,
+      "energyDelta": 5,
+      "combatMove": {
+        "power": 3.0,
+        "energyDelta": 2
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "POUND_FAST",
+      "type": "POKEMON_TYPE_NORMAL",
+      "power": 7.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "pound_fast",
+      "durationMs": 600,
+      "damageWindowStartMs": 340,
+      "damageWindowEndMs": 540,
+      "energyDelta": 6,
+      "combatMove": {
+        "power": 4.0,
+        "energyDelta": 4,
+        "durationTurns": 1
+      },
+      "pvpDurationMs": 1000
+    },
+    {
+      "moveId": "CUT_FAST",
+      "type": "POKEMON_TYPE_NORMAL",
+      "power": 5.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "cut_fast",
+      "durationMs": 500,
+      "damageWindowStartMs": 300,
+      "damageWindowEndMs": 500,
+      "energyDelta": 5,
+      "combatMove": {
+        "power": 3.0,
+        "energyDelta": 2
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "POISON_JAB_FAST",
+      "type": "POKEMON_TYPE_POISON",
+      "power": 10.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "poison_jab_fast",
+      "durationMs": 800,
+      "damageWindowStartMs": 200,
+      "damageWindowEndMs": 800,
+      "energyDelta": 7,
+      "combatMove": {
+        "power": 7.0,
+        "energyDelta": 7,
+        "durationTurns": 1
+      },
+      "pvpDurationMs": 1000
+    },
+    {
+      "moveId": "ACID_FAST",
+      "type": "POKEMON_TYPE_POISON",
+      "power": 9.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "acid_fast",
+      "durationMs": 800,
+      "damageWindowStartMs": 400,
+      "damageWindowEndMs": 600,
+      "energyDelta": 8,
+      "combatMove": {
+        "power": 6.0,
+        "energyDelta": 5,
+        "durationTurns": 1
+      },
+      "pvpDurationMs": 1000
+    },
+    {
+      "moveId": "PSYCHO_CUT_FAST",
+      "type": "POKEMON_TYPE_PSYCHIC",
+      "power": 5.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "psycho_cut_fast",
+      "durationMs": 600,
+      "damageWindowStartMs": 370,
+      "damageWindowEndMs": 570,
+      "energyDelta": 8,
+      "combatMove": {
+        "power": 3.0,
+        "energyDelta": 9,
+        "durationTurns": 1
+      },
+      "pvpDurationMs": 1000
+    },
+    {
+      "moveId": "ROCK_THROW_FAST",
+      "type": "POKEMON_TYPE_ROCK",
+      "power": 12.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "rock_throw_fast",
+      "durationMs": 900,
+      "damageWindowStartMs": 500,
+      "damageWindowEndMs": 800,
+      "energyDelta": 7,
+      "combatMove": {
+        "power": 8.0,
+        "energyDelta": 5,
+        "durationTurns": 1
+      },
+      "pvpDurationMs": 1000
+    },
+    {
+      "moveId": "METAL_CLAW_FAST",
+      "type": "POKEMON_TYPE_STEEL",
+      "power": 8.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "metal_claw_fast",
+      "durationMs": 700,
+      "damageWindowStartMs": 430,
+      "damageWindowEndMs": 630,
+      "energyDelta": 7,
+      "combatMove": {
+        "power": 5.0,
+        "energyDelta": 6,
+        "durationTurns": 1
+      },
+      "pvpDurationMs": 1000
+    },
+    {
+      "moveId": "BULLET_PUNCH_FAST",
+      "type": "POKEMON_TYPE_STEEL",
+      "power": 9.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "bullet_punch_fast",
+      "durationMs": 900,
+      "damageWindowStartMs": 300,
+      "damageWindowEndMs": 900,
+      "energyDelta": 10,
+      "combatMove": {
+        "power": 6.0,
+        "energyDelta": 7,
+        "durationTurns": 1
+      },
+      "pvpDurationMs": 1000
+    },
+    {
+      "moveId": "WATER_GUN_FAST",
+      "type": "POKEMON_TYPE_WATER",
+      "power": 5.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "water_gun_fast",
+      "durationMs": 500,
+      "damageWindowStartMs": 300,
+      "damageWindowEndMs": 500,
+      "energyDelta": 5,
+      "combatMove": {
+        "power": 3.0,
+        "energyDelta": 3
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "SPLASH_FAST",
+      "type": "POKEMON_TYPE_WATER",
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "splash_fast",
+      "durationMs": 1730,
+      "damageWindowStartMs": 1030,
+      "damageWindowEndMs": 1230,
+      "energyDelta": 20,
+      "combatMove": {
+        "energyDelta": 12,
+        "durationTurns": 3
+      },
+      "pvpDurationMs": 2000
+    },
+    {
+      "moveId": "WATER_GUN_FAST_BLASTOISE",
+      "type": "POKEMON_TYPE_WATER",
+      "power": 10.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "water_gun_fast_blastoise",
+      "durationMs": 1000,
+      "damageWindowStartMs": 300,
+      "damageWindowEndMs": 500,
+      "energyDelta": 6,
+      "combatMove": {
+        "power": 6.0,
+        "energyDelta": 4,
+        "durationTurns": 1
+      },
+      "pvpDurationMs": 1000
+    },
+    {
+      "moveId": "MUD_SLAP_FAST",
+      "type": "POKEMON_TYPE_GROUND",
+      "power": 18.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "mud_slap_fast",
+      "durationMs": 1400,
+      "damageWindowStartMs": 1150,
+      "damageWindowEndMs": 1350,
+      "energyDelta": 12,
+      "combatMove": {
+        "power": 11.0,
+        "energyDelta": 8,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "ZEN_HEADBUTT_FAST",
+      "type": "POKEMON_TYPE_PSYCHIC",
+      "power": 12.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "zen_headbutt_fast",
+      "durationMs": 1100,
+      "damageWindowStartMs": 850,
+      "damageWindowEndMs": 1050,
+      "energyDelta": 10,
+      "combatMove": {
+        "power": 8.0,
+        "energyDelta": 6,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "CONFUSION_FAST",
+      "type": "POKEMON_TYPE_PSYCHIC",
+      "power": 20.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "confusion_fast",
+      "durationMs": 1600,
+      "damageWindowStartMs": 600,
+      "damageWindowEndMs": 1600,
+      "energyDelta": 15,
+      "combatMove": {
+        "power": 16.0,
+        "energyDelta": 12,
+        "durationTurns": 3
+      },
+      "pvpDurationMs": 2000
+    },
+    {
+      "moveId": "POISON_STING_FAST",
+      "type": "POKEMON_TYPE_POISON",
+      "power": 5.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "poison_sting_fast",
+      "durationMs": 600,
+      "damageWindowStartMs": 375,
+      "damageWindowEndMs": 575,
+      "energyDelta": 7,
+      "combatMove": {
+        "power": 3.0,
+        "energyDelta": 9,
+        "durationTurns": 1
+      },
+      "pvpDurationMs": 1000
+    },
+    {
+      "moveId": "BUBBLE_FAST",
+      "type": "POKEMON_TYPE_WATER",
+      "power": 12.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "bubble_fast",
+      "durationMs": 1200,
+      "damageWindowStartMs": 750,
+      "damageWindowEndMs": 1000,
+      "energyDelta": 14,
+      "combatMove": {
+        "power": 7.0,
+        "energyDelta": 11,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "FEINT_ATTACK_FAST",
+      "type": "POKEMON_TYPE_DARK",
+      "power": 10.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "feint_attack_fast",
+      "durationMs": 900,
+      "damageWindowStartMs": 750,
+      "damageWindowEndMs": 900,
+      "energyDelta": 9,
+      "combatMove": {
+        "power": 6.0,
+        "energyDelta": 6,
+        "durationTurns": 1
+      },
+      "pvpDurationMs": 1000
+    },
+    {
+      "moveId": "STEEL_WING_FAST",
+      "type": "POKEMON_TYPE_STEEL",
+      "power": 11.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "steel_wing_fast",
+      "durationMs": 800,
+      "damageWindowStartMs": 500,
+      "damageWindowEndMs": 800,
+      "energyDelta": 6,
+      "combatMove": {
+        "power": 7.0,
+        "energyDelta": 5,
+        "durationTurns": 1
+      },
+      "pvpDurationMs": 1000
+    },
+    {
+      "moveId": "FIRE_FANG_FAST",
+      "type": "POKEMON_TYPE_FIRE",
+      "power": 12.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "fire_fang_fast",
+      "durationMs": 900,
+      "damageWindowStartMs": 640,
+      "damageWindowEndMs": 840,
+      "energyDelta": 8,
+      "combatMove": {
+        "power": 8.0,
+        "energyDelta": 5,
+        "durationTurns": 1
+      },
+      "pvpDurationMs": 1000
+    },
+    {
+      "moveId": "ROCK_SMASH_FAST",
+      "type": "POKEMON_TYPE_FIGHTING",
+      "power": 15.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "rock_smash_fast",
+      "durationMs": 1300,
+      "damageWindowStartMs": 550,
+      "damageWindowEndMs": 800,
+      "energyDelta": 10,
+      "combatMove": {
+        "power": 9.0,
+        "energyDelta": 7,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "TRANSFORM_FAST",
+      "type": "POKEMON_TYPE_NORMAL",
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "transform_fast",
+      "durationMs": 2230,
+      "damageWindowStartMs": 300,
+      "damageWindowEndMs": 700,
+      "combatMove": {
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "COUNTER_FAST",
+      "type": "POKEMON_TYPE_FIGHTING",
+      "power": 12.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "counter_fast",
+      "durationMs": 900,
+      "damageWindowStartMs": 700,
+      "damageWindowEndMs": 900,
+      "energyDelta": 8,
+      "combatMove": {
+        "power": 8.0,
+        "energyDelta": 7,
+        "durationTurns": 1
+      },
+      "pvpDurationMs": 1000
+    },
+    {
+      "moveId": "POWDER_SNOW_FAST",
+      "type": "POKEMON_TYPE_ICE",
+      "power": 6.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "powder_snow_fast",
+      "durationMs": 1000,
+      "damageWindowStartMs": 850,
+      "damageWindowEndMs": 1000,
+      "energyDelta": 15,
+      "combatMove": {
+        "power": 5.0,
+        "energyDelta": 8,
+        "durationTurns": 1
+      },
+      "pvpDurationMs": 1000
+    },
+    {
+      "moveId": "CLOSE_COMBAT",
+      "type": "POKEMON_TYPE_FIGHTING",
+      "power": 100.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.04,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "close_combat",
+      "durationMs": 2300,
+      "damageWindowStartMs": 1000,
+      "damageWindowEndMs": 2300,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 100.0,
+        "energyDelta": -45,
+        "buffs": {
+          "attackerDefenseStatStageChange": -2,
+          "buffActivationChance": 1.0
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "DYNAMIC_PUNCH",
+      "type": "POKEMON_TYPE_FIGHTING",
+      "power": 90.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.04,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "dynamic_punch",
+      "durationMs": 2700,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 2700,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 90.0,
+        "energyDelta": -50
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "FOCUS_BLAST",
+      "type": "POKEMON_TYPE_FIGHTING",
+      "power": 140.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.04,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "focus_blast",
+      "durationMs": 3500,
+      "damageWindowStartMs": 3000,
+      "damageWindowEndMs": 3500,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 150.0,
+        "energyDelta": -75
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "AURORA_BEAM",
+      "type": "POKEMON_TYPE_ICE",
+      "power": 80.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.04,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "aurora_beam",
+      "durationMs": 3550,
+      "damageWindowStartMs": 3350,
+      "damageWindowEndMs": 3550,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 80.0,
+        "energyDelta": -60
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "CHARGE_BEAM_FAST",
+      "type": "POKEMON_TYPE_ELECTRIC",
+      "power": 8.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "charge_beam_fast",
+      "durationMs": 1100,
+      "damageWindowStartMs": 850,
+      "damageWindowEndMs": 1050,
+      "energyDelta": 15,
+      "combatMove": {
+        "power": 5.0,
+        "energyDelta": 11,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "VOLT_SWITCH_FAST",
+      "type": "POKEMON_TYPE_ELECTRIC",
+      "power": 14.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "volt_switch_fast",
+      "durationMs": 1600,
+      "damageWindowStartMs": 700,
+      "damageWindowEndMs": 900,
+      "energyDelta": 21,
+      "combatMove": {
+        "power": 12.0,
+        "energyDelta": 16,
+        "durationTurns": 3
+      },
+      "pvpDurationMs": 2000
+    },
+    {
+      "moveId": "WILD_CHARGE",
+      "type": "POKEMON_TYPE_ELECTRIC",
+      "power": 90.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.04,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "wild_charge",
+      "durationMs": 2600,
+      "damageWindowStartMs": 1700,
+      "damageWindowEndMs": 2100,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 100.0,
+        "energyDelta": -45,
+        "buffs": {
+          "attackerDefenseStatStageChange": -2,
+          "buffActivationChance": 1.0
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "ZAP_CANNON",
+      "type": "POKEMON_TYPE_ELECTRIC",
+      "power": 140.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.04,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "zap_cannon",
+      "durationMs": 3700,
+      "damageWindowStartMs": 3000,
+      "damageWindowEndMs": 3500,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 150.0,
+        "energyDelta": -80,
+        "buffs": {
+          "targetAttackStatStageChange": -1,
+          "buffActivationChance": 1.0
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "DRAGON_TAIL_FAST",
+      "type": "POKEMON_TYPE_DRAGON",
+      "power": 15.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "dragon_tail_fast",
+      "durationMs": 1100,
+      "damageWindowStartMs": 850,
+      "damageWindowEndMs": 1050,
+      "energyDelta": 9,
+      "combatMove": {
+        "power": 13.0,
+        "energyDelta": 9,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "AVALANCHE",
+      "type": "POKEMON_TYPE_ICE",
+      "power": 90.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.04,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "avalanche",
+      "durationMs": 2700,
+      "damageWindowStartMs": 1700,
+      "damageWindowEndMs": 2100,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 90.0,
+        "energyDelta": -45
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "AIR_SLASH_FAST",
+      "type": "POKEMON_TYPE_FLYING",
+      "power": 14.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "air_slash_fast",
+      "durationMs": 1200,
+      "damageWindowStartMs": 1000,
+      "damageWindowEndMs": 1200,
+      "energyDelta": 10,
+      "combatMove": {
+        "power": 9.0,
+        "energyDelta": 9,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "BRAVE_BIRD",
+      "type": "POKEMON_TYPE_FLYING",
+      "power": 130.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.04,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "brave_bird",
+      "durationMs": 2000,
+      "damageWindowStartMs": 1000,
+      "damageWindowEndMs": 1600,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 130.0,
+        "energyDelta": -55,
+        "buffs": {
+          "attackerDefenseStatStageChange": -3,
+          "buffActivationChance": 1.0
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "SKY_ATTACK",
+      "type": "POKEMON_TYPE_FLYING",
+      "power": 80.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.04,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "sky_attack",
+      "durationMs": 2000,
+      "damageWindowStartMs": 1500,
+      "damageWindowEndMs": 1700,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 75.0,
+        "energyDelta": -45
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "SAND_TOMB",
+      "type": "POKEMON_TYPE_GROUND",
+      "power": 60.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.04,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "sand_tomb",
+      "durationMs": 4000,
+      "damageWindowStartMs": 1700,
+      "damageWindowEndMs": 4000,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 25.0,
+        "energyDelta": -40,
+        "buffs": {
+          "targetDefenseStatStageChange": -1,
+          "buffActivationChance": 1.0
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "ROCK_BLAST",
+      "type": "POKEMON_TYPE_ROCK",
+      "power": 50.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.04,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "rock_blast",
+      "durationMs": 2100,
+      "damageWindowStartMs": 1600,
+      "damageWindowEndMs": 2000,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 50.0,
+        "energyDelta": -40
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "INFESTATION_FAST",
+      "type": "POKEMON_TYPE_BUG",
+      "power": 10.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "infestation_fast",
+      "durationMs": 1100,
+      "damageWindowStartMs": 850,
+      "damageWindowEndMs": 1050,
+      "energyDelta": 14,
+      "combatMove": {
+        "power": 6.0,
+        "energyDelta": 12,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "STRUGGLE_BUG_FAST",
+      "type": "POKEMON_TYPE_BUG",
+      "power": 15.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "struggle_bug_fast",
+      "durationMs": 1500,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 1500,
+      "energyDelta": 15,
+      "combatMove": {
+        "power": 9.0,
+        "energyDelta": 8,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "SILVER_WIND",
+      "type": "POKEMON_TYPE_BUG",
+      "power": 70.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.04,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "silver_wind",
+      "durationMs": 3700,
+      "damageWindowStartMs": 1700,
+      "damageWindowEndMs": 3500,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 45.0,
+        "energyDelta": -45,
+        "buffs": {
+          "attackerAttackStatStageChange": 2,
+          "attackerDefenseStatStageChange": 2,
+          "buffActivationChance": 0.1
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "ASTONISH_FAST",
+      "type": "POKEMON_TYPE_GHOST",
+      "power": 8.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "astonish_fast",
+      "durationMs": 1100,
+      "damageWindowStartMs": 700,
+      "damageWindowEndMs": 1050,
+      "energyDelta": 14,
+      "combatMove": {
+        "power": 5.0,
+        "energyDelta": 9,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "HEX_FAST",
+      "type": "POKEMON_TYPE_GHOST",
+      "power": 10.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "hex_fast",
+      "durationMs": 1200,
+      "damageWindowStartMs": 1000,
+      "damageWindowEndMs": 1200,
+      "energyDelta": 16,
+      "combatMove": {
+        "power": 6.0,
+        "energyDelta": 12,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "NIGHT_SHADE",
+      "type": "POKEMON_TYPE_GHOST",
+      "power": 60.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.04,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "night_shade",
+      "durationMs": 2600,
+      "damageWindowStartMs": 2100,
+      "damageWindowEndMs": 2500,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 60.0,
+        "energyDelta": -55
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "IRON_TAIL_FAST",
+      "type": "POKEMON_TYPE_STEEL",
+      "power": 15.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "iron_tail_fast",
+      "durationMs": 1100,
+      "damageWindowStartMs": 850,
+      "damageWindowEndMs": 1050,
+      "energyDelta": 7,
+      "combatMove": {
+        "power": 9.0,
+        "energyDelta": 6,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "GYRO_BALL",
+      "type": "POKEMON_TYPE_STEEL",
+      "power": 80.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.04,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "gyro_ball",
+      "durationMs": 3300,
+      "damageWindowStartMs": 3000,
+      "damageWindowEndMs": 3300,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 80.0,
+        "energyDelta": -60
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "HEAVY_SLAM",
+      "type": "POKEMON_TYPE_STEEL",
+      "power": 70.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.04,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "heavy_slam",
+      "durationMs": 2100,
+      "damageWindowStartMs": 1500,
+      "damageWindowEndMs": 1900,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 70.0,
+        "energyDelta": -50
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "FIRE_SPIN_FAST",
+      "type": "POKEMON_TYPE_FIRE",
+      "power": 14.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "fire_spin_fast",
+      "durationMs": 1100,
+      "damageWindowStartMs": 850,
+      "damageWindowEndMs": 1050,
+      "energyDelta": 10,
+      "combatMove": {
+        "power": 9.0,
+        "energyDelta": 10,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "OVERHEAT",
+      "type": "POKEMON_TYPE_FIRE",
+      "power": 160.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.04,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "overheat",
+      "durationMs": 4000,
+      "damageWindowStartMs": 2600,
+      "damageWindowEndMs": 3800,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 130.0,
+        "energyDelta": -55,
+        "buffs": {
+          "attackerAttackStatStageChange": -2,
+          "buffActivationChance": 1.0
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "BULLET_SEED_FAST",
+      "type": "POKEMON_TYPE_GRASS",
+      "power": 8.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "bullet_seed_fast",
+      "durationMs": 1100,
+      "damageWindowStartMs": 850,
+      "damageWindowEndMs": 1050,
+      "energyDelta": 14,
+      "combatMove": {
+        "power": 5.0,
+        "energyDelta": 13,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "GRASS_KNOT",
+      "type": "POKEMON_TYPE_GRASS",
+      "power": 90.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.04,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "grass_knot",
+      "durationMs": 2600,
+      "damageWindowStartMs": 1700,
+      "damageWindowEndMs": 2600,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 90.0,
+        "energyDelta": -50
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "ENERGY_BALL",
+      "type": "POKEMON_TYPE_GRASS",
+      "power": 90.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.04,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "energy_ball",
+      "durationMs": 3900,
+      "damageWindowStartMs": 3000,
+      "damageWindowEndMs": 3800,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 90.0,
+        "energyDelta": -55,
+        "buffs": {
+          "targetDefenseStatStageChange": -1,
+          "buffActivationChance": 0.1
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "EXTRASENSORY_FAST",
+      "type": "POKEMON_TYPE_PSYCHIC",
+      "power": 12.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "extrasensory_fast",
+      "durationMs": 1100,
+      "damageWindowStartMs": 850,
+      "damageWindowEndMs": 1050,
+      "energyDelta": 12,
+      "combatMove": {
+        "power": 8.0,
+        "energyDelta": 10,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "FUTURESIGHT",
+      "type": "POKEMON_TYPE_PSYCHIC",
+      "power": 120.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.04,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "futuresight",
+      "durationMs": 2700,
+      "damageWindowStartMs": 1400,
+      "damageWindowEndMs": 2700,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 120.0,
+        "energyDelta": -65
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "MIRROR_COAT",
+      "type": "POKEMON_TYPE_PSYCHIC",
+      "power": 60.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.04,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "mirror_coat",
+      "durationMs": 2600,
+      "damageWindowStartMs": 2300,
+      "damageWindowEndMs": 2500,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 60.0,
+        "energyDelta": -55
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "OUTRAGE",
+      "type": "POKEMON_TYPE_DRAGON",
+      "power": 110.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.04,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "outrage",
+      "durationMs": 3900,
+      "damageWindowStartMs": 2500,
+      "damageWindowEndMs": 3700,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 110.0,
+        "energyDelta": -60
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "SNARL_FAST",
+      "type": "POKEMON_TYPE_DARK",
+      "power": 12.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "snarl_fast",
+      "durationMs": 1100,
+      "damageWindowStartMs": 850,
+      "damageWindowEndMs": 1050,
+      "energyDelta": 14,
+      "combatMove": {
+        "power": 5.0,
+        "energyDelta": 13,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "CRUNCH",
+      "type": "POKEMON_TYPE_DARK",
+      "power": 70.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.04,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "crunch",
+      "durationMs": 3200,
+      "damageWindowStartMs": 1300,
+      "damageWindowEndMs": 3000,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 70.0,
+        "energyDelta": -45,
+        "buffs": {
+          "targetDefenseStatStageChange": -1,
+          "buffActivationChance": 0.3
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "FOUL_PLAY",
+      "type": "POKEMON_TYPE_DARK",
+      "power": 70.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.04,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "foul_play",
+      "durationMs": 2000,
+      "damageWindowStartMs": 1700,
+      "damageWindowEndMs": 1900,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 70.0,
+        "energyDelta": -45
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "HIDDEN_POWER_FAST",
+      "power": 15.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "hidden_power_fast",
+      "durationMs": 1500,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1400,
+      "energyDelta": 15,
+      "combatMove": {
+        "power": 9.0,
+        "energyDelta": 8,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "TAKE_DOWN_FAST",
+      "type": "POKEMON_TYPE_NORMAL",
+      "power": 8.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "take_down_fast",
+      "durationMs": 1200,
+      "damageWindowStartMs": 950,
+      "damageWindowEndMs": 1100,
+      "energyDelta": 10,
+      "combatMove": {
+        "power": 5.0,
+        "energyDelta": 8,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "WATERFALL_FAST",
+      "type": "POKEMON_TYPE_WATER",
+      "power": 16.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "waterfall_fast",
+      "durationMs": 1200,
+      "damageWindowStartMs": 950,
+      "damageWindowEndMs": 1100,
+      "energyDelta": 8,
+      "combatMove": {
+        "power": 12.0,
+        "energyDelta": 8,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "SURF",
+      "type": "POKEMON_TYPE_WATER",
+      "power": 65.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "surf",
+      "durationMs": 1700,
+      "damageWindowStartMs": 1400,
+      "damageWindowEndMs": 1600,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 65.0,
+        "energyDelta": -40
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "DRACO_METEOR",
+      "type": "POKEMON_TYPE_DRAGON",
+      "power": 150.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "draco_meteor",
+      "durationMs": 3600,
+      "damageWindowStartMs": 3000,
+      "damageWindowEndMs": 3500,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 150.0,
+        "energyDelta": -65,
+        "buffs": {
+          "attackerAttackStatStageChange": -2,
+          "buffActivationChance": 1.0
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "DOOM_DESIRE",
+      "type": "POKEMON_TYPE_STEEL",
+      "power": 70.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "doom_desire",
+      "durationMs": 1700,
+      "damageWindowStartMs": 1400,
+      "damageWindowEndMs": 1600,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 75.0,
+        "energyDelta": -40
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "YAWN_FAST",
+      "type": "POKEMON_TYPE_NORMAL",
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "yawn_fast",
+      "durationMs": 1700,
+      "damageWindowStartMs": 1400,
+      "damageWindowEndMs": 1600,
+      "energyDelta": 15,
+      "combatMove": {
+        "energyDelta": 12,
+        "durationTurns": 3
+      },
+      "pvpDurationMs": 2000
+    },
+    {
+      "moveId": "PSYCHO_BOOST",
+      "type": "POKEMON_TYPE_PSYCHIC",
+      "power": 70.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "psycho_boost",
+      "durationMs": 4000,
+      "damageWindowStartMs": 3500,
+      "damageWindowEndMs": 4000,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 70.0,
+        "energyDelta": -35,
+        "buffs": {
+          "attackerAttackStatStageChange": -2,
+          "buffActivationChance": 1.0
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "ORIGIN_PULSE",
+      "type": "POKEMON_TYPE_WATER",
+      "power": 130.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "origin_pulse",
+      "durationMs": 1700,
+      "damageWindowStartMs": 1400,
+      "damageWindowEndMs": 1600,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 130.0,
+        "energyDelta": -60
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "PRECIPICE_BLADES",
+      "type": "POKEMON_TYPE_GROUND",
+      "power": 130.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "precipice_blades",
+      "durationMs": 1700,
+      "damageWindowStartMs": 1400,
+      "damageWindowEndMs": 1600,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 130.0,
+        "energyDelta": -60
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "PRESENT_FAST",
+      "type": "POKEMON_TYPE_NORMAL",
+      "power": 5.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "present_fast",
+      "durationMs": 1300,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1300,
+      "energyDelta": 20,
+      "combatMove": {
+        "power": 3.0,
+        "energyDelta": 12,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "WEATHER_BALL_FIRE",
+      "type": "POKEMON_TYPE_FIRE",
+      "power": 55.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "weather_ball_fire",
+      "durationMs": 1600,
+      "damageWindowStartMs": 1350,
+      "damageWindowEndMs": 1600,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 55.0,
+        "energyDelta": -35
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "WEATHER_BALL_ICE",
+      "type": "POKEMON_TYPE_ICE",
+      "power": 55.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "weather_ball_ice",
+      "durationMs": 1600,
+      "damageWindowStartMs": 1350,
+      "damageWindowEndMs": 1600,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 55.0,
+        "energyDelta": -35
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "WEATHER_BALL_ROCK",
+      "type": "POKEMON_TYPE_ROCK",
+      "power": 55.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "weather_ball_rock",
+      "durationMs": 1600,
+      "damageWindowStartMs": 1350,
+      "damageWindowEndMs": 1600,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 55.0,
+        "energyDelta": -35
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "WEATHER_BALL_WATER",
+      "type": "POKEMON_TYPE_WATER",
+      "power": 55.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "weather_ball_water",
+      "durationMs": 1600,
+      "damageWindowStartMs": 1350,
+      "damageWindowEndMs": 1600,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 55.0,
+        "energyDelta": -35
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "FRENZY_PLANT",
+      "type": "POKEMON_TYPE_GRASS",
+      "power": 100.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "frenzy_plant",
+      "durationMs": 2600,
+      "damageWindowStartMs": 2145,
+      "damageWindowEndMs": 2550,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 100.0,
+        "energyDelta": -45
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "SMACK_DOWN_FAST",
+      "type": "POKEMON_TYPE_ROCK",
+      "power": 16.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "smack_down_fast",
+      "durationMs": 1200,
+      "damageWindowStartMs": 800,
+      "damageWindowEndMs": 1100,
+      "energyDelta": 8,
+      "combatMove": {
+        "power": 12.0,
+        "energyDelta": 8,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "BLAST_BURN",
+      "type": "POKEMON_TYPE_FIRE",
+      "power": 110.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "blast_burn",
+      "durationMs": 3300,
+      "damageWindowStartMs": 2750,
+      "damageWindowEndMs": 3200,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 110.0,
+        "energyDelta": -50
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "HYDRO_CANNON",
+      "type": "POKEMON_TYPE_WATER",
+      "power": 90.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.065,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "hydro_cannon",
+      "durationMs": 1900,
+      "damageWindowStartMs": 500,
+      "damageWindowEndMs": 1600,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 80.0,
+        "energyDelta": -40
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "LAST_RESORT",
+      "type": "POKEMON_TYPE_NORMAL",
+      "power": 90.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.065,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "last_resort",
+      "durationMs": 2900,
+      "damageWindowStartMs": 2700,
+      "damageWindowEndMs": 2850,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 90.0,
+        "energyDelta": -55
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "METEOR_MASH",
+      "type": "POKEMON_TYPE_STEEL",
+      "power": 100.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.065,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "meteor_mash",
+      "durationMs": 2600,
+      "damageWindowStartMs": 2300,
+      "damageWindowEndMs": 2500,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 100.0,
+        "energyDelta": -50
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "SKULL_BASH",
+      "type": "POKEMON_TYPE_NORMAL",
+      "power": 130.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "skull_bash",
+      "durationMs": 3100,
+      "damageWindowStartMs": 1800,
+      "damageWindowEndMs": 2300,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 130.0,
+        "energyDelta": -75,
+        "buffs": {
+          "attackerDefenseStatStageChange": 1,
+          "buffActivationChance": 1.0
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "ACID_SPRAY",
+      "type": "POKEMON_TYPE_POISON",
+      "power": 20.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "acid_spray",
+      "durationMs": 3000,
+      "damageWindowStartMs": 2100,
+      "damageWindowEndMs": 2800,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 20.0,
+        "energyDelta": -45,
+        "buffs": {
+          "targetDefenseStatStageChange": -2,
+          "buffActivationChance": 1.0
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "EARTH_POWER",
+      "type": "POKEMON_TYPE_GROUND",
+      "power": 100.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "earth_power",
+      "durationMs": 3600,
+      "damageWindowStartMs": 2700,
+      "damageWindowEndMs": 3400,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 90.0,
+        "energyDelta": -55,
+        "buffs": {
+          "targetDefenseStatStageChange": -1,
+          "buffActivationChance": 0.1
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "CRABHAMMER",
+      "type": "POKEMON_TYPE_WATER",
+      "power": 85.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "crabhammer",
+      "durationMs": 1900,
+      "damageWindowStartMs": 1500,
+      "damageWindowEndMs": 1750,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 85.0,
+        "energyDelta": -50,
+        "buffs": {
+          "attackerAttackStatStageChange": 2,
+          "buffActivationChance": 0.125
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "LUNGE",
+      "type": "POKEMON_TYPE_BUG",
+      "power": 55.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "lunge",
+      "durationMs": 2900,
+      "damageWindowStartMs": 2400,
+      "damageWindowEndMs": 2700,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 60.0,
+        "energyDelta": -45,
+        "buffs": {
+          "targetAttackStatStageChange": -1,
+          "buffActivationChance": 1.0
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "CRUSH_CLAW",
+      "type": "POKEMON_TYPE_NORMAL",
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "crush_claw",
+      "durationMs": 1900,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 1700
+    },
+    {
+      "moveId": "OCTAZOOKA",
+      "type": "POKEMON_TYPE_WATER",
+      "power": 50.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "octazooka",
+      "durationMs": 2300,
+      "damageWindowStartMs": 1300,
+      "damageWindowEndMs": 1600,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 50.0,
+        "energyDelta": -50,
+        "buffs": {
+          "targetAttackStatStageChange": -2,
+          "buffActivationChance": 0.5
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "MIRROR_SHOT",
+      "type": "POKEMON_TYPE_STEEL",
+      "power": 50.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "mirror_shot",
+      "durationMs": 2400,
+      "damageWindowStartMs": 1800,
+      "damageWindowEndMs": 2200,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 35.0,
+        "energyDelta": -35,
+        "buffs": {
+          "targetAttackStatStageChange": -1,
+          "buffActivationChance": 0.3
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "SUPER_POWER",
+      "type": "POKEMON_TYPE_FIGHTING",
+      "power": 85.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "super_power",
+      "durationMs": 3000,
+      "damageWindowStartMs": 2100,
+      "damageWindowEndMs": 2800,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 85.0,
+        "energyDelta": -40,
+        "buffs": {
+          "attackerAttackStatStageChange": -1,
+          "attackerDefenseStatStageChange": -1,
+          "buffActivationChance": 1.0
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "FELL_STINGER",
+      "type": "POKEMON_TYPE_BUG",
+      "power": 50.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "fell_stinger",
+      "durationMs": 2200,
+      "damageWindowStartMs": 1800,
+      "damageWindowEndMs": 2000,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 20.0,
+        "energyDelta": -35,
+        "buffs": {
+          "attackerAttackStatStageChange": 1,
+          "buffActivationChance": 1.0
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "LEAF_TORNADO",
+      "type": "POKEMON_TYPE_GRASS",
+      "power": 45.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "leaf_tornado",
+      "durationMs": 3100,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 2600,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 45.0,
+        "energyDelta": -40,
+        "buffs": {
+          "targetAttackStatStageChange": -2,
+          "buffActivationChance": 0.5
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "LEECH_LIFE",
+      "type": "POKEMON_TYPE_BUG",
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "leech_life",
+      "durationMs": 2500,
+      "damageWindowStartMs": 1150,
+      "damageWindowEndMs": 1400
+    },
+    {
+      "moveId": "DRAIN_PUNCH",
+      "type": "POKEMON_TYPE_FIGHTING",
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "drain_punch",
+      "durationMs": 2400,
+      "damageWindowStartMs": 1000,
+      "damageWindowEndMs": 1500
+    },
+    {
+      "moveId": "SHADOW_BONE",
+      "type": "POKEMON_TYPE_GHOST",
+      "power": 80.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "shadow_bone",
+      "durationMs": 2800,
+      "damageWindowStartMs": 2250,
+      "damageWindowEndMs": 2700,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 75.0,
+        "energyDelta": -45,
+        "buffs": {
+          "targetDefenseStatStageChange": -1,
+          "buffActivationChance": 0.2
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "MUDDY_WATER",
+      "type": "POKEMON_TYPE_WATER",
+      "power": 50.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "muddy_water",
+      "durationMs": 2200,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 1900,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 35.0,
+        "energyDelta": -35,
+        "buffs": {
+          "targetAttackStatStageChange": -1,
+          "buffActivationChance": 0.3
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "BLAZE_KICK",
+      "type": "POKEMON_TYPE_FIRE",
+      "power": 45.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "blaze_kick",
+      "durationMs": 1200,
+      "damageWindowStartMs": 450,
+      "damageWindowEndMs": 800,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 55.0,
+        "energyDelta": -40
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "RAZOR_SHELL",
+      "type": "POKEMON_TYPE_WATER",
+      "power": 45.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "razor_shell",
+      "durationMs": 1300,
+      "damageWindowStartMs": 650,
+      "damageWindowEndMs": 1000,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 35.0,
+        "energyDelta": -35,
+        "buffs": {
+          "targetDefenseStatStageChange": -1,
+          "buffActivationChance": 0.5
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "POWER_UP_PUNCH",
+      "type": "POKEMON_TYPE_FIGHTING",
+      "power": 50.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "power_up_punch",
+      "durationMs": 2000,
+      "damageWindowStartMs": 1700,
+      "damageWindowEndMs": 1900,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 20.0,
+        "energyDelta": -35,
+        "buffs": {
+          "attackerAttackStatStageChange": 1,
+          "buffActivationChance": 1.0
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "CHARM_FAST",
+      "type": "POKEMON_TYPE_FAIRY",
+      "power": 20.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "charm_fast",
+      "durationMs": 1500,
+      "damageWindowStartMs": 900,
+      "damageWindowEndMs": 1200,
+      "energyDelta": 11,
+      "combatMove": {
+        "power": 16.0,
+        "energyDelta": 6,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "GIGA_IMPACT",
+      "type": "POKEMON_TYPE_NORMAL",
+      "power": 200.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "giga_impact",
+      "durationMs": 4700,
+      "damageWindowStartMs": 1000,
+      "damageWindowEndMs": 2400,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 150.0,
+        "energyDelta": -80
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "FRUSTRATION",
+      "type": "POKEMON_TYPE_NORMAL",
+      "power": 10.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "frustration",
+      "durationMs": 2000,
+      "damageWindowStartMs": 1000,
+      "damageWindowEndMs": 1800,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 10.0,
+        "energyDelta": -70
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "RETURN",
+      "type": "POKEMON_TYPE_NORMAL",
+      "power": 35.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "return",
+      "durationMs": 700,
+      "damageWindowStartMs": 100,
+      "damageWindowEndMs": 350,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 130.0,
+        "energyDelta": -70
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "SYNCHRONOISE",
+      "type": "POKEMON_TYPE_PSYCHIC",
+      "power": 80.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "synchronoise",
+      "durationMs": 2600,
+      "damageWindowStartMs": 850,
+      "damageWindowEndMs": 1600,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 80.0,
+        "energyDelta": -50
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "LOCK_ON_FAST",
+      "type": "POKEMON_TYPE_NORMAL",
+      "power": 1.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "lock_on_fast",
+      "durationMs": 300,
+      "damageWindowStartMs": 170,
+      "damageWindowEndMs": 300,
+      "energyDelta": 6,
+      "combatMove": {
+        "power": 1.0,
+        "energyDelta": 5
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "THUNDER_FANG_FAST",
+      "type": "POKEMON_TYPE_ELECTRIC",
+      "power": 12.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "thunder_fang_fast",
+      "durationMs": 1200,
+      "damageWindowStartMs": 400,
+      "damageWindowEndMs": 900,
+      "energyDelta": 16,
+      "combatMove": {
+        "power": 8.0,
+        "energyDelta": 5,
+        "durationTurns": 1
+      },
+      "pvpDurationMs": 1000
+    },
+    {
+      "moveId": "ICE_FANG_FAST",
+      "type": "POKEMON_TYPE_ICE",
+      "power": 12.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "ice_fang_fast",
+      "durationMs": 1500,
+      "damageWindowStartMs": 400,
+      "damageWindowEndMs": 1000,
+      "energyDelta": 20,
+      "combatMove": {
+        "power": 8.0,
+        "energyDelta": 5,
+        "durationTurns": 1
+      },
+      "pvpDurationMs": 1000
+    },
+    {
+      "moveId": "HORN_DRILL",
+      "type": "POKEMON_TYPE_NORMAL",
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "horn_drill",
+      "durationMs": 1900,
+      "damageWindowStartMs": 500,
+      "damageWindowEndMs": 1500
+    },
+    {
+      "moveId": "FISSURE",
+      "type": "POKEMON_TYPE_GROUND",
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "fissure",
+      "durationMs": 2800,
+      "damageWindowStartMs": 1000,
+      "damageWindowEndMs": 2300
+    },
+    {
+      "moveId": "SACRED_SWORD",
+      "type": "POKEMON_TYPE_FIGHTING",
+      "power": 55.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "sacred_sword",
+      "durationMs": 1200,
+      "damageWindowStartMs": 500,
+      "damageWindowEndMs": 1000,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 60.0,
+        "energyDelta": -35
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "FLYING_PRESS",
+      "type": "POKEMON_TYPE_FIGHTING",
+      "power": 110.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "flying_press",
+      "durationMs": 2300,
+      "damageWindowStartMs": 1000,
+      "damageWindowEndMs": 2000,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 90.0,
+        "energyDelta": -40
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "AURA_SPHERE",
+      "type": "POKEMON_TYPE_FIGHTING",
+      "power": 90.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "aura_sphere",
+      "durationMs": 1800,
+      "damageWindowStartMs": 1000,
+      "damageWindowEndMs": 1600,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 100.0,
+        "energyDelta": -55
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "PAYBACK",
+      "type": "POKEMON_TYPE_DARK",
+      "power": 100.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "payback",
+      "durationMs": 2200,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 2000,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 110.0,
+        "energyDelta": -60
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "ROCK_WRECKER",
+      "type": "POKEMON_TYPE_ROCK",
+      "power": 110.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "rock_wrecker",
+      "durationMs": 3600,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 2700,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 110.0,
+        "energyDelta": -50
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "AEROBLAST",
+      "type": "POKEMON_TYPE_FLYING",
+      "power": 180.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "aeroblast",
+      "durationMs": 3400,
+      "damageWindowStartMs": 3200,
+      "damageWindowEndMs": 3400,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 170.0,
+        "energyDelta": -75,
+        "buffs": {
+          "attackerAttackStatStageChange": 2,
+          "buffActivationChance": 0.125
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "TECHNO_BLAST_NORMAL",
+      "type": "POKEMON_TYPE_NORMAL",
+      "power": 120.0,
+      "accuracyChance": 1.0,
+      "vfxName": "techno_blast_normal",
+      "durationMs": 2000,
+      "damageWindowStartMs": 1600,
+      "damageWindowEndMs": 2000,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 120.0,
+        "energyDelta": -55
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "TECHNO_BLAST_BURN",
+      "type": "POKEMON_TYPE_FIRE",
+      "power": 120.0,
+      "accuracyChance": 1.0,
+      "vfxName": "techno_blast_burn",
+      "durationMs": 2000,
+      "damageWindowStartMs": 1400,
+      "damageWindowEndMs": 2000,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 120.0,
+        "energyDelta": -55
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "TECHNO_BLAST_CHILL",
+      "type": "POKEMON_TYPE_ICE",
+      "power": 120.0,
+      "accuracyChance": 1.0,
+      "vfxName": "techno_blast_chill",
+      "durationMs": 2000,
+      "damageWindowStartMs": 1400,
+      "damageWindowEndMs": 2000,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 120.0,
+        "energyDelta": -55
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "TECHNO_BLAST_WATER",
+      "type": "POKEMON_TYPE_WATER",
+      "power": 120.0,
+      "accuracyChance": 1.0,
+      "vfxName": "techno_blast_water",
+      "durationMs": 2000,
+      "damageWindowStartMs": 1500,
+      "damageWindowEndMs": 2000,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 120.0,
+        "energyDelta": -55
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "TECHNO_BLAST_SHOCK",
+      "type": "POKEMON_TYPE_ELECTRIC",
+      "power": 120.0,
+      "accuracyChance": 1.0,
+      "vfxName": "techno_blast_shock",
+      "durationMs": 2000,
+      "damageWindowStartMs": 1600,
+      "damageWindowEndMs": 2000,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 120.0,
+        "energyDelta": -55
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "FLY",
+      "type": "POKEMON_TYPE_FLYING",
+      "power": 80.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "fly",
+      "durationMs": 1800,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 1500,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 80.0,
+        "energyDelta": -45
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "V_CREATE",
+      "type": "POKEMON_TYPE_FIRE",
+      "power": 95.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "v_create",
+      "durationMs": 2800,
+      "damageWindowStartMs": 1700,
+      "damageWindowEndMs": 2500,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 95.0,
+        "energyDelta": -40,
+        "buffs": {
+          "attackerDefenseStatStageChange": -3,
+          "buffActivationChance": 1.0
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "LEAF_STORM",
+      "type": "POKEMON_TYPE_GRASS",
+      "power": 130.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "leaf_storm",
+      "durationMs": 2500,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1250,
+      "energyDelta": -100,
+      "combatMove": {
+        "power": 130.0,
+        "energyDelta": -55,
+        "buffs": {
+          "attackerAttackStatStageChange": -2,
+          "buffActivationChance": 1.0
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "TRI_ATTACK",
+      "type": "POKEMON_TYPE_NORMAL",
+      "power": 75.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "tri_attack",
+      "durationMs": 2500,
+      "damageWindowStartMs": 1300,
+      "damageWindowEndMs": 2400,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 65.0,
+        "energyDelta": -50,
+        "buffs": {
+          "targetAttackStatStageChange": -1,
+          "targetDefenseStatStageChange": -1,
+          "buffActivationChance": 0.5
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "GUST_FAST",
+      "type": "POKEMON_TYPE_FLYING",
+      "power": 25.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "gust_fast",
+      "durationMs": 2000,
+      "damageWindowStartMs": 900,
+      "damageWindowEndMs": 2000,
+      "energyDelta": 20,
+      "combatMove": {
+        "power": 16.0,
+        "energyDelta": 12,
+        "durationTurns": 3
+      },
+      "pvpDurationMs": 2000
+    },
+    {
+      "moveId": "INCINERATE_FAST",
+      "type": "POKEMON_TYPE_FIRE",
+      "power": 29.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "incinerate_fast",
+      "durationMs": 2300,
+      "damageWindowStartMs": 500,
+      "damageWindowEndMs": 2300,
+      "energyDelta": 20,
+      "combatMove": {
+        "power": 15.0,
+        "energyDelta": 20,
+        "durationTurns": 4
+      },
+      "pvpDurationMs": 2500
+    },
+    {
+      "moveId": "FEATHER_DANCE",
+      "type": "POKEMON_TYPE_FLYING",
+      "power": 35.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "feather_dance",
+      "durationMs": 2800,
+      "damageWindowStartMs": 1700,
+      "damageWindowEndMs": 2500,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 35.0,
+        "energyDelta": -50,
+        "buffs": {
+          "targetAttackStatStageChange": -2,
+          "buffActivationChance": 1.0
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "WEATHER_BALL_NORMAL",
+      "type": "POKEMON_TYPE_NORMAL",
+      "power": 55.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "weather_ball_normal",
+      "durationMs": 1600,
+      "damageWindowStartMs": 1350,
+      "damageWindowEndMs": 1600,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 55.0,
+        "energyDelta": -35
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "PSYCHIC_FANGS",
+      "type": "POKEMON_TYPE_PSYCHIC",
+      "power": 30.0,
+      "accuracyChance": 1.0,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "psychic_fangs",
+      "durationMs": 1200,
+      "damageWindowStartMs": 400,
+      "damageWindowEndMs": 1100,
+      "energyDelta": -33,
+      "combatMove": {
+        "power": 40.0,
+        "energyDelta": -35,
+        "buffs": {
+          "targetDefenseStatStageChange": -1,
+          "buffActivationChance": 1.0
+        }
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "ICICLE_SPEAR",
+      "type": "POKEMON_TYPE_ICE",
+      "power": 60.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.06,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "flame_wheel",
+      "durationMs": 2700,
+      "damageWindowStartMs": 2100,
+      "damageWindowEndMs": 2400,
+      "energyDelta": -50,
+      "combatMove": {
+        "power": 60.0,
+        "energyDelta": -35
+      },
+      "pvpDurationMs": 500
+    },
+    {
+      "moveId": "DODGE",
+      "durationMs": 500
+    },
+    {
+      "type": "POKEMON_TYPE_NORMAL",
+      "durationMs": 50000,
+      "energyDelta": -100,
+      "combatMove": {
+        "energyDelta": -70
+      }
+    },
+    {
+      "moveId": "MOVE_NONE",
+      "type": "POKEMON_TYPE_NORMAL",
+      "durationMs": 50000,
+      "energyDelta": -100,
+      "combatMove": {
+        "energyDelta": -70
+      }
+    },
+    {
+      "moveId": "HIDDEN_POWER_NORMAL_FAST",
+      "type": "POKEMON_TYPE_NORMAL",
+      "power": 15.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "hidden_power_fast",
+      "durationMs": 1500,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1400,
+      "energyDelta": 15,
+      "combatMove": {
+        "power": 9.0,
+        "energyDelta": 8,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "HIDDEN_POWER_FIGHTING_FAST",
+      "type": "POKEMON_TYPE_FIGHTING",
+      "power": 15.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "hidden_power_fast",
+      "durationMs": 1500,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1400,
+      "energyDelta": 15,
+      "combatMove": {
+        "power": 9.0,
+        "energyDelta": 8,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "HIDDEN_POWER_FLYING_FAST",
+      "type": "POKEMON_TYPE_FLYING",
+      "power": 15.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "hidden_power_fast",
+      "durationMs": 1500,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1400,
+      "energyDelta": 15,
+      "combatMove": {
+        "power": 9.0,
+        "energyDelta": 8,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "HIDDEN_POWER_POISON_FAST",
+      "type": "POKEMON_TYPE_POISON",
+      "power": 15.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "hidden_power_fast",
+      "durationMs": 1500,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1400,
+      "energyDelta": 15,
+      "combatMove": {
+        "power": 9.0,
+        "energyDelta": 8,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "HIDDEN_POWER_GROUND_FAST",
+      "type": "POKEMON_TYPE_GROUND",
+      "power": 15.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "hidden_power_fast",
+      "durationMs": 1500,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1400,
+      "energyDelta": 15,
+      "combatMove": {
+        "power": 9.0,
+        "energyDelta": 8,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "HIDDEN_POWER_ROCK_FAST",
+      "type": "POKEMON_TYPE_ROCK",
+      "power": 15.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "hidden_power_fast",
+      "durationMs": 1500,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1400,
+      "energyDelta": 15,
+      "combatMove": {
+        "power": 9.0,
+        "energyDelta": 8,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "HIDDEN_POWER_BUG_FAST",
+      "type": "POKEMON_TYPE_BUG",
+      "power": 15.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "hidden_power_fast",
+      "durationMs": 1500,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1400,
+      "energyDelta": 15,
+      "combatMove": {
+        "power": 9.0,
+        "energyDelta": 8,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "HIDDEN_POWER_GHOST_FAST",
+      "type": "POKEMON_TYPE_GHOST",
+      "power": 15.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "hidden_power_fast",
+      "durationMs": 1500,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1400,
+      "energyDelta": 15,
+      "combatMove": {
+        "power": 9.0,
+        "energyDelta": 8,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "HIDDEN_POWER_STEEL_FAST",
+      "type": "POKEMON_TYPE_STEEL",
+      "power": 15.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "hidden_power_fast",
+      "durationMs": 1500,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1400,
+      "energyDelta": 15,
+      "combatMove": {
+        "power": 9.0,
+        "energyDelta": 8,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "HIDDEN_POWER_FIRE_FAST",
+      "type": "POKEMON_TYPE_FIRE",
+      "power": 15.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "hidden_power_fast",
+      "durationMs": 1500,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1400,
+      "energyDelta": 15,
+      "combatMove": {
+        "power": 9.0,
+        "energyDelta": 8,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "HIDDEN_POWER_WATER_FAST",
+      "type": "POKEMON_TYPE_WATER",
+      "power": 15.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "hidden_power_fast",
+      "durationMs": 1500,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1400,
+      "energyDelta": 15,
+      "combatMove": {
+        "power": 9.0,
+        "energyDelta": 8,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "HIDDEN_POWER_GRASS_FAST",
+      "type": "POKEMON_TYPE_GRASS",
+      "power": 15.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "hidden_power_fast",
+      "durationMs": 1500,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1400,
+      "energyDelta": 15,
+      "combatMove": {
+        "power": 9.0,
+        "energyDelta": 8,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "HIDDEN_POWER_ELECTRIC_FAST",
+      "type": "POKEMON_TYPE_ELECTRIC",
+      "power": 15.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "hidden_power_fast",
+      "durationMs": 1500,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1400,
+      "energyDelta": 15,
+      "combatMove": {
+        "power": 9.0,
+        "energyDelta": 8,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "HIDDEN_POWER_PSYCHIC_FAST",
+      "type": "POKEMON_TYPE_PSYCHIC",
+      "power": 15.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "hidden_power_fast",
+      "durationMs": 1500,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1400,
+      "energyDelta": 15,
+      "combatMove": {
+        "power": 9.0,
+        "energyDelta": 8,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "HIDDEN_POWER_ICE_FAST",
+      "type": "POKEMON_TYPE_ICE",
+      "power": 15.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "hidden_power_fast",
+      "durationMs": 1500,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1400,
+      "energyDelta": 15,
+      "combatMove": {
+        "power": 9.0,
+        "energyDelta": 8,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "HIDDEN_POWER_DRAGON_FAST",
+      "type": "POKEMON_TYPE_DRAGON",
+      "power": 15.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "hidden_power_fast",
+      "durationMs": 1500,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1400,
+      "energyDelta": 15,
+      "combatMove": {
+        "power": 9.0,
+        "energyDelta": 8,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "HIDDEN_POWER_DARK_FAST",
+      "type": "POKEMON_TYPE_DARK",
+      "power": 15.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "hidden_power_fast",
+      "durationMs": 1500,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1400,
+      "energyDelta": 15,
+      "combatMove": {
+        "power": 9.0,
+        "energyDelta": 8,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "HIDDEN_POWER_FAIRY_FAST",
+      "type": "POKEMON_TYPE_FAIRY",
+      "power": 15.0,
+      "accuracyChance": 1.0,
+      "criticalChance": 0.05,
+      "staminaLossScalar": 0.01,
+      "trainerLevelMin": 1,
+      "trainerLevelMax": 100,
+      "vfxName": "hidden_power_fast",
+      "durationMs": 1500,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1400,
+      "energyDelta": 15,
+      "combatMove": {
+        "power": 9.0,
+        "energyDelta": 8,
+        "durationTurns": 2
+      },
+      "pvpDurationMs": 1500
+    },
+    {
+      "moveId": "RANDOM",
+      "durationMs": 500
+    }
+  ]
+}

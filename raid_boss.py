@@ -80,7 +80,7 @@ class RaidBoss:
         if self.pokemon:
             self.pokemon_base = self.pokemon.base_codename
             self.pokemon_form = self.pokemon.form_codename  # Ignores shadow and mega
-            self.is_mega = self.tier == "RAID_LEVEL_MEGA" or self.pokemon.is_mega
+            self.is_mega = self.tier in ["RAID_LEVEL_MEGA", "RAID_LEVEL_MEGA_LEGENDARY"] or self.pokemon.is_mega
         else:
             print(f"Warning (RaidBoss.init_pokemon): Pokemon with code name {self.pokemon_codename} not found",
                 file=sys.stderr)
@@ -153,7 +153,7 @@ def filter_raids_by_criteria(raid_list, criterion_raid=None, criterion_pokemon=N
 def criterion_not_ignore_raid(raid):
     """
     Returns True if the RaidBoss should NOT be ignored.
-    An example of raids that should be ignored is Meloetta raids.
+    Examples of raids that should be ignored are T5 KYOGRE_PRIMAL and Bidoof raids.
     We also ignore a raid if the featured Pokemon should be ignored.
 
     :param raid: RaidBoss object to be evaluated on
@@ -194,7 +194,7 @@ def group_raid_bosses_by_basename(boss_list, separate_shadows=True, separate_meg
         if pkm.is_shadow and separate_shadows:
             base += "_SHADOW_FORM"
             # Need to check shadows with forms (e.g. Shadow Darmanitan Zen) in future, but okay for now
-        if pkm.is_mega and separate_megas:
+        if (pkm.is_mega or pkm.is_primal) and separate_megas:
             base = pkm.name
         if base not in ret:
             ret[base] = []

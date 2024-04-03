@@ -164,6 +164,10 @@ class CountersListSingle:
             battle_settings=self.battle_settings,
             sort_option=self.sort_option
         )
+        # if self.boss.pokemon_codename == "AMPHAROS_MEGA":
+        #     f = open("ampharos.json", "a")
+        #     f.write(str(self.JSON))
+        #     f.close()
         if self.trainer_id:
             print(f"Finished Loading: {parse_raid_tier_code2str(self.boss.tier)} {self.boss.pokemon_codename}, "
                   f"Trainer ID {self.trainer_id}, {self.battle_settings}")
@@ -185,7 +189,7 @@ class CountersListSingle:
                 {
                     "POKEMON_CODENAME": "MAGNETON_SHADOW_FORM",
                     "LEVEL": "40",  # String because .5
-                    "IV": "15/15/15",
+                    "IV": "15\\15\\15",
                     "ESTIMATOR": 2.9663813,  # Best moveset [only among those that participate in scaling];
                         # keys match sort_options code names
                         # If estimator has been scaled, an "ESTIMATOR_UNSCALED" key will appear here
@@ -241,12 +245,31 @@ class CountersListSingle:
             """
             dct = {"POKEMON_CODENAME": def_dict["pokemonId"],
                    "LEVEL": def_dict["stats"]["level"],
-                   "IV": "{}/{}/{}".format(
+                   "IV": "{}\\{}\\{}".format(
                        def_dict["stats"]["attack"], def_dict["stats"]["defense"], def_dict["stats"]["stamina"]),
                    "BY_MOVE": {}}
 
             dct.update(parse_timings(def_dict["total"], include_in_scaling=False))
             for mvst_blk in reversed(def_dict["byMove"]):  # Pokebattler lists movesets from worst to best
+                # if (self.attacker_criteria_multi.check_attacker(
+                #         pokemon_codename=dct["POKEMON_CODENAME"], level=dct["LEVEL"], iv=dct["IV"],
+                #         fast_codename=mvst_blk["move1"], charged_codename=mvst_blk["move2"],
+                #         ignore_specific_codenames_and_moves=True
+                #         # For example, Black Kyurem against itself will not pass the generic AttackerCriteria, but
+                #         # it passes the whitelist AttackerCriteria.
+                #         # We don't want Black Kyurem to participate in estimator scaling, so we need a way to prevent it
+                #         # from passing the whitelist for these purposes.
+                #     ) is False and self.attacker_criteria_multi.check_attacker(
+                #         pokemon_codename=dct["POKEMON_CODENAME"], level=dct["LEVEL"], iv=dct["IV"],
+                #         fast_codename=mvst_blk["move1"], charged_codename=mvst_blk["move2"],
+                #         ignore_specific_codenames_and_moves=False
+                #         # For example, Black Kyurem against itself will not pass the generic AttackerCriteria, but
+                #         # it passes the whitelist AttackerCriteria.
+                #         # We don't want Black Kyurem to participate in estimator scaling, so we need a way to prevent it
+                #         # from passing the whitelist for these purposes.
+                #     ) is True):
+                #     print(dct["POKEMON_CODENAME"], dct["LEVEL"], mvst_blk["move1"], mvst_blk["move2"], "FALSE")
+
                 dct["BY_MOVE"][(mvst_blk["move1"], mvst_blk["move2"])] = parse_timings(
                     mvst_blk["result"], include_in_scaling=True,
                     in_scaling_value=self.attacker_criteria_multi.check_attacker(
@@ -311,12 +334,13 @@ class CountersListSingle:
         self.rankings = new_rankings
 
     def get_attackers_with_movesets_bs(self, random_boss_moveset=True, specific_boss_moveset=False,
-                                       best_atker_moveset_only=False, atkers_not_combined=[]):
+                                       best_atker_moveset_only=False, atkers_not_combined=[],
+                                       return_per_boss_moveset=False): # TODO: Ugly. Fix.
         """
         Get a dict of all attackers contained in this CountersListSingle, their possible movesets,
         and whether each moveset participates in estimator scaling, as a dict in the following format:
         {
-            ("MAGNETON_SHADOW_FORM", 40, "15/15/15"): [
+            ("MAGNETON_SHADOW_FORM", 40, "15\\15\\15"): [
                 ('SPARK_FAST', 'FRUSTRATION', True),  # Only movesets included in this counters list
                 ...
             ], ...
@@ -337,6 +361,8 @@ class CountersListSingle:
             the specified sorting option, unless it's in the atkers_not_combined list.
         :param atkers_not_combined: Attackers in this list will keep all their movesets, even if
             best_atker_moveset_only is True.
+        :param return_per_boss_moveset: If True, returned dict contains all boss moveset in the format
+            {('RANDOM', 'RANDOM'): <dict>}, where <dict> is of the format above.
         :return: Dict of all attackers in the format above
         """
         ret = {}
@@ -372,7 +398,7 @@ class CountersListSingle:
 
         self.attackers = ret
         self.attackers_per_boss_mvst = ret_per_boss_mvst
-        return ret
+        return ret if not return_per_boss_moveset else ret_per_boss_mvst
 
     async def fill_blanks(self, target_atkers=None, random_boss_moveset=True, specific_boss_moveset=False):
         """
@@ -425,16 +451,22 @@ class CountersListSingle:
 
         # 2. Filter only the "missing" attackers that does not exist in this object yet
         # (Do this on a per-boss-moveset basis)
+        attackers_per_boss_mvst = self.get_attackers_with_movesets_bs(
+            random_boss_moveset=random_boss_moveset, specific_boss_moveset=specific_boss_moveset,
+            return_per_boss_moveset=True)
+        # Do not use cache because we're trying to find all info stored in this CountersListSingle, without choosing
+        # the best attacker moveset
+
         target_atkers_per_boss_mvst = {}
         for boss_mvst in boss_mvst_keys:
             target_atkers_per_boss_mvst[boss_mvst] = {}
             for atker_key, mvsts in target_atkers.items():
-                if atker_key not in self.attackers_per_boss_mvst[boss_mvst]:
+                if atker_key not in attackers_per_boss_mvst[boss_mvst]:
                     target_atkers_per_boss_mvst[boss_mvst][atker_key] = mvsts.copy()
                 else:  # mvsts = [('SPARK_FAST', 'FRUSTRATION', False), ...]
                     missing_mvsts = [mv for mv in mvsts
-                                     if mv not in self.attackers_per_boss_mvst[boss_mvst][atker_key]
-                                     and mv[:2] + (True,) not in self.attackers_per_boss_mvst[boss_mvst][atker_key]]
+                                     if mv not in attackers_per_boss_mvst[boss_mvst][atker_key]
+                                     and mv[:2] + (True,) not in attackers_per_boss_mvst[boss_mvst][atker_key]]
                     if missing_mvsts:
                         target_atkers_per_boss_mvst[boss_mvst][atker_key] = missing_mvsts
 
@@ -443,8 +475,8 @@ class CountersListSingle:
         #         atker_key: mvsts
         #         for atker_key, mvsts in target_atkers.items()
         #         if atker_key not in self.attackers_per_boss_mvst[boss_mvst]
-        #         # TODO: The above only considers an attacker as missing if the entire attacker is not there.
-        #         # TODO: Also consider the case when the attacker exists, but some attacker movesets are missing.
+        #         # TO-DO: The above only considers an attacker as missing if the entire attacker is not there.
+        #         # TO-DO: Also consider the case when the attacker exists, but some attacker movesets are missing.
         #     }
         #     for boss_mvst in boss_mvst_keys
         # }
@@ -529,17 +561,27 @@ class CountersListSingle:
             baseline_boss_moveset = "random"
 
         # Determine baseline
-        baselines_per_boss_moveset = {
-            # mvst_key: #min(atker_dict[self.sort_option] for atker_dict in atkers_list)
-            mvst_key: min(
+        # baselines_per_boss_moveset = {
+        #     # mvst_key: #min(atker_dict[self.sort_option] for atker_dict in atkers_list)
+        #     mvst_key: min(
+        #         timings_dict[self.sort_option]
+        #         for atker_dict in atkers_list
+        #         for (fast_codename, charged_codename), timings_dict in atker_dict["BY_MOVE"].items()
+        #         if timings_dict["IN_SCALING"]  # Careful to only consider movesets in scaling
+        #     )
+        #     for mvst_key, atkers_list in self.rankings.items()
+        #     if atkers_list
+        # }
+        baselines_per_boss_moveset = {}
+        for mvst_key, atkers_list in self.rankings.items():
+            estimators = [
                 timings_dict[self.sort_option]
                 for atker_dict in atkers_list
                 for (fast_codename, charged_codename), timings_dict in atker_dict["BY_MOVE"].items()
                 if timings_dict["IN_SCALING"]  # Careful to only consider movesets in scaling
-            )
-            for mvst_key, atkers_list in self.rankings.items()
-            if atkers_list
-        }
+            ]
+            if estimators:
+                baselines_per_boss_moveset[mvst_key] = min(estimators)
         if ("RANDOM", "RANDOM") not in baselines_per_boss_moveset:
             print(f"Warning (CountersListSingle.get_estimator_baseline): "
                   f"Boss moveset option {('RANDOM', 'RANDOM')} does not have any attackers. Returning 1.",
@@ -1011,7 +1053,7 @@ class CountersListsMultiBSLevel:
         Get a dict of all attackers contained in each CountersListSingle BY LEVEL, their possible movesets,
         and whether each moveset participates in estimator scaling, as a dict in the following format:
         {
-            ("MAGNETON_SHADOW_FORM", 40, "15/15/15"): [
+            ("MAGNETON_SHADOW_FORM", 40, "15\\15\\15"): [
                 ('SPARK_FAST', 'FRUSTRATION', True),  # Only movesets included in this counters list
                 ...
             ], ...
@@ -1057,7 +1099,7 @@ class CountersListsMultiBSLevel:
         Get a dict of all attackers contained in each CountersListSingle BY TRAINER ID, their possible movesets,
         and whether each moveset participates in estimator scaling, as a dict in the following format:
         {
-            ("MAGNETON_SHADOW_FORM", 40, "15/15/15"): [
+            ("MAGNETON_SHADOW_FORM", 40, "15\\15\\15"): [
                 ('SPARK_FAST', 'FRUSTRATION', True),  # Only movesets included in this counters list
                 ...
             ], ...
@@ -1561,7 +1603,7 @@ class CountersListsRE:
         Get a dict of all attackers contained in each CountersListSingle BY LEVEL, their possible movesets,
         and whether each moveset participates in estimator scaling, as a dict in the following format:
         {
-            ("MAGNETON_SHADOW_FORM", 40, "15/15/15"): [
+            ("MAGNETON_SHADOW_FORM", 40, "15\\15\\15"): [
                 ('SPARK_FAST', 'FRUSTRATION', True),  # Only movesets included in this counters list
                 ...
             ], ...
@@ -1606,7 +1648,7 @@ class CountersListsRE:
         Get a dict of all attackers contained in each CountersListSingle BY TRAINER ID, their possible movesets,
         and whether each moveset participates in estimator scaling, as a dict in the following format:
         {
-            ("MAGNETON_SHADOW_FORM", 40, "15/15/15"): [
+            ("MAGNETON_SHADOW_FORM", 40, "15\\15\\15"): [
                 ('SPARK_FAST', 'FRUSTRATION', True),  # Only movesets included in this counters list
                 ...
             ], ...
@@ -1650,7 +1692,7 @@ class CountersListsRE:
         Get a dict of all required attackers specified by "Pokemon code names and moves", as a dict in the
         following format:
         {
-            ("MAGNETON_SHADOW_FORM", 40, "15/15/15"): [
+            ("MAGNETON_SHADOW_FORM", 40, "15\\15\\15"): [
                 ('SPARK_FAST', 'FRUSTRATION', True/False),
                 ...
             ], ...
@@ -1670,13 +1712,15 @@ class CountersListsRE:
         """
         required_atkers = self.attacker_criteria_multi.get_required_attackers()  # Unformatted, list of tuples
         # [
-        #     ("URSALUNA", 40, "15/15/15", "MUD_SHOT_FAST", "HIGH_HORSEPOWER"),
-        #     ("GARCHOMP_MEGA", 30, "10/10/10", "MUD_SHOT_FAST", "EARTH_POWER"),
+        #     ("URSALUNA", 40, "15\\15\\15", "MUD_SHOT_FAST", "HIGH_HORSEPOWER", None),
+        #     ("GARCHOMP_MEGA", 30, "10\\10\\10", "MUD_SHOT_FAST", "EARTH_POWER", True),
         # ]
         ret = {}
         for atker_tuple in required_atkers:
             atker_key = (atker_tuple[0], atker_tuple[1], atker_tuple[2])
-            atker_moves = [(atker_tuple[3], atker_tuple[4], self.scaling_settings["Consider required attackers"])]
+            atker_moves = [(atker_tuple[3], atker_tuple[4],
+                            atker_tuple[5] if atker_tuple[5] is not None
+                            else self.scaling_settings["Consider required attackers"])]
             if atker_key not in ret:
                 ret[atker_key] = []
             ret[atker_key] = list(set(ret[atker_key] + atker_moves))
@@ -1691,25 +1735,28 @@ class CountersListsRE:
 
         This is performed before estimator scaling.
         """
-        if not self.processing_settings["Fill blanks"]:
-            print("Skipped filling blanks.")
-            return
+        # if not self.processing_settings["Fill blanks"]:
+        #     print("Skipped filling blanks.")
+        #     return
 
         print("Filling blanks......")
-        all_atkers = self.get_attackers_by_all_levels(
-            random_boss_moveset=self.processing_settings["Include random boss movesets"],
-            specific_boss_moveset=self.processing_settings["Include specific boss movesets"],
-            best_atker_moveset_only=self.processing_settings["Combine attacker movesets"],  # Reduce amount of work for filling blanks
-            atkers_not_combined=self.processing_settings["Attackers that should not be combined"]
-        )  # Only include attackers in the by-level lists
-        all_atkers_by_id = self.get_attackers_by_all_ids(
-            random_boss_moveset=self.processing_settings["Include random boss movesets"],
-            specific_boss_moveset=self.processing_settings["Include specific boss movesets"],
-            best_atker_moveset_only=self.processing_settings["Combine attacker movesets"],  # Reduce amount of work for filling blanks
-            atkers_not_combined=self.processing_settings["Attackers that should not be combined"]
-        )  # Only include attackers in the by-ID lists
+        all_atkers, all_atkers_by_id = {}, {}
+        if self.processing_settings["Fill blanks"]:
+            all_atkers = self.get_attackers_by_all_levels(
+                random_boss_moveset=self.processing_settings["Include random boss movesets"],
+                specific_boss_moveset=self.processing_settings["Include specific boss movesets"],
+                best_atker_moveset_only=self.processing_settings["Combine attacker movesets"],  # Reduce amount of work for filling blanks
+                atkers_not_combined=self.processing_settings["Attackers that should not be combined"]
+            )  # Only include attackers in the by-level lists
+            all_atkers_by_id = self.get_attackers_by_all_ids(
+                random_boss_moveset=self.processing_settings["Include random boss movesets"],
+                specific_boss_moveset=self.processing_settings["Include specific boss movesets"],
+                best_atker_moveset_only=self.processing_settings["Combine attacker movesets"],  # Reduce amount of work for filling blanks
+                atkers_not_combined=self.processing_settings["Attackers that should not be combined"]
+            )  # Only include attackers in the by-ID lists
 
         # Find required attackers specified by "Pokemon code names and moves", in the same format as all_atkers
+        # Always do this even if config["Fill blanks"] is False
         required_atkers = self.get_required_attackers()
 
         # Merge all_atkers and required_atkers
@@ -1868,14 +1915,17 @@ class CountersListsRE:
         # TODO: Clean up.
 
         combine_attacker_movesets = self.processing_settings["Combine attacker movesets"]
+        combine_attacker_fast_moves = self.processing_settings["Combine attacker fast moves"]
         random_boss_moveset = self.processing_settings["Include random boss movesets"]
         specific_boss_moveset = self.processing_settings["Include specific boss movesets"]
         weights_to_specific_boss_movesets = self.processing_settings["Assign weights to specific boss movesets"]
         write_unscaled = self.processing_settings["Include unscaled estimators"]
         write_iv = self.processing_settings["Include attacker IVs"]
+        write_fast_move_type = self.processing_settings["Include fast move type"]
+        write_charged_move_type = self.processing_settings["Include charged move type"]
 
         attackers_boss_dict = {}
-        # {("VENUSAUR_MEGA", "VINE_WHIP_FAST", "FRENZY_PLANT", "40", "15/15/15"):
+        # {("VENUSAUR_MEGA", "VINE_WHIP_FAST", "FRENZY_PLANT", "40", "15\\15\\15"):
         #     {
         #         ("GROUDON", "DRAGON_TAIL_FAST", "SOLAR_BEAM", "RAID_LEVEL_5", <Battle Settings object>, weight): {
         #             "ESTIMATOR": 1.0,
@@ -1984,6 +2034,51 @@ class CountersListsRE:
                     continue
                 best_fast = list(set(mvst[0] for mvst in atker_curr_mvsts.values()))
                 best_charged = list(set(mvst[1] for mvst in atker_curr_mvsts.values()))
+                best_fast.sort()
+                best_charged.sort()
+                new_atker_key = (atker, "Unknown" if not best_fast else " or ".join(best_fast),
+                                 "Unknown" if not best_charged else " or ".join(best_charged), atker_lvl, atker_iv)
+                new_atk_boss_dict[new_atker_key] = atker_curr_vals
+            attackers_boss_dict = new_atk_boss_dict
+        elif combine_attacker_fast_moves:
+            new_atk_boss_dict = {}  # Same format
+            atker_names_charged_lvls_ivs = set((atker_key[0], atker_key[2], atker_key[3], atker_key[4])
+                                       for atker_key in attackers_boss_dict.keys())
+            for atker, atker_charged, atker_lvl, atker_iv in atker_names_charged_lvls_ivs:
+                if atker in self.processing_settings["Attackers that should not be combined"]:
+                    # Do not combine different moves, keep separate
+                    for atker_mvst_key, atker_mvst_vals in attackers_boss_dict.items():
+                        if not (atker_mvst_key[0] == atker and atker_mvst_key[3] == atker_lvl
+                                and atker_mvst_key[4] == atker_iv):
+                            continue
+                        new_atk_boss_dict[atker_mvst_key] = atker_mvst_vals
+                    continue
+
+                atker_curr_vals = {}  # Map boss keys to timings
+                atker_curr_mvsts = {}  # Map boss keys to attacker movesets (fast, charged)
+                for atker_mvst_key, atker_mvst_vals in attackers_boss_dict.items():
+                    if not (atker_mvst_key[0] == atker and atker_mvst_key[2] == atker_charged
+                            and atker_mvst_key[3] == atker_lvl
+                            and atker_mvst_key[4] == atker_iv):
+                        continue
+                    fast, charged = atker_mvst_key[1], atker_mvst_key[2]
+                    for boss_key in boss_keys:
+                        if boss_key not in atker_mvst_vals:
+                            continue
+                        timings = atker_mvst_vals[boss_key]
+                        add = (boss_key not in atker_curr_vals
+                               or timings[self.sort_option] < atker_curr_vals[boss_key][self.sort_option])
+                        if add:
+                            atker_curr_vals[boss_key] = timings
+                            atker_curr_mvsts[boss_key] = (fast, charged)
+                if not atker_curr_mvsts:
+                    # This attacker doesn't show up in any of the boss movesets we're interested in
+                    # Therefore, it no longer has to be in the output
+                    continue
+                best_fast = list(set(mvst[0] for mvst in atker_curr_mvsts.values()))
+                best_charged = list(set(mvst[1] for mvst in atker_curr_mvsts.values()))
+                best_fast.sort()
+                best_charged.sort()
                 new_atker_key = (atker, "Unknown" if not best_fast else " or ".join(best_fast),
                                  "Unknown" if not best_charged else " or ".join(best_charged), atker_lvl, atker_iv)
                 new_atk_boss_dict[new_atker_key] = atker_curr_vals
@@ -2007,7 +2102,13 @@ class CountersListsRE:
         filename = os.path.join(path, f"table_{self.sort_option}.csv")
         os.makedirs(os.path.dirname(filename), exist_ok=True)
         with open(filename, mode='w', newline='', encoding='UTF-8') as csv_file:
-            fieldnames = ["Attacker", "Fast Move", "Charged Move", "Level"]
+            fieldnames = ["Attacker", "Fast Move"]
+            if write_fast_move_type:
+                fieldnames.append("Fast Type")
+            fieldnames.append("Charged Move")
+            if write_charged_move_type:
+                fieldnames.append("Charged Type")
+            fieldnames.append("Level")
             if write_iv:
                 fieldnames.append("IV")
             row_boss_offset = len(fieldnames)  # Add this to boss index
@@ -2064,19 +2165,51 @@ class CountersListsRE:
             writer.writerow(bs_row)
 
             for atker_key, atker_values in attackers_boss_dict.items():
-                atker_row = [None,] * row_len
-                atker_row[0] = self.metadata.pokemon_codename_to_displayname(atker_key[0])  # Attacker
-                atker_row[1] = (  # Fast Move
+                # atker_row = [None,] * row_len
+                # atker_row[0] = self.metadata.pokemon_codename_to_displayname(atker_key[0])  # Attacker
+                # atker_row[1] = (  # Fast Move
+                #     "Unknown" if atker_key[1] == "Unknown"
+                #     else " or ".join([self.metadata.move_codename_to_displayname(code)
+                #                       for code in atker_key[1].split(" or ")]))
+                # atker_row[2] = (  # Charged Move
+                #                  "Unknown" if atker_key[2] == "Unknown"
+                #                  else " or ".join([self.metadata.move_codename_to_displayname(code)
+                #                                    for code in atker_key[2].split(" or ")]))
+                # atker_row[3] = atker_key[3]  # Level
+                # if write_iv:
+                #     atker_row[4] = atker_key[4]  # IV
+
+                atker_row = []
+                atker_row.append(self.metadata.pokemon_codename_to_displayname(atker_key[0]))  # Attacker
+                atker_row.append(  # Fast Move
                     "Unknown" if atker_key[1] == "Unknown"
                     else " or ".join([self.metadata.move_codename_to_displayname(code)
                                       for code in atker_key[1].split(" or ")]))
-                atker_row[2] = (  # Charged Move
+                if write_fast_move_type:
+                    if atker_key[1] == "Unknown":
+                        atker_row.append("Unknown")
+                    else:
+                        move_objs = [self.metadata.find_move(code)
+                                     for code in atker_key[1].split(" or ")]
+                        types = set(move.type for move in move_objs)  # Natural language
+                        atker_row.append(" or ".join(sorted(types)))
+                atker_row.append(  # Charged Move
                                  "Unknown" if atker_key[2] == "Unknown"
                                  else " or ".join([self.metadata.move_codename_to_displayname(code)
                                                    for code in atker_key[2].split(" or ")]))
-                atker_row[3] = atker_key[3]  # Level
+                if write_charged_move_type:
+                    if atker_key[2] == "Unknown":
+                        atker_row.append("Unknown")
+                    else:
+                        move_objs = [self.metadata.find_move(code)
+                                     for code in atker_key[2].split(" or ")]
+                        types = set(move.type for move in move_objs)  # Natural language
+                        atker_row.append(" or ".join(sorted(types)))
+                atker_row.append(atker_key[3])  # Level
                 if write_iv:
-                    atker_row[4] = atker_key[4]  # IV
+                    atker_row.append(atker_key[4])  # IV
+
+                atker_row += [None,] * (row_len - len(atker_row))
 
                 for i, boss_key in enumerate(boss_keys):
                     if boss_key in atker_values:
@@ -2085,7 +2218,8 @@ class CountersListsRE:
 
                 if write_unscaled:
                     unscaled_row = atker_row.copy()
-                    unscaled_row[0] = atker_row[0] + " (Unscaled)"
+                    #unscaled_row[0] = atker_row[0] + " (Unscaled)"
+                    unscaled_row[0] = "Unscaled: " + atker_row[0]
                     for i, boss_key in enumerate(boss_keys):
                         if boss_key in atker_values:
                             unscaled_row[i + row_boss_offset] = atker_values[boss_key][self.sort_option + "_UNSCALED"]

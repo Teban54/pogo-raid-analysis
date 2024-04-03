@@ -1,0 +1,163 @@
+{
+  'pokemonId': 'VENUSAUR',
+  'type': 'POKEMON_TYPE_GRASS',
+  'type2': 'POKEMON_TYPE_POISON',
+  'stats': {
+    'baseStamina': 190,
+    'baseAttack': 198,
+    'baseDefense': 189
+  },
+  'quickMoves': [
+    'VINE_WHIP_FAST',
+    'RAZOR_LEAF_FAST'
+  ],
+  'cinematicMoves': [
+    'PETAL_BLIZZARD',
+    'SLUDGE_BOMB',
+    'SOLAR_BEAM',
+    'RETURN',
+    'FRENZY_PLANT'
+  ],
+  'pokedexHeightM': 2.0,
+  'pokedexWeightKg': 100.0,
+  'parentPokemonId': 'IVYSAUR',
+  'heightStdDev': 0.25,
+  'weightStdDev': 12.5,
+  'familyId': 'FAMILY_BULBASAUR',
+  'eliteCinematicMove': [
+    'FRENZY_PLANT'
+  ],
+  'thirdMove': {
+    'stardustToUnlock': 10000,
+    'candyToUnlock': 25
+  },
+  'movesets': [
+    {
+      'quickMove': 'VINE_WHIP_FAST',
+      'cinematicMove': 'PETAL_BLIZZARD'
+    },
+    {
+      'quickMove': 'VINE_WHIP_FAST',
+      'cinematicMove': 'SLUDGE_BOMB'
+    },
+    {
+      'quickMove': 'VINE_WHIP_FAST',
+      'cinematicMove': 'SOLAR_BEAM'
+    },
+    {
+      'quickMove': 'VINE_WHIP_FAST',
+      'cinematicMove': 'RETURN'
+    },
+    {
+      'quickMove': 'RAZOR_LEAF_FAST',
+      'cinematicMove': 'PETAL_BLIZZARD'
+    },
+    {
+      'quickMove': 'RAZOR_LEAF_FAST',
+      'cinematicMove': 'SLUDGE_BOMB'
+    },
+    {
+      'quickMove': 'RAZOR_LEAF_FAST',
+      'cinematicMove': 'SOLAR_BEAM'
+    },
+    {
+      'quickMove': 'RAZOR_LEAF_FAST',
+      'cinematicMove': 'RETURN'
+    },
+    {
+      'quickMove': 'VINE_WHIP_FAST',
+      'cinematicMove': 'FRENZY_PLANT',
+      'legacyDate': '20191214'
+    },
+    {
+      'quickMove': 'RAZOR_LEAF_FAST',
+      'cinematicMove': 'FRENZY_PLANT',
+      'legacyDate': '20191214'
+    }
+  ],
+  'pokedex': {
+    'pokemonId': 'VENUSAUR',
+    'pokemonNum': 3,
+    'gen': 'GEN_1'
+  },
+  'tmMovesets': [
+    {
+      'quickMove': 'VINE_WHIP_FAST',
+      'cinematicMove': 'PETAL_BLIZZARD'
+    },
+    {
+      'quickMove': 'VINE_WHIP_FAST',
+      'cinematicMove': 'SLUDGE_BOMB'
+    },
+    {
+      'quickMove': 'VINE_WHIP_FAST',
+      'cinematicMove': 'SOLAR_BEAM'
+    },
+    {
+      'quickMove': 'VINE_WHIP_FAST',
+      'cinematicMove': 'RETURN'
+    },
+    {
+      'quickMove': 'VINE_WHIP_FAST',
+      'cinematicMove': 'FRENZY_PLANT',
+      'legacyDate': '20191214',
+      'elite': True
+    },
+    {
+      'quickMove': 'RAZOR_LEAF_FAST',
+      'cinematicMove': 'PETAL_BLIZZARD'
+    },
+    {
+      'quickMove': 'RAZOR_LEAF_FAST',
+      'cinematicMove': 'SLUDGE_BOMB'
+    },
+    {
+      'quickMove': 'RAZOR_LEAF_FAST',
+      'cinematicMove': 'SOLAR_BEAM'
+    },
+    {
+      'quickMove': 'RAZOR_LEAF_FAST',
+      'cinematicMove': 'RETURN'
+    },
+    {
+      'quickMove': 'RAZOR_LEAF_FAST',
+      'cinematicMove': 'FRENZY_PLANT',
+      'legacyDate': '20191214',
+      'elite': True
+    }
+  ],
+  'currentMovesets': [
+    {
+      'quickMove': 'VINE_WHIP_FAST',
+      'cinematicMove': 'PETAL_BLIZZARD'
+    },
+    {
+      'quickMove': 'VINE_WHIP_FAST',
+      'cinematicMove': 'SLUDGE_BOMB'
+    },
+    {
+      'quickMove': 'VINE_WHIP_FAST',
+      'cinematicMove': 'SOLAR_BEAM'
+    },
+    {
+      'quickMove': 'VINE_WHIP_FAST',
+      'cinematicMove': 'RETURN'
+    },
+    {
+      'quickMove': 'RAZOR_LEAF_FAST',
+      'cinematicMove': 'PETAL_BLIZZARD'
+    },
+    {
+      'quickMove': 'RAZOR_LEAF_FAST',
+      'cinematicMove': 'SLUDGE_BOMB'
+    },
+    {
+      'quickMove': 'RAZOR_LEAF_FAST',
+      'cinematicMove': 'SOLAR_BEAM'
+    },
+    {
+      'quickMove': 'RAZOR_LEAF_FAST',
+      'cinematicMove': 'RETURN'
+    }
+  ]
+}

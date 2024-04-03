@@ -1,0 +1,3015 @@
+{
+  (
+  'CHARGE_BEAM_FAST',
+  'OUTRAGE'
+  ): [
+    {
+      'POKEMON_CODENAME': 'MAMOSWINE_SHADOW_FORM',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SLAP_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.5887978,
+          'TIME': 697473,
+          'DEATHS': 39.30213359096446
+        },
+        (
+        'POWDER_SNOW_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.9996154,
+          'TIME': 808075,
+          'DEATHS': 45.57356263273618
+        }
+      },
+      'ESTIMATOR': 2.5887978,
+      'TIME': 697473,
+      'DEATHS': 39.30213359096446
+    },
+    {
+      'POKEMON_CODENAME': 'EXCADRILL',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SLAP_FAST',
+        'DRILL_RUN'
+        ): {
+          'ESTIMATOR': 2.4161534,
+          'TIME': 683161,
+          'DEATHS': 25.971627745607066
+        },
+        (
+        'MUD_SLAP_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.4481187,
+          'TIME': 692053,
+          'DEATHS': 26.35426254887706
+        },
+        (
+        'MUD_SHOT_FAST',
+        'DRILL_RUN'
+        ): {
+          'ESTIMATOR': 2.5208073,
+          'TIME': 712839,
+          'DEATHS': 27.089967467572823
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.630976,
+          'TIME': 743790,
+          'DEATHS': 28.30822732297457
+        },
+        (
+        'METAL_CLAW_FAST',
+        'DRILL_RUN'
+        ): {
+          'ESTIMATOR': 3.0134509,
+          'TIME': 852965,
+          'DEATHS': 32.246387969765856
+        },
+        (
+        'METAL_CLAW_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 3.395356,
+          'TIME': 960944,
+          'DEATHS': 36.41245020987462
+        }
+      },
+      'ESTIMATOR': 2.4161534,
+      'TIME': 683161,
+      'DEATHS': 25.971627745607066
+    },
+    {
+      'POKEMON_CODENAME': 'GARCHOMP',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.436388,
+          'TIME': 656694,
+          'DEATHS': 36.781870244524654
+        },
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.6011317,
+          'TIME': 700750,
+          'DEATHS': 39.497475726868416
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.779436,
+          'TIME': 748787,
+          'DEATHS': 42.20094513678814
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.8482866,
+          'TIME': 767770,
+          'DEATHS': 43.04458031144993
+        },
+        (
+        'DRAGON_TAIL_FAST',
+        'SAND_TOMB'
+        ): {
+          'ESTIMATOR': 3.5614173,
+          'TIME': 959684,
+          'DEATHS': 54.11915468167479
+        }
+      },
+      'ESTIMATOR': 2.436388,
+      'TIME': 656694,
+      'DEATHS': 36.781870244524654
+    },
+    {
+      'POKEMON_CODENAME': 'MAMOSWINE',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SLAP_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 3.0825083,
+          'TIME': 830573,
+          'DEATHS': 46.7850932313172
+        },
+        (
+        'POWDER_SNOW_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 3.5873957,
+          'TIME': 966551,
+          'DEATHS': 54.41198235484717
+        }
+      },
+      'ESTIMATOR': 3.0825083,
+      'TIME': 830573,
+      'DEATHS': 46.7850932313172
+    },
+    {
+      'POKEMON_CODENAME': 'GROUDON',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.5155113,
+          'TIME': 708355,
+          'DEATHS': 28.812212392678653
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.5626974,
+          'TIME': 721591,
+          'DEATHS': 29.351809367557347
+        },
+        (
+        'SPLASH_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 3.793445,
+          'TIME': 1069746,
+          'DEATHS': 43.381871636084696
+        }
+      },
+      'ESTIMATOR': 2.5155113,
+      'TIME': 708355,
+      'DEATHS': 28.812212392678653
+    },
+    {
+      'POKEMON_CODENAME': 'LANDORUS_THERIAN_FORM',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.561274,
+          'TIME': 690350,
+          'DEATHS': 38.71045197905204
+        },
+        (
+        'MUD_SHOT_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.9139054,
+          'TIME': 785075,
+          'DEATHS': 44.23725952611056
+        },
+        (
+        'EXTRASENSORY_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 3.1244369,
+          'TIME': 842272,
+          'DEATHS': 47.11862951620486
+        },
+        (
+        'EXTRASENSORY_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 3.314381,
+          'TIME': 893096,
+          'DEATHS': 50.251488546916555
+        }
+      },
+      'ESTIMATOR': 2.561274,
+      'TIME': 690350,
+      'DEATHS': 38.71045197905204
+    },
+    {
+      'POKEMON_CODENAME': 'RHYPERIOR',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SLAP_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.5736911,
+          'TIME': 727455,
+          'DEATHS': 27.89238687159309
+        },
+        (
+        'SMACK_DOWN_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 3.329266,
+          'TIME': 941288,
+          'DEATHS': 36.06554065859864
+        }
+      },
+      'ESTIMATOR': 2.5736911,
+      'TIME': 727455,
+      'DEATHS': 27.89238687159309
+    }
+  ],
+  (
+  'DRAGON_BREATH_FAST',
+  'OUTRAGE'
+  ): [
+    {
+      'POKEMON_CODENAME': 'MAMOSWINE_SHADOW_FORM',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SLAP_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.6250525,
+          'TIME': 705022,
+          'DEATHS': 42.61090153917325
+        },
+        (
+        'POWDER_SNOW_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.9958792,
+          'TIME': 804708,
+          'DEATHS': 48.38580538040424
+        }
+      },
+      'ESTIMATOR': 2.6250525,
+      'TIME': 705022,
+      'DEATHS': 42.61090153917325
+    },
+    {
+      'POKEMON_CODENAME': 'EXCADRILL',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SLAP_FAST',
+        'DRILL_RUN'
+        ): {
+          'ESTIMATOR': 2.4133255,
+          'TIME': 678003,
+          'DEATHS': 27.893367371687244
+        },
+        (
+        'MUD_SLAP_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.4733586,
+          'TIME': 694629,
+          'DEATHS': 28.612960125796754
+        },
+        (
+        'MUD_SHOT_FAST',
+        'DRILL_RUN'
+        ): {
+          'ESTIMATOR': 2.5217714,
+          'TIME': 708561,
+          'DEATHS': 29.125247018823583
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.624542,
+          'TIME': 737216,
+          'DEATHS': 30.330511511746554
+        },
+        (
+        'METAL_CLAW_FAST',
+        'DRILL_RUN'
+        ): {
+          'ESTIMATOR': 3.0538962,
+          'TIME': 858154,
+          'DEATHS': 35.26756146981392
+        },
+        (
+        'METAL_CLAW_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 3.427495,
+          'TIME': 962722,
+          'DEATHS': 39.63180717893178
+        }
+      },
+      'ESTIMATOR': 2.4133255,
+      'TIME': 678003,
+      'DEATHS': 27.893367371687244
+    },
+    {
+      'POKEMON_CODENAME': 'GARCHOMP',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.4268,
+          'TIME': 651315,
+          'DEATHS': 40.1804515727354
+        },
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.5548537,
+          'TIME': 685241,
+          'DEATHS': 42.46294633031711
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.770817,
+          'TIME': 743272,
+          'DEATHS': 46.02295318911996
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.8145773,
+          'TIME': 755470,
+          'DEATHS': 46.56172034988345
+        },
+        (
+        'DRAGON_TAIL_FAST',
+        'SAND_TOMB'
+        ): {
+          'ESTIMATOR': 3.6286306,
+          'TIME': 973682,
+          'DEATHS': 60.31272039294215
+        }
+      },
+      'ESTIMATOR': 2.4268,
+      'TIME': 651315,
+      'DEATHS': 40.1804515727354
+    },
+    {
+      'POKEMON_CODENAME': 'MAMOSWINE',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SLAP_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 3.0979607,
+          'TIME': 832195,
+          'DEATHS': 49.75371840958461
+        },
+        (
+        'POWDER_SNOW_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 3.5614274,
+          'TIME': 957080,
+          'DEATHS': 56.868033728556675
+        }
+      },
+      'ESTIMATOR': 3.0979607,
+      'TIME': 832195,
+      'DEATHS': 49.75371840958461
+    },
+    {
+      'POKEMON_CODENAME': 'LANDORUS_THERIAN_FORM',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.5677185,
+          'TIME': 690009,
+          'DEATHS': 40.891015433315204
+        },
+        (
+        'MUD_SHOT_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.9308,
+          'TIME': 787285,
+          'DEATHS': 46.87517227915284
+        },
+        (
+        'EXTRASENSORY_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 3.0947015,
+          'TIME': 832051,
+          'DEATHS': 49.2046523543419
+        },
+        (
+        'EXTRASENSORY_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 3.3488095,
+          'TIME': 899871,
+          'DEATHS': 53.52350275684782
+        }
+      },
+      'ESTIMATOR': 2.5677185,
+      'TIME': 690009,
+      'DEATHS': 40.891015433315204
+    },
+    {
+      'POKEMON_CODENAME': 'GROUDON',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.765871,
+          'TIME': 749219,
+          'DEATHS': 36.086796717288664
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.8310804,
+          'TIME': 766511,
+          'DEATHS': 36.963694306788966
+        },
+        (
+        'SPLASH_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 4.3146524,
+          'TIME': 1169024,
+          'DEATHS': 56.155881261112384
+        }
+      },
+      'ESTIMATOR': 2.765871,
+      'TIME': 749219,
+      'DEATHS': 36.086796717288664
+    }
+  ],
+  (
+  'CHARGE_BEAM_FAST',
+  'WILD_CHARGE'
+  ): [
+    {
+      'POKEMON_CODENAME': 'MAMOSWINE_SHADOW_FORM',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SLAP_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.238126,
+          'TIME': 636270,
+          'DEATHS': 18.985404851452355
+        },
+        (
+        'POWDER_SNOW_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.5179908,
+          'TIME': 715676,
+          'DEATHS': 21.384679030943325
+        }
+      },
+      'ESTIMATOR': 2.238126,
+      'TIME': 636270,
+      'DEATHS': 18.985404851452355
+    },
+    {
+      'POKEMON_CODENAME': 'GARCHOMP',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.0796556,
+          'TIME': 619737,
+          'DEATHS': 8.08496171474364
+        },
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.0870156,
+          'TIME': 621930,
+          'DEATHS': 8.107191936318522
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.2696128,
+          'TIME': 676344,
+          'DEATHS': 8.81872929762495
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.320045,
+          'TIME': 691373,
+          'DEATHS': 9.018824325601999
+        },
+        (
+        'DRAGON_TAIL_FAST',
+        'SAND_TOMB'
+        ): {
+          'ESTIMATOR': 2.7970245,
+          'TIME': 833513,
+          'DEATHS': 10.874291216193473
+        },
+        (
+        'MUD_SHOT_FAST',
+        'SAND_TOMB'
+        ): {
+          'ESTIMATOR': 3.191962,
+          'TIME': 951204,
+          'DEATHS': 12.39228470358529
+        }
+      },
+      'ESTIMATOR': 2.0796556,
+      'TIME': 619737,
+      'DEATHS': 8.08496171474364
+    },
+    {
+      'POKEMON_CODENAME': 'MAMOSWINE',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SLAP_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.689354,
+          'TIME': 764515,
+          'DEATHS': 18.905795646693697
+        },
+        (
+        'POWDER_SNOW_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 3.0226703,
+          'TIME': 859024,
+          'DEATHS': 21.238865350319273
+        }
+      },
+      'ESTIMATOR': 2.689354,
+      'TIME': 764515,
+      'DEATHS': 18.905795646693697
+    },
+    {
+      'POKEMON_CODENAME': 'HAXORUS',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.4463236,
+          'TIME': 676991,
+          'DEATHS': 30.00440257455496
+        },
+        (
+        'COUNTER_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 3.3433793,
+          'TIME': 925479,
+          'DEATHS': 40.976780952849865
+        }
+      },
+      'ESTIMATOR': 2.4463236,
+      'TIME': 676991,
+      'DEATHS': 30.00440257455496
+    },
+    {
+      'POKEMON_CODENAME': 'LANDORUS_THERIAN_FORM',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.2664804,
+          'TIME': 644048,
+          'DEATHS': 24.13736762146602
+        },
+        (
+        'MUD_SHOT_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.556079,
+          'TIME': 726417,
+          'DEATHS': 27.221149516773846
+        },
+        (
+        'EXTRASENSORY_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.6828566,
+          'TIME': 762480,
+          'DEATHS': 28.553392847770137
+        },
+        (
+        'EXTRASENSORY_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.9245849,
+          'TIME': 831242,
+          'DEATHS': 31.11894799959897
+        }
+      },
+      'ESTIMATOR': 2.2664804,
+      'TIME': 644048,
+      'DEATHS': 24.13736762146602
+    },
+    {
+      'POKEMON_CODENAME': 'GROUDON',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.311167,
+          'TIME': 675023,
+          'DEATHS': 13.694251025749974
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.4043598,
+          'TIME': 701837,
+          'DEATHS': 14.242190861835493
+        },
+        (
+        'SPLASH_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 3.8835,
+          'TIME': 1134650,
+          'DEATHS': 22.99068203142474
+        }
+      },
+      'ESTIMATOR': 2.311167,
+      'TIME': 675023,
+      'DEATHS': 13.694251025749974
+    },
+    {
+      'POKEMON_CODENAME': 'FLYGON_SHADOW_FORM',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.3205404,
+          'TIME': 667848,
+          'DEATHS': 14.519022363637898
+        },
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.3464718,
+          'TIME': 675204,
+          'DEATHS': 14.688912940845317
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.492402,
+          'TIME': 717276,
+          'DEATHS': 15.59647128832271
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.5730631,
+          'TIME': 740343,
+          'DEATHS': 16.092202030687883
+        },
+        (
+        'SPLASH_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 3.3387678,
+          'TIME': 961137,
+          'DEATHS': 20.86378856453572
+        }
+      },
+      'ESTIMATOR': 2.3205404,
+      'TIME': 667848,
+      'DEATHS': 14.519022363637898
+    },
+    {
+      'POKEMON_CODENAME': 'RHYPERIOR',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SLAP_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.3317704,
+          'TIME': 689427,
+          'DEATHS': 13.143568910146149
+        },
+        (
+        'SMACK_DOWN_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 3.1175332,
+          'TIME': 922213,
+          'DEATHS': 17.561127393061575
+        }
+      },
+      'ESTIMATOR': 2.3317704,
+      'TIME': 689427,
+      'DEATHS': 13.143568910146149
+    },
+    {
+      'POKEMON_CODENAME': 'EXCADRILL',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SLAP_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.3743775,
+          'TIME': 674819,
+          'DEATHS': 18.264857240994782
+        },
+        (
+        'MUD_SLAP_FAST',
+        'DRILL_RUN'
+        ): {
+          'ESTIMATOR': 2.3754573,
+          'TIME': 675180,
+          'DEATHS': 18.304982266513377
+        },
+        (
+        'MUD_SHOT_FAST',
+        'DRILL_RUN'
+        ): {
+          'ESTIMATOR': 2.5246775,
+          'TIME': 717489,
+          'DEATHS': 19.470637383031562
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.529098,
+          'TIME': 718745,
+          'DEATHS': 19.47591904862476
+        },
+        (
+        'METAL_CLAW_FAST',
+        'DRILL_RUN'
+        ): {
+          'ESTIMATOR': 3.087763,
+          'TIME': 877307,
+          'DEATHS': 23.7349911161907
+        },
+        (
+        'METAL_CLAW_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 3.2582695,
+          'TIME': 925905,
+          'DEATHS': 25.09908687791566
+        }
+      },
+      'ESTIMATOR': 2.3743775,
+      'TIME': 674819,
+      'DEATHS': 18.264857240994782
+    },
+    {
+      'POKEMON_CODENAME': 'LANDORUS',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SHOT_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.3958368,
+          'TIME': 681480,
+          'DEATHS': 24.536708870265578
+        },
+        (
+        'ROCK_THROW_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.7696848,
+          'TIME': 787905,
+          'DEATHS': 28.342831253717772
+        }
+      },
+      'ESTIMATOR': 2.3958368,
+      'TIME': 681480,
+      'DEATHS': 24.536708870265578
+    }
+  ],
+  (
+  'DRAGON_BREATH_FAST',
+  'WILD_CHARGE'
+  ): [
+    {
+      'POKEMON_CODENAME': 'MAMOSWINE_SHADOW_FORM',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SLAP_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.2918954,
+          'TIME': 651736,
+          'DEATHS': 22.151804258698498
+        },
+        (
+        'POWDER_SNOW_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.5261369,
+          'TIME': 718431,
+          'DEATHS': 24.363397146717276
+        }
+      },
+      'ESTIMATOR': 2.2918954,
+      'TIME': 651736,
+      'DEATHS': 22.151804258698498
+    },
+    {
+      'POKEMON_CODENAME': 'GARCHOMP',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.069721,
+          'TIME': 616776,
+          'DEATHS': 11.689193683186588
+        },
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.1460884,
+          'TIME': 639534,
+          'DEATHS': 12.11391965367878
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.2514565,
+          'TIME': 670933,
+          'DEATHS': 12.708461018139381
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.360837,
+          'TIME': 703529,
+          'DEATHS': 13.321052594178662
+        },
+        (
+        'DRAGON_TAIL_FAST',
+        'SAND_TOMB'
+        ): {
+          'ESTIMATOR': 2.8375683,
+          'TIME': 845595,
+          'DEATHS': 16.025855873489697
+        },
+        (
+        'MUD_SHOT_FAST',
+        'SAND_TOMB'
+        ): {
+          'ESTIMATOR': 3.198865,
+          'TIME': 953262,
+          'DEATHS': 18.087439578403146
+        }
+      },
+      'ESTIMATOR': 2.069721,
+      'TIME': 616776,
+      'DEATHS': 11.689193683186588
+    },
+    {
+      'POKEMON_CODENAME': 'MAMOSWINE',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SLAP_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.6870544,
+          'TIME': 763601,
+          'DEATHS': 22.25140852421111
+        },
+        (
+        'POWDER_SNOW_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 3.009637,
+          'TIME': 855427,
+          'DEATHS': 24.950088929003183
+        }
+      },
+      'ESTIMATOR': 2.6870544,
+      'TIME': 763601,
+      'DEATHS': 22.25140852421111
+    },
+    {
+      'POKEMON_CODENAME': 'HAXORUS',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.5541742,
+          'TIME': 691024,
+          'DEATHS': 34.39103187212761
+        },
+        (
+        'COUNTER_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 3.4765015,
+          'TIME': 940805,
+          'DEATHS': 46.740285107767384
+        }
+      },
+      'ESTIMATOR': 2.5541742,
+      'TIME': 691024,
+      'DEATHS': 34.39103187212761
+    },
+    {
+      'POKEMON_CODENAME': 'LANDORUS_THERIAN_FORM',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.2946658,
+          'TIME': 647395,
+          'DEATHS': 26.316914878364063
+        },
+        (
+        'MUD_SHOT_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.616334,
+          'TIME': 738207,
+          'DEATHS': 30.00079046129566
+        },
+        (
+        'EXTRASENSORY_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.7101672,
+          'TIME': 764633,
+          'DEATHS': 31.067693879807806
+        },
+        (
+        'EXTRASENSORY_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.9416323,
+          'TIME': 830197,
+          'DEATHS': 33.705103562053516
+        }
+      },
+      'ESTIMATOR': 2.2946658,
+      'TIME': 647395,
+      'DEATHS': 26.316914878364063
+    },
+    {
+      'POKEMON_CODENAME': 'FLYGON_SHADOW_FORM',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.3259878,
+          'TIME': 661254,
+          'DEATHS': 20.213748552481
+        },
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.3403227,
+          'TIME': 665311,
+          'DEATHS': 20.344295219741934
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.5372803,
+          'TIME': 721050,
+          'DEATHS': 22.04946070121897
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.7005486,
+          'TIME': 767700,
+          'DEATHS': 23.47570603707727
+        },
+        (
+        'SPLASH_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 3.3586001,
+          'TIME': 954548,
+          'DEATHS': 29.21049958825085
+        }
+      },
+      'ESTIMATOR': 2.3259878,
+      'TIME': 661254,
+      'DEATHS': 20.213748552481
+    },
+    {
+      'POKEMON_CODENAME': 'EXCADRILL',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SLAP_FAST',
+        'DRILL_RUN'
+        ): {
+          'ESTIMATOR': 2.369146,
+          'TIME': 673463,
+          'DEATHS': 20.16515728539237
+        },
+        (
+        'MUD_SLAP_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.3710246,
+          'TIME': 673985,
+          'DEATHS': 20.180519574622927
+        },
+        (
+        'MUD_SHOT_FAST',
+        'DRILL_RUN'
+        ): {
+          'ESTIMATOR': 2.4958973,
+          'TIME': 709389,
+          'DEATHS': 21.22854194100621
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.5005684,
+          'TIME': 710731,
+          'DEATHS': 21.274035062818804
+        },
+        (
+        'METAL_CLAW_FAST',
+        'DRILL_RUN'
+        ): {
+          'ESTIMATOR': 3.0373924,
+          'TIME': 863447,
+          'DEATHS': 25.817420099778804
+        },
+        (
+        'METAL_CLAW_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 3.2636476,
+          'TIME': 927741,
+          'DEATHS': 27.751773924979457
+        }
+      },
+      'ESTIMATOR': 2.369146,
+      'TIME': 673463,
+      'DEATHS': 20.16515728539237
+    },
+    {
+      'POKEMON_CODENAME': 'GROUDON',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.4163003,
+          'TIME': 686600,
+          'DEATHS': 16.240322512880752
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.4458747,
+          'TIME': 694978,
+          'DEATHS': 16.421640779147197
+        },
+        (
+        'SPLASH_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 3.932398,
+          'TIME': 1117001,
+          'DEATHS': 26.43540065182766
+        }
+      },
+      'ESTIMATOR': 2.4163003,
+      'TIME': 686600,
+      'DEATHS': 16.240322512880752
+    },
+    {
+      'POKEMON_CODENAME': 'RHYPERIOR',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SLAP_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.4609234,
+          'TIME': 699854,
+          'DEATHS': 16.052634220607704
+        },
+        (
+        'SMACK_DOWN_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 3.3011668,
+          'TIME': 938649,
+          'DEATHS': 21.548821876100938
+        }
+      },
+      'ESTIMATOR': 2.4609234,
+      'TIME': 699854,
+      'DEATHS': 16.052634220607704
+    },
+    {
+      'POKEMON_CODENAME': 'LANDORUS',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SHOT_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.4805748,
+          'TIME': 700009,
+          'DEATHS': 28.41745106726049
+        },
+        (
+        'ROCK_THROW_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.7454255,
+          'TIME': 774786,
+          'DEATHS': 31.464287394270354
+        }
+      },
+      'ESTIMATOR': 2.4805748,
+      'TIME': 700009,
+      'DEATHS': 28.41745106726049
+    },
+    {
+      'POKEMON_CODENAME': 'PILOSWINE_SHADOW_FORM',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'ICE_SHARD_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 3.2789106,
+          'TIME': 931215,
+          'DEATHS': 36.37979846878752
+        },
+        (
+        'POWDER_SNOW_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 3.405511,
+          'TIME': 967234,
+          'DEATHS': 37.76082506358955
+        }
+      },
+      'ESTIMATOR': 3.2789106,
+      'TIME': 931215,
+      'DEATHS': 36.37979846878752
+    }
+  ],
+  (
+  'DRAGON_BREATH_FAST',
+  'FLASH_CANNON'
+  ): [
+    {
+      'POKEMON_CODENAME': 'MAMOSWINE_SHADOW_FORM',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SLAP_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.6517684,
+          'TIME': 704045,
+          'DEATHS': 46.86977665978014
+        },
+        (
+        'POWDER_SNOW_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 3.0702069,
+          'TIME': 814669,
+          'DEATHS': 54.252199399148395
+        }
+      },
+      'ESTIMATOR': 2.6517684,
+      'TIME': 704045,
+      'DEATHS': 46.86977665978014
+    },
+    {
+      'POKEMON_CODENAME': 'GARCHOMP',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.228287,
+          'TIME': 634035,
+          'DEATHS': 23.889654253898847
+        },
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.2537835,
+          'TIME': 641325,
+          'DEATHS': 24.282430686406137
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.3379688,
+          'TIME': 665445,
+          'DEATHS': 25.078240636578776
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.5066588,
+          'TIME': 713369,
+          'DEATHS': 26.668895833271186
+        },
+        (
+        'DRAGON_TAIL_FAST',
+        'SAND_TOMB'
+        ): {
+          'ESTIMATOR': 3.0739095,
+          'TIME': 874886,
+          'DEATHS': 32.82250536766814
+        },
+        (
+        'MUD_SHOT_FAST',
+        'SAND_TOMB'
+        ): {
+          'ESTIMATOR': 3.3786187,
+          'TIME': 961644,
+          'DEATHS': 36.102088749994074
+        }
+      },
+      'ESTIMATOR': 2.228287,
+      'TIME': 634035,
+      'DEATHS': 23.889654253898847
+    },
+    {
+      'POKEMON_CODENAME': 'HAXORUS',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.528657,
+          'TIME': 685877,
+          'DEATHS': 33.06434032418496
+        },
+        (
+        'COUNTER_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 3.4465954,
+          'TIME': 935877,
+          'DEATHS': 44.34409452062013
+        }
+      },
+      'ESTIMATOR': 2.528657,
+      'TIME': 685877,
+      'DEATHS': 33.06434032418496
+    },
+    {
+      'POKEMON_CODENAME': 'MAMOSWINE',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SLAP_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.927341,
+          'TIME': 794144,
+          'DEATHS': 38.326598699278215
+        },
+        (
+        'POWDER_SNOW_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 3.2306812,
+          'TIME': 877082,
+          'DEATHS': 41.48412064885855
+        }
+      },
+      'ESTIMATOR': 2.927341,
+      'TIME': 794144,
+      'DEATHS': 38.326598699278215
+    },
+    {
+      'POKEMON_CODENAME': 'EXCADRILL',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SLAP_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.3917794,
+          'TIME': 679948,
+          'DEATHS': 21.226516885608085
+        },
+        (
+        'MUD_SLAP_FAST',
+        'DRILL_RUN'
+        ): {
+          'ESTIMATOR': 2.4032817,
+          'TIME': 683273,
+          'DEATHS': 21.88521978748716
+        },
+        (
+        'MUD_SHOT_FAST',
+        'DRILL_RUN'
+        ): {
+          'ESTIMATOR': 2.5369704,
+          'TIME': 721282,
+          'DEATHS': 23.13178055818326
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.5492713,
+          'TIME': 724743,
+          'DEATHS': 22.974633694653843
+        },
+        (
+        'METAL_CLAW_FAST',
+        'DRILL_RUN'
+        ): {
+          'ESTIMATOR': 3.1102982,
+          'TIME': 884384,
+          'DEATHS': 28.035124589492924
+        },
+        (
+        'METAL_CLAW_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 3.2898352,
+          'TIME': 935278,
+          'DEATHS': 28.71865593909802
+        }
+      },
+      'ESTIMATOR': 2.3917794,
+      'TIME': 679948,
+      'DEATHS': 21.226516885608085
+    },
+    {
+      'POKEMON_CODENAME': 'GROUDON',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.4340737,
+          'TIME': 692002,
+          'DEATHS': 22.354341908856423
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.4489677,
+          'TIME': 696292,
+          'DEATHS': 22.830391667829257
+        },
+        (
+        'SPLASH_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 3.9602938,
+          'TIME': 1126038,
+          'DEATHS': 35.48309495218764
+        }
+      },
+      'ESTIMATOR': 2.4340737,
+      'TIME': 692002,
+      'DEATHS': 22.354341908856423
+    },
+    {
+      'POKEMON_CODENAME': 'LANDORUS',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SHOT_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.5193832,
+          'TIME': 698362,
+          'DEATHS': 30.02097915867193
+        },
+        (
+        'ROCK_THROW_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.8446991,
+          'TIME': 789915,
+          'DEATHS': 33.81568413313338
+        }
+      },
+      'ESTIMATOR': 2.5193832,
+      'TIME': 698362,
+      'DEATHS': 30.02097915867193
+    },
+    {
+      'POKEMON_CODENAME': 'SWAMPERT_SHADOW_FORM',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.525251,
+          'TIME': 717981,
+          'DEATHS': 23.43469633950286
+        },
+        (
+        'WATER_GUN_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 3.2657676,
+          'TIME': 928677,
+          'DEATHS': 29.9185974203446
+        },
+        (
+        'SPLASH_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 4.1952753,
+          'TIME': 1192898,
+          'DEATHS': 37.477169248612746
+        }
+      },
+      'ESTIMATOR': 2.525251,
+      'TIME': 717981,
+      'DEATHS': 23.43469633950286
+    },
+    {
+      'POKEMON_CODENAME': 'FLYGON_SHADOW_FORM',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.6407375,
+          'TIME': 713697,
+          'DEATHS': 38.95807907290716
+        },
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.6451495,
+          'TIME': 714880,
+          'DEATHS': 38.600696067580806
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.7491403,
+          'TIME': 743039,
+          'DEATHS': 40.60585702470256
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 3.0236297,
+          'TIME': 817257,
+          'DEATHS': 44.53579636009883
+        },
+        (
+        'SPLASH_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 3.5627775,
+          'TIME': 962969,
+          'DEATHS': 52.22243344666847
+        }
+      },
+      'ESTIMATOR': 2.6407375,
+      'TIME': 713697,
+      'DEATHS': 38.95807907290716
+    }
+  ],
+  (
+  'CHARGE_BEAM_FAST',
+  'FLASH_CANNON'
+  ): [
+    {
+      'POKEMON_CODENAME': 'MAMOSWINE_SHADOW_FORM',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SLAP_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.438341,
+          'TIME': 658972,
+          'DEATHS': 32.958605316915275
+        },
+        (
+        'POWDER_SNOW_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.7324347,
+          'TIME': 738580,
+          'DEATHS': 36.76999693707509
+        }
+      },
+      'ESTIMATOR': 2.438341,
+      'TIME': 658972,
+      'DEATHS': 32.958605316915275
+    },
+    {
+      'POKEMON_CODENAME': 'GARCHOMP',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.2328424,
+          'TIME': 634779,
+          'DEATHS': 18.917459577062456
+        },
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.2408977,
+          'TIME': 637054,
+          'DEATHS': 19.233329083882648
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.4292672,
+          'TIME': 690567,
+          'DEATHS': 20.989033254131435
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.5614595,
+          'TIME': 728093,
+          'DEATHS': 21.847580269931335
+        },
+        (
+        'DRAGON_TAIL_FAST',
+        'SAND_TOMB'
+        ): {
+          'ESTIMATOR': 3.03721,
+          'TIME': 863400,
+          'DEATHS': 26.021886196775178
+        },
+        (
+        'MUD_SHOT_FAST',
+        'SAND_TOMB'
+        ): {
+          'ESTIMATOR': 3.3939838,
+          'TIME': 964852,
+          'DEATHS': 28.81922078097568
+        }
+      },
+      'ESTIMATOR': 2.2328424,
+      'TIME': 634779,
+      'DEATHS': 18.917459577062456
+    },
+    {
+      'POKEMON_CODENAME': 'LANDORUS_THERIAN_FORM',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.2413752,
+          'TIME': 637943,
+          'DEATHS': 24.794620794747953
+        },
+        (
+        'MUD_SHOT_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.559511,
+          'TIME': 727746,
+          'DEATHS': 28.453882099128485
+        },
+        (
+        'EXTRASENSORY_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.7011578,
+          'TIME': 768627,
+          'DEATHS': 29.681615568363103
+        },
+        (
+        'EXTRASENSORY_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.9868836,
+          'TIME': 849532,
+          'DEATHS': 33.14676168963108
+        }
+      },
+      'ESTIMATOR': 2.2413752,
+      'TIME': 637943,
+      'DEATHS': 24.794620794747953
+    },
+    {
+      'POKEMON_CODENAME': 'HAXORUS',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.491704,
+          'TIME': 686561,
+          'DEATHS': 30.81595028615462
+        },
+        (
+        'COUNTER_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 3.44483,
+          'TIME': 951860,
+          'DEATHS': 41.77026042982754
+        }
+      },
+      'ESTIMATOR': 2.491704,
+      'TIME': 686561,
+      'DEATHS': 30.81595028615462
+    },
+    {
+      'POKEMON_CODENAME': 'MAMOSWINE',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SLAP_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.8658042,
+          'TIME': 790281,
+          'DEATHS': 35.03379433865155
+        },
+        (
+        'POWDER_SNOW_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 3.1938748,
+          'TIME': 883631,
+          'DEATHS': 38.58231741738736
+        }
+      },
+      'ESTIMATOR': 2.8658042,
+      'TIME': 790281,
+      'DEATHS': 35.03379433865155
+    },
+    {
+      'POKEMON_CODENAME': 'EXCADRILL',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SLAP_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.3761854,
+          'TIME': 675458,
+          'DEATHS': 20.002850723117987
+        },
+        (
+        'MUD_SLAP_FAST',
+        'DRILL_RUN'
+        ): {
+          'ESTIMATOR': 2.4193184,
+          'TIME': 687697,
+          'DEATHS': 20.766744310602466
+        },
+        (
+        'MUD_SHOT_FAST',
+        'DRILL_RUN'
+        ): {
+          'ESTIMATOR': 2.5671015,
+          'TIME': 729675,
+          'DEATHS': 22.036044139351556
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.600772,
+          'TIME': 739258,
+          'DEATHS': 22.09108715975333
+        },
+        (
+        'METAL_CLAW_FAST',
+        'DRILL_RUN'
+        ): {
+          'ESTIMATOR': 3.1474957,
+          'TIME': 894751,
+          'DEATHS': 26.635625299654233
+        },
+        (
+        'METAL_CLAW_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 3.388344,
+          'TIME': 963066,
+          'DEATHS': 27.935672460740665
+        }
+      },
+      'ESTIMATOR': 2.3761854,
+      'TIME': 675458,
+      'DEATHS': 20.002850723117987
+    },
+    {
+      'POKEMON_CODENAME': 'GROUDON',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.4421787,
+          'TIME': 694171,
+          'DEATHS': 20.687614244278755
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.5095413,
+          'TIME': 713315,
+          'DEATHS': 21.400681444596884
+        },
+        (
+        'SPLASH_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 3.937802,
+          'TIME': 1119178,
+          'DEATHS': 32.189115907601355
+        }
+      },
+      'ESTIMATOR': 2.4421787,
+      'TIME': 694171,
+      'DEATHS': 20.687614244278755
+    },
+    {
+      'POKEMON_CODENAME': 'LANDORUS',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SHOT_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.4652226,
+          'TIME': 701313,
+          'DEATHS': 27.35110645140953
+        },
+        (
+        'ROCK_THROW_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.6928606,
+          'TIME': 765997,
+          'DEATHS': 29.822546758501765
+        }
+      },
+      'ESTIMATOR': 2.4652226,
+      'TIME': 701313,
+      'DEATHS': 27.35110645140953
+    },
+    {
+      'POKEMON_CODENAME': 'FLYGON_SHADOW_FORM',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.5233786,
+          'TIME': 694888,
+          'DEATHS': 31.127587573509754
+        },
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.5855973,
+          'TIME': 711843,
+          'DEATHS': 32.05619220714737
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.7096665,
+          'TIME': 746774,
+          'DEATHS': 33.27825221649335
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.951501,
+          'TIME': 813387,
+          'DEATHS': 36.41281974693451
+        },
+        (
+        'SPLASH_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 3.6226912,
+          'TIME': 1003293,
+          'DEATHS': 43.523320217877774
+        }
+      },
+      'ESTIMATOR': 2.5233786,
+      'TIME': 694888,
+      'DEATHS': 31.127587573509754
+    },
+    {
+      'POKEMON_CODENAME': 'SWAMPERT_SHADOW_FORM',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.5782347,
+          'TIME': 732845,
+          'DEATHS': 22.039178445697488
+        },
+        (
+        'WATER_GUN_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 3.3240092,
+          'TIME': 944879,
+          'DEATHS': 28.042728809971063
+        },
+        (
+        'SPLASH_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 4.174248,
+          'TIME': 1186457,
+          'DEATHS': 34.307835504454616
+        }
+      },
+      'ESTIMATOR': 2.5782347,
+      'TIME': 732845,
+      'DEATHS': 22.039178445697488
+    }
+  ],
+  (
+  'DRAGON_BREATH_FAST',
+  'CRUNCH'
+  ): [
+    {
+      'POKEMON_CODENAME': 'MAMOSWINE_SHADOW_FORM',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SLAP_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.3996508,
+          'TIME': 658899,
+          'DEATHS': 29.855624955845805
+        },
+        (
+        'POWDER_SNOW_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.676696,
+          'TIME': 735226,
+          'DEATHS': 33.20732678044358
+        }
+      },
+      'ESTIMATOR': 2.3996508,
+      'TIME': 658899,
+      'DEATHS': 29.855624955845805
+    },
+    {
+      'POKEMON_CODENAME': 'GARCHOMP',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.1985655,
+          'TIME': 625239,
+          'DEATHS': 21.705399602768615
+        },
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.2165852,
+          'TIME': 630383,
+          'DEATHS': 21.881678881476496
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.3848476,
+          'TIME': 678261,
+          'DEATHS': 23.52788324255151
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.5293233,
+          'TIME': 719533,
+          'DEATHS': 24.94262489684621
+        },
+        (
+        'DRAGON_TAIL_FAST',
+        'SAND_TOMB'
+        ): {
+          'ESTIMATOR': 3.0319738,
+          'TIME': 862498,
+          'DEATHS': 29.92816166068918
+        },
+        (
+        'MUD_SHOT_FAST',
+        'SAND_TOMB'
+        ): {
+          'ESTIMATOR': 3.3676026,
+          'TIME': 958096,
+          'DEATHS': 33.229986743684805
+        }
+      },
+      'ESTIMATOR': 2.1985655,
+      'TIME': 625239,
+      'DEATHS': 21.705399602768615
+    },
+    {
+      'POKEMON_CODENAME': 'HAXORUS',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.4957113,
+          'TIME': 681860,
+          'DEATHS': 31.512631446717897
+        },
+        (
+        'COUNTER_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 3.383667,
+          'TIME': 924391,
+          'DEATHS': 42.75331594653429
+        }
+      },
+      'ESTIMATOR': 2.4957113,
+      'TIME': 681860,
+      'DEATHS': 31.512631446717897
+    },
+    {
+      'POKEMON_CODENAME': 'LANDORUS_THERIAN_FORM',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.2479868,
+          'TIME': 638270,
+          'DEATHS': 25.05393014068783
+        },
+        (
+        'MUD_SHOT_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.5920792,
+          'TIME': 735979,
+          'DEATHS': 28.887660022465578
+        },
+        (
+        'EXTRASENSORY_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.7585142,
+          'TIME': 783331,
+          'DEATHS': 30.808588218732595
+        },
+        (
+        'EXTRASENSORY_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.9495654,
+          'TIME': 837668,
+          'DEATHS': 32.92603598702396
+        }
+      },
+      'ESTIMATOR': 2.2479868,
+      'TIME': 638270,
+      'DEATHS': 25.05393014068783
+    },
+    {
+      'POKEMON_CODENAME': 'MAMOSWINE',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SLAP_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.7839465,
+          'TIME': 781167,
+          'DEATHS': 32.3058735471154
+        },
+        (
+        'POWDER_SNOW_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 3.0914724,
+          'TIME': 868112,
+          'DEATHS': 35.72672660687916
+        }
+      },
+      'ESTIMATOR': 2.7839465,
+      'TIME': 781167,
+      'DEATHS': 32.3058735471154
+    },
+    {
+      'POKEMON_CODENAME': 'RHYPERIOR',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SLAP_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.4498725,
+          'TIME': 696464,
+          'DEATHS': 22.3808778101998
+        },
+        (
+        'SMACK_DOWN_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 3.3231165,
+          'TIME': 944952,
+          'DEATHS': 30.38842351915519
+        }
+      },
+      'ESTIMATOR': 2.4498725,
+      'TIME': 696464,
+      'DEATHS': 22.3808778101998
+    },
+    {
+      'POKEMON_CODENAME': 'LANDORUS',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SHOT_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.4669065,
+          'TIME': 700361,
+          'DEATHS': 27.490826845352267
+        },
+        (
+        'ROCK_THROW_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.7264621,
+          'TIME': 774084,
+          'DEATHS': 30.41629229139099
+        }
+      },
+      'ESTIMATOR': 2.4669065,
+      'TIME': 700361,
+      'DEATHS': 27.490826845352267
+    },
+    {
+      'POKEMON_CODENAME': 'GROUDON',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.4806473,
+          'TIME': 705338,
+          'DEATHS': 23.075688476465274
+        },
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.4975655,
+          'TIME': 710136,
+          'DEATHS': 23.236284419896915
+        },
+        (
+        'SPLASH_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 3.7769372,
+          'TIME': 1074322,
+          'DEATHS': 35.135362189283526
+        }
+      },
+      'ESTIMATOR': 2.4806473,
+      'TIME': 705338,
+      'DEATHS': 23.075688476465274
+    },
+    {
+      'POKEMON_CODENAME': 'EXCADRILL',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SLAP_FAST',
+        'DRILL_RUN'
+        ): {
+          'ESTIMATOR': 2.511731,
+          'TIME': 694916,
+          'DEATHS': 30.64816702111807
+        },
+        (
+        'MUD_SLAP_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.5789893,
+          'TIME': 713521,
+          'DEATHS': 31.480723748860967
+        },
+        (
+        'MUD_SHOT_FAST',
+        'DRILL_RUN'
+        ): {
+          'ESTIMATOR': 2.6142218,
+          'TIME': 723278,
+          'DEATHS': 31.838537418187045
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.724337,
+          'TIME': 753536,
+          'DEATHS': 33.22493178017279
+        },
+        (
+        'METAL_CLAW_FAST',
+        'DRILL_RUN'
+        ): {
+          'ESTIMATOR': 3.140027,
+          'TIME': 869183,
+          'DEATHS': 38.05709452227192
+        },
+        (
+        'METAL_CLAW_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 3.584403,
+          'TIME': 991971,
+          'DEATHS': 43.52324394153224
+        }
+      },
+      'ESTIMATOR': 2.511731,
+      'TIME': 694916,
+      'DEATHS': 30.64816702111807
+    }
+  ],
+  (
+  'CHARGE_BEAM_FAST',
+  'CRUNCH'
+  ): [
+    {
+      'POKEMON_CODENAME': 'MAMOSWINE_SHADOW_FORM',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SLAP_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.355746,
+          'TIME': 659568,
+          'DEATHS': 27.21550198897093
+        },
+        (
+        'POWDER_SNOW_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.6167254,
+          'TIME': 732708,
+          'DEATHS': 30.222936363854657
+        }
+      },
+      'ESTIMATOR': 2.355746,
+      'TIME': 659568,
+      'DEATHS': 27.21550198897093
+    },
+    {
+      'POKEMON_CODENAME': 'GARCHOMP',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.234608,
+          'TIME': 635269,
+          'DEATHS': 18.63799967388001
+        },
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.255341,
+          'TIME': 641162,
+          'DEATHS': 18.815911767363144
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.3969603,
+          'TIME': 681355,
+          'DEATHS': 20.015101955204024
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.5398257,
+          'TIME': 721955,
+          'DEATHS': 21.27524064286617
+        },
+        (
+        'DRAGON_TAIL_FAST',
+        'SAND_TOMB'
+        ): {
+          'ESTIMATOR': 3.024375,
+          'TIME': 859738,
+          'DEATHS': 25.359368049342734
+        },
+        (
+        'MUD_SHOT_FAST',
+        'SAND_TOMB'
+        ): {
+          'ESTIMATOR': 3.3823054,
+          'TIME': 961482,
+          'DEATHS': 28.39630648229347
+        }
+      },
+      'ESTIMATOR': 2.234608,
+      'TIME': 635269,
+      'DEATHS': 18.63799967388001
+    },
+    {
+      'POKEMON_CODENAME': 'HAXORUS',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.4176207,
+          'TIME': 676952,
+          'DEATHS': 27.98409452727249
+        },
+        (
+        'COUNTER_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 3.3258643,
+          'TIME': 931303,
+          'DEATHS': 38.52534157622346
+        }
+      },
+      'ESTIMATOR': 2.4176207,
+      'TIME': 676952,
+      'DEATHS': 27.98409452727249
+    },
+    {
+      'POKEMON_CODENAME': 'MAMOSWINE',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SLAP_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.7369823,
+          'TIME': 778781,
+          'DEATHS': 28.416266878349465
+        },
+        (
+        'POWDER_SNOW_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 3.0447206,
+          'TIME': 866440,
+          'DEATHS': 31.617234773097806
+        }
+      },
+      'ESTIMATOR': 2.7369823,
+      'TIME': 778781,
+      'DEATHS': 28.416266878349465
+    },
+    {
+      'POKEMON_CODENAME': 'LANDORUS_THERIAN_FORM',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.2573354,
+          'TIME': 642230,
+          'DEATHS': 23.42866629871655
+        },
+        (
+        'MUD_SHOT_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.558972,
+          'TIME': 728129,
+          'DEATHS': 26.571682731440536
+        },
+        (
+        'EXTRASENSORY_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.6944058,
+          'TIME': 766676,
+          'DEATHS': 27.97534845533983
+        },
+        (
+        'EXTRASENSORY_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.9371285,
+          'TIME': 835777,
+          'DEATHS': 30.494966391988278
+        }
+      },
+      'ESTIMATOR': 2.2573354,
+      'TIME': 642230,
+      'DEATHS': 23.42866629871655
+    },
+    {
+      'POKEMON_CODENAME': 'LANDORUS',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SHOT_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.4061701,
+          'TIME': 684421,
+          'DEATHS': 23.891823673480054
+        },
+        (
+        'ROCK_THROW_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.7702103,
+          'TIME': 788024,
+          'DEATHS': 27.504041321764007
+        }
+      },
+      'ESTIMATOR': 2.4061701,
+      'TIME': 684421,
+      'DEATHS': 23.891823673480054
+    },
+    {
+      'POKEMON_CODENAME': 'FLYGON_SHADOW_FORM',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.4208126,
+          'TIME': 677870,
+          'DEATHS': 28.00751000038631
+        },
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.4879985,
+          'TIME': 696644,
+          'DEATHS': 28.793574896367396
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.5964115,
+          'TIME': 726991,
+          'DEATHS': 30.056007273630975
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.7817416,
+          'TIME': 778825,
+          'DEATHS': 32.22518826403691
+        },
+        (
+        'SPLASH_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 3.355759,
+          'TIME': 939945,
+          'DEATHS': 38.80260841074074
+        }
+      },
+      'ESTIMATOR': 2.4208126,
+      'TIME': 677870,
+      'DEATHS': 28.00751000038631
+    },
+    {
+      'POKEMON_CODENAME': 'GROUDON',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.4298403,
+          'TIME': 690705,
+          'DEATHS': 20.340043308330667
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.4835372,
+          'TIME': 705896,
+          'DEATHS': 20.805356728789796
+        },
+        (
+        'SPLASH_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 3.7887223,
+          'TIME': 1077043,
+          'DEATHS': 31.85574685355757
+        }
+      },
+      'ESTIMATOR': 2.4298403,
+      'TIME': 690705,
+      'DEATHS': 20.340043308330667
+    },
+    {
+      'POKEMON_CODENAME': 'EXCADRILL',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SLAP_FAST',
+        'DRILL_RUN'
+        ): {
+          'ESTIMATOR': 2.4763536,
+          'TIME': 693556,
+          'DEATHS': 28.512164972202196
+        },
+        (
+        'MUD_SLAP_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.528512,
+          'TIME': 708116,
+          'DEATHS': 29.12880578722559
+        },
+        (
+        'MUD_SHOT_FAST',
+        'DRILL_RUN'
+        ): {
+          'ESTIMATOR': 2.6159966,
+          'TIME': 732711,
+          'DEATHS': 30.118492956220063
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.7030723,
+          'TIME': 756944,
+          'DEATHS': 31.174543860004807
+        },
+        (
+        'METAL_CLAW_FAST',
+        'DRILL_RUN'
+        ): {
+          'ESTIMATOR': 3.1443362,
+          'TIME': 880928,
+          'DEATHS': 36.1673591981886
+        },
+        (
+        'METAL_CLAW_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 3.5049148,
+          'TIME': 981662,
+          'DEATHS': 40.39650573559783
+        }
+      },
+      'ESTIMATOR': 2.4763536,
+      'TIME': 693556,
+      'DEATHS': 28.512164972202196
+    }
+  ],
+  (
+  'RANDOM',
+  'RANDOM'
+  ): [
+    {
+      'POKEMON_CODENAME': 'MAMOSWINE_SHADOW_FORM',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SLAP_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.4220264,
+          'TIME': 668753,
+          'DEATHS': 30.86042599657092
+        },
+        (
+        'POWDER_SNOW_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.736602,
+          'TIME': 754074,
+          'DEATHS': 34.950531579009876
+        }
+      },
+      'ESTIMATOR': 2.4220264,
+      'TIME': 668753,
+      'DEATHS': 30.86042599657092
+    },
+    {
+      'POKEMON_CODENAME': 'GARCHOMP',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.2481072,
+          'TIME': 638877,
+          'DEATHS': 21.378962416790255
+        },
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.266656,
+          'TIME': 643574,
+          'DEATHS': 21.823853729871875
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.429485,
+          'TIME': 689893,
+          'DEATHS': 23.321283061714038
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.5467389,
+          'TIME': 723400,
+          'DEATHS': 24.335622777066792
+        },
+        (
+        'DRAGON_TAIL_FAST',
+        'SAND_TOMB'
+        ): {
+          'ESTIMATOR': 3.0964527,
+          'TIME': 878756,
+          'DEATHS': 29.9288595024005
+        }
+      },
+      'ESTIMATOR': 2.2481072,
+      'TIME': 638877,
+      'DEATHS': 21.378962416790255
+    },
+    {
+      'POKEMON_CODENAME': 'MAMOSWINE',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SLAP_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.8249335,
+          'TIME': 787204,
+          'DEATHS': 31.751605206709446
+        },
+        (
+        'POWDER_SNOW_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 3.1815271,
+          'TIME': 885930,
+          'DEATHS': 35.727907180580104
+        }
+      },
+      'ESTIMATOR': 2.8249335,
+      'TIME': 787204,
+      'DEATHS': 31.751605206709446
+    },
+    {
+      'POKEMON_CODENAME': 'LANDORUS_THERIAN_FORM',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.366576,
+          'TIME': 661875,
+          'DEATHS': 27.68165387115419
+        },
+        (
+        'MUD_SHOT_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 2.645752,
+          'TIME': 739965,
+          'DEATHS': 31.03956382123089
+        },
+        (
+        'EXTRASENSORY_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.8348517,
+          'TIME': 793077,
+          'DEATHS': 33.254125996650814
+        },
+        (
+        'EXTRASENSORY_FAST',
+        'BULLDOZE'
+        ): {
+          'ESTIMATOR': 3.033101,
+          'TIME': 848632,
+          'DEATHS': 35.59488560778613
+        }
+      },
+      'ESTIMATOR': 2.366576,
+      'TIME': 661875,
+      'DEATHS': 27.68165387115419
+    },
+    {
+      'POKEMON_CODENAME': 'EXCADRILL',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SLAP_FAST',
+        'DRILL_RUN'
+        ): {
+          'ESTIMATOR': 2.4114375,
+          'TIME': 683312,
+          'DEATHS': 22.536409707306472
+        },
+        (
+        'MUD_SLAP_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.4224114,
+          'TIME': 686300,
+          'DEATHS': 22.629087154011096
+        },
+        (
+        'MUD_SHOT_FAST',
+        'DRILL_RUN'
+        ): {
+          'ESTIMATOR': 2.5324347,
+          'TIME': 717833,
+          'DEATHS': 23.636758240054096
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.5889163,
+          'TIME': 733602,
+          'DEATHS': 24.2516944200336
+        },
+        (
+        'METAL_CLAW_FAST',
+        'DRILL_RUN'
+        ): {
+          'ESTIMATOR': 3.0743532,
+          'TIME': 871349,
+          'DEATHS': 28.4027210227542
+        },
+        (
+        'METAL_CLAW_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 3.3698869,
+          'TIME': 954706,
+          'DEATHS': 31.307433341434365
+        }
+      },
+      'ESTIMATOR': 2.4114375,
+      'TIME': 683312,
+      'DEATHS': 22.536409707306472
+    },
+    {
+      'POKEMON_CODENAME': 'GROUDON',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.4677792,
+          'TIME': 699323,
+          'DEATHS': 21.566236349852048
+        },
+        (
+        'MUD_SHOT_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.5189662,
+          'TIME': 713748,
+          'DEATHS': 22.111379692180844
+        },
+        (
+        'SPLASH_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 3.9432027,
+          'TIME': 1117572,
+          'DEATHS': 34.07563231744341
+        }
+      },
+      'ESTIMATOR': 2.4677792,
+      'TIME': 699323,
+      'DEATHS': 21.566236349852048
+    },
+    {
+      'POKEMON_CODENAME': 'HAXORUS',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'DRAGON_TAIL_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.8283453,
+          'TIME': 749250,
+          'DEATHS': 48.14650304559539
+        },
+        (
+        'COUNTER_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 4.247517,
+          'TIME': 1116974,
+          'DEATHS': 76.1406288231764
+        }
+      },
+      'ESTIMATOR': 2.8283453,
+      'TIME': 749250,
+      'DEATHS': 48.14650304559539
+    },
+    {
+      'POKEMON_CODENAME': 'LANDORUS',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SHOT_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.5304391,
+          'TIME': 708123,
+          'DEATHS': 29.18500563545787
+        },
+        (
+        'ROCK_THROW_FAST',
+        'EARTH_POWER'
+        ): {
+          'ESTIMATOR': 2.8216248,
+          'TIME': 790562,
+          'DEATHS': 32.46768977496067
+        }
+      },
+      'ESTIMATOR': 2.5304391,
+      'TIME': 708123,
+      'DEATHS': 29.18500563545787
+    },
+    {
+      'POKEMON_CODENAME': 'RHYPERIOR',
+      'LEVEL': '40',
+      'IV': '15/15/15',
+      'BY_MOVE': {
+        (
+        'MUD_SLAP_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 2.5379457,
+          'TIME': 721621,
+          'DEATHS': 22.608456311824316
+        },
+        (
+        'SMACK_DOWN_FAST',
+        'EARTHQUAKE'
+        ): {
+          'ESTIMATOR': 3.3227441,
+          'TIME': 945953,
+          'DEATHS': 29.563016804976645
+        }
+      },
+      'ESTIMATOR': 2.5379457,
+      'TIME': 721621,
+      'DEATHS': 22.608456311824316
+    }
+  ]
+}

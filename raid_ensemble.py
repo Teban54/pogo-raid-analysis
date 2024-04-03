@@ -32,7 +32,7 @@ class RaidEnsemble:
     """
     def __init__(self, raid_bosses=None, pokemons=None, tier=None,
                  weight_multiplier=1,
-                 forms_weight_strategy="combine", separate_shadows=True, separate_megas=True,
+                 forms_weight_strategy="combine", separate_shadows=False, separate_megas=True,
                  remove_dupes=True, battle_settings=None, baseline_battle_settings=None):
         """
         Initialize the raid ensemble.
@@ -117,7 +117,7 @@ class RaidEnsemble:
         self.baseline_battle_settings = [baseline_battle_settings,] * len(self.bosses)
 
     def build_raid_dict(self, raid_bosses=None, pokemons=None, tier=None,
-                        separate_shadows=True, separate_megas=True, remove_dupes=True):
+                        separate_shadows=False, separate_megas=True, remove_dupes=True):
         """
         Combine all 4 initialization methods and give a single dict mapping
         Pokemon base codenames to RaidBoss objects, such as:
@@ -280,7 +280,7 @@ class RaidEnsemble:
         Debug function that outputs the current ensemble to CSV.
         """
         os.makedirs(os.path.dirname(filename), exist_ok=True)
-        with open(filename, mode='w') as csv_file:
+        with open(filename, mode='w', encoding='utf-8') as csv_file:
             fieldnames = ['Tier', 'Pokemon', 'Weight', 'Battle settings']
             writer = csv.writer(csv_file)
             writer.writerow(fieldnames)

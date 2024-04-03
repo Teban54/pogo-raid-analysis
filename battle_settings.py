@@ -141,7 +141,7 @@ class BattleSettings:
             return self.indiv_settings == other.indiv_settings
 
     def __lt__(self, other):
-        weather_order = ["NO_WEATHER", "CLEAR", "RAINY", "PARTLY_CLOUDY", "CLOUDY", "WINDY", "SNOW", "FOG"]
+        weather_order = ["NO_WEATHER", "CLEAR", "RAINY", "PARTLY_CLOUDY", "OVERCAST", "WINDY", "SNOW", "FOG"]
         friendship_order = ["FRIENDSHIP_LEVEL_UNSET"] + [f"FRIENDSHIP_LEVEL_{x}" for x in range(5)]
         attack_strategy_order = ["CINEMATIC_ATTACK_WHEN_POSSIBLE", "DODGE_SPECIALS", "DODGE_WEAVE_CAUTIOUS"]
         dodge_strategy_order = ["DODGE_100", "DODGE_REACTION_TIME", "DODGE_REACTION_TIME2", "DODGE_25"]

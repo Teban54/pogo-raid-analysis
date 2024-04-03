@@ -158,7 +158,7 @@ class AttackerCriteria:
         :param pokemon_codename: Pokemon codename
         :param pokemon: Pokemon object, if codename is not given
         :param level: Level of attacker, as string or numerical value
-        :param iv: IV of attacker, as string "15/15/15"
+        :param iv: IV of attacker, as string "15\\15\\15"
         :param fast_codename: Fast move codename
         :param fast: Fast Move object, if codename is not given
         :param charged_codename: Charged move codename
@@ -260,20 +260,23 @@ class AttackerCriteria:
         specifically the pokemon_codenames_and_moves attribute.
         These attackers are forced to be included in the output CSV. If they're not in the counters lists, they
         should be filled during fill_blanks.
-        IV is taken as 15/15/15 by default, unless specified in self.pokemon_codenames_and_moves.
+        IV is taken as 15\\15\\15 by default, unless specified in self.pokemon_codenames_and_moves.
         This should only be used if this object is by level, not trainer ID. Thus, levels are generated based on
         the configurations here.
 
-        :return: List of required attacker codenames, their levels, IVs and movesets, Format:
+        :return: List of required attacker codenames, their levels, IVs, movesets and whether they participate in
+            estimator scaling (None if it's left to the default settings). Format:
             [
-                ("URSALUNA", 30, "15/15/15", "MUD_SHOT_FAST", "HIGH_HORSEPOWER"),
-                ("URSALUNA", 40, "15/15/15", "MUD_SHOT_FAST", "HIGH_HORSEPOWER"),
-                ("URSALUNA", 30, "15/15/15", "TACKLE_FAST", "HIGH_HORSEPOWER"),
-                ("URSALUNA", 40, "15/15/15", "TACKLE_FAST", "HIGH_HORSEPOWER"),
-                ("GOLURK_SHADOW_FORM", 30, "15/15/15", "MUD_SLAP_FAST", "EARTH_POWER"),
-                ("GOLURK_SHADOW_FORM", 40, "15/15/15", "MUD_SLAP_FAST", "EARTH_POWER"),
-                ("GARCHOMP_MEGA", 30, "10/10/10", "MUD_SHOT_FAST", "EARTH_POWER"),
-                ("GARCHOMP_MEGA", 40, "10/10/10", "MUD_SHOT_FAST", "EARTH_POWER"),
+                ("URSALUNA", 30, "15\\15\\15", "MUD_SHOT_FAST", "HIGH_HORSEPOWER", None),
+                ("URSALUNA", 40, "15\\15\\15", "MUD_SHOT_FAST", "HIGH_HORSEPOWER", None),
+                ("URSALUNA", 30, "15\\15\\15", "TACKLE_FAST", "HIGH_HORSEPOWER", None),
+                ("URSALUNA", 40, "15\\15\\15", "TACKLE_FAST", "HIGH_HORSEPOWER", None),
+                ("GOLURK_SHADOW_FORM", 30, "15\\15\\15", "MUD_SLAP_FAST", "EARTH_POWER", None),
+                ("GOLURK_SHADOW_FORM", 40, "15\\15\\15", "MUD_SLAP_FAST", "EARTH_POWER", None),
+                ("GARCHOMP_MEGA", 30, "10\\10\\10", "MUD_SHOT_FAST", "EARTH_POWER", None),
+                ("GARCHOMP_MEGA", 40, "10\\10\\10", "MUD_SHOT_FAST", "EARTH_POWER", None),
+                ("SCIZOR_MEGA", 30, "15\\15\\15", "FURY_CUTTER_FAST", "X_SCISSOR", True),  # Force to participate in scaling
+                ("SCIZOR_MEGA", 40, "15\\15\\15", "FURY_CUTTER_FAST", "X_SCISSOR", True),  # Force to participate in scaling
                 ...
             ]
         """
@@ -295,8 +298,9 @@ class AttackerCriteria:
                 ret.append((
                     pkm[0],  # Pokemon codename
                     lvl,
-                    pkm[3] if len(pkm) >= 4 else "15/15/15",  # IV
-                    pkm[1], pkm[2]  # Fast and charged moves
+                    pkm[3] if len(pkm) >= 4 else "15\\15\\15",  # IV
+                    pkm[1], pkm[2],  # Fast and charged moves
+                    pkm[4] if len(pkm) >= 5 else None,  # Scaling participation
                 ))
         return ret
 
@@ -323,7 +327,7 @@ class AttackerCriteriaMulti:
         :param pokemon_codename: Pokemon codename
         :param pokemon: Pokemon object, if codename is not given
         :param level: Level of attacker, as string or numerical value
-        :param iv: IV of attacker, as string "15/15/15"
+        :param iv: IV of attacker, as string "15\\15\\15"
         :param fast_codename: Fast move codename
         :param fast: Fast Move object, if codename is not given
         :param charged_codename: Charged move codename
@@ -400,10 +404,12 @@ class AttackerCriteriaMulti:
         If any AttackerCriteria does not enforce a limit on Pokemon types, return None.
         :return: List of attacker Pokemon types in code name, or None if should not be enforced
         """
-        if any(not criteria.pokemon_types for criteria in self.sets):
+        if any((not criteria.pokemon_types and criteria.pokemon_codenames_and_moves is None) for criteria in self.sets):
             return None
         return list(set([parse_type_str2code(tp)  # Code name
-                         for criteria in self.sets for tp in criteria.pokemon_types]))
+                         for criteria in self.sets if criteria.pokemon_types
+                         for tp in criteria.pokemon_types]))
+        # Careful to ignore whitelist AttackerCriteria objects
 
     def pokebattler_trainer_ids(self):
         """
@@ -456,14 +462,14 @@ class AttackerCriteriaMulti:
 
         :return: List of required attacker codenames, their levels, IVs and movesets, Format:
             [
-                ("URSALUNA", 30, "15/15/15", "MUD_SHOT_FAST", "HIGH_HORSEPOWER"),
-                ("URSALUNA", 40, "15/15/15", "MUD_SHOT_FAST", "HIGH_HORSEPOWER"),
-                ("URSALUNA", 30, "15/15/15", "TACKLE_FAST", "HIGH_HORSEPOWER"),
-                ("URSALUNA", 40, "15/15/15", "TACKLE_FAST", "HIGH_HORSEPOWER"),
-                ("GOLURK_SHADOW_FORM", 30, "15/15/15", "MUD_SLAP_FAST", "EARTH_POWER"),
-                ("GOLURK_SHADOW_FORM", 40, "15/15/15", "MUD_SLAP_FAST", "EARTH_POWER"),
-                ("GARCHOMP_MEGA", 30, "10/10/10", "MUD_SHOT_FAST", "EARTH_POWER"),
-                ("GARCHOMP_MEGA", 40, "10/10/10", "MUD_SHOT_FAST", "EARTH_POWER"),
+                ("URSALUNA", 30, "15\\15\\15", "MUD_SHOT_FAST", "HIGH_HORSEPOWER"),
+                ("URSALUNA", 40, "15\\15\\15", "MUD_SHOT_FAST", "HIGH_HORSEPOWER"),
+                ("URSALUNA", 30, "15\\15\\15", "TACKLE_FAST", "HIGH_HORSEPOWER"),
+                ("URSALUNA", 40, "15\\15\\15", "TACKLE_FAST", "HIGH_HORSEPOWER"),
+                ("GOLURK_SHADOW_FORM", 30, "15\\15\\15", "MUD_SLAP_FAST", "EARTH_POWER"),
+                ("GOLURK_SHADOW_FORM", 40, "15\\15\\15", "MUD_SLAP_FAST", "EARTH_POWER"),
+                ("GARCHOMP_MEGA", 30, "10\\10\\10", "MUD_SHOT_FAST", "EARTH_POWER"),
+                ("GARCHOMP_MEGA", 40, "10\\10\\10", "MUD_SHOT_FAST", "EARTH_POWER"),
                 ...
             ]
         """

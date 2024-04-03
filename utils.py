@@ -16,6 +16,7 @@ import aiohttp
 import ssl
 import certifi
 import traceback
+import time
 
 from params import *
 
@@ -38,6 +39,8 @@ async def do_http_request(url, payload={}):
                 # async with aiohttp.TCPConnector(limit=500) as connector:  # https://stackoverflow.com/questions/47675410/python-asyncio-aiohttp-valueerror-too-many-file-descriptors-in-select-on-win
                 #     async with aiohttp.ClientSession(connector=connector) as session:
                     async with aiohttp.ClientSession() as session:
+                        # print(url)
+                        # print(payload)
                         async with session.get(url, params=payload, ssl=ssl_context) as r:
                             r.encoding = 'utf-8'  # 解码汉字
                             if r.ok:
@@ -47,7 +50,7 @@ async def do_http_request(url, payload={}):
                                 print(i)
                                 # txt = await(r.text())
                                 # print(txt)
-                                await asyncio.sleep(2)
+                                await asyncio.sleep(CONNECTION_WAIT_SEC)
                                 i += 1
                                 if i == CONNECTION_RETRIES:
                                     print("Error with HTTP request: " + str(r), file=sys.stderr)
@@ -275,7 +278,7 @@ def is_weather_str(weather):
     """
     return ('part' in weather.lower() and 'cloud' in weather.lower()
             or any(x in weather.lower()
-                   for x in ['extreme', 'no ', 'neutral', 'sun', 'clear', 'rain', 'cloud',
+                   for x in ['extreme', 'no ', 'neutral', 'sun', 'clear', 'rain', 'cloud', 'overcast',
                              'wind', 'snow', 'fog'])
             and '_' not in weather)
 
@@ -288,7 +291,7 @@ def is_weather_code(weather):
     :return: Whether the string is code name.
     """
     return weather.lower() in [x.lower() for x in [
-        "NO_WEATHER", "CLEAR", "RAINY", "PARTLY_CLOUDY", "CLOUDY", "WINDY", "SNOW", "FOG"]]
+        "NO_WEATHER", "CLEAR", "RAINY", "PARTLY_CLOUDY", "OVERCAST", "WINDY", "SNOW", "FOG"]]
 
 
 def parse_weather_str2code(weather_str):
@@ -321,7 +324,8 @@ def parse_weather_str2code(weather_str):
         'sun': "CLEAR",
         'clear': "CLEAR",
         'rain': "RAINY",
-        'cloud': "CLOUDY",
+        'cloud': "OVERCAST",
+        'overcast': "OVERCAST",
         'wind': "WINDY",
         'snow': "SNOW",
         'fog': "FOG"
@@ -336,7 +340,7 @@ def parse_weather_code2str(weather_code):
     to natural language (e.g. "sunny", "extreme").
 
     :param weather_code: Weather in Pokebattler code name.
-        Should be one of: "NO_WEATHER", "CLEAR", "RAINY", "PARTLY_CLOUDY", "CLOUDY", "WINDY", "SNOW", "FOG".
+        Should be one of: "NO_WEATHER", "CLEAR", "RAINY", "PARTLY_CLOUDY", "OVERCAST", "WINDY", "SNOW", "FOG".
     :return: Weather in natural language.
         Should be one of: "Extreme", "Clear", "Rainy", "Partly Cloudy", "Cloudy", "Windy", "Snow", "Fog".
     """
@@ -353,7 +357,7 @@ def parse_weather_code2str(weather_code):
         "CLEAR": "Clear",
         "RAINY": "Rainy",
         "PARTLY_CLOUDY": "Partly Cloudy",
-        "CLOUDY": "Cloudy",
+        "OVERCAST": "Cloudy",
         "WINDY": "Windy",
         "SNOW": "Snow",
         "FOG": "Fog"
@@ -636,7 +640,7 @@ def parse_type_inds2strs(type_inds):
 def trim_raid_tier_str(tier):
     """
     Remove the word "Tier" from raid tier or category in natural language, and convert it to lower case.
-    E.g. "Tier 5" becomes "5"; "Mega Tier" becomes "mega".
+    E.g. "Tier 5" becomes "5"; "Mega Tier" becomes "mega"; "Shadow Tier 5" becomes "shadow 5".
     This is typically for comparisons.
     :param tier: Raid tier or category string in natural language.
     :return: Trimmed string.

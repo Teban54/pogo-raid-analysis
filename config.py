@@ -8,12 +8,27 @@ so that you don't have to change everything whenever you want to run something d
 from params import *
 
 
+TEMPORARY_MEGA_FIX = False  # Whether to turn off megas from default attacker criteria
+TEMPORARY_FRIENDSHIP_DEFAULT = "Not"
+
 #CONFIG_WRITE_ALL_COUNTERS = True
 
-SINGLE_TYPE_ATTACKER = ["Dragon"]
-MULTI_TYPE_ATTACKERS_COMPARE = ["Ghost", "Dark"]
-EXTRA_TYPE_ATTACKER = ["Psychic"]  # Attacker types that use non-STAB moves (Mewtwo, Xurkitree, Mega Alakazam, Landorus-I), doesn't apply to moves
-MODE = "SINGLE"  # SINGLE, SINGLE+, MULTI, MULTI+
+SINGLE_TYPE_ATTACKER = ["Fairy"]
+MULTI_TYPE_ATTACKERS_COMPARE = ["Dark", "Ghost"]  # Use this for Dark/Ghost
+# Ground/Steel, Ground/Fire, Ground/Fighting, Ground/Water/Rock, Water/Steel, Water/Grass
+EXTRA_TYPE_ATTACKER = ["Psychic"]  # Attacker types that use non-STAB moves, doesn't apply to moves
+    # Bug: Grass (Kartana)
+    # Dark/Ghost: Psychic (Mewtwo, Mega Alakazam)
+    # Dragon: Fire, Water (Mega Charizard Y, Mega Gyarados)
+    # Electric: Psychic, Water (Mewtwo, Primal Kyogre)
+    # Fairy: Electric, Psychic (Xurkitree, Mega Alakazam, Lunala)
+    # Fighting: Psychic (Mega Alakazam)
+    # Fire: Psychic (Mewtwo)
+    # Grass: Electric, Ground (Xurkitree, Primal Groudon)
+    # Ice: Psychic, Water (Mewtwo, Mega Gardevoir, Primal Kyogre)
+    # Poison: Dark (Darkrai)
+    # Rock: Ground (Landorus-I RT/RS)
+MODE = "MULTI+"  # SINGLE, SINGLE+, MULTI, MULTI+  (Use MULTI+ for DARK GHOST)
 
 #CONFIG_SORT_OPTION = "Estimator"
 CONFIG_SORT_OPTIONS = ["Estimator", "TTW"]
@@ -42,8 +57,9 @@ CONFIG_BATTLE_SETTINGS = {
     # In that case, simulations for all combinations of all specified options will be generated.
     "Weather": "Extreme",  # "Extreme",  # Extreme/No Weather/Neutral, Sunny/Clear, Rainy, Partly Cloudy, Cloudy, Windy, Snow, Fog
                            # Default: Extreme
-    "Friendship": "Best",  # Not Friend, New Friend, Good Friend, Great Friend, Ultra Friend, Best Friend (can omit "Friend")
+    # "Friendship": "Best",  # Not Friend, New Friend, Good Friend, Great Friend, Ultra Friend, Best Friend (can omit "Friend")
                            # Default: Best Friend
+    "Friendship": TEMPORARY_FRIENDSHIP_DEFAULT,  # TEMPORARY
     "Attack strategy": "No Dodging",  # No Dodging, Dodge Specials PRO, Dodge All Weave
                                       # Default: No Dodging
     "Dodge strategy": "Realistic Dodging"  # Perfect Dodging, Realistic Dodging, Realistic Dodging Pro, 25 Percent Dodging
@@ -80,18 +96,25 @@ CONFIG_ATTACKER_CRITERIA = [
             #     ("URSALUNA", "MUD_SHOT_FAST", "HIGH_HORSEPOWER"),
             #     ("URSALUNA", "TACKLE_FAST", "HIGH_HORSEPOWER"),
             #     ("GOLURK_SHADOW_FORM", "MUD_SLAP_FAST", "EARTH_POWER"),
-            #     ("GARCHOMP_MEGA", "MUD_SHOT_FAST", "EARTH_POWER", "10/10/10"),
+            #     ("GARCHOMP_MEGA", "MUD_SHOT_FAST", "EARTH_POWER", "10\\10\\10"),
+            #     ("SCIZOR_MEGA", "FURY_CUTTER_FAST", "X_SCISSOR", "15\\15\\15", True),  # True = Participate in estimator scaling
             #     ...
             # ]
             # This DOES guarantee the required Pokemon will be on the counters list.
             # Use this option if you want to test unreleased Pokemon or movesets, or Pokemon that are too weak
             # to appear on any of the top 32 lists.
+
+            # Use 4 args if you want to specify IVs.
+            # Use 5 args if you want to specify whether this attacker participates in estimator scaling,
+            # overriding "Consider required attackers" in CONFIG_ESTIMATOR_SCALING_SETTINGS
+            # (If you want to specify this, MUST give IVs)
+
         # "Trainer ID": 52719,  # Pokebattler trainer ID
         #                       # If this is provided, only Pokemon from that Trainer's Pokebox are used
         # "Must be shadow": False,  # This describes attackers, not bosses
         # "Must be non shadow": True,
         # "Must be mega": True,
-        # "Must be non mega": True,
+        "Must be non mega": TEMPORARY_MEGA_FIX,
         # "Must be legendary": False,
         # "Must be non legendary": True,
         # "Must be mythical": False,
@@ -105,7 +128,9 @@ CONFIG_ATTACKER_CRITERIA = [
         "Pokemon types": get_pokemon_types(),
         # "Fast move types": ["Flying"],  # Only use this if you know what you're doing
         "Exclude": ["LUCARIO_MEGA", "KYUREM_BLACK_FORM", "KYUREM_WHITE_FORM", "MEWTWO_MEGA_X", "MEWTWO_MEGA_Y",
-                    "CALYREX_SHADOW_RIDER_FORM", "BLACEPHALON", "ETERNATUS", "ETERNATUS_ETERNAMAX_FORM"],
+                    "CALYREX_SHADOW_RIDER_FORM", "BLACEPHALON", "ETERNATUS", "ETERNATUS_ETERNAMAX_FORM",
+                    "PALKIA_SHADOW_FORM", "RESHIRAM_SHADOW_FORM", "ZEKROM_SHADOW_FORM", "KYUREM_SHADOW_FORM",
+                    "TERRAKION_SHADOW_FORM"],
             # Specific Pokemon to be excluded,
             # in the same format as "Pokemon code names", e.g. "VENUSAUR_SHADOW_FORM"
     },
@@ -128,44 +153,1140 @@ CONFIG_ATTACKER_CRITERIA = [
         "Pokemon code names and moves": [
             # REMINDER: UPDATE "Attackers that should not be combined"
 
-            # ("RAYQUAZA_SHADOW_FORM", "AIR_SLASH_FAST", "AERIAL_ACE"),
-            # ("RAYQUAZA_SHADOW_FORM", "AIR_SLASH_FAST", "HURRICANE"),
-            # ("RAYQUAZA_SHADOW_FORM", "AIR_SLASH_FAST", "SKY_ATTACK"),
-            # ("RAYQUAZA_SHADOW_FORM", "AIR_SLASH_FAST", "FLY"),
-            # ("RAYQUAZA_SHADOW_FORM", "AIR_SLASH_FAST", "BRAVE_BIRD"),
-            # ("RAYQUAZA_SHADOW_FORM", "AIR_SLASH_FAST", "AEROBLAST"),
-            # ("RAYQUAZA", "AIR_SLASH_FAST", "SKY_ATTACK"),
-            # ("RAYQUAZA", "AIR_SLASH_FAST", "FLY"),
-            # ("RAYQUAZA", "AIR_SLASH_FAST", "BRAVE_BIRD"),
-            # ("RAYQUAZA", "AIR_SLASH_FAST", "AEROBLAST"),
-            # ("ARCHEOPS", "WING_ATTACK_FAST", "SKY_ATTACK"),
-            # ("ARCHEOPS_SHADOW_FORM", "WING_ATTACK_FAST", "SKY_ATTACK"),
+            # Future Pokemon
+            # Future shadows
+            # Future megas
+            # Better moves
+            # Signature moves
 
-            # ("TERRAKION_SHADOW_FORM", "DOUBLE_KICK_FAST", "SACRED_SWORD"),
+            # [Bug]
+            # ("BEEDRILL_MEGA", "BUG_BITE_FAST", "X_SCISSOR", "15\\15\\15", True),  # Megas (force to participate in scaling)
+            # ("BEEDRILL_MEGA", "INFESTATION_FAST", "X_SCISSOR", "15\\15\\15", True),
+            # ("BEEDRILL_MEGA", "POISON_JAB_FAST", "X_SCISSOR", "15\\15\\15", True),
+            # ("SCIZOR_MEGA", "BULLET_PUNCH_FAST", "X_SCISSOR", "15\\15\\15", True),
+            # ("SCIZOR_MEGA", "FURY_CUTTER_FAST", "X_SCISSOR", "15\\15\\15", True),
+            # ("VOLCARONA", "BUG_BITE_FAST", "BUG_BUZZ"),  # Now
+            # ("KLEAVOR", "QUICK_ATTACK_FAST", "X_SCISSOR"),
+            # ("KLEAVOR", "AIR_SLASH_FAST", "X_SCISSOR"),
+            # ("PINSIR_MEGA", "BUG_BITE_FAST", "X_SCISSOR"),
+            # ("PINSIR_MEGA", "FURY_CUTTER_FAST", "X_SCISSOR"),
+            # ("CENTISKORCH", "BUG_BITE_FAST", "BUG_BUZZ"),  # Future Pokemon
+            # ("FROSMOTH", "BUG_BITE_FAST", "BUG_BUZZ"),
+            # ("YANMEGA_SHADOW_FORM", "BUG_BITE_FAST", "BUG_BUZZ"),  # Future shadows
+            # ("VOLCARONA_SHADOW_FORM", "BUG_BITE_FAST", "BUG_BUZZ"),
+            # ("HERACROSS_MEGA", "STRUGGLE_BUG_FAST", "MEGAHORN"),  # Future megas
+            # ("HERACROSS_MEGA", "COUNTER_FAST", "MEGAHORN"),
+            # ("VIKAVOLT", "BUG_BITE_FAST", "BUG_BUZZ"),  # Better moves
+            # ("GOLISOPOD", "FURY_CUTTER_FAST", "BUG_BUZZ"),
+            # ("HERACROSS", "STRUGGLE_BUG_FAST", "BUG_BUZZ"),
+            # ("HERACROSS", "COUNTER_FAST", "BUG_BUZZ"),
+            # ("HERACROSS_MEGA", "STRUGGLE_BUG_FAST", "BUG_BUZZ"),
+            # ("HERACROSS_MEGA", "COUNTER_FAST", "BUG_BUZZ"),
+            # ("GENESECT", "FURY_CUTTER_FAST", "BUG_BUZZ"),
+            # ("SCIZOR", "FURY_CUTTER_FAST", "BUG_BUZZ"),
+            # ("SCIZOR_SHADOW_FORM", "FURY_CUTTER_FAST", "BUG_BUZZ"),
+            # ("SCIZOR_MEGA", "FURY_CUTTER_FAST", "BUG_BUZZ"),
+            # ("KLEAVOR", "FURY_CUTTER_FAST", "X_SCISSOR"),
+            # ("KLEAVOR", "FURY_CUTTER_FAST", "BUG_BUZZ"),
+            # Signature moves
+
+            # [Bug] Comparisons
+            # ("VOLCARONA", "BUG_BITE_FAST", "BUG_BUZZ"),  # Now
+            # ("KLEAVOR", "QUICK_ATTACK_FAST", "X_SCISSOR"),
+            # ("KLEAVOR", "AIR_SLASH_FAST", "X_SCISSOR"),
+            # ("PINSIR_MEGA", "BUG_BITE_FAST", "X_SCISSOR"),
+            # ("PINSIR_MEGA", "FURY_CUTTER_FAST", "X_SCISSOR"),
+            # ("PHEROMOSA", "BUG_BITE_FAST", "BUG_BUZZ"),
+            # ("PINSIR_SHADOW_FORM", "BUG_BITE_FAST", "X_SCISSOR"),
+            # ("PINSIR_SHADOW_FORM", "FURY_CUTTER_FAST", "X_SCISSOR"),
+            # ("SCIZOR_SHADOW_FORM", "FURY_CUTTER_FAST", "X_SCISSOR"),
+
+            # [Bug Dark Ghost] Comparisons
+            # ("CHANDELURE", "HEX_FAST", "SHADOW_BALL"),
+            # ("GHOLDENGO", "HEX_FAST", "SHADOW_BALL"),
+            # ("HYDREIGON", "BITE_FAST", "BRUTAL_SWING"),
+            # ("TYRANITAR_SHADOW_FORM", "BITE_FAST", "CRUNCH"),
+            # ("HYDREIGON", "BITE_FAST", "BRUTAL_SWING"),
+            # ("WEAVILE_SHADOW_FORM", "SNARL_FAST", "FOUL_PLAY"),
+            # ("DARKRAI", "SNARL_FAST", "DARK_PULSE"),
+            # ("DARKRAI", "SNARL_FAST", "SHADOW_BALL"),
+            # ("GIRATINA_ORIGIN_FORM", "SHADOW_CLAW_FAST", "SHADOW_FORCE"),
+
+            # [Dark Ghost]  TODO: Add Gen 9 mons
+            ("INCINEROAR", "SNARL_FAST", "DARKEST_LARIAT"),  # Now
+            ("DHELMISE", "SHADOW_CLAW_FAST", "SHADOW_BALL"),  # Future Pokemon
+            ("MARSHADOW", "SHADOW_CLAW_FAST", "SHADOW_BALL"),
+            ("MARSHADOW", "SHADOW_CLAW_FAST", "SHADOW_PUNCH"),
+            ("MARSHADOW", "ASTONISH_FAST", "SHADOW_BALL"),
+            ("BLACEPHALON", "ASTONISH_FAST", "SHADOW_BALL"),
+            ("POLTEAGEIST", "HEX_FAST", "SHADOW_BALL"),
+            ("GRIMMSNARL", "BITE_FAST", "FOUL_PLAY"),
+            ("GRIMMSNARL", "SUCKER_PUNCH_FAST", "FOUL_PLAY"),
+            ("CURSOLA", "HEX_FAST", "SHADOW_BALL"),
+            ("DRAGAPULT", "HEX_FAST", "SHADOW_BALL"),
+            ("URSHIFU_SINGLE_STRIKE_FORM", "SUCKER_PUNCH_FAST", "PAYBACK"),
+            ("CALYREX_SHADOW_RIDER_FORM", "CONFUSION_FAST", "SHADOW_BALL"),  # (Spectrier no fast move)
+            ("KINGAMBIT", "SNARL_FAST", "DARK_PULSE"),
+            ("CHIENPAO", "SNARL_FAST", "DARK_PULSE"),
+            ("CHIYU", "SNARL_FAST", "DARK_PULSE"),
+            ("FLUTTERMANE", "HEX_FAST", "SHADOW_BALL"),  # (TODO: The rest of Gen 9 has not been added)
+            ("FLUTTERMANE", "ASTONISH_FAST", "SHADOW_BALL"),
+            ("GENGAR_SHADOW_FORM", "SHADOW_CLAW_FAST", "SHADOW_BALL"),  # Future shadows
+            ("GENGAR_SHADOW_FORM", "LICK_FAST", "SHADOW_BALL"),
+            ("CHANDELURE_SHADOW_FORM", "HEX_FAST", "SHADOW_BALL"),
+            ("HYDREIGON_SHADOW_FORM", "BITE_FAST", "BRUTAL_SWING"),
+            ("DARKRAI_SHADOW_FORM", "SNARL_FAST", "DARK_PULSE"),
+            ("DARKRAI_SHADOW_FORM", "SNARL_FAST", "SHADOW_BALL"),
+            ("MEWTWO_MEGA_Y", "PSYCHO_CUT_FAST", "SHADOW_BALL"),  # Future megas
+            ("SHARPEDO_MEGA", "BITE_FAST", "CRUNCH"),  # (Mega Sableye ignored due to low power)
+            ("TYRANITAR", "SNARL_FAST", "BRUTAL_SWING"),  # Better moves
+            ("TYRANITAR_SHADOW_FORM", "SNARL_FAST", "BRUTAL_SWING"),
+            ("TYRANITAR_MEGA", "SNARL_FAST", "BRUTAL_SWING"),
+            ("GYARADOS_MEGA", "BITE_FAST", "BRUTAL_SWING"),
+            ("ABSOL", "SNARL_FAST", "BRUTAL_SWING"),
+            ("ABSOL_SHADOW_FORM", "SNARL_FAST", "BRUTAL_SWING"),
+            ("ABSOL_MEGA", "SNARL_FAST", "BRUTAL_SWING"),
+            ("HONCHKROW", "SNARL_FAST", "FOUL_PLAY"),
+            ("HONCHKROW_SHADOW_FORM", "SNARL_FAST", "FOUL_PLAY"),
+            ("KROOKODILE", "SNARL_FAST", "BRUTAL_SWING"),
+            ("GRENINJA", "FEINT_ATTACK_FAST", "BRUTAL_SWING"),
+            ("INCINEROAR", "SNARL_FAST", "BRUTAL_SWING"),
+            ("ZARUDE", "BITE_FAST", "BRUTAL_SWING"),
+            ("DARKRAI", "SNARL_FAST", "FOUL_PLAY"),
+            ("DARKRAI_SHADOW_FORM", "SNARL_FAST", "FOUL_PLAY"),
+            ("URSHIFU_SINGLE_STRIKE_FORM", "SUCKER_PUNCH_FAST", "FOUL_PLAY"),  # Or Snarl
+            ("LUNALA", "SHADOW_CLAW_FAST", "SHADOW_BALL"),
+            ("LUNALA", "HEX_FAST", "SHADOW_BALL"),
+            ("SPECTRIER", "HEX_FAST", "SHADOW_BALL"),
+            ("CALYREX_SHADOW_RIDER_FORM", "HEX_FAST", "SHADOW_BALL"),
+            ("DARKRAI", "SNARL_FAST", "BRUTAL_SWING"),  # Signature moves (Dark)
+            ("DARKRAI_SHADOW_FORM", "SNARL_FAST", "BRUTAL_SWING"),
+            ("ZOROARK", "SNARL_FAST", "BRUTAL_SWING"),
+            ("PANGORO", "SNARL_FAST", "BRUTAL_SWING"),
+            ("HOOPA_UNBOUND_FORM", "ASTONISH_FAST", "BRUTAL_SWING"),
+            ("GRIMMSNARL", "BITE_FAST", "BRUTAL_SWING"),
+            ("GRIMMSNARL", "SUCKER_PUNCH_FAST", "BRUTAL_SWING"),
+            ("URSHIFU_SINGLE_STRIKE_FORM", "SUCKER_PUNCH_FAST", "BRUTAL_SWING"),  # Or Snarl
+            ("CHIENPAO", "SNARL_FAST", "BRUTAL_SWING"),
+            ("CHIYU", "SNARL_FAST", "BRUTAL_SWING"),
+            ("NECROZMA_DAWN_WINGS_FORM", "SHADOW_CLAW_FAST", "SHADOW_BALL"),  # Signature moves (Ghost) (Most of them already have Shadow Ball elsewhere)
+            # ("MARSHADOW", "SHADOW_CLAW_FAST", "SHADOW_FORCE"),
+            # ("CALYREX_SHADOW_RIDER_FORM", "HEX_FAST", "SHADOW_FORCE"),
+
+            # [DarkGhost] for boss movesets
+            # ("TYRANITAR", "BITE_FAST", "BRUTAL_SWING"),
+            # ("TYRANITAR", "SMACK_DOWN_FAST", "BRUTAL_SWING"),
+            # ("HYDREIGON", "BITE_FAST", "BRUTAL_SWING"),
+            # ("WEAVILE_SHADOW_FORM", "SNARL_FAST", "FOUL_PLAY"),
+            # ("DARKRAI", "SNARL_FAST", "DARK_PULSE"),
+            # ("DARKRAI", "SNARL_FAST", "SHADOW_BALL"),
+            # ("GIRATINA_ORIGIN_FORM", "SHADOW_CLAW_FAST", "SHADOW_FORCE"),
+            # ("TYRANITAR_SHADOW_FORM", "BITE_FAST", "BRUTAL_SWING"),
+            # ("TYRANITAR_SHADOW_FORM", "SMACK_DOWN_FAST", "BRUTAL_SWING"),
+            # ("GENGAR_SHADOW_FORM", "SHADOW_CLAW_FAST", "SHADOW_BALL"),
+            # ("GENGAR_SHADOW_FORM", "LICK_FAST", "SHADOW_BALL"),
+            # ("GENGAR_SHADOW_FORM", "HEX_FAST", "SHADOW_BALL"),
+            # ("CHANDELURE_SHADOW_FORM", "HEX_FAST", "SHADOW_BALL"),
+
+            # [Dragon]
+            # ("KYUREM", "DRAGON_BREATH_FAST", "GLACIATE"),  # PERMANENT!!!!
+            # ("BAXCALIBUR", "ICE_FANG_FAST", "AVALANCHE"),  # PERMANENT!!!!
+            # ("BAXCALIBUR", "DRAGON_BREATH_FAST", "AVALANCHE"),  # PERMANENT!!!!
+            # ("DIALGA_ORIGIN_FORM", "DRAGON_BREATH_FAST", "DRACO_METEOR"),  # Now
+            # ("DIALGA_ORIGIN_FORM", "DRAGON_BREATH_FAST", "ROAR_OF_TIME"),
+            # ("PALKIA_ORIGIN_FORM", "DRAGON_TAIL_FAST", "DRACO_METEOR"),
+            # ("PALKIA_ORIGIN_FORM", "DRAGON_TAIL_FAST", "SPACIAL_REND"),
+            # ("PALKIA_ORIGIN_FORM", "DRAGON_BREATH_FAST", "DRACO_METEOR"),  # (In case of last-minute moveset changes)
+            # ("PALKIA_ORIGIN_FORM", "DRAGON_BREATH_FAST", "SPACIAL_REND"),
+            # ("RAYQUAZA_SHADOW_FORM", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # ("RAYQUAZA_SHADOW_FORM", "DRAGON_TAIL_FAST", "BREAKING_SWIPE"),
+            # ("RAYQUAZA_SHADOW_FORM", "DRAGON_TAIL_FAST", "OUTRAGE", "11\\11\\11"),
+            # ("RAYQUAZA_SHADOW_FORM", "DRAGON_TAIL_FAST", "BREAKING_SWIPE", "11\\11\\11"),
+            # ("RAYQUAZA_SHADOW_FORM", "DRAGON_TAIL_FAST", "OUTRAGE", "6\\6\\6"),
+            # ("RAYQUAZA_SHADOW_FORM", "DRAGON_TAIL_FAST", "BREAKING_SWIPE", "6\\6\\6"),
+            # ("KYUREM_BLACK_FORM", "DRAGON_TAIL_FAST", "OUTRAGE"),  # Future Pokemon
+            # ("KYUREM_WHITE_FORM", "DRAGON_BREATH_FAST", "DRAGON_PULSE"),
+            # ("DRAMPA", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # ("NECROZMA_ULTRA_FORM", "PSYCHO_CUT_FAST", "OUTRAGE"),
+            # ("DURALUDON", "DRAGON_TAIL_FAST", "DRAGON_CLAW"),
+            # ("DRAGAPULT", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # ("ETERNATUS", "DRAGON_TAIL_FAST", "DRAGON_PULSE"),
+            # ("PALKIA", "DRAGON_TAIL_FAST", "SPACIAL_REND"),  # (I think they will happen, but seemingly not Sinnoh Tour)
+            # ("DIALGA", "DRAGON_BREATH_FAST", "ROAR_OF_TIME"),
+            # ("KORAIDON", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # ("KORAIDON", "DRAGON_TAIL_FAST", "DRAGON_CLAW"),
+            # ("MIRAIDON", "DRAGON_BREATH_FAST", "OUTRAGE"),
+            # ("RAYQUAZA_SHADOW_FORM", "DRAGON_TAIL_FAST", "OUTRAGE"),  # Future shadows
+            # ("RAYQUAZA_SHADOW_FORM", "DRAGON_TAIL_FAST", "BREAKING_SWIPE"),
+            # ("GARCHOMP_SHADOW_FORM", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # ("PALKIA_SHADOW_FORM", "DRAGON_TAIL_FAST", "DRACO_METEOR"),
+            # ("DIALGA_SHADOW_FORM", "DRAGON_BREATH_FAST", "DRACO_METEOR"),
+            # ("PALKIA_SHADOW_FORM", "DRAGON_TAIL_FAST", "SPACIAL_REND"),
+            # ("DIALGA_SHADOW_FORM", "DRAGON_BREATH_FAST", "ROAR_OF_TIME"),
+            # ("HAXORUS_SHADOW_FORM", "DRAGON_TAIL_FAST", "BREAKING_SWIPE"),
+            # ("HYDREIGON_SHADOW_FORM", "DRAGON_BREATH_FAST", "DRAGON_PULSE"),
+            # ("RESHIRAM_SHADOW_FORM", "DRAGON_BREATH_FAST", "DRACO_METEOR"),
+            # ("ZEKROM_SHADOW_FORM", "DRAGON_BREATH_FAST", "OUTRAGE"),
+            # ("GARCHOMP_MEGA", "DRAGON_TAIL_FAST", "OUTRAGE"),  # Future megas
+            # # ("CHARIZARD_MEGA_X", "DRAGON_BREATH_FAST", "OUTRAGE"),  # Better moves
+            # # ("CHARIZARD_MEGA_X", "DRAGON_BREATH_FAST", "BREAKING_SWIPE"),
+            # # ("CHARIZARD_MEGA_Y", "DRAGON_BREATH_FAST", "OUTRAGE"),
+            # # ("CHARIZARD_MEGA_Y", "DRAGON_BREATH_FAST", "BREAKING_SWIPE"),
+            # # ("EXEGGUTOR_ALOLA_FORM", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # # ("EXEGGUTOR_ALOLA_FORM", "DRAGON_TAIL_FAST", "BREAKING_SWIPE"),
+            # # ("EXEGGUTOR_ALOLA_SHADOW_FORM", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # # ("EXEGGUTOR_ALOLA_SHADOW_FORM", "DRAGON_TAIL_FAST", "BREAKING_SWIPE"),
+            # # ("DRAGONITE", "DRAGON_TAIL_FAST", "BREAKING_SWIPE"),
+            # # ("DRAGONITE_SHADOW_FORM", "DRAGON_TAIL_FAST", "BREAKING_SWIPE"),
+            # ("AMPHAROS_MEGA", "DRAGON_TAIL_FAST", "DRAGON_PULSE"),
+            # ("AMPHAROS_MEGA", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # ("SCEPTILE_MEGA", "DRAGON_BREATH_FAST", "BREAKING_SWIPE"),
+            # # ("ALTARIA_MEGA", "DRAGON_BREATH_FAST", "OUTRAGE"),
+            # # ("SALAMENCE", "DRAGON_TAIL_FAST", "BREAKING_SWIPE"),
+            # # ("SALAMENCE_SHADOW_FORM", "DRAGON_TAIL_FAST", "BREAKING_SWIPE"),
+            # # ("SALAMENCE_MEGA", "DRAGON_TAIL_FAST", "BREAKING_SWIPE"),
+            # # ("LATIOS_SHADOW_FORM", "DRAGON_BREATH_FAST", "OUTRAGE"),
+            # # ("LATIOS_SHADOW_FORM", "DRAGON_BREATH_FAST", "BREAKING_SWIPE"),
+            # # ("LATIOS_MEGA", "DRAGON_BREATH_FAST", "OUTRAGE"),
+            # # ("LATIOS_MEGA", "DRAGON_BREATH_FAST", "BREAKING_SWIPE"),
+            # # ("GARCHOMP", "DRAGON_TAIL_FAST", "BREAKING_SWIPE"),
+            # # ("GARCHOMP_SHADOW_FORM", "DRAGON_TAIL_FAST", "BREAKING_SWIPE"),
+            # # ("GARCHOMP_MEGA", "DRAGON_TAIL_FAST", "BREAKING_SWIPE"),
+            # # ("DIALGA", "DRAGON_BREATH_FAST", "OUTRAGE"),
+            # # ("DIALGA", "DRAGON_BREATH_FAST", "BREAKING_SWIPE"),
+            # # ("DIALGA_SHADOW_FORM", "DRAGON_BREATH_FAST", "OUTRAGE"),
+            # # ("DIALGA_SHADOW_FORM", "DRAGON_BREATH_FAST", "BREAKING_SWIPE"),
+            # # ("PALKIA", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # # ("PALKIA", "DRAGON_TAIL_FAST", "BREAKING_SWIPE"),
+            # # ("PALKIA_SHADOW_FORM", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # # ("PALKIA_SHADOW_FORM", "DRAGON_TAIL_FAST", "BREAKING_SWIPE"),
+            # # ("HYDREIGON", "DRAGON_BREATH_FAST", "OUTRAGE"),
+            # # ("HYDREIGON", "DRAGON_BREATH_FAST", "BREAKING_SWIPE"),
+            # # ("HYDREIGON_SHADOW_FORM", "DRAGON_BREATH_FAST", "OUTRAGE"),
+            # # ("HYDREIGON_SHADOW_FORM", "DRAGON_BREATH_FAST", "BREAKING_SWIPE"),
+            # # ("RESHIRAM", "DRAGON_BREATH_FAST", "BREAKING_SWIPE"),
+            # # ("RESHIRAM_SHADOW_FORM", "DRAGON_BREATH_FAST", "BREAKING_SWIPE"),
+            # # ("ZEKROM", "DRAGON_BREATH_FAST", "BREAKING_SWIPE"),
+            # # ("ZEKROM_SHADOW_FORM", "DRAGON_BREATH_FAST", "BREAKING_SWIPE"),
+            # ("KOMMO_O", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # ("DURALUDON", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # ("ETERNATUS", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # ("GARCHOMP", "DRAGON_TAIL_FAST", "SPACIAL_REND"),  # Signature moves
+            # ("GARCHOMP", "DRAGON_TAIL_FAST", "ROAR_OF_TIME"),
+            # ("GARCHOMP_SHADOW_FORM", "DRAGON_TAIL_FAST", "SPACIAL_REND"),
+            # ("GARCHOMP_SHADOW_FORM", "DRAGON_TAIL_FAST", "ROAR_OF_TIME"),
+            # ("GARCHOMP_MEGA", "DRAGON_TAIL_FAST", "SPACIAL_REND"),
+            # ("GARCHOMP_MEGA", "DRAGON_TAIL_FAST", "ROAR_OF_TIME"),
+            # ("EXEGGUTOR_ALOLA_FORM", "DRAGON_TAIL_FAST", "SPACIAL_REND"),
+            # ("EXEGGUTOR_ALOLA_FORM", "DRAGON_TAIL_FAST", "ROAR_OF_TIME"),
+            # ("EXEGGUTOR_ALOLA_SHADOW_FORM", "DRAGON_TAIL_FAST", "SPACIAL_REND"),
+            # ("EXEGGUTOR_ALOLA_SHADOW_FORM", "DRAGON_TAIL_FAST", "ROAR_OF_TIME"),
+            # ("KOMMO_O", "DRAGON_TAIL_FAST", "SPACIAL_REND"),
+            # ("KOMMO_O", "DRAGON_TAIL_FAST", "ROAR_OF_TIME"),
+            # ("DRAGAPULT", "DRAGON_TAIL_FAST", "SPACIAL_REND"),
+            # ("DRAGAPULT", "DRAGON_TAIL_FAST", "ROAR_OF_TIME"),
+            # ("ETERNATUS", "DRAGON_TAIL_FAST", "SPACIAL_REND"),
+            # ("ETERNATUS", "DRAGON_TAIL_FAST", "ROAR_OF_TIME"),
+            # ("BAXCALIBUR", "DRAGON_BREATH_FAST", "SPACIAL_REND"),
+            # ("BAXCALIBUR", "DRAGON_BREATH_FAST", "ROAR_OF_TIME"),
+
+            # [Dragon] For boss movesets
+            # ("RAYQUAZA_SHADOW_FORM", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # ("RAYQUAZA_SHADOW_FORM", "DRAGON_TAIL_FAST", "BREAKING_SWIPE"),
+            # ("SALAMENCE_SHADOW_FORM", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # ("SALAMENCE_SHADOW_FORM", "DRAGON_TAIL_FAST", "DRACO_METEOR"),
+            # ("DRAGONITE_SHADOW_FORM", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # ("DRAGONITE_SHADOW_FORM", "DRAGON_TAIL_FAST", "DRACO_METEOR"),
+            # ("DRAGONITE_SHADOW_FORM", "DRAGON_TAIL_FAST", "DRAGON_CLAW"),
+            # ("DRAGONITE_SHADOW_FORM", "DRAGON_BREATH_FAST", "OUTRAGE"),
+            # ("DRAGONITE_SHADOW_FORM", "DRAGON_BREATH_FAST", "DRACO_METEOR"),
+            # ("DRAGONITE_SHADOW_FORM", "DRAGON_BREATH_FAST", "DRAGON_CLAW"),
+            # ("GARCHOMP_SHADOW_FORM", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # ("PALKIA_SHADOW_FORM", "DRAGON_TAIL_FAST", "DRACO_METEOR"),
+            # ("PALKIA_SHADOW_FORM", "DRAGON_TAIL_FAST", "SPACIAL_REND"),
+            # ("DIALGA_SHADOW_FORM", "DRAGON_BREATH_FAST", "DRACO_METEOR"),
+            # ("DIALGA_SHADOW_FORM", "DRAGON_BREATH_FAST", "ROAR_OF_TIME"),
+            # ("HAXORUS_SHADOW_FORM", "DRAGON_TAIL_FAST", "BREAKING_SWIPE"),
+            # ("ZEKROM_SHADOW_FORM", "DRAGON_BREATH_FAST", "OUTRAGE"),
+            # ("PALKIA_ORIGIN_FORM", "DRAGON_TAIL_FAST", "DRACO_METEOR"),
+            # ("PALKIA_ORIGIN_FORM", "DRAGON_TAIL_FAST", "SPACIAL_REND"),
+            # ("DIALGA_ORIGIN_FORM", "DRAGON_BREATH_FAST", "DRACO_METEOR"),
+            # ("DIALGA_ORIGIN_FORM", "DRAGON_BREATH_FAST", "ROAR_OF_TIME"),
+            # ("RAYQUAZA", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # ("RAYQUAZA", "DRAGON_TAIL_FAST", "BREAKING_SWIPE"),
+            # ("SALAMENCE", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # ("SALAMENCE", "DRAGON_TAIL_FAST", "DRACO_METEOR"),
+            # ("GARCHOMP", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # ("PALKIA", "DRAGON_TAIL_FAST", "DRACO_METEOR"),
+            # ("PALKIA", "DRAGON_TAIL_FAST", "SPACIAL_REND"),
+            # ("DIALGA", "DRAGON_BREATH_FAST", "DRACO_METEOR"),
+            # ("DIALGA", "DRAGON_BREATH_FAST", "ROAR_OF_TIME"),
+            # ("ZEKROM", "DRAGON_BREATH_FAST", "OUTRAGE"),
+            # ("DRAGONITE", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # ("DRAGONITE", "DRAGON_TAIL_FAST", "DRACO_METEOR"),
+            # ("DRAGONITE", "DRAGON_TAIL_FAST", "DRAGON_CLAW"),
+            # ("DRAGONITE", "DRAGON_BREATH_FAST", "OUTRAGE"),
+            # ("DRAGONITE", "DRAGON_BREATH_FAST", "DRACO_METEOR"),
+            # ("DRAGONITE", "DRAGON_BREATH_FAST", "DRAGON_CLAW"),
+            # ("HAXORUS", "DRAGON_TAIL_FAST", "BREAKING_SWIPE"),
+
+            # [Dragon] Custom IVs
+            # ("SALAMENCE_SHADOW_FORM", "DRAGON_TAIL_FAST", "OUTRAGE", "14\\14\\4"),
+            # ("SALAMENCE_SHADOW_FORM", "DRAGON_TAIL_FAST", "OUTRAGE", "14\\8\\15"),
+            # ("SALAMENCE_SHADOW_FORM", "DRAGON_TAIL_FAST", "OUTRAGE", "11\\14\\15"),
+            # ("SALAMENCE_SHADOW_FORM", "DRAGON_TAIL_FAST", "OUTRAGE", "12\\12\\15"),
+            # ("SALAMENCE_SHADOW_FORM", "DRAGON_TAIL_FAST", "OUTRAGE", "15\\12\\5"),
+            # ("DRAGONITE_SHADOW_FORM", "DRAGON_TAIL_FAST", "OUTRAGE", "11\\14\\11"),
+            # ("DRAGONITE_SHADOW_FORM", "DRAGON_TAIL_FAST", "OUTRAGE", "14\\10\\6"),
+            # ("DRAGONITE_SHADOW_FORM", "DRAGON_TAIL_FAST", "OUTRAGE", "15\\4\\10"),
+            # ("DRAGONITE_SHADOW_FORM", "DRAGON_TAIL_FAST", "DRAGON_CLAW", "11\\14\\11"),
+            # ("DRAGONITE_SHADOW_FORM", "DRAGON_TAIL_FAST", "DRAGON_CLAW", "14\\10\\6"),
+            # ("DRAGONITE_SHADOW_FORM", "DRAGON_TAIL_FAST", "DRAGON_CLAW", "15\\4\\10"),
+            # ("SALAMENCE_SHADOW_FORM", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # ("DRAGONITE_SHADOW_FORM", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # ("DRAGONITE_SHADOW_FORM", "DRAGON_TAIL_FAST", "DRAGON_CLAW"),
+
+            # [Electric]
+            # ("RAIKOU_SHADOW_FORM", "THUNDER_SHOCK_FAST", "WILD_CHARGE", "11\\11\\11"),  # Now
+            # ("RAIKOU_SHADOW_FORM", "VOLT_SWITCH_FAST", "WILD_CHARGE", "11\\11\\11"),
+            # ("RAIKOU_SHADOW_FORM", "THUNDER_SHOCK_FAST", "WILD_CHARGE", "6\\6\\6"),
+            # ("RAIKOU_SHADOW_FORM", "VOLT_SWITCH_FAST", "WILD_CHARGE", "6\\6\\6"),
+            # ("KYUREM_BLACK_FORM", "DRAGON_TAIL_FAST", "FUSION_BOLT"),  # Future Pokemon
+            # ("KYUREM_BLACK_FORM", "SHADOW_CLAW_FAST", "FUSION_BOLT"),
+            # ("THUNDURUS_INCARNATE_FORM", "THUNDER_SHOCK_FAST", "WILDBOLT_STORM"),
+            # ("ZERAORA", "SPARK_FAST", "WILD_CHARGE"),
+            # ("ZERAORA", "VOLT_SWITCH_FAST", "WILD_CHARGE"),
+            # ("MIRAIDON", "THUNDER_SHOCK_FAST", "THUNDER"),
+            # ("JOLTEON_SHADOW_FORM", "THUNDER_SHOCK_FAST", "THUNDERBOLT"),  # Future shadows
+            # ("ZEKROM_SHADOW_FORM", "CHARGE_BEAM_FAST", "WILD_CHARGE"),
+            # ("ZEKROM_SHADOW_FORM", "CHARGE_BEAM_FAST", "FUSION_BOLT"),
+            # ("MEWTWO_MEGA_Y", "PSYCHO_CUT_FAST", "THUNDERBOLT"),  # Future megas
+            # ("JOLTEON", "THUNDER_SHOCK_FAST", "WILD_CHARGE"),  # Better regular moves
+            # ("JOLTEON_SHADOW_FORM", "THUNDER_SHOCK_FAST", "WILD_CHARGE"),
+            # ("ZAPDOS", "THUNDER_SHOCK_FAST", "WILD_CHARGE"),
+            # ("ZAPDOS_SHADOW_FORM", "THUNDER_SHOCK_FAST", "WILD_CHARGE"),
+            # ("AMPHAROS_MEGA", "VOLT_SWITCH_FAST", "THUNDERBOLT"),
+            # ("AMPHAROS_MEGA", "VOLT_SWITCH_FAST", "WILD_CHARGE"),
+            # ("LUXRAY", "THUNDER_FANG_FAST", "WILD_CHARGE"),
+            # ("LUXRAY_SHADOW_FORM", "THUNDER_FANG_FAST", "WILD_CHARGE"),
+            # ("ZEKROM", "THUNDER_FANG_FAST", "FUSION_BOLT"),
+            # ("ZEKROM_SHADOW_FORM", "THUNDER_FANG_FAST", "FUSION_BOLT"),
+            # ("THUNDURUS_THERIAN_FORM", "VOLT_SWITCH_FAST", "WILD_CHARGE"),
+            # ("XURKITREE", "THUNDER_SHOCK_FAST", "WILD_CHARGE"),
+            # ("XURKITREE", "THUNDER_SHOCK_FAST", "THUNDERBOLT"),
+            # ("VIKAVOLT", "SPARK_FAST", "WILD_CHARGE"),
+            # ("TAPU_KOKO", "VOLT_SWITCH_FAST", "WILD_CHARGE"),
+            # ("REGIELEKI", "THUNDER_SHOCK_FAST", "WILD_CHARGE"),
+            # ("MIRAIDON", "THUNDER_SHOCK_FAST", "WILD_CHARGE"),  # Signature moves
+            # ("MIRAIDON", "THUNDER_SHOCK_FAST", "FUSION_BOLT"),
+            # ("MIRAIDON", "THUNDER_SHOCK_FAST", "WILDBOLT_STORM"),
+            # ("ZERAORA", "SPARK_FAST", "FUSION_BOLT"),
+            # ("ZERAORA", "SPARK_FAST", "WILDBOLT_STORM"),
+
+            # [Electric] For boss movesets
+            # ("RAIKOU_SHADOW_FORM", "THUNDER_SHOCK_FAST", "WILD_CHARGE"),
+            # ("RAIKOU_SHADOW_FORM", "VOLT_SWITCH_FAST", "WILD_CHARGE"),
+            # ("ZAPDOS_SHADOW_FORM", "THUNDER_SHOCK_FAST", "THUNDERBOLT"),
+            # ("ZAPDOS_SHADOW_FORM", "THUNDER_SHOCK_FAST", "ZAP_CANNON"),
+            # ("ELECTIVIRE_SHADOW_FORM", "THUNDER_SHOCK_FAST", "WILD_CHARGE"),
+            # ("MAGNEZONE_SHADOW_FORM", "SPARK_FAST", "WILD_CHARGE"),
+            # ("MAGNEZONE_SHADOW_FORM", "VOLT_SWITCH_FAST", "WILD_CHARGE"),
+            # ("MAGNEZONE_SHADOW_FORM", "CHARGE_BEAM_FAST", "WILD_CHARGE"),
+            # ("XURKITREE", "THUNDER_SHOCK_FAST", "DISCHARGE"),
+            # ("XURKITREE", "SPARK_FAST", "DISCHARGE"),
+            # ("ZEKROM", "CHARGE_BEAM_FAST", "FUSION_BOLT"),
+            # ("ZEKROM", "CHARGE_BEAM_FAST", "WILD_CHARGE"),
+            # ("THUNDURUS_THERIAN_FORM", "VOLT_SWITCH_FAST", "WILDBOLT_STORM"),
+            # ("RAIKOU_SHADOW_FORM", "THUNDER_SHOCK_FAST", "WILD_CHARGE", "11\\11\\11"),
+            # ("RAIKOU_SHADOW_FORM", "VOLT_SWITCH_FAST", "WILD_CHARGE", "11\\11\\11"),
+            # ("RAIKOU_SHADOW_FORM", "THUNDER_SHOCK_FAST", "WILD_CHARGE", "6\\6\\6"),
+            # ("RAIKOU_SHADOW_FORM", "VOLT_SWITCH_FAST", "WILD_CHARGE", "6\\6\\6"),
+            # ("ZAPDOS_SHADOW_FORM", "THUNDER_SHOCK_FAST", "THUNDERBOLT", "11\\11\\11"),
+            # ("ZAPDOS_SHADOW_FORM", "THUNDER_SHOCK_FAST", "ZAP_CANNON", "11\\11\\11"),
+            # ("XURKITREE", "THUNDER_SHOCK_FAST", "DISCHARGE", "13\\13\\13"),
+            # ("XURKITREE", "SPARK_FAST", "DISCHARGE", "13\\13\\13"),
+
+            # [Fairy]
+            # ("TOGEKISS", "CHARM_FAST", "AURA_SPHERE"),  # PERMANENT!!!!
+            # ("TAPU_KOKO", "VOLT_SWITCH_FAST", "NATURES_MADNESS"),  # Now
+            # ("TAPU_KOKO", "QUICK_ATTACK_FAST", "NATURES_MADNESS"),
+            # ("TAPU_LELE", "CONFUSION_FAST", "NATURES_MADNESS"),
+            # ("TAPU_LELE", "ASTONISH_FAST", "NATURES_MADNESS"),
+            # ("TAPU_BULU", "BULLET_SEED_FAST", "NATURES_MADNESS"),
+            # ("TAPU_BULU", "ROCK_SMASH_FAST", "NATURES_MADNESS"),
+            # ("MAGEARNA", "LOCK_ON_FAST", "PLAY_ROUGH"),  # Future Pokemon
+            # ("HATTERENE", "CHARM_FAST", "DAZZLING_GLEAM"),  # (Ignores Grimmsnarl due to no fast move and mediocre stats)
+            # ("ALCREMIE", "CHARM_FAST", "DAZZLING_GLEAM"),
+            # ("ENAMORUS_THERIAN_FORM", "FAIRY_WIND_FAST", "DAZZLING_GLEAM"),
+            # ("ZACIAN_CROWNED_SWORD_FORM", "METAL_CLAW_FAST", "PLAY_ROUGH"),
+            # ("ZACIAN_CROWNED_SWORD_FORM", "SNARL_FAST", "PLAY_ROUGH"),
+            # ("ZACIAN_CROWNED_SWORD_FORM", "QUICK_ATTACK_FAST", "PLAY_ROUGH"),
+            # ("ZACIAN_CROWNED_SWORD_FORM", "FIRE_FANG_FAST", "PLAY_ROUGH"),
+            # ("IRONVALIANT", "FURY_CUTTER_FAST", "DAZZLING_GLEAM"),  # (TODO: The rest of Gen 9 has not been added)
+            # ("IRONVALIANT", "PSYCHO_CUT_FAST", "DAZZLING_GLEAM"),
+            # ("IRONVALIANT", "LOW_KICK_FAST", "DAZZLING_GLEAM"),
+            # ("IRONVALIANT", "CHARGE_BEAM_FAST", "DAZZLING_GLEAM"),
+            # ("IRONVALIANT", "FURY_CUTTER_FAST", "MOONBLAST"),
+            # ("IRONVALIANT", "PSYCHO_CUT_FAST", "MOONBLAST"),
+            # ("IRONVALIANT", "LOW_KICK_FAST", "MOONBLAST"),
+            # ("IRONVALIANT", "CHARGE_BEAM_FAST", "MOONBLAST"),
+            # ("FLUTTERMANE", "CHARM_FAST", "DAZZLING_GLEAM"),
+            # ("FLUTTERMANE", "CHARM_FAST", "MOONBLAST"),
+            # ("TOGEKISS_SHADOW_FORM", "CHARM_FAST", "DAZZLING_GLEAM"),  # Future shadows
+            # ("TOGEKISS_SHADOW_FORM", "CHARM_FAST", "AURA_SPHERE"),  # Future shadows
+            # ("MAWILE_MEGA", "FAIRY_WIND_FAST", "PLAY_ROUGH"),  # Future megas
+            # ("TOGEKISS", "FAIRY_WIND_FAST", "DAZZLING_GLEAM"),  # Better moves
+            # ("TOGEKISS", "FAIRY_WIND_FAST", "AURA_SPHERE"),
+            # ("TOGEKISS_SHADOW_FORM", "FAIRY_WIND_FAST", "DAZZLING_GLEAM"),
+            # ("TOGEKISS_SHADOW_FORM", "FAIRY_WIND_FAST", "AURA_SPHERE"),
+            # ("FLORGES", "FAIRY_WIND_FAST", "DAZZLING_GLEAM"),
+            # ("SYLVEON", "FAIRY_WIND_FAST", "DAZZLING_GLEAM"),
+            # ("XERNEAS", "GEOMANCY_FAST", "PLAY_ROUGH"),
+            # ("DIANCIE_MEGA", "ROCK_THROW_FAST", "PLAY_ROUGH"),
+            # ("DIANCIE_MEGA", "TACKLE_FAST", "PLAY_ROUGH"),
+            # ("DIANCIE_MEGA", "CHARM_FAST", "MOONBLAST"),
+            # ("DIANCIE_MEGA", "CHARM_FAST", "PLAY_ROUGH"),
+            # ("PRIMARINA", "CHARM_FAST", "PLAY_ROUGH"),
+            # ("TAPU_KOKO", "FAIRY_WIND_FAST", "NATURES_MADNESS"),
+            # ("TAPU_LELE", "CHARM_FAST", "NATURES_MADNESS"),
+            # ("TAPU_KOKO", "GEOMANCY_FAST", "NATURES_MADNESS"),  # Hypothetical fast moves
+            # ("TAPU_LELE", "FAIRY_WIND_FAST", "NATURES_MADNESS"),
+            # ("TAPU_LELE", "GEOMANCY_FAST", "NATURES_MADNESS"),
+            # ("TAPU_BULU", "FAIRY_WIND_FAST", "NATURES_MADNESS"),
+            # ("TAPU_BULU", "GEOMANCY_FAST", "NATURES_MADNESS"),
+            # ("MAGEARNA", "FAIRY_WIND_FAST", "PLAY_ROUGH"),
+            # ("MAGEARNA", "GEOMANCY_FAST", "PLAY_ROUGH"),
+            # ("GRIMMSNARL", "FAIRY_WIND_FAST", "PLAY_ROUGH"),
+            # ("GRIMMSNARL", "GEOMANCY_FAST", "PLAY_ROUGH"),
+            # ("ZACIAN", "FAIRY_WIND_FAST", "PLAY_ROUGH"),
+            # ("ZACIAN", "GEOMANCY_FAST", "PLAY_ROUGH"),
+            # ("ZACIAN_CROWNED_SWORD_FORM", "FAIRY_WIND_FAST", "PLAY_ROUGH"),
+            # ("ZACIAN_CROWNED_SWORD_FORM", "GEOMANCY_FAST", "PLAY_ROUGH"),
+            # ("IRONVALIANT", "FAIRY_WIND_FAST", "DAZZLING_GLEAM"),
+            # ("IRONVALIANT", "FAIRY_WIND_FAST", "MOONBLAST"),
+            # ("IRONVALIANT", "GEOMANCY_FAST", "DAZZLING_GLEAM"),
+            # ("IRONVALIANT", "GEOMANCY_FAST", "MOONBLAST"),
+            # ("ENAMORUS_INCARNATE_FORM", "FAIRY_WIND_FAST", "NATURES_MADNESS"),  # Signature moves
+            # ("MAGEARNA", "LOCK_ON_FAST", "NATURES_MADNESS"),
+            # ("MAGEARNA", "FAIRY_WIND_FAST", "NATURES_MADNESS"),
+            # ("MAGEARNA", "GEOMANCY_FAST", "NATURES_MADNESS"),
+
+            # [Fairy] For boss movesets
+            # ("ENAMORUS_INCARNATE_FORM", "FAIRY_WIND_FAST", "DAZZLING_GLEAM"),
+            # ("XERNEAS", "GEOMANCY_FAST", "MOONBLAST"),
+            # ("GARDEVOIR", "CHARM_FAST", "DAZZLING_GLEAM"),
+            # ("GARDEVOIR_SHADOW_FORM", "CHARM_FAST", "DAZZLING_GLEAM"),
+            # ("TOGEKISS", "CHARM_FAST", "DAZZLING_GLEAM"),
+            # ("TOGEKISS", "CHARM_FAST", "AURA_SPHERE"),  # Now
+            # ("ZACIAN", "METAL_CLAW_FAST", "PLAY_ROUGH"),
+            # ("ZACIAN", "SNARL_FAST", "PLAY_ROUGH"),
+            # ("ZACIAN", "QUICK_ATTACK_FAST", "PLAY_ROUGH"),
+            # ("ZACIAN", "FIRE_FANG_FAST", "PLAY_ROUGH"),
+            # ("XURKITREE", "THUNDER_SHOCK_FAST", "DAZZLING_GLEAM"),
+            # ("GRANBULL", "CHARM_FAST", "PLAY_ROUGH"),
+            # ("GRANBULL_SHADOW_FORM", "CHARM_FAST", "PLAY_ROUGH"),
+            # ("TAPU_KOKO", "VOLT_SWITCH_FAST", "NATURES_MADNESS"),
+            # ("TAPU_KOKO", "QUICK_ATTACK_FAST", "NATURES_MADNESS"),
+            # ("TAPU_LELE", "CONFUSION_FAST", "NATURES_MADNESS"),
+            # ("TAPU_LELE", "ASTONISH_FAST", "NATURES_MADNESS"),
+            # ("TAPU_BULU", "BULLET_SEED_FAST", "NATURES_MADNESS"),
+            # ("TAPU_BULU", "ROCK_SMASH_FAST", "NATURES_MADNESS"),
+
+            # [Fairy vs Dragon] Filling blanks
+            # ("ENAMORUS_INCARNATE_FORM", "FAIRY_WIND_FAST", "DAZZLING_GLEAM"),
+            # ("XERNEAS", "GEOMANCY_FAST", "MOONBLAST"),
+            # ("GARDEVOIR", "CHARM_FAST", "DAZZLING_GLEAM"),
+            # ("GARDEVOIR_SHADOW_FORM", "CHARM_FAST", "DAZZLING_GLEAM"),
+            # ("TOGEKISS", "CHARM_FAST", "DAZZLING_GLEAM"),
+            # ("TOGEKISS", "CHARM_FAST", "AURA_SPHERE"),
+            # ("ZACIAN", "METAL_CLAW_FAST", "PLAY_ROUGH"),
+            # ("ZACIAN", "SNARL_FAST", "PLAY_ROUGH"),
+            # ("ZACIAN", "QUICK_ATTACK_FAST", "PLAY_ROUGH"),
+            # ("ZACIAN", "FIRE_FANG_FAST", "PLAY_ROUGH"),
+            # ("XURKITREE", "THUNDER_SHOCK_FAST", "DAZZLING_GLEAM"),
+            # ("GRANBULL", "CHARM_FAST", "PLAY_ROUGH"),
+            # ("GRANBULL_SHADOW_FORM", "CHARM_FAST", "PLAY_ROUGH"),
+            # ("SALAMENCE_SHADOW_FORM", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # ("SALAMENCE_SHADOW_FORM", "DRAGON_TAIL_FAST", "DRACO_METEOR"),
+            # ("DRAGONITE_SHADOW_FORM", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # ("DRAGONITE_SHADOW_FORM", "DRAGON_TAIL_FAST", "DRACO_METEOR"),
+            # ("DRAGONITE_SHADOW_FORM", "DRAGON_TAIL_FAST", "DRAGON_CLAW"),
+            # ("DRAGONITE_SHADOW_FORM", "DRAGON_BREATH_FAST", "OUTRAGE"),
+            # ("DRAGONITE_SHADOW_FORM", "DRAGON_BREATH_FAST", "DRACO_METEOR"),
+            # ("DRAGONITE_SHADOW_FORM", "DRAGON_BREATH_FAST", "DRAGON_CLAW"),
+            # ("RAYQUAZA", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # ("RAYQUAZA", "DRAGON_TAIL_FAST", "BREAKING_SWIPE"),
+            # ("SALAMENCE", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # ("SALAMENCE", "DRAGON_TAIL_FAST", "DRACO_METEOR"),
+            # ("GARCHOMP", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # ("PALKIA", "DRAGON_TAIL_FAST", "DRACO_METEOR"),
+            # ("DIALGA", "DRAGON_BREATH_FAST", "DRACO_METEOR"),
+            # ("PALKIA", "DRAGON_TAIL_FAST", "SPACIAL_REND"),
+            # ("DIALGA", "DRAGON_BREATH_FAST", "ROAR_OF_TIME"),
+            # ("PALKIA_ORIGIN_FORM", "DRAGON_TAIL_FAST", "SPACIAL_REND"),
+            # ("DIALGA_ORIGIN_FORM", "DRAGON_BREATH_FAST", "ROAR_OF_TIME"),
+            # ("ZEKROM", "DRAGON_BREATH_FAST", "OUTRAGE"),
+            # ("DRAGONITE", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # ("DRAGONITE", "DRAGON_TAIL_FAST", "DRACO_METEOR"),
+            # ("DRAGONITE", "DRAGON_TAIL_FAST", "DRAGON_CLAW"),
+            # ("DRAGONITE", "DRAGON_BREATH_FAST", "OUTRAGE"),
+            # ("DRAGONITE", "DRAGON_BREATH_FAST", "DRACO_METEOR"),
+            # ("DRAGONITE", "DRAGON_BREATH_FAST", "DRAGON_CLAW"),
+            # ("HAXORUS", "DRAGON_TAIL_FAST", "BREAKING_SWIPE"),
+            # ("IRONVALIANT", "FURY_CUTTER_FAST", "DAZZLING_GLEAM"),  # (TODO: The rest of Gen 9 has not been added)
+            # ("IRONVALIANT", "PSYCHO_CUT_FAST", "DAZZLING_GLEAM"),
+            # ("IRONVALIANT", "LOW_KICK_FAST", "DAZZLING_GLEAM"),
+            # ("IRONVALIANT", "CHARGE_BEAM_FAST", "DAZZLING_GLEAM"),
+            # ("IRONVALIANT", "FURY_CUTTER_FAST", "MOONBLAST"),
+            # ("IRONVALIANT", "PSYCHO_CUT_FAST", "MOONBLAST"),
+            # ("IRONVALIANT", "LOW_KICK_FAST", "MOONBLAST"),
+            # ("IRONVALIANT", "CHARGE_BEAM_FAST", "MOONBLAST"),
+            # ("FLUTTERMANE", "CHARM_FAST", "DAZZLING_GLEAM"),
+            # ("FLUTTERMANE", "CHARM_FAST", "MOONBLAST"),
+            # ("IRONVALIANT", "FAIRY_WIND_FAST", "DAZZLING_GLEAM"),
+            # ("IRONVALIANT", "FAIRY_WIND_FAST", "MOONBLAST"),
+            # ("IRONVALIANT", "GEOMANCY_FAST", "DAZZLING_GLEAM"),
+            # ("IRONVALIANT", "GEOMANCY_FAST", "MOONBLAST"),
+
+            # [Fairy vs Fighting] Filling blanks
+            # ("GARDEVOIR", "CHARM_FAST", "DAZZLING_GLEAM"),
+            # ("GARDEVOIR_SHADOW_FORM", "CHARM_FAST", "DAZZLING_GLEAM"),
+            # ("GARDEVOIR_MEGA", "CHARM_FAST", "DAZZLING_GLEAM"),
+            # ("TOGEKISS", "CHARM_FAST", "DAZZLING_GLEAM"),
+            # ("TOGEKISS", "CHARM_FAST", "AURA_SPHERE"),  # Now
+            # ("ZACIAN", "METAL_CLAW_FAST", "PLAY_ROUGH"),
+            # ("ZACIAN", "SNARL_FAST", "PLAY_ROUGH"),
+            # ("ZACIAN", "QUICK_ATTACK_FAST", "PLAY_ROUGH"),
+            # ("ZACIAN", "FIRE_FANG_FAST", "PLAY_ROUGH"),
+            # ("XURKITREE", "THUNDER_SHOCK_FAST", "DAZZLING_GLEAM"),
+            # ("GRANBULL", "CHARM_FAST", "PLAY_ROUGH"),
+            # ("GRANBULL_SHADOW_FORM", "CHARM_FAST", "PLAY_ROUGH"),
+            # ("TERRAKION", "DOUBLE_KICK_FAST", "SACRED_SWORD"),
+            # ("MACHAMP_SHADOW_FORM", "COUNTER_FAST", "DYNAMIC_PUNCH"),
+            # ("HARIYAMA_SHADOW_FORM", "COUNTER_FAST", "DYNAMIC_PUNCH"),
+            # ("CONKELDURR", "COUNTER_FAST", "DYNAMIC_PUNCH"),
+            # ("LUCARIO", "COUNTER_FAST", "AURA_SPHERE"),
+            # ("MACHAMP", "COUNTER_FAST", "DYNAMIC_PUNCH"),
+            # ("BRELOOM", "COUNTER_FAST", "DYNAMIC_PUNCH"),
+            # ("HARIYAMA", "COUNTER_FAST", "DYNAMIC_PUNCH"),
+            # ("BLAZIKEN_MEGA", "COUNTER_FAST", "FOCUS_BLAST"),
+
+            # [Fighting]
+            # ("MELOETTA_PIROUETTE_FORM", "LOW_KICK_FAST", "CLOSE_COMBAT"),  # Future Pokemon (missing Paldea)
+            # ("HAWLUCHA", "LOW_KICK_FAST", "FLYING_PRESS"),
+            # ("MARSHADOW", "COUNTER_FAST", "AURA_SPHERE"),
+            # ("MARSHADOW", "COUNTER_FAST", "CLOSE_COMBAT"),
+            # ("MARSHADOW", "LOW_KICK_FAST", "BRICK_BREAK"),
+            # ("URSHIFU_SINGLE_STRIKE_FORM", "COUNTER_FAST", "DYNAMIC_PUNCH"),
+            # ("URSHIFU_RAPID_STRIKE_FORM", "COUNTER_FAST", "DYNAMIC_PUNCH"),
+            # ("KORAIDON", "ROCK_SMASH_FAST", "CLOSE_COMBAT"),
+            # ("DECIDUEYE_HISUIAN_FORM", "PSYCHO_CUT_FAST", "AURA_SPHERE"),
+            # ("DECIDUEYE_HISUIAN_FORM", "MAGICAL_LEAF_FAST", "AURA_SPHERE"),
+            # ("IRONVALIANT", "LOW_KICK_FAST", "AURA_SPHERE"),  # (TODO: The rest of Gen 9 has not been added)
+            # ("BRELOOM_SHADOW_FORM", "COUNTER_FAST", "DYNAMIC_PUNCH"),  # Future shadows
             # ("LUCARIO_SHADOW_FORM", "COUNTER_FAST", "AURA_SPHERE"),
             # ("CONKELDURR_SHADOW_FORM", "COUNTER_FAST", "DYNAMIC_PUNCH"),
+            # ("TERRAKION_SHADOW_FORM", "DOUBLE_KICK_FAST", "SACRED_SWORD"),
+            # ("MEWTWO_MEGA_X", "PSYCHO_CUT_FAST", "FOCUS_BLAST"),  # Future megas
+            # ("BLAZIKEN_MEGA", "COUNTER_FAST", "FOCUS_BLAST"),
+            # ("HERACROSS_MEGA", "COUNTER_FAST", "CLOSE_COMBAT"),
+            # ("LUCARIO_MEGA", "COUNTER_FAST", "AURA_SPHERE"),
+            # ("GALLADE_MEGA", "LOW_KICK_FAST", "CLOSE_COMBAT"),
+            # ("HITMONLEE", "DOUBLE_KICK_FAST", "AURA_SPHERE"),  # Better regular moves
+            # ("HITMONLEE_SHADOW_FORM", "DOUBLE_KICK_FAST", "AURA_SPHERE"),
+            # ("MEWTWO", "LOW_KICK_FAST", "FOCUS_BLAST"),
+            # ("MEWTWO_SHADOW_FORM", "LOW_KICK_FAST", "FOCUS_BLAST"),
+            # ("MEWTWO_MEGA_X", "LOW_KICK_FAST", "FOCUS_BLAST"),
+            # ("MEWTWO", "COUNTER_FAST", "FOCUS_BLAST"),
+            # ("MEWTWO_SHADOW_FORM", "COUNTER_FAST", "FOCUS_BLAST"),
+            # ("MEWTWO_MEGA_X", "COUNTER_FAST", "FOCUS_BLAST"),
+            # ("MEWTWO", "LOW_KICK_FAST", "AURA_SPHERE"),
+            # ("MEWTWO_SHADOW_FORM", "LOW_KICK_FAST", "AURA_SPHERE"),
+            # ("MEWTWO_MEGA_X", "LOW_KICK_FAST", "AURA_SPHERE"),
+            # ("MEWTWO", "COUNTER_FAST", "AURA_SPHERE"),
+            # ("MEWTWO_SHADOW_FORM", "COUNTER_FAST", "AURA_SPHERE"),
+            # ("MEWTWO_MEGA_X", "COUNTER_FAST", "AURA_SPHERE"),
+            # ("BLAZIKEN", "COUNTER_FAST", "AURA_SPHERE"),
+            # ("BLAZIKEN_SHADOW_FORM", "COUNTER_FAST", "AURA_SPHERE"),
+            # ("BLAZIKEN_MEGA", "COUNTER_FAST", "AURA_SPHERE"),
+            # ("GALLADE", "LOW_KICK_FAST", "AURA_SPHERE"),
+            # ("GALLADE_SHADOW_FORM", "LOW_KICK_FAST", "AURA_SPHERE"),
+            # ("GALLADE_MEGA", "LOW_KICK_FAST", "AURA_SPHERE"),
+            # ("GALLADE", "LOW_KICK_FAST", "SACRED_SWORD"),
+            # ("GALLADE_SHADOW_FORM", "LOW_KICK_FAST", "SACRED_SWORD"),
+            # ("GALLADE_MEGA", "LOW_KICK_FAST", "SACRED_SWORD"),
+            # ("LOPUNNY_MEGA", "DOUBLE_KICK_FAST", "AURA_SPHERE"),
+            # ("MIENSHAO", "LOW_KICK_FAST", "AURA_SPHERE"),
+            # ("MIENSHAO_SHADOW_FORM", "LOW_KICK_FAST", "AURA_SPHERE"),
+            # ("KELDEO", "DOUBLE_KICK_FAST", "SACRED_SWORD"),
+            # ("MELOETTA_PIROUETTE_FORM", "LOW_KICK_FAST", "FOCUS_BLAST"),
+            # ("CRABOMINABLE", "ROCK_SMASH_FAST", "DYNAMIC_PUNCH"),
+            # ("KOMMO_O", "COUNTER_FAST", "CLOSE_COMBAT"),
+            # ("KOMMO_O", "COUNTER_FAST", "AURA_SPHERE"),
+            # ("BUZZWOLE", "COUNTER_FAST", "DYNAMIC_PUNCH"),
+            # ("ZAPDOS_GALARIAN_FORM", "COUNTER_FAST", "SUPER_POWER"),
+            # ("URSHIFU_SINGLE_STRIKE_FORM", "COUNTER_FAST", "AURA_SPHERE"),
+            # ("URSHIFU_RAPID_STRIKE_FORM", "COUNTER_FAST", "AURA_SPHERE"),
+            # ("SNEASLER", "COUNTER_FAST", "CLOSE_COMBAT"),
+            # ("SNEASLER", "COUNTER_FAST", "FOCUS_BLAST"),
+            # ("DECIDUEYE_HISUIAN_FORM", "LOW_KICK_FAST", "AURA_SPHERE"),
+            # ("MACHAMP", "COUNTER_FAST", "SACRED_SWORD"),  # Signature moves
+            # ("MACHAMP", "COUNTER_FAST", "AURA_SPHERE"),
+            # ("MACHAMP_SHADOW_FORM", "COUNTER_FAST", "SACRED_SWORD"),
+            # ("MACHAMP_SHADOW_FORM", "COUNTER_FAST", "AURA_SPHERE"),
+            # ("CONKELDURR", "COUNTER_FAST", "SACRED_SWORD"),
+            # ("CONKELDURR", "COUNTER_FAST", "AURA_SPHERE"),
             # ("CONKELDURR_SHADOW_FORM", "COUNTER_FAST", "SACRED_SWORD"),
+            # ("CONKELDURR_SHADOW_FORM", "COUNTER_FAST", "AURA_SPHERE"),
+            # ("SIRFETCHD", "COUNTER_FAST", "SACRED_SWORD"),
+            # ("SIRFETCHD", "COUNTER_FAST", "AURA_SPHERE"),
+            # ("ZAPDOS_GALARIAN_FORM", "COUNTER_FAST", "SACRED_SWORD"),
+            # ("ZAPDOS_GALARIAN_FORM", "COUNTER_FAST", "AURA_SPHERE"),
+            # ("HERACROSS", "COUNTER_FAST", "SACRED_SWORD"),
+            # ("HERACROSS", "COUNTER_FAST", "AURA_SPHERE"),
+            # ("HERACROSS_MEGA", "COUNTER_FAST", "SACRED_SWORD"),
+            # ("HERACROSS_MEGA", "COUNTER_FAST", "AURA_SPHERE"),
+            # ("HARIYAMA", "COUNTER_FAST", "SACRED_SWORD"),
+            # ("HARIYAMA", "COUNTER_FAST", "AURA_SPHERE"),
+            # ("HARIYAMA_SHADOW_FORM", "COUNTER_FAST", "SACRED_SWORD"),
+            # ("HARIYAMA_SHADOW_FORM", "COUNTER_FAST", "AURA_SPHERE"),
+            # ("PANGORO", "LOW_KICK_FAST", "SACRED_SWORD"),
+            # ("PANGORO", "LOW_KICK_FAST", "AURA_SPHERE"),
+            # ("KORAIDON", "ROCK_SMASH_FAST", "SACRED_SWORD"),
+            # ("KORAIDON", "ROCK_SMASH_FAST", "AURA_SPHERE"),
 
-            # ("DARKRAI_SHADOW_FORM", "SNARL_FAST", "DARK_PULSE"),
-            # ("DARKRAI_SHADOW_FORM", "SNARL_FAST", "SHADOW_BALL"),
-            # ("DARKRAI_SHADOW_FORM", "SNARL_FAST", "FOUL_PLAY"),
-            # ("DARKRAI_SHADOW_FORM", "SNARL_FAST", "BRUTAL_SWING"),
+            # [Fighting] For boss movesets
+            # ("CONKELDURR", "COUNTER_FAST", "DYNAMIC_PUNCH"),
+            # ("LUCARIO", "COUNTER_FAST", "AURA_SPHERE"),
+            # ("HARIYAMA_SHADOW_FORM", "COUNTER_FAST", "DYNAMIC_PUNCH"),
+            # ("CONKELDURR_SHADOW_FORM", "COUNTER_FAST", "DYNAMIC_PUNCH"),
+            # ("LUCARIO_SHADOW_FORM", "COUNTER_FAST", "AURA_SPHERE"),
+            # ("TERRAKION", "DOUBLE_KICK_FAST", "SACRED_SWORD"),
 
-            # ("ZEKROM_SHADOW_FORM", "CHARGE_BEAM_FAST", "WILD_CHARGE"),
-            # ("XURKITREE", "THUNDER_SHOCK_FAST", "WILD_CHARGE"),
-            # ("MEWTWO_MEGA_Y", "PSYCHO_CUT_FAST", "THUNDERBOLT"),
+            # [Fire]
+            # ("TYPHLOSION_HISUIAN_FORM", "EMBER_FAST", "OVERHEAT"),  # (in case not added to Pokebattler yet)
+            # ("HO_OH_SHADOW_FORM", "INCINERATE_FAST", "SACRED_FIRE_PLUS"),  # Now
+            # ("HO_OH_SHADOW_FORM", "INCINERATE_FAST", "SACRED_FIRE"),
+            # ("HO_OH_SHADOW_FORM", "INCINERATE_FAST", "SACRED_FIRE", "11\\11\\11"),
+            # ("HO_OH_SHADOW_FORM", "INCINERATE_FAST", "SACRED_FIRE", "6\\6\\6"),
+            # ("INFERNAPE_SHADOW_FORM", "FIRE_SPIN_FAST", "BLAST_BURN"),
+            # ("BLACEPHALON", "INCINERATE_FAST", "MYSTICAL_FIRE"),  # Future Pokemon
+            # ("BLACEPHALON", "INCINERATE_FAST", "OVERHEAT"),
+            # ("INCINEROAR", "FIRE_FANG_FAST", "BLAST_BURN"),
+            # ("CINDERACE", "EMBER_FAST", "BLAST_BURN"),
+            # ("SKELEDIRGE", "INCINERATE_FAST", "BLAST_BURN"),
+            # ("TYPHLOSION_HISUIAN_FORM", "EMBER_FAST", "BLAST_BURN"),
+            # ("DARMANITAN_ZEN_FORM", "FIRE_FANG_FAST", "OVERHEAT"),
+            # ("DARMANITAN_GALARIAN_ZEN_FORM", "TACKLE_FAST", "OVERHEAT"),
+            # ("DARMANITAN_GALARIAN_ZEN_FORM", "ICE_FANG_FAST", "OVERHEAT"),
+            # ("VOLCANION", "INCINERATE_FAST", "OVERHEAT"),
+            # ("KYUREM_WHITE_FORM", "DRAGON_BREATH_FAST", "FUSION_FLARE"),
+            # ("KYUREM_WHITE_FORM", "STEEL_WING_FAST", "FUSION_FLARE"),
+            # ("ARMAROUGE", "INCINERATE_FAST", "FLAMETHROWER"),
+            # ("CERULEDGE", "INCINERATE_FAST", "FLAMETHROWER"),
+            # # ("SCOVILLAIN", "FIRE_FANG_FAST", "OVERHEAT"),
+            # ("CHIYU", "INCINERATE_FAST", "FLAME_CHARGE"),
+            # ("CHIYU", "INCINERATE_FAST", "FLAME_WHEEL"),
+            # ("IRONMOTH", "FIRE_SPIN_FAST", "OVERHEAT"),  # (TODO: The rest of Gen 9 has not been added)
+            # ("IRONMOTH", "EMBER_FAST", "FLAMETHROWER"),
+            # ("HEATRAN_SHADOW_FORM", "FIRE_SPIN_FAST", "MAGMA_STORM"),  # Future shadows
+            # ("EMBOAR_SHADOW_FORM", "EMBER_FAST", "BLAST_BURN"),
+            # ("FLAREON_SHADOW_FORM", "FIRE_SPIN_FAST", "OVERHEAT"),
+            # ("RESHIRAM_SHADOW_FORM", "FIRE_FANG_FAST", "FUSION_FLARE"),
+            # ("VOLCARONA_SHADOW_FORM", "FIRE_SPIN_FAST", "OVERHEAT"),
+            # ("CAMERUPT_MEGA", "INCINERATE_FAST", "OVERHEAT"),  # Future megas
+            # ("MEWTWO_MEGA_Y", "PSYCHO_CUT_FAST", "FLAMETHROWER"),
+            # ("GROUDON_PRIMAL", "MUD_SHOT_FAST", "OVERHEAT"),  # Better regular moves
+            # ("GROUDON_PRIMAL", "DRAGON_TAIL_FAST", "OVERHEAT"),
+            # ("GROUDON_PRIMAL", "INCINERATE_FAST", "FIRE_BLAST"),
+            # ("GROUDON_PRIMAL", "INCINERATE_FAST", "FIRE_PUNCH"),
+            # ("GROUDON_PRIMAL", "INCINERATE_FAST", "OVERHEAT"),
+            # ("GROUDON_PRIMAL", "FIRE_FANG_FAST", "FIRE_BLAST"),
+            # ("GROUDON_PRIMAL", "FIRE_FANG_FAST", "FIRE_PUNCH"),
+            # ("GROUDON_PRIMAL", "FIRE_FANG_FAST", "OVERHEAT"),
+            # ("DARMANITAN_GALARIAN_ZEN_FORM", "FIRE_FANG_FAST", "OVERHEAT"),
+            # ("CHANDELURE", "FIRE_SPIN_FAST", "MYSTICAL_FIRE"),
+            # ("DARMANITAN", "FIRE_FANG_FAST", "MYSTICAL_FIRE"),
+            # ("VOLCARONA", "FIRE_SPIN_FAST", "MYSTICAL_FIRE"),
+            # ("MOLTRES", "FIRE_SPIN_FAST", "MYSTICAL_FIRE"),
+            # ("MOLTRES_SHADOW_FORM", "FIRE_SPIN_FAST", "MYSTICAL_FIRE"),
+            # ("CHANDELURE", "FIRE_SPIN_FAST", "BLAST_BURN"),  # Signature moves
+            # ("CHANDELURE", "FIRE_SPIN_FAST", "V_CREATE"),
+            # ("CHANDELURE_SHADOW_FORM", "FIRE_SPIN_FAST", "BLAST_BURN"),
+            # ("CHANDELURE_SHADOW_FORM", "FIRE_SPIN_FAST", "V_CREATE"),
+            # ("BLACEPHALON", "INCINERATE_FAST", "BLAST_BURN"),
+            # ("BLACEPHALON", "INCINERATE_FAST", "V_CREATE"),
+            # ("ENTEI", "FIRE_FANG_FAST", "BLAST_BURN"),
+            # ("ENTEI", "FIRE_FANG_FAST", "V_CREATE"),
+            # ("ENTEI_SHADOW_FORM", "FIRE_FANG_FAST", "BLAST_BURN"),
+            # ("ENTEI_SHADOW_FORM", "FIRE_FANG_FAST", "V_CREATE"),
+            # ("CAMERUPT_MEGA", "INCINERATE_FAST", "BLAST_BURN"),
+            # ("CAMERUPT_MEGA", "INCINERATE_FAST", "V_CREATE"),
+            # ("VOLCARONA", "FIRE_SPIN_FAST", "BLAST_BURN"),
+            # ("VOLCARONA", "FIRE_SPIN_FAST", "V_CREATE"),
+            # ("VOLCARONA_SHADOW_FORM", "FIRE_SPIN_FAST", "BLAST_BURN"),
+            # ("VOLCARONA_SHADOW_FORM", "FIRE_SPIN_FAST", "V_CREATE"),
+            # ("IRONMOTH", "FIRE_SPIN_FAST", "BLAST_BURN"),
+            # ("IRONMOTH", "FIRE_SPIN_FAST", "V_CREATE"),
 
-            ("RAYQUAZA_SHADOW_FORM", "DRAGON_TAIL_FAST", "OUTRAGE"),
-            ("HAXORUS_SHADOW_FORM", "DRAGON_TAIL_FAST", "OUTRAGE"),
-            ("PALKIA_SHADOW_FORM", "DRAGON_TAIL_FAST", "DRACO_METEOR"),
-            ("DIALGA_SHADOW_FORM", "DRAGON_BREATH_FAST", "DRACO_METEOR"),
-            ("ZEKROM_SHADOW_FORM", "DRAGON_BREATH_FAST", "OUTRAGE"),
-            ("KYUREM_BLACK_FORM", "DRAGON_TAIL_FAST", "OUTRAGE"),
-            ("PALKIA_SHADOW_FORM", "DRAGON_TAIL_FAST", "OUTRAGE"),
-            ("DIALGA_SHADOW_FORM", "DRAGON_BREATH_FAST", "OUTRAGE"),
-            ("GARCHOMP_SHADOW_FORM", "DRAGON_TAIL_FAST", "OUTRAGE"),
-            ("NECROZMA_ULTRA_FORM", "PSYCHO_CUT_FAST", "OUTRAGE"),
+            # [Fire] For boss movesets
+            # ("CHANDELURE_SHADOW_FORM", "FIRE_SPIN_FAST", "OVERHEAT"),
+            # ("HEATRAN_SHADOW_FORM", "FIRE_SPIN_FAST", "MAGMA_STORM"),
+            # ("VOLCARONA_SHADOW_FORM", "FIRE_SPIN_FAST", "OVERHEAT"),
+            # ("RESHIRAM", "FIRE_FANG_FAST", "FUSION_FLARE"),
+            # ("RESHIRAM", "FIRE_FANG_FAST", "OVERHEAT"),
+            # ("MOLTRES_SHADOW_FORM", "FIRE_SPIN_FAST", "OVERHEAT"),
+            # ("MOLTRES_SHADOW_FORM", "WING_ATTACK_FAST", "OVERHEAT"),
+            # ("ENTEI_SHADOW_FORM", "FIRE_FANG_FAST", "OVERHEAT"),
+            # ("HO_OH_SHADOW_FORM", "INCINERATE_FAST", "SACRED_FIRE_PLUS"),
+            # ("BLAZIKEN_SHADOW_FORM", "FIRE_SPIN_FAST", "BLAST_BURN"),
+            # ("BLAZIKEN_SHADOW_FORM", "COUNTER_FAST", "BLAST_BURN"),
+            # ("BLAZIKEN_SHADOW_FORM", "FIRE_SPIN_FAST", "BLAZE_KICK"),
+            # ("BLAZIKEN_SHADOW_FORM", "COUNTER_FAST", "BLAZE_KICK"),
 
+            # ("CHANDELURE", "FIRE_SPIN_FAST", "OVERHEAT"),
+            # ("VOLCARONA", "FIRE_SPIN_FAST", "OVERHEAT"),
+            # # Darmanitan
+            # ("MOLTRES", "FIRE_SPIN_FAST", "OVERHEAT"),
+            # ("MOLTRES", "WING_ATTACK_FAST", "OVERHEAT"),
+            # ("ENTEI", "FIRE_FANG_FAST", "OVERHEAT"),
+            # ("BLAZIKEN", "FIRE_SPIN_FAST", "BLAST_BURN"),
+            # ("BLAZIKEN", "COUNTER_FAST", "BLAST_BURN"),
+            # ("BLAZIKEN", "FIRE_SPIN_FAST", "BLAZE_KICK"),
+            # ("BLAZIKEN", "COUNTER_FAST", "BLAZE_KICK"),
+            # ("TYPHLOSION_HISUIAN_FORM", "EMBER_FAST", "BLAST_BURN"),
+            # ("DELPHOX", "FIRE_SPIN_FAST", "BLAST_BURN"),
+            # ("EMBOAR", "EMBER_FAST", "BLAST_BURN"),
+            # ("CHARIZARD", "FIRE_SPIN_FAST", "BLAST_BURN"),
+
+            # [Flying]
+            # ("ENAMORUS_INCARNATE_FORM", "FAIRY_WIND_FAST", "FLY"),  # Now
+            # ("ENAMORUS_INCARNATE_FORM", "ASTONISH_FAST", "FLY"),
+            # ("ENAMORUS_INCARNATE_FORM", "ZEN_HEADBUTT_FAST", "FLY"),
+            # ("FLAMIGO", "WING_ATTACK_FAST", "BRAVE_BIRD"),  # Future Pokemon
+            # ("ENAMORUS_THERIAN_FORM", "FAIRY_WIND_FAST", "FLY"),
+            # ("ENAMORUS_THERIAN_FORM", "ASTONISH_FAST", "FLY"),
+            # ("ENAMORUS_THERIAN_FORM", "ZEN_HEADBUTT_FAST", "FLY"),
+            # ("YANMEGA_SHADOW_FORM", "WING_ATTACK_FAST", "AERIAL_ACE"),  # Future shadows
+            # ("BRAVIARY_SHADOW_FORM", "AIR_SLASH_FAST", "FLY"),
+            # ("TOGEKISS_SHADOW_FORM", "AIR_SLASH_FAST", "AERIAL_ACE"),
+            # # Future megas
+            # ("SALAMENCE", "AIR_SLASH_FAST", "FLY"),  # Better moves
+            # ("SALAMENCE", "AIR_SLASH_FAST", "HURRICANE"),
+            # ("SALAMENCE", "AIR_SLASH_FAST", "AERIAL_ACE"),
+            # ("SALAMENCE_SHADOW_FORM", "AIR_SLASH_FAST", "FLY"),
+            # ("SALAMENCE_SHADOW_FORM", "AIR_SLASH_FAST", "HURRICANE"),
+            # ("SALAMENCE_SHADOW_FORM", "AIR_SLASH_FAST", "AERIAL_ACE"),
+            # ("SALAMENCE_MEGA", "AIR_SLASH_FAST", "FLY"),
+            # ("SALAMENCE_MEGA", "AIR_SLASH_FAST", "HURRICANE"),
+            # ("SALAMENCE_MEGA", "AIR_SLASH_FAST", "AERIAL_ACE"),
+            # ("AERODACTYL", "WING_ATTACK_FAST", "FLY"),
+            # ("AERODACTYL", "WING_ATTACK_FAST", "SKY_ATTACK"),
+            # ("AERODACTYL_SHADOW_FORM", "WING_ATTACK_FAST", "FLY"),
+            # ("AERODACTYL_SHADOW_FORM", "WING_ATTACK_FAST", "SKY_ATTACK"),
+            # ("AERODACTYL_MEGA", "WING_ATTACK_FAST", "FLY"),
+            # ("AERODACTYL_MEGA", "WING_ATTACK_FAST", "SKY_ATTACK"),
+            # ("CHARIZARD", "WING_ATTACK_FAST", "FLY"),
+            # ("CHARIZARD", "WING_ATTACK_FAST", "ACROBATICS"),
+            # ("CHARIZARD", "WING_ATTACK_FAST", "HURRICANE"),
+            # ("CHARIZARD", "AIR_SLASH_FAST", "FLY"),
+            # ("CHARIZARD", "AIR_SLASH_FAST", "ACROBATICS"),
+            # ("CHARIZARD", "AIR_SLASH_FAST", "HURRICANE"),
+            # ("CHARIZARD_SHADOW_FORM", "WING_ATTACK_FAST", "FLY"),
+            # ("CHARIZARD_SHADOW_FORM", "WING_ATTACK_FAST", "ACROBATICS"),
+            # ("CHARIZARD_SHADOW_FORM", "WING_ATTACK_FAST", "HURRICANE"),
+            # ("CHARIZARD_SHADOW_FORM", "AIR_SLASH_FAST", "FLY"),
+            # ("CHARIZARD_SHADOW_FORM", "AIR_SLASH_FAST", "ACROBATICS"),
+            # ("CHARIZARD_SHADOW_FORM", "AIR_SLASH_FAST", "HURRICANE"),
+            # ("CHARIZARD_MEGA_Y", "WING_ATTACK_FAST", "FLY"),
+            # ("CHARIZARD_MEGA_Y", "WING_ATTACK_FAST", "ACROBATICS"),
+            # ("CHARIZARD_MEGA_Y", "WING_ATTACK_FAST", "HURRICANE"),
+            # ("CHARIZARD_MEGA_Y", "AIR_SLASH_FAST", "FLY"),
+            # ("CHARIZARD_MEGA_Y", "AIR_SLASH_FAST", "ACROBATICS"),
+            # ("CHARIZARD_MEGA_Y", "AIR_SLASH_FAST", "HURRICANE"),
+            # ("ARCHEOPS", "WING_ATTACK_FAST", "SKY_ATTACK"),
+            # ("ARCHEOPS", "WING_ATTACK_FAST", "ACROBATICS"),
+            # ("ARCHEOPS_SHADOW_FORM", "WING_ATTACK_FAST", "SKY_ATTACK"),
+            # ("ARCHEOPS_SHADOW_FORM", "WING_ATTACK_FAST", "ACROBATICS"),
+            # ("PIDGEOT_MEGA", "GUST_FAST", "FLY"),
+            # # Skipped Tornadus-I here to put it under signature moves
+            # ("DRAGONITE", "WING_ATTACK_FAST", "FLY"),
+            # # ("DRAGONITE", "AIR_SLASH_FAST", "FLY"),
+            # ("DRAGONITE_SHADOW_FORM", "WING_ATTACK_FAST", "FLY"),
+            # # ("DRAGONITE_SHADOW_FORM", "AIR_SLASH_FAST", "FLY"),
+            # ("SHAYMIN_SKY_FORM", "AIR_SLASH_FAST", "AERIAL_ACE"),
+            # ("ZAPDOS", "PECK_FAST", "DRILL_PECK"),
+            # ("ZAPDOS", "PECK_FAST", "FLY"),
+            # ("ZAPDOS", "PECK_FAST", "SKY_ATTACK"),
+            # ("ZAPDOS_SHADOW_FORM", "PECK_FAST", "DRILL_PECK"),
+            # ("ZAPDOS_SHADOW_FORM", "PECK_FAST", "FLY"),
+            # ("ZAPDOS_SHADOW_FORM", "PECK_FAST", "SKY_ATTACK"),
+            # ("ZAPDOS_GALARIAN_FORM", "PECK_FAST", "BRAVE_BIRD"),
+            # ("ZAPDOS_GALARIAN_FORM", "PECK_FAST", "DRILL_PECK"),
+            # ("ZAPDOS_GALARIAN_FORM", "PECK_FAST", "FLY"),
+            # ("MOLTRES", "WING_ATTACK_FAST", "FLY"),
+            # # ("MOLTRES", "GUST_FAST", "SKY_ATTACK"),
+            # # ("MOLTRES", "GUST_FAST", "FLY"),
+            # ("MOLTRES_SHADOW_FORM", "WING_ATTACK_FAST", "FLY"),
+            # # ("MOLTRES_SHADOW_FORM", "GUST_FAST", "SKY_ATTACK"),
+            # # ("MOLTRES_SHADOW_FORM", "GUST_FAST", "FLY"),
+            # ("ARTICUNO_GALARIAN_FORM", "GUST_FAST", "BRAVE_BIRD"),
+            # ("ARTICUNO_GALARIAN_FORM", "GUST_FAST", "FLY"),
+            # # ("ARTICUNO_GALARIAN_FORM", "AIR_SLASH_FAST", "BRAVE_BIRD"),
+            # # ("ARTICUNO_GALARIAN_FORM", "AIR_SLASH_FAST", "FLY"),
+            # ("HONCHKROW", "PECK_FAST", "FLY"),
+            # # ("HONCHKROW", "WING_ATTACK_FAST", "SKY_ATTACK"),
+            # # ("HONCHKROW", "WING_ATTACK_FAST", "FLY"),
+            # ("HONCHKROW", "GUST_FAST", "SKY_ATTACK"),
+            # ("HONCHKROW", "GUST_FAST", "FLY"),
+            # ("HONCHKROW_SHADOW_FORM", "PECK_FAST", "FLY"),
+            # # ("HONCHKROW_SHADOW_FORM", "WING_ATTACK_FAST", "SKY_ATTACK"),
+            # # ("HONCHKROW_SHADOW_FORM", "WING_ATTACK_FAST", "FLY"),
+            # ("HONCHKROW_SHADOW_FORM", "GUST_FAST", "SKY_ATTACK"),
+            # ("HONCHKROW_SHADOW_FORM", "GUST_FAST", "FLY"),
+            # ("HO_OH", "GUST_FAST", "BRAVE_BIRD"),
+            # ("HO_OH", "GUST_FAST", "SKY_ATTACK"),
+            # ("HO_OH", "GUST_FAST", "FLY"),
+            # # ("HO_OH", "AIR_SLASH_FAST", "BRAVE_BIRD"),
+            # # ("HO_OH", "AIR_SLASH_FAST", "SKY_ATTACK"),
+            # # ("HO_OH", "AIR_SLASH_FAST", "FLY"),
+            # ("HO_OH_SHADOW_FORM", "GUST_FAST", "BRAVE_BIRD"),
+            # ("HO_OH_SHADOW_FORM", "GUST_FAST", "SKY_ATTACK"),
+            # ("HO_OH_SHADOW_FORM", "GUST_FAST", "FLY"),
+            # # ("HO_OH_SHADOW_FORM", "AIR_SLASH_FAST", "BRAVE_BIRD"),
+            # # ("HO_OH_SHADOW_FORM", "AIR_SLASH_FAST", "SKY_ATTACK"),
+            # # ("HO_OH_SHADOW_FORM", "AIR_SLASH_FAST", "FLY"),
+            # ("UNFEZANT", "AIR_SLASH_FAST", "FLY"),
+            # # ("UNFEZANT", "GUST_FAST", "SKY_ATTACK"),
+            # # ("UNFEZANT", "GUST_FAST", "FLY"),
+            # ("UNFEZANT_SHADOW_FORM", "AIR_SLASH_FAST", "FLY"),
+            # # ("UNFEZANT_SHADOW_FORM", "GUST_FAST", "SKY_ATTACK"),
+            # # ("UNFEZANT_SHADOW_FORM", "GUST_FAST", "FLY"),
+            # ("TOGEKISS", "AIR_SLASH_FAST", "SKY_ATTACK"),
+            # ("TOGEKISS", "AIR_SLASH_FAST", "FLY"),
+            # ("TOGEKISS_SHADOW_FORM", "AIR_SLASH_FAST", "SKY_ATTACK"),
+            # ("TOGEKISS_SHADOW_FORM", "AIR_SLASH_FAST", "FLY"),
+            # ("TOUCANNON", "PECK_FAST", "FLY"),
+            # ("TOUCANNON", "PECK_FAST", "BRAVE_BIRD"),
+            # ("TOUCANNON", "PECK_FAST", "SKY_ATTACK"),
+            # ("LUGIA", "GUST_FAST", "AEROBLAST"),
+            # ("LUGIA", "GUST_FAST", "AEROBLAST_PLUS_PLUS"),
+            # ("LUGIA_SHADOW_FORM", "GUST_FAST", "AEROBLAST"),
+            # ("LUGIA_SHADOW_FORM", "GUST_FAST", "AEROBLAST_PLUS"),
+
+            # [Flying] Boss movesets
+            # ("RAYQUAZA", "AIR_SLASH_FAST", "DRAGON_ASCENT"),
+            # ("RAYQUAZA", "DRAGON_TAIL_FAST", "DRAGON_ASCENT"),
+            # ("RAYQUAZA", "AIR_SLASH_FAST", "AERIAL_ACE"),
+            # ("RAYQUAZA", "DRAGON_TAIL_FAST", "AERIAL_ACE"),
+            # ("MOLTRES_SHADOW_FORM", "WING_ATTACK_FAST", "SKY_ATTACK"),
+            # ("MOLTRES_SHADOW_FORM", "FIRE_SPIN_FAST", "SKY_ATTACK"),
+            # ("YVELTAL", "GUST_FAST", "OBLIVION_WING"),
+            # ("YVELTAL", "GUST_FAST", "HURRICANE"),
+            # ("HONCHKROW_SHADOW_FORM", "PECK_FAST", "SKY_ATTACK"),
+            # ("HONCHKROW_SHADOW_FORM", "SNARL_FAST", "SKY_ATTACK"),
+            # ("HONCHKROW", "PECK_FAST", "SKY_ATTACK"),
+            # ("HONCHKROW", "SNARL_FAST", "SKY_ATTACK"),
+            # ("STARAPTOR_SHADOW_FORM", "GUST_FAST", "FLY"),
+            # ("STARAPTOR_SHADOW_FORM", "WING_ATTACK_FAST", "FLY"),
+            # ("MOLTRES", "WING_ATTACK_FAST", "SKY_ATTACK"),
+            # ("MOLTRES", "FIRE_SPIN_FAST", "SKY_ATTACK"),
+            # ("ENAMORUS_INCARNATE_FORM", "FAIRY_WIND_FAST", "FLY"),
+            # ("ENAMORUS_INCARNATE_FORM", "ASTONISH_FAST", "FLY"),
+            # ("ENAMORUS_INCARNATE_FORM", "ZEN_HEADBUTT_FAST", "FLY"),
+
+            # ("BRAVIARY", "AIR_SLASH_FAST", "FLY"),
+            # ("STARAPTOR", "GUST_FAST", "FLY"),
+            # ("STARAPTOR", "WING_ATTACK_FAST", "FLY"),
+            # ("TORNADUS", "AIR_SLASH_FAST", "BLEAKWIND_STORM"),
+            # ("TORNADUS_THERIAN_FORM", "GUST_FAST", "BLEAKWIND_STORM"),
+
+            # [Grass]
+            # ("DECIDUEYE_HISUIAN_FORM", "MAGICAL_LEAF_FAST", "TRAILBLAZE"),  # Now
+            # ("DECIDUEYE_HISUIAN_FORM", "MAGICAL_LEAF_FAST", "ENERGY_BALL"),
+            # ("SHAYMIN_SKY_FORM", "MAGICAL_LEAF_FAST", "GRASS_KNOT"),  # Missing data from Pokebattler
+            # ("SHAYMIN_LAND_FORM", "MAGICAL_LEAF_FAST", "GRASS_KNOT"),
+            # ("RILLABOOM", "RAZOR_LEAF_FAST", "GRASS_KNOT"),  # Future Pokemon
+            # ("RILLABOOM", "RAZOR_LEAF_FAST", "FRENZY_PLANT"),
+            # ("MEOWSCARADA", "LEAFAGE_FAST", "FRENZY_PLANT"),
+            # ("DECIDUEYE_HISUIAN_FORM", "MAGICAL_LEAF_FAST", "FRENZY_PLANT"),
+            # ("BRAMBLEGHAST", "BULLET_SEED_FAST", "POWER_WHIP"),
+            # ("SCOVILLAIN", "LEAFAGE_FAST", "GRASS_KNOT"),
+            # ("ROSERADE_SHADOW_FORM", "MAGICAL_LEAF_FAST", "GRASS_KNOT"),  # Future shadows
+            # ("ROSERADE_SHADOW_FORM", "POISON_JAB_FAST", "GRASS_KNOT"),
+            # # ("SCEPTILE", "MAGICAL_LEAF_FAST", "FRENZY_PLANT"),  # Better regular moves (removed excess Magical Leaf users)
+            # # ("SCEPTILE_SHADOW_FORM", "MAGICAL_LEAF_FAST", "FRENZY_PLANT"),
+            # # ("SCEPTILE_MEGA", "MAGICAL_LEAF_FAST", "FRENZY_PLANT"),
+            # # ("ABOMASNOW_MEGA", "MAGICAL_LEAF_FAST", "GRASS_KNOT"),
+            # # ("VENUSAUR", "MAGICAL_LEAF_FAST", "FRENZY_PLANT"),
+            # # ("VENUSAUR_SHADOW_FORM", "MAGICAL_LEAF_FAST", "FRENZY_PLANT"),
+            # # ("VENUSAUR_MEGA", "MAGICAL_LEAF_FAST", "FRENZY_PLANT"),
+            # # ("ZARUDE", "MAGICAL_LEAF_FAST", "POWER_WHIP"),
+            # ("MEWTWO_MEGA_Y", "PSYCHO_CUT_FAST", "GRASS_KNOT"),
+            # ("TSAREENA", "MAGICAL_LEAF_FAST", "FRENZY_PLANT"),  # Signature moves
+            # ("ZARUDE", "VINE_WHIP_FAST", "FRENZY_PLANT"),
+
+            # [Grass] For boss movesets
+            # ("SHAYMIN_SKY_FORM", "MAGICAL_LEAF_FAST", "GRASS_KNOT"),
+            # ("TANGROWTH_SHADOW_FORM", "VINE_WHIP_FAST", "POWER_WHIP"),
+            # ("ZARUDE", "VINE_WHIP_FAST", "POWER_WHIP"),
+            # ("VENUSAUR_SHADOW_FORM", "VINE_WHIP_FAST", "FRENZY_PLANT"),
+            # ("SCEPTILE_SHADOW_FORM", "BULLET_SEED_FAST", "FRENZY_PLANT"),
+            # ("TORTERRA_SHADOW_FORM", "RAZOR_LEAF_FAST", "FRENZY_PLANT"),
+            # ("KARTANA", "RAZOR_LEAF_FAST", "LEAF_BLADE"),
+            #
+            # ("ROSERADE", "MAGICAL_LEAF_FAST", "GRASS_KNOT"),
+            # ("DECIDUEYE", "MAGICAL_LEAF_FAST", "FRENZY_PLANT"),
+            # ("DECIDUEYE_HISUIAN_FORM", "MAGICAL_LEAF_FAST", "FRENZY_PLANT"),
+            # ("TSAREENA", "MAGICAL_LEAF_FAST", "GRASS_KNOT"),
+            # ("TAPU_BULU", "BULLET_SEED_FAST", "GRASS_KNOT"),
+            # ("CHESNAUGHT", "VINE_WHIP_FAST", "FRENZY_PLANT"),
+            # ("TANGROWTH", "VINE_WHIP_FAST", "POWER_WHIP"),
+            # ("SCEPTILE", "BULLET_SEED_FAST", "FRENZY_PLANT"),
+            # ("MEOWSCARADA", "LEAFAGE_FAST", "GRASS_KNOT"),
+
+            # [Ground]
+            # ("LANDORUS_THERIAN_FORM", "MUD_SHOT_FAST", "SANDSEAR_STORM"),  # (not yet added to Pokebattler)
+            # ("LANDORUS_INCARNATE_FORM", "MUD_SHOT_FAST", "SANDSEAR_STORM"),
+            # ("GROUDON_SHADOW_FORM", "MUD_SHOT_FAST", "EARTHQUAKE"),  # Now
+            # ("GROUDON_SHADOW_FORM", "MUD_SHOT_FAST", "PRECIPICE_BLADES"),
+            # ("GROUDON_SHADOW_FORM", "MUD_SHOT_FAST", "EARTHQUAKE", "11\\11\\11"),
+            # ("GROUDON_SHADOW_FORM", "MUD_SHOT_FAST", "PRECIPICE_BLADES", "11\\11\\11"),
+            # ("GROUDON_SHADOW_FORM", "MUD_SHOT_FAST", "EARTHQUAKE", "6\\6\\6"),
+            # ("GROUDON_SHADOW_FORM", "MUD_SHOT_FAST", "PRECIPICE_BLADES", "6\\6\\6"),
+            # ("MUDSDALE", "MUD_SLAP_FAST", "EARTHQUAKE"),  # Future Pokemon
+            # ("KROOKODILE_SHADOW_FORM", "MUD_SLAP_FAST", "EARTHQUAKE"),  # Future shadows
+            # ("CAMERUPT_MEGA", "INCINERATE_FAST", "EARTH_POWER"),  # Future megas
+            # ("CAMERUPT_MEGA", "ROCK_SMASH_FAST", "EARTH_POWER"),
+            # ("CAMERUPT_MEGA", "EMBER_FAST", "EARTH_POWER"),
+            # ("RHYPERIOR", "MUD_SLAP_FAST", "EARTH_POWER"),  # Better moves
+            # ("RHYPERIOR", "MUD_SLAP_FAST", "HIGH_HORSEPOWER"),
+            # ("RHYPERIOR", "MUD_SLAP_FAST", "SCORCHING_SANDS"),
+            # ("RHYPERIOR_SHADOW_FORM", "MUD_SLAP_FAST", "EARTH_POWER"),
+            # ("RHYPERIOR_SHADOW_FORM", "MUD_SLAP_FAST", "HIGH_HORSEPOWER"),
+            # ("RHYPERIOR_SHADOW_FORM", "MUD_SLAP_FAST", "SCORCHING_SANDS"),
+            # # ("MAMOSWINE", "MUD_SLAP_FAST", "EARTH_POWER"),
+            # # ("MAMOSWINE_SHADOW_FORM", "MUD_SLAP_FAST", "EARTH_POWER"),
+            # # ("EXCADRILL", "MUD_SLAP_FAST", "EARTH_POWER"),  # Consider taking out next time
+            # # ("EXCADRILL", "MUD_SHOT_FAST", "EARTH_POWER"),
+            # # ("EXCADRILL", "METAL_CLAW_FAST", "EARTH_POWER"),
+            # # ("EXCADRILL", "MUD_SLAP_FAST", "HIGH_HORSEPOWER"),
+            # # ("EXCADRILL", "MUD_SHOT_FAST", "HIGH_HORSEPOWER"),
+            # # ("EXCADRILL", "METAL_CLAW_FAST", "HIGH_HORSEPOWER"),
+            # # ("EXCADRILL_SHADOW_FORM", "MUD_SLAP_FAST", "EARTH_POWER"),
+            # # ("EXCADRILL_SHADOW_FORM", "MUD_SHOT_FAST", "EARTH_POWER"),
+            # # ("EXCADRILL_SHADOW_FORM", "METAL_CLAW_FAST", "EARTH_POWER"),
+            # # ("EXCADRILL_SHADOW_FORM", "MUD_SLAP_FAST", "HIGH_HORSEPOWER"),
+            # # ("EXCADRILL_SHADOW_FORM", "MUD_SHOT_FAST", "HIGH_HORSEPOWER"),
+            # # ("EXCADRILL_SHADOW_FORM", "METAL_CLAW_FAST", "HIGH_HORSEPOWER"),
+            # ("KROOKODILE", "MUD_SLAP_FAST", "EARTH_POWER"),
+            # ("KROOKODILE", "MUD_SLAP_FAST", "HIGH_HORSEPOWER"),
+            # ("KROOKODILE", "MUD_SLAP_FAST", "SCORCHING_SANDS"),
+            # ("KROOKODILE_SHADOW_FORM", "MUD_SLAP_FAST", "EARTH_POWER"),
+            # ("KROOKODILE_SHADOW_FORM", "MUD_SLAP_FAST", "HIGH_HORSEPOWER"),
+            # ("KROOKODILE_SHADOW_FORM", "MUD_SLAP_FAST", "SCORCHING_SANDS"),
+            # ("MUDSDALE", "MUD_SLAP_FAST", "EARTH_POWER"),
+            # ("MUDSDALE", "MUD_SLAP_FAST", "HIGH_HORSEPOWER"),
+            # ("STEELIX_MEGA", "MUD_SLAP_FAST", "EARTHQUAKE"),
+            # ("STEELIX_MEGA", "MUD_SLAP_FAST", "EARTH_POWER"),
+            # ("STEELIX_MEGA", "MUD_SLAP_FAST", "HIGH_HORSEPOWER"),
+            # ("STEELIX_MEGA", "MUD_SLAP_FAST", "SCORCHING_SANDS"),
+            # ("GARCHOMP", "MUD_SHOT_FAST", "SCORCHING_SANDS"),
+            # ("GARCHOMP_SHADOW_FORM", "MUD_SHOT_FAST", "SCORCHING_SANDS"),
+            # ("GARCHOMP_MEGA", "MUD_SHOT_FAST", "SCORCHING_SANDS"),
+            # ("CAMERUPT_MEGA", "MUD_SLAP_FAST", "EARTH_POWER"),
+            # # Signature moves (ignored as there's no more)
+
+            # [Ground] Boss Movesets
+            # ("MAMOSWINE", "MUD_SLAP_FAST", "HIGH_HORSEPOWER"),
+            # ("GARCHOMP", "MUD_SHOT_FAST", "EARTH_POWER"),
+            # ("GARCHOMP", "DRAGON_TAIL_FAST", "EARTH_POWER"),
+            # ("EXCADRILL", "MUD_SLAP_FAST", "SCORCHING_SANDS"),
+            # ("EXCADRILL", "MUD_SHOT_FAST", "SCORCHING_SANDS"),
+            # ("EXCADRILL", "METAL_CLAW_FAST", "SCORCHING_SANDS"),
+            # ("EXCADRILL", "MUD_SLAP_FAST", "DRILL_RUN"),
+            # ("EXCADRILL", "MUD_SHOT_FAST", "DRILL_RUN"),
+            # ("EXCADRILL", "METAL_CLAW_FAST", "DRILL_RUN"),
+            # ("RHYPERIOR", "MUD_SLAP_FAST", "EARTHQUAKE"),
+            # ("RHYPERIOR", "SMACK_DOWN_FAST", "EARTHQUAKE"),
+
+            # ("MAMOSWINE_SHADOW_FORM", "MUD_SLAP_FAST", "HIGH_HORSEPOWER"),
+            # ("GARCHOMP_SHADOW_FORM", "MUD_SHOT_FAST", "EARTH_POWER"),
+            # ("GARCHOMP_SHADOW_FORM", "DRAGON_TAIL_FAST", "EARTH_POWER"),
+            # ("GARCHOMP_SHADOW_FORM", "MUD_SHOT_FAST", "EARTHQUAKE"),
+            # ("GARCHOMP_SHADOW_FORM", "DRAGON_TAIL_FAST", "EARTHQUAKE"),
+            # ("EXCADRILL_SHADOW_FORM", "MUD_SLAP_FAST", "SCORCHING_SANDS"),
+            # ("EXCADRILL_SHADOW_FORM", "MUD_SHOT_FAST", "SCORCHING_SANDS"),
+            # ("EXCADRILL_SHADOW_FORM", "METAL_CLAW_FAST", "SCORCHING_SANDS"),
+            # ("EXCADRILL_SHADOW_FORM", "MUD_SLAP_FAST", "DRILL_RUN"),
+            # ("EXCADRILL_SHADOW_FORM", "MUD_SHOT_FAST", "DRILL_RUN"),
+            # ("EXCADRILL_SHADOW_FORM", "METAL_CLAW_FAST", "DRILL_RUN"),
+            # ("LANDORUS_THERIAN_FORM", "MUD_SHOT_FAST", "SANDSEAR_STORM"),
+            # ("RHYPERIOR_SHADOW_FORM", "MUD_SLAP_FAST", "EARTHQUAKE"),
+            # ("RHYPERIOR_SHADOW_FORM", "SMACK_DOWN_FAST", "EARTHQUAKE"),
+            # ("GROUDON", "MUD_SHOT_FAST", "PRECIPICE_BLADES"),
+
+            # [Ice]
+            # ("BAXCALIBUR", "ICE_FANG_FAST", "AVALANCHE"),  # Now
+            # ("KYUREM_BLACK_FORM", "DRAGON_TAIL_FAST", "BLIZZARD"),  # Future Pokemon
+            # ("KYUREM_BLACK_FORM", "SHADOW_CLAW_FAST", "BLIZZARD"),
+            # ("KYUREM_WHITE_FORM", "DRAGON_BREATH_FAST", "BLIZZARD"),
+            # ("KYUREM_WHITE_FORM", "STEEL_WING_FAST", "BLIZZARD"),
+            # ("DARMANITAN_GALARIAN_ZEN_FORM", "ICE_FANG_FAST", "AVALANCHE"),
+            # ("FROSMOTH", "POWDER_SNOW_FAST", "ICE_BEAM"),
+            # ("CALYREX_ICE_RIDER_FORM", "CONFUSION_FAST", "AVALANCHE"),
+            # ("CHIENPAO", "POWDER_SNOW_FAST", "AVALANCHE"),
+            # ("GLACEON_SHADOW_FORM", "FROST_BREATH_FAST", "AVALANCHE"),  # Future shadows
+            # ("MEWTWO_MEGA_Y", "PSYCHO_CUT_FAST", "ICE_BEAM"),  # Future megas
+            # ("KYUREM", "ICE_SHARD_FAST", "GLACIATE"),  # Better regular moves
+            # ("KYUREM_BLACK_FORM", "DRAGON_TAIL_FAST", "ICE_BEAM"),
+            # ("KYUREM_BLACK_FORM", "SHADOW_CLAW_FAST", "ICE_BEAM"),
+            # ("KYUREM_BLACK_FORM", "ICE_SHARD_FAST", "BLIZZARD"),
+            # ("KYUREM_BLACK_FORM", "ICE_SHARD_FAST", "ICE_BEAM"),
+            # ("ABOMASNOW_MEGA", "POWDER_SNOW_FAST", "AVALANCHE"),
+            # ("KYUREM_BLACK_FORM", "DRAGON_TAIL_FAST", "AVALANCHE"),  # Signature moves
+            # ("KYUREM_BLACK_FORM", "SHADOW_CLAW_FAST", "AVALANCHE"),
+            # ("KYUREM_BLACK_FORM", "ICE_SHARD_FAST", "AVALANCHE"),
+            # ("KYUREM_BLACK_FORM", "DRAGON_TAIL_FAST", "GLACIATE"),
+            # ("KYUREM_BLACK_FORM", "SHADOW_CLAW_FAST", "GLACIATE"),
+            # ("KYUREM_BLACK_FORM", "ICE_SHARD_FAST", "GLACIATE"),
+            # ("AVALUGG_HISUIAN_FORM", "POWDER_SNOW_FAST", "AVALANCHE"),
+            # ("AVALUGG_HISUIAN_FORM", "POWDER_SNOW_FAST", "GLACIATE"),
+            # ("CRABOMINABLE", "FROST_BREATH_FAST", "AVALANCHE"),
+            # ("CRABOMINABLE", "FROST_BREATH_FAST", "GLACIATE"),
+            # ("CALYREX_ICE_RIDER_FORM", "CONFUSION_FAST", "GLACIATE"),
+
+            # [Ice] Boss movesets
+            # ("MAMOSWINE", "POWDER_SNOW_FAST", "AVALANCHE"),
+            # ("MAMOSWINE_SHADOW_FORM", "POWDER_SNOW_FAST", "AVALANCHE"),
+            # ("DARMANITAN_GALARIAN_STANDARD_FORM", "ICE_FANG_FAST", "AVALANCHE"),
+            # ("WEAVILE", "ICE_SHARD_FAST", "AVALANCHE"),
+            # ("WEAVILE", "SNARL_FAST", "AVALANCHE"),
+            # ("WEAVILE_SHADOW_FORM", "ICE_SHARD_FAST", "AVALANCHE"),
+            # ("WEAVILE_SHADOW_FORM", "SNARL_FAST", "AVALANCHE"),
+            # ("MEWTWO", "PSYCHO_CUT_FAST", "ICE_BEAM"),
+            # ("MEWTWO_SHADOW_FORM", "PSYCHO_CUT_FAST", "ICE_BEAM"),
+            # ("GLACEON", "FROST_BREATH_FAST", "AVALANCHE"),
+            # ("KYUREM", "DRAGON_BREATH_FAST", "GLACIATE"),
+            # ("KYUREM", "STEEL_WING_FAST", "GLACIATE"),
+
+            # [Ice Dragon] Dragons for boss movesets
+            # ("SALAMENCE_SHADOW_FORM", "DRAGON_TAIL_FAST", "OUTRAGE"),  # Manually "fill blanks"
+            # ("SALAMENCE_SHADOW_FORM", "DRAGON_TAIL_FAST", "DRACO_METEOR"),
+            # ("DRAGONITE_SHADOW_FORM", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # ("DRAGONITE_SHADOW_FORM", "DRAGON_TAIL_FAST", "DRACO_METEOR"),
+            # ("DRAGONITE_SHADOW_FORM", "DRAGON_TAIL_FAST", "DRAGON_CLAW"),
+            # ("DRAGONITE_SHADOW_FORM", "DRAGON_BREATH_FAST", "OUTRAGE"),
+            # ("DRAGONITE_SHADOW_FORM", "DRAGON_BREATH_FAST", "DRACO_METEOR"),
+            # ("DRAGONITE_SHADOW_FORM", "DRAGON_BREATH_FAST", "DRAGON_CLAW"),
+            # ("RAYQUAZA", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # ("RAYQUAZA", "DRAGON_TAIL_FAST", "BREAKING_SWIPE"),
+            # ("SALAMENCE", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # ("SALAMENCE", "DRAGON_TAIL_FAST", "DRACO_METEOR"),
+            # ("GARCHOMP", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # ("PALKIA", "DRAGON_TAIL_FAST", "DRACO_METEOR"),
+            # ("DIALGA", "DRAGON_BREATH_FAST", "DRACO_METEOR"),
+            # ("PALKIA", "DRAGON_TAIL_FAST", "SPACIAL_REND"),
+            # ("DIALGA", "DRAGON_BREATH_FAST", "ROAR_OF_TIME"),
+            # ("PALKIA_ORIGIN_FORM", "DRAGON_TAIL_FAST", "SPACIAL_REND"),
+            # ("DIALGA_ORIGIN_FORM", "DRAGON_BREATH_FAST", "ROAR_OF_TIME"),
+            # ("ZEKROM", "DRAGON_BREATH_FAST", "OUTRAGE"),
+            # ("DRAGONITE", "DRAGON_TAIL_FAST", "OUTRAGE"),
+            # ("DRAGONITE", "DRAGON_TAIL_FAST", "DRACO_METEOR"),
+            # ("DRAGONITE", "DRAGON_TAIL_FAST", "DRAGON_CLAW"),
+            # ("DRAGONITE", "DRAGON_BREATH_FAST", "OUTRAGE"),
+            # ("DRAGONITE", "DRAGON_BREATH_FAST", "DRACO_METEOR"),
+            # ("DRAGONITE", "DRAGON_BREATH_FAST", "DRAGON_CLAW"),
+            # ("HAXORUS", "DRAGON_TAIL_FAST", "BREAKING_SWIPE"),
+            # ("MAMOSWINE", "POWDER_SNOW_FAST", "AVALANCHE"),
+            # ("MAMOSWINE_SHADOW_FORM", "POWDER_SNOW_FAST", "AVALANCHE"),
+            # ("BAXCALIBUR", "ICE_FANG_FAST", "AVALANCHE"),
+            # ("DARMANITAN_ZEN_FORM", "ICE_FANG_FAST", "AVALANCHE"),
+            # ("DARMANITAN_GALARIAN_ZEN_FORM", "ICE_FANG_FAST", "AVALANCHE"),
+            # ("CHIENPAO", "POWDER_SNOW_FAST", "AVALANCHE"),
+            # ("KYUREM", "DRAGON_BREATH_FAST", "GLACIATE"),
+            # ("KYUREM_BLACK_FORM", "DRAGON_TAIL_FAST", "BLIZZARD"),
+            # ("KYUREM_BLACK_FORM", "SHADOW_CLAW_FAST", "BLIZZARD"),
+            # ("KYUREM_BLACK_FORM", "DRAGON_TAIL_FAST", "GLACIATE"),
+            # ("KYUREM_BLACK_FORM", "SHADOW_CLAW_FAST", "GLACIATE"),
+
+            # [Ice Rock Electric]
+            # ("RAIKOU_SHADOW_FORM", "THUNDER_SHOCK_FAST", "WILD_CHARGE"),
+            # ("XURKITREE", "THUNDER_SHOCK_FAST", "DISCHARGE"),
+            # ("XURKITREE", "SPARK_FAST", "DISCHARGE"),
+            # ("MANECTRIC_MEGA", "THUNDER_FANG_FAST", "WILD_CHARGE"),
+            # ("ELECTIVIRE_SHADOW_FORM", "THUNDER_SHOCK_FAST", "WILD_CHARGE"),
+            # ("ZAPDOS_SHADOW_FORM", "THUNDER_SHOCK_FAST", "THUNDERBOLT"),
+            # ("MAGNEZONE_SHADOW_FORM", "SPARK_FAST", "WILD_CHARGE"),
+            # ("LUXRAY_SHADOW_FORM", "SPARK_FAST", "WILD_CHARGE"),
+            # ("ZEKROM", "CHARGE_BEAM_FAST", "FUSION_BOLT"),
+            # ("ZEKROM", "CHARGE_BEAM_FAST", "WILD_CHARGE"),
+            # ("THUNDURUS_THERIAN_FORM", "VOLT_SWITCH_FAST", "THUNDERBOLT"),
+            # ("RAIKOU", "THUNDER_SHOCK_FAST", "WILD_CHARGE"),
+            # ("ELECTIVIRE", "THUNDER_SHOCK_FAST", "WILD_CHARGE"),
+            # ("ZAPDOS", "THUNDER_SHOCK_FAST", "THUNDERBOLT"),
+            # ("MAGNEZONE", "SPARK_FAST", "WILD_CHARGE"),
+            # ("LUXRAY", "SPARK_FAST", "WILD_CHARGE"),
+            # ("AERODACTYL_MEGA", "ROCK_THROW_FAST", "ROCK_SLIDE"),
+            # ("TYRANITAR_SHADOW_FORM", "SMACK_DOWN_FAST", "STONE_EDGE"),
+            # ("RAMPARDOS", "SMACK_DOWN_FAST", "ROCK_SLIDE"),
+            # ("RHYPERIOR", "SMACK_DOWN_FAST", "ROCK_WRECKER"),
+            # ("TYRANTRUM", "ROCK_THROW_FAST", "METEOR_BEAM"),
+            # ("TERRAKION", "SMACK_DOWN_FAST", "ROCK_SLIDE"),
+            # ("GIGALITH", "SMACK_DOWN_FAST", "METEOR_BEAM"),
+            # ("TYRANITAR", "SMACK_DOWN_FAST", "STONE_EDGE"),
+
+            # [Poison]
+            # ("TOXICROAK_SHADOW_FORM", "POISON_JAB_FAST", "SLUDGE_BOMB"),  # Now
+            # ("REVAVROOM", "POISON_JAB_FAST", "GUNK_SHOT"),
+            # ("NAGANADEL", "POISON_JAB_FAST", "SLUDGE_BOMB"),  # Future Pokemon
+            # ("ETERNATUS", "POISON_JAB_FAST", "CROSS_POISON"),
+            # ("ROSERADE_SHADOW_FORM", "POISON_JAB_FAST", "SLUDGE_BOMB"),  # Future shadows
+            # ("GENGAR", "POISON_JAB_FAST", "SLUDGE_BOMB"),  # Better moves
+            # ("GENGAR_SHADOW_FORM", "POISON_JAB_FAST", "SLUDGE_BOMB"),
+            # ("GENGAR_MEGA", "POISON_JAB_FAST", "SLUDGE_BOMB"),
+            # ("ARCEUS_POISON_FORM", "POISON_JAB_FAST", "SLUDGE_BOMB"),
+            # ("SALAZZLE", "POISON_JAB_FAST", "SLUDGE_BOMB"),
+            # ("SNEASLER", "POISON_JAB_FAST", "SLUDGE_BOMB"),
+            # ("SNEASLER", "POISON_JAB_FAST", "GUNK_SHOT"),
+            # ("TOXTRICITY", "POISON_JAB_FAST", "SLUDGE_BOMB"),
+            # ("ETERNATUS", "POISON_JAB_FAST", "SLUDGE_BOMB"),
+            # ("ETERNATUS", "POISON_JAB_FAST", "GUNK_SHOT"),
+            # # Signature moves (None because no better moves than Sludge Bomb)
+
+            # [Psychic]
+            # ("GARDEVOIR_MEGA", "CONFUSION_FAST", "PSYCHIC"),  # Now
+            # ("GARDEVOIR_MEGA", "CONFUSION_FAST", "SYNCHRONOISE"),
+            # ("NECROZMA_ULTRA_FORM", "CONFUSION_FAST", "PSYCHIC"),  # Future Pokemon
+            # ("NECROZMA_ULTRA_FORM", "PSYCHO_CUT_FAST", "FUTURESIGHT"),
+            # ("NECROZMA_DAWN_WINGS_FORM", "CONFUSION_FAST", "PSYCHIC"),
+            # ("NECROZMA_DAWN_WINGS_FORM", "PSYCHO_CUT_FAST", "FUTURESIGHT"),
+            # ("NECROZMA_DUSK_MANE_FORM", "CONFUSION_FAST", "PSYCHIC"),
+            # ("NECROZMA_DUSK_MANE_FORM", "PSYCHO_CUT_FAST", "FUTURESIGHT"),
+            # ("NECROZMA", "CONFUSION_FAST", "PSYCHIC"),
+            # ("CALYREX_SHADOW_RIDER_FORM", "CONFUSION_FAST", "PSYCHIC"),
+            # ("HATTERENE", "CONFUSION_FAST", "PSYCHIC"),
+            # ("ESPEON_SHADOW_FORM", "CONFUSION_FAST", "PSYCHIC"),  # Future shadows
+            # ("GALLADE_MEGA", "CONFUSION_FAST", "PSYCHIC"),  # Future megas
+            # ("GALLADE_MEGA", "CONFUSION_FAST", "SYNCHRONOISE"),
+            # ("MEDICHAM_MEGA", "PSYCHO_CUT_FAST", "PSYCHIC"),
+            # ("METAGROSS_MEGA", "ZEN_HEADBUTT_FAST", "PSYCHIC"),  # (Mewtwo in its own section with level treatments)
+            # ("DEOXYS", "ZEN_HEADBUTT_FAST", "PSYCHIC"),  # Better moves
+            # ("DEOXYS_ATTACK_FORM", "ZEN_HEADBUTT_FAST", "PSYCHIC"),
+            # ("ARTICUNO_GALARIAN_FORM", "CONFUSION_FAST", "PSYCHIC"),
+            # ("TAPU_LELE", "CONFUSION_FAST", "PSYCHIC"),
+            # ("AZELF", "CONFUSION_FAST", "PSYCHIC"),
+            # ("MELOETTA_ARIA_FORM", "CONFUSION_FAST", "PSYCHIC"),
+            # ("DARMANITAN_ZEN_FORM", "EXTRASENSORY_FAST", "PSYCHIC"),
+            # ("DEOXYS", "ZEN_HEADBUTT_FAST", "PSYSTRIKE"),  # Signature moves
+            # ("DEOXYS_ATTACK_FORM", "ZEN_HEADBUTT_FAST", "PSYSTRIKE"),
+            # ("HOOPA", "CONFUSION_FAST", "PSYSTRIKE"),  # (Confined)
+            # ("NECROZMA_ULTRA_FORM", "CONFUSION_FAST", "PSYSTRIKE"),
+            # ("NECROZMA_DAWN_WINGS_FORM", "CONFUSION_FAST", "PSYSTRIKE"),
+            # ("NECROZMA", "CONFUSION_FAST", "PSYSTRIKE"),
+            # ("HATTERENE", "CONFUSION_FAST", "PSYSTRIKE"),
+
+            # [Psychic] Shadow Mewtwo IVs
             # ("MEWTWO_SHADOW_FORM", "CONFUSION_FAST", "PSYSTRIKE", "12/15/15"),
             # ("MEWTWO_SHADOW_FORM", "CONFUSION_FAST", "PSYSTRIKE", "9/15/15"),
             # ("MEWTWO_SHADOW_FORM", "CONFUSION_FAST", "PSYSTRIKE", "6/15/15"),
@@ -197,87 +1318,228 @@ CONFIG_ATTACKER_CRITERIA = [
             # ("MEWTWO_SHADOW_FORM", "PSYCHO_CUT_FAST", "PSYSTRIKE", "9/6/6"),
             # ("MEWTWO_SHADOW_FORM", "PSYCHO_CUT_FAST", "PSYSTRIKE", "6/6/6"),
 
-            # ("KYOGRE_SHADOW_FORM", "WATERFALL_FAST", "SURF"),
+            # [Rock]
+            # ("TYRANITAR_MEGA", "SMACK_DOWN_FAST", "STONE_EDGE"),  # Now
+            # ("STONJOURNER", "ROCK_THROW_FAST", "ROCK_SLIDE"),  # Future Pokemon
+            # ("STONJOURNER", "ROCK_THROW_FAST", "METEOR_BEAM"),
+            # ("STAKATAKA", "ROCK_THROW_FAST", "STONE_EDGE"),
+            # ("GLIMMORA", "ROCK_THROW_FAST", "ROCK_SLIDE"),
+            # ("GIGALITH_SHADOW_FORM", "SMACK_DOWN_FAST", "METEOR_BEAM"),  # Future shadows
+            # ("TERRAKION_SHADOW_FORM", "SMACK_DOWN_FAST", "ROCK_SLIDE"),
+            # ("DIANCIE_MEGA", "ROCK_THROW_FAST", "ROCK_SLIDE"),  # Future megas
+            # ("TYRANITAR", "SMACK_DOWN_FAST", "ROCK_SLIDE"),  # Better moves
+            # ("TYRANITAR", "ROCK_THROW_FAST", "ROCK_SLIDE"),
+            # ("TYRANITAR_SHADOW_FORM", "SMACK_DOWN_FAST", "ROCK_SLIDE"),
+            # ("TYRANITAR_SHADOW_FORM", "ROCK_THROW_FAST", "ROCK_SLIDE"),
+            # ("TYRANITAR_MEGA", "SMACK_DOWN_FAST", "ROCK_SLIDE"),
+            # ("TYRANITAR_MEGA", "ROCK_THROW_FAST", "ROCK_SLIDE"),
+            # ("RHYPERIOR", "SMACK_DOWN_FAST", "METEOR_BEAM"),
+            # ("RHYPERIOR", "ROLLOUT_FAST", "ROCK_WRECKER"),
+            # ("RHYPERIOR", "ROLLOUT_FAST", "METEOR_BEAM"),
+            # ("RHYPERIOR_SHADOW_FORM", "SMACK_DOWN_FAST", "METEOR_BEAM"),
+            # ("RHYPERIOR_SHADOW_FORM", "ROLLOUT_FAST", "ROCK_WRECKER"),
+            # ("RHYPERIOR_SHADOW_FORM", "ROLLOUT_FAST", "METEOR_BEAM"),
+            # ("ARCHEOPS", "ROCK_THROW_FAST", "ROCK_SLIDE"),
+            # ("ARCHEOPS", "ROCK_THROW_FAST", "METEOR_BEAM"),
+            # ("AERODACTYL", "ROCK_THROW_FAST", "METEOR_BEAM"),
+            # ("AERODACTYL_SHADOW_FORM", "ROCK_THROW_FAST", "METEOR_BEAM"),
+            # ("AERODACTYL_MEGA", "ROCK_THROW_FAST", "METEOR_BEAM"),
+            # ("DIANCIE_MEGA", "ROCK_THROW_FAST", "METEOR_BEAM"),
+            # ("NIHILEGO", "POISON_JAB_FAST", "METEOR_BEAM"),
+            # ("NIHILEGO", "ROCK_THROW_FAST", "ROCK_SLIDE"),  # ("Stealth Rock")
+            # ("NIHILEGO", "ROCK_THROW_FAST", "METEOR_BEAM"),
+            # ("NIHILEGO", "SMACK_DOWN_FAST", "ROCK_SLIDE"),
+            # ("NIHILEGO", "SMACK_DOWN_FAST", "METEOR_BEAM"),
+            # ("ARCANINE_HISUIAN_FORM", "ROCK_THROW_FAST", "ROCK_SLIDE"),
+            # ("RAMPARDOS", "SMACK_DOWN_FAST", "ROCK_WRECKER"),
+            # ("KLEAVOR", "SMACK_DOWN_FAST", "ROCK_SLIDE"),
+            # ("RAMPARDOS", "SMACK_DOWN_FAST", "METEOR_BEAM"),  # Signature moves
+            # ("RAMPARDOS_SHADOW_FORM", "SMACK_DOWN_FAST", "ROCK_WRECKER"),
+            # ("RAMPARDOS_SHADOW_FORM", "SMACK_DOWN_FAST", "METEOR_BEAM"),
+            # ("KLEAVOR", "SMACK_DOWN_FAST", "ROCK_WRECKER"),
+            # ("KLEAVOR", "SMACK_DOWN_FAST", "METEOR_BEAM"),
+            # ("DIANCIE_MEGA", "ROCK_THROW_FAST", "ROCK_WRECKER"),  # (MB above)
+            # ("LYCANROC_MIDDAY_FORM", "ROCK_THROW_FAST", "ROCK_WRECKER"),
+            # ("LYCANROC_MIDDAY_FORM", "ROCK_THROW_FAST", "METEOR_BEAM"),
+
+            # [Rock] for boss movesets
+            # ("DIANCIE_MEGA", "ROCK_THROW_FAST", "ROCK_SLIDE"),
+            # ("TYRANITAR_MEGA", "SMACK_DOWN_FAST", "STONE_EDGE"),
+            # ("RHYPERIOR_SHADOW_FORM", "SMACK_DOWN_FAST", "ROCK_WRECKER"),
+            # ("RHYPERIOR_SHADOW_FORM", "MUD_SLAP_FAST", "ROCK_WRECKER"),
+            # ("RAMPARDOS_SHADOW_FORM", "SMACK_DOWN_FAST", "ROCK_SLIDE"),
+            # ("RHYPERIOR", "SMACK_DOWN_FAST", "ROCK_WRECKER"),
+            # ("RHYPERIOR", "MUD_SLAP_FAST", "ROCK_WRECKER"),
+            # ("RAMPARDOS", "SMACK_DOWN_FAST", "ROCK_SLIDE"),
+
+            # [Steel]
+            # ("MELMETAL", "THUNDER_SHOCK_FAST", "DOUBLE_IRON_BASH"),  # Now
+            # ("NECROZMA_DUSK_MANE_FORM", "METAL_CLAW_FAST", "IRON_HEAD"),  # Future Pokemon
+            # ("MAGEARNA", "LOCK_ON_FAST", "HEAVY_SLAM"),
+            # ("ZACIAN_CROWNED_SWORD_FORM", "METAL_CLAW_FAST", "IRON_HEAD"),
+            # ("ZAMAZENTA_CROWNED_SHIELD_FORM", "METAL_CLAW_FAST", "IRON_HEAD"),
+            # ("DURALUDON", "METAL_CLAW_FAST", "FLASH_CANNON"),
+            # ("KINGAMBIT", "METAL_CLAW_FAST", "IRON_HEAD"),
+            # ("DIALGA_SHADOW_FORM", "METAL_CLAW_FAST", "IRON_HEAD"),  # Future shadows
+            # ("EXCADRILL_SHADOW_FORM", "METAL_CLAW_FAST", "IRON_HEAD"),
+            # ("METAGROSS_MEGA", "BULLET_PUNCH_FAST", "METEOR_MASH"),  # Future megas
+            # ("LUCARIO_MEGA", "BULLET_PUNCH_FAST", "FLASH_CANNON"),
+            # ("LUCARIO", "BULLET_PUNCH_FAST", "METEOR_MASH"),  # Better moves
+            # ("LUCARIO_SHADOW_FORM", "BULLET_PUNCH_FAST", "METEOR_MASH"),
+            # ("LUCARIO_MEGA", "BULLET_PUNCH_FAST", "METEOR_MASH"),
+            # ("SOLGALEO", "METAL_CLAW_FAST", "IRON_HEAD"),
+            # ("HEATRAN", "METAL_CLAW_FAST", "IRON_HEAD"),
+            # # ("GHOLDENGO", "HEX_FAST", "DOUBLE_IRON_BASH"),  # Signature moves
+            # ("GHOLDENGO", "HEX_FAST", "METEOR_MASH"),
+            # ("GHOLDENGO", "HEX_FAST", "DOOM_DESIRE"),
+            # # ("SOLGALEO", "METAL_CLAW_FAST", "DOUBLE_IRON_BASH"),
+            # ("SOLGALEO", "METAL_CLAW_FAST", "METEOR_MASH"),
+            # # ("NECROZMA_DUSK_MANE_FORM", "METAL_CLAW_FAST", "DOUBLE_IRON_BASH"),
+            # ("NECROZMA_DUSK_MANE_FORM", "METAL_CLAW_FAST", "METEOR_MASH"),
+            # # ("KLINKLANG", "THUNDER_SHOCK_FAST", "DOUBLE_IRON_BASH"),
+            # # ("KLINKLANG", "THUNDER_SHOCK_FAST", "METEOR_MASH"),
+            # # ("KLINKLANG", "THUNDER_SHOCK_FAST", "DOOM_DESIRE"),
+            # ("AGGRON", "IRON_TAIL_FAST", "METEOR_MASH"),  # Meteor Mash what-ifs
+            # ("AGGRON_SHADOW_FORM", "IRON_TAIL_FAST", "METEOR_MASH"),
+            # ("AGGRON_MEGA", "IRON_TAIL_FAST", "METEOR_MASH"),
+            # ("GENESECT", "METAL_CLAW_FAST", "METEOR_MASH"),
+            # ("SCIZOR", "BULLET_PUNCH_FAST", "METEOR_MASH"),
+            # ("SCIZOR_SHADOW_FORM", "BULLET_PUNCH_FAST", "METEOR_MASH"),
+            # ("SCIZOR_MEGA", "BULLET_PUNCH_FAST", "METEOR_MASH"),
+            # ("DIALGA", "METAL_CLAW_FAST", "METEOR_MASH"),
+            # ("DIALGA_ORIGIN_FORM", "METAL_CLAW_FAST", "METEOR_MASH"),
+            # ("EXCADRILL", "METAL_CLAW_FAST", "METEOR_MASH"),
+            # ("MELMETAL", "THUNDER_SHOCK_FAST", "METEOR_MASH"),
+            # ("KARTANA", "RAZOR_LEAF_FAST", "METEOR_MASH"),
+            # ("KARTANA", "PSYCHO_CUT_FAST", "METEOR_MASH"),
+            # ("MELMETAL", "METAL_CLAW_FAST", "DOUBLE_IRON_BASH"),  # Fast move what-ifs
+            # ("MELMETAL", "METAL_CLAW_FAST", "METEOR_MASH"),
+            # ("GHOLDENGO", "METAL_CLAW_FAST", "DOUBLE_IRON_BASH"),
+            # ("GHOLDENGO", "METAL_CLAW_FAST", "METEOR_MASH"),
+            # ("GHOLDENGO", "METAL_CLAW_FAST", "DOOM_DESIRE"),
+
+            # [Steel] Custom IVs
+            # ("METAGROSS_SHADOW_FORM", "BULLET_PUNCH_FAST", "METEOR_MASH", "15\\1\\15"),
+            # ("METAGROSS_SHADOW_FORM", "BULLET_PUNCH_FAST", "METEOR_MASH", "14\\14\\13"),
+            # ("METAGROSS_SHADOW_FORM", "BULLET_PUNCH_FAST", "METEOR_MASH", "13\\15\\15"),
+
+            # [Water]
+            # ("KYOGRE_SHADOW_FORM", "WATERFALL_FAST", "SURF"),  # Now
             # ("KYOGRE_SHADOW_FORM", "WATERFALL_FAST", "ORIGIN_PULSE"),
-            # ("KYOGRE", "WATERFALL_FAST", "ORIGIN_PULSE"),
-            # ("GRENINJA", "BUBBLE_FAST", "HYDRO_CANNON"),
-            # ("PRIMARINA", "WATERFALL_FAST", "HYDRO_CANNON"),
-            # ("INTELEON", "WATER_GUN_FAST", "HYDRO_CANNON"),
+            # ("KYOGRE_SHADOW_FORM", "WATERFALL_FAST", "SURF", "11\\11\\11"),
+            # ("KYOGRE_SHADOW_FORM", "WATERFALL_FAST", "ORIGIN_PULSE", "11\\11\\11"),
+            # ("KYOGRE_SHADOW_FORM", "WATERFALL_FAST", "SURF", "6\\6\\6"),
+            # ("KYOGRE_SHADOW_FORM", "WATERFALL_FAST", "ORIGIN_PULSE", "6\\6\\6"),
             # ("EMPOLEON_SHADOW_FORM", "WATERFALL_FAST", "HYDRO_CANNON"),
+            # ("EMPOLEON_SHADOW_FORM", "METAL_CLAW_FAST", "HYDRO_CANNON"),
+            # ("VOLCANION", "WATER_GUN_FAST", "HYDRO_PUMP"),  # Future Pokemon
+            # ("PRIMARINA", "WATERFALL_FAST", "HYDRO_CANNON"),
+            # ("WISHIWASHI_SCHOOL_FORM", "WATERFALL_FAST", "SURF"),
+            # ("WISHIWASHI_SCHOOL_FORM", "WATERFALL_FAST", "HYDRO_PUMP"),
+            # ("INTELEON", "WATER_GUN_FAST", "SURF"),
+            # ("INTELEON", "WATER_GUN_FAST", "HYDRO_CANNON"),
+            # ("QUAQUAVAL", "WATER_GUN_FAST", "HYDRO_CANNON"),
+            # # ("BARRASKEWDA", "WATERFALL_FAST", "AQUA_JET"),
+            # ("URSHIFU_RAPID_STRIKE_FORM", "WATERFALL_FAST", "AQUA_JET"),
+            # # ("TATSUGIRI", "WATER_GUN_FAST", "SURF"),
+            # ("PALAFIN_HERO_FORM", "WATERFALL_FAST", "WATER_PULSE"),
+            # ("KINGLER_SHADOW_FORM", "BUBBLE_FAST", "CRABHAMMER"),  # Future shadows
             # ("SAMUROTT_SHADOW_FORM", "WATERFALL_FAST", "HYDRO_CANNON"),
-            # ("KINGLER_SHADOW_FORM", "BUBBLE_FAST", "CRABHAMMER"),
+            # ("SAMUROTT_SHADOW_FORM", "FURY_CUTTER_FAST", "HYDRO_CANNON"),
+            # ("PALKIA_SHADOW_FORM", "DRAGON_TAIL_FAST", "AQUA_TAIL"),
+            # ("PALKIA_SHADOW_FORM", "DRAGON_TAIL_FAST", "HYDRO_PUMP"),
+            # ("SHARPEDO_MEGA", "WATERFALL_FAST", "HYDRO_PUMP"),  # Future megas
+            # # ("GYARADOS", "WATERFALL_FAST", "SURF"),  # Better regular moves
+            # # ("GYARADOS_SHADOW_FORM", "WATERFALL_FAST", "SURF"),
+            # # ("GYARADOS_MEGA", "WATERFALL_FAST", "SURF"),
+            # ("SHARPEDO", "WATERFALL_FAST", "SURF"),
+            # ("SHARPEDO_SHADOW_FORM", "WATERFALL_FAST", "SURF"),
+            # ("SHARPEDO_MEGA", "WATERFALL_FAST", "SURF"),
             # ("PALKIA", "WATERFALL_FAST", "AQUA_TAIL"),
             # ("PALKIA", "WATERFALL_FAST", "HYDRO_PUMP"),
+            # ("PALKIA", "WATERFALL_FAST", "SURF"),
             # ("PALKIA_SHADOW_FORM", "WATERFALL_FAST", "AQUA_TAIL"),
             # ("PALKIA_SHADOW_FORM", "WATERFALL_FAST", "HYDRO_PUMP"),
+            # ("PALKIA_SHADOW_FORM", "WATERFALL_FAST", "SURF"),
+            # ("PALKIA_ORIGIN_FORM", "WATERFALL_FAST", "AQUA_TAIL"),
+            # ("PALKIA_ORIGIN_FORM", "WATERFALL_FAST", "HYDRO_PUMP"),
+            # ("PALKIA_ORIGIN_FORM", "WATERFALL_FAST", "SURF"),
+            # ("SAMUROTT_HISUIAN_FORM", "WATERFALL_FAST", "HYDRO_CANNON"),
+            # ("SAMUROTT_HISUIAN_FORM", "FURY_CUTTER_FAST", "HYDRO_CANNON"),
+            # ("SAMUROTT_HISUIAN_FORM", "SNARL_FAST", "HYDRO_CANNON"),
+            # # ("BARRASKEWDA", "WATERFALL_FAST", "SURF"),
+            # ("VOLCANION", "WATER_GUN_FAST", "CRABHAMMER"),  # Signature moves
+            # ("VOLCANION", "WATER_GUN_FAST", "HYDRO_CANNON"),
+            # ("URSHIFU_RAPID_STRIKE_FORM", "WATERFALL_FAST", "CRABHAMMER"),
+            # ("URSHIFU_RAPID_STRIKE_FORM", "WATERFALL_FAST", "HYDRO_CANNON"),
 
-            # ("DARMANITAN_GALARIAN_ZEN_FORM", "ICE_FANG_FAST", "AVALANCHE"),
-            # ("KYUREM_BLACK_FORM", "DRAGON_TAIL_FAST", "BLIZZARD"),
-            # ("KYUREM_BLACK_FORM", "SHADOW_CLAW_FAST", "BLIZZARD"),
-
-            # ("URSALUNA", "TACKLE_FAST", "HIGH_HORSEPOWER"),
-            # ("URSALUNA", "ROCK_SMASH_FAST", "HIGH_HORSEPOWER"),
-            # ("URSALUNA", "MUD_SLAP_FAST", "HIGH_HORSEPOWER"),
-            # ("URSALUNA", "MUD_SHOT_FAST", "HIGH_HORSEPOWER"),
-            # ("URSALUNA", "COUNTER_FAST", "HIGH_HORSEPOWER"),
-            # ("URSALUNA_SHADOW_FORM", "TACKLE_FAST", "HIGH_HORSEPOWER"),
-            # ("URSALUNA_SHADOW_FORM", "ROCK_SMASH_FAST", "HIGH_HORSEPOWER"),
-            # ("URSALUNA_SHADOW_FORM", "MUD_SLAP_FAST", "HIGH_HORSEPOWER"),
-            # ("URSALUNA_SHADOW_FORM", "MUD_SHOT_FAST", "HIGH_HORSEPOWER"),
-            # ("URSALUNA_SHADOW_FORM", "COUNTER_FAST", "HIGH_HORSEPOWER"),
-            # ("URSALUNA", "TACKLE_FAST", "EARTH_POWER"),
-            # ("URSALUNA", "ROCK_SMASH_FAST", "EARTH_POWER"),
-            # ("URSALUNA", "MUD_SLAP_FAST", "EARTH_POWER"),
-            # ("URSALUNA", "MUD_SHOT_FAST", "EARTH_POWER"),
-            # ("URSALUNA", "COUNTER_FAST", "EARTH_POWER"),
-            # ("URSALUNA_SHADOW_FORM", "TACKLE_FAST", "EARTH_POWER"),
-            # ("URSALUNA_SHADOW_FORM", "ROCK_SMASH_FAST", "EARTH_POWER"),
-            # ("URSALUNA_SHADOW_FORM", "MUD_SLAP_FAST", "EARTH_POWER"),
-            # ("URSALUNA_SHADOW_FORM", "MUD_SHOT_FAST", "EARTH_POWER"),
-            # ("URSALUNA_SHADOW_FORM", "COUNTER_FAST", "EARTH_POWER"),
-            # ("GOLURK_SHADOW_FORM", "MUD_SLAP_FAST", "EARTH_POWER"),
-            # ("MUDSDALE", "MUD_SLAP_FAST", "EARTHQUAKE"),
-            # ("MUDSDALE", "MUD_SLAP_FAST", "EARTH_POWER"),
-            # ("GROUDON", "MUD_SHOT_FAST", "EARTH_POWER"),
-            # ("GROUDON", "MUD_SHOT_FAST", "PRECIPICE_BLADES"),
-            # ("GROUDON_SHADOW_FORM", "MUD_SHOT_FAST", "EARTHQUAKE"),
-            # ("GROUDON_SHADOW_FORM", "MUD_SHOT_FAST", "EARTH_POWER"),
-            # ("GROUDON_SHADOW_FORM", "MUD_SHOT_FAST", "PRECIPICE_BLADES"),
-            # ("GARCHOMP_SHADOW_FORM", "MUD_SHOT_FAST", "EARTH_POWER"),
-            # ("GARCHOMP_MEGA", "MUD_SHOT_FAST", "EARTH_POWER"),
-            # ("EXCADRILL", "MUD_SLAP_FAST", "EARTH_POWER"),
-            # ("EXCADRILL", "MUD_SHOT_FAST", "EARTH_POWER"),
-            # ("EXCADRILL", "METAL_CLAW_FAST", "EARTH_POWER"),
-            # ("EXCADRILL_SHADOW_FORM", "MUD_SLAP_FAST", "DRILL_RUN"),
-            # ("EXCADRILL_SHADOW_FORM", "MUD_SHOT_FAST", "DRILL_RUN"),
-            # ("EXCADRILL_SHADOW_FORM", "METAL_CLAW_FAST", "DRILL_RUN"),
-            # ("EXCADRILL_SHADOW_FORM", "MUD_SLAP_FAST", "EARTH_POWER"),
-            # ("EXCADRILL_SHADOW_FORM", "MUD_SHOT_FAST", "EARTH_POWER"),
-            # ("EXCADRILL_SHADOW_FORM", "METAL_CLAW_FAST", "EARTH_POWER"),
-            # ("RHYPERIOR", "MUD_SLAP_FAST", "EARTH_POWER"),
-            # ("RHYPERIOR_SHADOW_FORM", "MUD_SLAP_FAST", "EARTHQUAKE"),
-            # ("RHYPERIOR_SHADOW_FORM", "MUD_SLAP_FAST", "EARTH_POWER"),
-            # ("KROOKODILE", "MUD_SLAP_FAST", "EARTH_POWER"),
-            # ("KROOKODILE_SHADOW_FORM", "MUD_SLAP_FAST", "EARTHQUAKE"),
-            # ("KROOKODILE_SHADOW_FORM", "MUD_SLAP_FAST", "EARTH_POWER"),
-            # ("SWAMPERT", "MUD_SHOT_FAST", "EARTH_POWER"),
-            # ("SWAMPERT_SHADOW_FORM", "MUD_SHOT_FAST", "EARTH_POWER"),
-            # ("SWAMPERT_MEGA", "MUD_SHOT_FAST", "EARTHQUAKE"),
-            # ("SWAMPERT_MEGA", "MUD_SHOT_FAST", "EARTH_POWER"),
-            # ("CAMERUPT_MEGA", "MUD_SLAP_FAST", "EARTH_POWER"),
-            # ("CAMERUPT_MEGA", "INCINERATE_FAST", "EARTH_POWER"),
-            # ("CAMERUPT_MEGA", "ROCK_SMASH_FAST", "EARTH_POWER"),
-            # ("MAMOSWINE", "MUD_SLAP_FAST", "EARTH_POWER"),
-            # ("MAMOSWINE_SHADOW_FORM", "MUD_SLAP_FAST", "EARTH_POWER"),
-            # ("LANDORUS_THERIAN_FORM", "MUD_SHOT_FAST", "EARTH_POWER"),
-            # ("GOLEM", "MUD_SLAP_FAST", "EARTH_POWER"),
-            # ("GOLEM_SHADOW_FORM", "MUD_SLAP_FAST", "EARTH_POWER"),
-            # ("STEELIX_MEGA", "MUD_SLAP_FAST", "EARTHQUAKE"),
-            # ("STEELIX_MEGA", "MUD_SLAP_FAST", "EARTH_POWER"),
-            # ("CAMERUPT_MEGA", "EMBER_FAST", "EARTH_POWER"),
-
+            # [Water] For boss movesets
+            # ("GRENINJA", "WATER_SHURIKEN_FAST", "HYDRO_CANNON"),
+            # ("SWAMPERT", "WATER_GUN_FAST", "HYDRO_CANNON"),
+            # ("KINGLER", "BUBBLE_FAST", "CRABHAMMER"),
+            # ("SAMUROTT", "WATERFALL_FAST", "HYDRO_CANNON"),
+            # ("EMPOLEON", "WATERFALL_FAST", "HYDRO_CANNON"),
+            # ("FERALIGATR", "WATER_GUN_FAST", "HYDRO_CANNON"),
+            # ("FERALIGATR", "WATERFALL_FAST", "HYDRO_CANNON"),
+            # ("SAMUROTT_HISUIAN_FORM", "WATERFALL_FAST", "HYDRO_CANNON"),
+            # ("SAMUROTT_HISUIAN_FORM", "FURY_CUTTER_FAST", "HYDRO_CANNON"),
+            # ("SAMUROTT_HISUIAN_FORM", "SNARL_FAST", "HYDRO_CANNON"),
         ],
     },
+
+    # Replacing unnerfed megas on Pokebattler
+    # {
+    #     "Min level": 25,  # Unnerfed 25 = Nerfed 30
+    #     "Max level": 25,
+    #     "Level step size": 5,
+    #     "Pokemon code names and moves": [
+    #         # ("RAYQUAZA_MEGA", "DRAGON_TAIL_FAST", "OUTRAGE"),
+    #         ("MEWTWO_MEGA_Y", "PSYCHO_CUT_FAST", "SHADOW_BALL"),
+    #     ],
+    # },
+    # {
+    #     "Min level": 27.5,  # Unnerfed 27.5 = Nerfed 35
+    #     "Max level": 27.5,
+    #     "Level step size": 5,
+    #     "Pokemon code names and moves": [
+    #         # ("RAYQUAZA_MEGA", "DRAGON_TAIL_FAST", "OUTRAGE"),
+    #         ("MEWTWO_MEGA_Y", "PSYCHO_CUT_FAST", "SHADOW_BALL"),
+    #     ],
+    # },
+    # {
+    #     "Min level": 29.5,  # Unnerfed 29.5 = Nerfed 40
+    #     "Max level": 29.5,
+    #     "Level step size": 5,
+    #     "Pokemon code names and moves": [
+    #         # ("RAYQUAZA_MEGA", "DRAGON_TAIL_FAST", "OUTRAGE"),
+    #         ("MEWTWO_MEGA_Y", "PSYCHO_CUT_FAST", "SHADOW_BALL"),
+    #     ],
+    # },
+    # {
+    #     "Min level": 32.5,  # Unnerfed 32.5 = Nerfed 45
+    #     "Max level": 32.5,
+    #     "Level step size": 5,
+    #     "Pokemon code names and moves": [
+    #         # ("RAYQUAZA_MEGA", "DRAGON_TAIL_FAST", "OUTRAGE"),
+    #         ("MEWTWO_MEGA_Y", "PSYCHO_CUT_FAST", "SHADOW_BALL"),
+    #     ],
+    # },
+    # {
+    #     "Min level": 36.5,  # Unnerfed 36.5 = Nerfed 50
+    #     "Max level": 36.5,
+    #     "Level step size": 5,
+    #     "Pokemon code names and moves": [
+    #         # ("RAYQUAZA_MEGA", "DRAGON_TAIL_FAST", "OUTRAGE"),
+    #         ("MEWTWO_MEGA_Y", "PSYCHO_CUT_FAST", "SHADOW_BALL"),
+    #     ],
+    # },
+
+    # [For all counters]
+    # {
+    #     "Min level": 30,
+    #     "Max level": 50,
+    #     "Level step size": 5, #5,  # Can be as low as 0.5, but recommend 5 for efficiency
+    # },
 
     # Add more {} blocks here if needed
     # {
@@ -335,18 +1597,38 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
     # [For testing]
     # {
     #     "Pokemon pool": "By raid category",
-    #     "Raid categories": ["Future Tier 5"],  # Here, "Tier 5" has only current bosses
+    #     "Raid categories": ["Tier 5", "Ultra Beast Tier"],  # Here, "Tier 5" has only current bosses
     #     "Weight of each Pokemon": 1,
     #     "Weight of whole group": 0,
     #     "Forms weight strategy": "combine",  # "combine" or "separate"
-    #     "Filters": {  # Only those without # at the start are applied
-    #         "Weak to contender types": ["Dragon"],
-    #     }
+    #     # "Filters": {  # Only those without # at the start are applied
+    #     #     "Weak to contender types": ["Dragon"],
+    #     # }
+    # },
+
+    # [For counters against specific boss]
+    # {
+    #     "Pokemon pool": ["XURKITREE"],
+    #     "Raid tier": "Tier 5",  # Here, "Tier 5" has only current bosses
+    #     "Weight of each Pokemon": 1,
+    #     "Weight of whole group": 1,
+    #     "Forms weight strategy": "combine",  # "combine" or "separate"
+    # },
+    # {
+    #     "Pokemon pool": ["XURKITREE"],
+    #     "Raid tier": "Tier 5",  # Here, "Tier 5" has only current bosses
+    #     "Weight of each Pokemon": 1,
+    #     "Weight of whole group": 0,
+    #     "Forms weight strategy": "combine",  # "combine" or "separate"
+    #     "Battle settings": {
+    #         "Attack strategy": "Dodge Specials PRO",
+    #     },
     # },
 
     {
         "Pokemon pool": "By raid tier",  # "All Pokemon", "All Pokemon except above", "By raid tier" or "By raid category"
-        "Raid tiers": ["Tier 5", "Ultra Beast Tier", "Elite Tier"],  # Here, "Tier 5" has all past/present/future bosses
+                # Can also specify a list of Pokemon (code names), e.g. ["TAPU_BULU", "XERNEAS"]
+        "Raid tiers": ["Tier 5", "Ultra Beast Tier", "Elite Tier", "Shadow Tier 5"],  # Here, "Tier 5" has all past/present/future bosses
         #"Raid category": "Ultra Beast Tier",  # Here, "Tier 5" has only current bosses
         "Filters": {  # Only those without # at the start are applied
             #"Weak to contender types": SINGLE_TYPE_ATTACKER,
@@ -384,7 +1666,7 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
     },
     {
         "Pokemon pool": "By raid tier",
-        "Raid tiers": ["Tier 5", "Ultra Beast Tier", "Elite Tier"],
+        "Raid tiers": ["Tier 5", "Ultra Beast Tier", "Elite Tier", "Shadow Tier 5"],
         "Filters": {
             #"Weak to contender types": SINGLE_TYPE_ATTACKER,
             #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
@@ -399,7 +1681,7 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
     },
     # {
     #     "Pokemon pool": "By raid tier",
-    #     "Raid tiers": ["Tier 5", "Ultra Beast Tier", "Elite Tier"],
+    #     "Raid tiers": ["Tier 5", "Ultra Beast Tier", "Elite Tier", "Shadow Tier 5"],
     #     "Filters": {
     #         #"Weak to contender types": SINGLE_TYPE_ATTACKER,
     #         #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
@@ -409,7 +1691,7 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
     #     "Weight of whole group": 0,
     #     "Forms weight strategy": "combine",
     #     "Battle settings": {
-    #         "Weather": "Sunny",
+    #         "Weather": "Rainy",
     #     },
     # },
 
@@ -452,13 +1734,13 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
     #     "Weight of whole group": 0,
     #     "Forms weight strategy": "combine",
     #     "Battle settings": {
-    #         "Weather": "Sunny",
+    #         "Weather": "Rainy",
     #     },
     # },
 
     {
         "Pokemon pool": "By raid tier",
-        "Raid tier": "Tier 3",
+        "Raid tiers": ["Tier 3", "Shadow Tier 3"],
         "Filters": {
             #"Weak to contender types": SINGLE_TYPE_ATTACKER,
             #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
@@ -476,7 +1758,7 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
     },
     {
         "Pokemon pool": "By raid tier",
-        "Raid tier": "Tier 3",
+        "Raid tiers": ["Tier 3", "Shadow Tier 3"],
         "Filters": {
             #"Weak to contender types": SINGLE_TYPE_ATTACKER,
             #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
@@ -495,7 +1777,7 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
     },
     # {
     #     "Pokemon pool": "By raid tier",
-    #     "Raid tier": "Tier 3",
+    #     "Raid tiers": ["Tier 3", "Shadow Tier 3"],
     #     "Filters": {
     #         #"Weak to contender types": SINGLE_TYPE_ATTACKER,
     #         #"Weak to contender types simultaneously": MULTI_TYPE_ATTACKERS_COMPARE,
@@ -506,7 +1788,7 @@ CONFIG_RAID_BOSS_ENSEMBLE = [
     #     "Forms weight strategy": "combine",
     #     "Battle settings": {
     #         "Friendship": "Not",
-    #         "Weather": "Sunny",
+    #         "Weather": "Rainy",
     #     },
     #     "Baseline battle settings": {
     #         "Friendship": "Not",
@@ -630,6 +1912,13 @@ CONFIG_ESTIMATOR_SCALING_SETTINGS = {
     # (Technical note: Unlike the other baseline items here, baseline battle settings are pushed directly
     # to each RaidEnsemble object, just like each raid's battle settings.)
     #
+    # [Consider required attackers]
+    #
+    # Whether all required attackers participate in estimator scaling.
+    # Typically set to False, so that 1.0 is only for the best current attacker.
+    # These can be overridden for individual required attackers, by providing a True/False as their 5th arg
+    # in the tuple.
+    #
     # ----- End of documentation for this section -----
 
     "Enabled": True,  # Default: True
@@ -638,7 +1927,7 @@ CONFIG_ESTIMATOR_SCALING_SETTINGS = {
     "Baseline attacker level": 40,  # Specific level, "min", "max", "average", "by level"/-1/None
     "Baseline battle settings": {
         "Weather": "Extreme",
-        "Friendship": "Best",
+        "Friendship": TEMPORARY_FRIENDSHIP_DEFAULT,
         "Attack strategy": "No Dodging",
         "Dodge strategy": "Realistic Dodging",
     },
@@ -653,50 +1942,133 @@ CONFIG_PROCESSING_SETTINGS = {
     # Other options for write_CSV_list to be included
 
     # CSV table settings
-    "Include unscaled estimators": False, #False,  # Default: False
+    "Include unscaled estimators": False,  # Default: False  # [MAMOSWINE]
     "Combine attacker movesets": True,  # Combine attacker moves (e.g. FS/BB and Counter/BB Blaziken), Default: True
     "Include random boss movesets": True,  # Default: True
     "Include specific boss movesets": False,  # Default: False
     "Assign weights to specific boss movesets": False,  # Default: False
-    "Include attacker IVs": False,  # Default: False
+    "Include attacker IVs": False,  # Default: False  # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     "Fill blanks": True,  # Default: True
 
     "Attackers that should not be combined": [  # Will not combine these attackers' different movesets,
         # displaying each moveset separately. (Remember to INCLUDE SHADOWS & MEGAS separately here!!!)
-        # "STARAPTOR", "STARAPTOR_SHADOW_FORM",
-        #"BEEDRILL_MEGA", # Bug Bite legacy
-        #"ALAKAZAM_MEGA", "ALAKAZAM", "ALAKAZAM_SHADOW_FORM",  # Psychic legacy
 
-        #"VIKAVOLT", "GOLISOPOD",
-        #"ZERAORA", "TAPU_KOKO", "THUNDURUS_THERIAN_FORM", "XURKITREE"
-        #"BLAZIKEN_MEGA", "BLAZIKEN", "MEWTWO_MEGA_X", "GALLADE_MEGA", "LOPUNNY_MEGA", "KELDEO", "PHEROMOSA",
-        #"GENGAR", "GENGAR_MEGA", "ETERNATUS", "SALAZZLE", "SNEASLER", "GENGAR_SHADOW_FORM",
-        #"TOGEKISS", "FLORGES", "TAPU_KOKO", "SYLVEON", "XERNEAS", "DIANCIE_MEGA"
-        #"ALAKAZAM_MEGA", "ALAKAZAM", "ALAKAZAM_SHADOW_FORM", "NECROZMA_DAWN_WINGS_FORM", "NECROZMA_DUSK_MANE_FORM", "NECROZMA_ULTRA_FORM"
-        # "RHYPERIOR", "RHYPERIOR_SHADOW_FORM", "ARCHEOPS", "AERODACTYL", "AERODACTYL_SHADOW_FORM", "AERODACTYL_MEGA",
-        # "OMASTAR", "OMASTAR_SHADOW_FORM", "TYRANTRUM", "STONJOURNER", "STAKATAKA", "DIANCIE_MEGA", "TYRANITAR",
-        # "TYRANITAR_SHADOW_FORM", "TYRANITAR_MEGA", "GOLEM_SHADOW_FORM", "GOLEM", "GOLEM_ALOLA_FORM", "LYCANROC_MIDDAY_FORM",
-        # "GIGALITH"  # CSV 1 combines Gigalith
-        # "CHESNAUGHT", "DECIDUEYE", "ABOMASNOW_MEGA", "SCEPTILE", "VENUSAUR_MEGA", "RILLABOOM", "ROSERADE", "ROSERADE_SHADOW_FORM",
-        # "SCEPTILE_SHADOW_FORM", "SCEPTILE_MEGA", "VENUSAUR_SHADOW_FORM", "SHAYMIN_SKY_FORM", "ZARUDE"
-        # "AGGRON_MEGA", "SOLGALEO", "NECROZMA_DUSK_MANE_FORM", "LUCARIO", "LUCARIO_MEGA", "GENESECT", "SCIZOR",
-        # "SCIZOR_MEGA", "DIALGA", "EXCADRILL", "MELMETAL"
-        # "BLACEPHALON", "DARMANITAN_GALARIAN_ZEN_FORM", "RESHIRAM", "HEATRAN", "CHANDELURE", "ENTEI", "SALAZZLE",
-        # "CAMERUPT_MEGA", "ENTEI_SHADOW_FORM", "VOLCARONA"
-        # "LUNALA", "MARSHADOW", "BLACEPHALON", "TYRANITAR", "TYRANITAR_SHADOW_FORM", "TYRANITAR_MEGA", "ABSOL_MEGA",
-        # "KROOKODILE", "GRENINJA", "INCINEROAR", "ZARUDE", "DARKRAI", "ZOROARK", "PANGORO", "HOOPA_UNBOUND_FORM",
-        # "GRIMMSNARL", "URSHIFU_SINGLE_STRIKE_FORM", "CALYREX_SHADOW_RIDER_FORM", "GYARADOS_MEGA",
-        # "GIRATINA_ORIGIN_FORM", "DECIDUEYE", "SABLEYE_MEGA",
-        # "DARKRAI_SHADOW_FORM",
-        # "URSALUNA", "URSALUNA_SHADOW_FORM", "MUDSDALE", "GROUDON", "GROUDON_SHADOW_FORM", "EXCADRILL", "RHYPERIOR",
-        # "KROOKODILE", "KROOKODILE_SHADOW_FORM", "SWAMPERT", "SWAMPERT_SHADOW_FORM", "SWAMPERT_MEGA", "CAMERUPT_MEGA",
-        # "MAMOSWINE", "MAMOSWINE_SHADOW_FORM", "LANDORUS_THERIAN_FORM", "GOLEM", "GOLEM_SHADOW_FORM", "STEELIX_MEGA",
-        # "EXCADRILL_SHADOW_FORM"
-        # "MEWTWO_SHADOW_FORM"
-        # "KYOGRE", "KYOGRE_SHADOW_FORM", "GRENINJA", "PRIMARINA", "INTELEON", "PALKIA", "PALKIA_SHADOW_FORM",
-        "PALKIA_SHADOW_FORM", "DIALGA_SHADOW_FORM",
-        # "XURKITREE",
-        # "CONKELDURR_SHADOW_FORM",
-        # "RAYQUAZA", "RAYQUAZA_SHADOW_FORM"
+        # [Bug]
+        # "BEEDRILL_MEGA",  # Bug Bite legacy
+        # "PINSIR_MEGA",  # One-time only
+        # "VIKAVOLT", "GOLISOPOD", "HERACROSS", "HERACROSS_MEGA", "GENESECT", "SCIZOR", "SCIZOR_SHADOW_FORM",
+        # "SCIZOR_MEGA", "KLEAVOR",
+
+        # [Dark/Ghost]
+        "GIRATINA_ORIGIN_FORM",  # Permanent
+        "LUNALA", "MARSHADOW", "TYRANITAR", "TYRANITAR_SHADOW_FORM", "TYRANITAR_MEGA", "ABSOL",
+        "ABSOL_SHADOW_FORM", "ABSOL_MEGA", "KROOKODILE", "GRENINJA", "INCINEROAR", "ZARUDE", "DARKRAI", "ZOROARK",
+        "PANGORO", "HOOPA_UNBOUND_FORM", "GRIMMSNARL", "URSHIFU_SINGLE_STRIKE_FORM", "CALYREX_SHADOW_RIDER_FORM",
+        "GYARADOS_MEGA", "DARKRAI_SHADOW_FORM", "HONCHKROW", "HONCHKROW_SHADOW_FORM", "CHIENPAO", "CHIYU",
+        "FLUTTERMANE",
+
+        # [Dragon]
+        # "RAYQUAZA_SHADOW_FORM", "PALKIA_SHADOW_FORM", "DIALGA_SHADOW_FORM",  # Mvsts
+        # "RAYQUAZA", "RAYQUAZA_SHADOW_FORM", "RAYQUAZA_MEGA",  # Permanent
+        # "GYARADOS_MEGA",  # Permanent (Dragon Tail is exclusive)
+        # "DIALGA_ORIGIN_FORM", "PALKIA_ORIGIN_FORM",  # Permanent? (Depending on how common RoT and SR are)
+        # "EXEGGUTOR_ALOLA_FORM", "EXEGGUTOR_ALOLA_SHADOW_FORM", "AMPHAROS_MEGA", "SCEPTILE_MEGA", "ALTARIA_MEGA",
+        # "DIALGA", "DIALGA_SHADOW_FORM", "PALKIA", "PALKIA_SHADOW_FORM", "KOMMO_O", "DURALUDON", "ETERNATUS",
+        # "GARCHOMP", "GARCHOMP_SHADOW_FORM", "GARCHOMP_MEGA", "DRAGAPULT", "BAXCALIBUR",  # Signature moves
+        # # Obsolete: "DRAGONITE", "DRAGONITE_SHADOW_FORM", "SALAMENCE", "SALAMENCE_SHADOW_FORM", "SALAMENCE_MEGA",
+        # # Obsolete: "CHARIZARD_MEGA_X", "CHARIZARD_MEGA_Y", "LATIOS_SHADOW_FORM", "LATIOS_MEGA", "HYDREIGON",
+        # # Obsolete: "HYDREIGON_SHADOW_FORM", "RESHIRAM", "RESHIRAM_SHADOW_FORM", "ZEKROM", "ZEKROM_SHADOW_FORM",
+
+        # [Electric]
+        # "RAIKOU_SHADOW_FORM",  # One-time only
+        # "THUNDURUS_THERIAN_FORM",  # Permanent?
+        # "THUNDURUS_INCARNATE_FORM",  # One-time only?
+        # "ZEKROM", "ZEKROM_SHADOW_FORM",   # Permanent (non-legacy moves)
+        # "ZAPDOS", "ZAPDOS_SHADOW_FORM",  # Permanent? (non-legacy moves)
+        # "JOLTEON", "JOLTEON_SHADOW_FORM", "ZERAORA", "MIRAIDON",
+        # "AMPHAROS_MEGA", "LUXRAY", "LUXRAY_SHADOW_FORM", "XURKITREE", "VIKAVOLT", "TAPU_KOKO", "REGIELEKI",
+
+        # [Fairy]
+        # "TOGEKISS", "TOGEKISS_SHADOW_FORM", "FLORGES", "SYLVEON", "DIANCIE_MEGA", "PRIMARINA",
+        # "XERNEAS", "MAGEARNA", "GRIMMSNARL", "ZACIAN", "ZACIAN_CROWNED_SWORD_FORM", "IRONVALIANT", "FLUTTERMANE",
+        # "ENAMORUS_INCARNATE_FORM", "TAPU_KOKO", "TAPU_LELE", "TAPU_BULU",
+
+        # [Fighting]
+        # "MARSHADOW", "HITMONLEE", "HITMONLEE_SHADOW_FORM", "MEWTWO", "MEWTWO_SHADOW_FORM", "MEWTWO_MEGA_X",
+        # "BLAZIKEN", "BLAZIKEN_SHADOW_FORM", "BLAZIKEN_MEGA", "GALLADE", "GALLADE_SHADOW_FORM", "GALLADE_MEGA",
+        # "LOPUNNY_MEGA", "MIENSHAO", "KELDEO", "MELOETTA_PIROUETTE_FORM", "KOMMO_O", "BUZZWOLE", "ZAPDOS_GALARIAN_FORM",
+        # "URSHIFU_SINGLE_STRIKE_FORM", "URSHIFU_RAPID_STRIKE_FORM", "SNEASLER", "MACHAMP", "MACHAMP_SHADOW_FORM",
+        # "CONKELDURR", "CONKELDURR_SHADOW_FORM", "SIRFETCHD", "ZAPDOS_GALARIAN_FORM", "HERACROSS", "HERACROSS_MEGA",
+        # "HARIYAMA", "HARIYAMA_SHADOW_FORM", "PANGORO", "KORAIDON", "DECIDUEYE_HISUIAN_FORM",
+
+        # [Fire]
+        # "HO_OH_SHADOW_FORM",  # One-time only
+        # "RESHIRAM", "HEATRAN", "GROUDON_PRIMAL",  # Permanent (non-legacy moves)
+        # "BLAZIKEN_MEGA", "CHARIZARD_MEGA_Y",  # Permanent?
+        # "BLACEPHALON", "DARMANITAN_GALARIAN_ZEN_FORM", "CHANDELURE", "ENTEI",
+        # "CAMERUPT_MEGA", "ENTEI_SHADOW_FORM", "VOLCARONA", "CHANDELURE_SHADOW_FORM", "VOLCARONA_SHADOW_FORM",
+        # "GROUDON_PRIMAL", "DARMANITAN", "MOLTRES", "MOLTRES_SHADOW_FORM", "TYPHLOSION_HISUIAN_FORM", "IRONMOTH",
+
+        # [Flying]
+        # "RAYQUAZA", "RAYQUAZA_SHADOW_FORM", "YVELTAL", "PIDGEOT_MEGA",  # Permanent (maybe except Pidgeot)
+        # "HO_OH", "HO_OH_SHADOW_FORM", "LUGIA", "LUGIA_SHADOW_FORM",  # Keep for non-Hidden Power and non-Apex moves
+        # "TORNADUS", "TORNADUS_THERIAN_FORM",  # For the Nov'23 run that doesn't include any other speculative moves
+        # "SALAMENCE", "SALAMENCE_SHADOW_FORM", "SALAMENCE_MEGA", "AERODACTYL", "AERODACTYL_SHADOW_FORM",
+        # "AERODACTYL_MEGA", "CHARIZARD", "CHARIZARD_SHADOW_FORM", "CHARIZARD_MEGA_Y", "ARCHEOPS", "ARCHEOPS_SHADOW_FORM",
+        # "PIDGEOT_MEGA", "DRAGONITE", "DRAGONITE_SHADOW_FORM", "ZAPDOS", "ZAPDOS_SHADOW_FORM", "ZAPDOS_GALARIAN_FORM",
+        # "MOLTRES", "MOLTRES_SHADOW_FORM", "ARTICUNO_GALARIAN_FORM", "HONCHKROW", "HONCHKROW_SHADOW_FORM",
+        # "UNFEZANT", "UNFEZANT_SHADOW_FORM", "TOGEKISS", "TOGEKISS_SHADOW_FORM", "TOUCANNON",
+        # "LUGIA", "LUGIA_SHADOW_FORM", "TORNADUS",
+
+        # [Grass]
+        # "SCEPTILE_MEGA",  # Permanent?
+        # "DECIDUEYE_HISUIAN_FORM",  # One-time only?
+        # "RILLABOOM", "TSAREENA", "ZARUDE", "MEOWSCARADA",
+        # # Obsolete: "ROSERADE", "ROSERADE_SHADOW_FORM", "SCEPTILE_SHADOW_FORM", "SCEPTILE_MEGA", "SCEPTILE",
+        # # Obsolete: "ABOMASNOW_MEGA", "VENUSAUR_MEGA", "VENUSAUR_SHADOW_FORM", "SHAYMIN_SKY_FORM",  "VENUSAUR", "DECIDUEYE",
+
+        # [Ground]
+        # "GROUDON", "GROUDON_SHADOW_FORM", "GROUDON_PRIMAL",  # Permanent
+        # "GARCHOMP", "GARCHOMP_SHADOW_FORM", "GARCHOMP_MEGA",  # Permanent?
+        # "LANDORUS_THERIAN_FORM", "LANDORUS_INCARNATE_FORM",  # Permanent? (At least Therian)
+        # "MUDSDALE", "GROUDON_SHADOW_FORM", "RHYPERIOR", "KROOKODILE", "KROOKODILE_SHADOW_FORM",
+        # "CAMERUPT_MEGA", "STEELIX_MEGA", "RHYPERIOR_SHADOW_FORM",
+        # "GARCHOMP", "GARCHOMP_SHADOW_FORM",
+        # # Obsolete: "MAMOSWINE", "MAMOSWINE_SHADOW_FORM", "GOLEM", "GOLEM_SHADOW_FORM", "SWAMPERT",
+        # # Obsolete: "SWAMPERT_SHADOW_FORM", "SWAMPERT_MEGA",
+
+        # [Ice]
+        # "KYUREM", "KYUREM_BLACK_FORM", "KYUREM_WHITE_FORM", "ABOMASNOW_MEGA", "AVALUGG_HISUIAN_FORM",
+        # "CRABOMINABLE", "CALYREX_ICE_RIDER_FORM",
+
+        # [Poison]
+        # "GENGAR", "GENGAR_SHADOW_FORM", "GENGAR_MEGA", "ETERNATUS", "SALAZZLE", "SNEASLER",
+
+        # [Psychic]
+        # "GARDEVOIR_MEGA", "GALLADE_MEGA", "GARDEVOIR_SHADOW_FORM", "GALLADE_SHADOW_FORM", "GARDEVOIR", "GALLADE",  # Synchronoise (one-time only)
+        # "NECROZMA", "NECROZMA_DAWN_WINGS_FORM", "NECROZMA_DUSK_MANE_FORM", "NECROZMA_ULTRA_FORM", "DEOXYS",
+        # "DEOXYS_ATTACK_FORM", "ARTICUNO_GALARIAN_FORM", "TAPU_LELE", "AZELF", "MELOETTA_ARIA_FORM", "HOOPA",
+        # "HATTERENE",
+
+        # [Rock]
+        # "RHYPERIOR",  # Also for beginners (Stone Edge), even without MB speculation
+        # "RHYPERIOR_SHADOW_FORM", "ARCHEOPS", "AERODACTYL", "AERODACTYL_SHADOW_FORM", "AERODACTYL_MEGA",
+        # "STONJOURNER", "DIANCIE_MEGA", "TYRANITAR", "TYRANITAR_SHADOW_FORM", "TYRANITAR_MEGA",
+        # "NIHILEGO", "ARCANINE_HISUIAN_FORM", "RAMPARDOS", "RAMPARDOS_SHADOW_FORM", "LYCANROC_MIDDAY_FORM",
+        # "KLEAVOR",
+        # # Obsolete: "OMASTAR", "OMASTAR_SHADOW_FORM", "GOLEM_SHADOW_FORM", "GOLEM", "GOLEM_ALOLA_FORM",
+
+        # [Steel]
+        # "MAGEARNA", "LUCARIO", "LUCARIO_SHADOW_FORM", "LUCARIO_MEGA", "SOLGALEO", "HEATRAN", "GHOLDENGO",
+        # "NECROZMA_DUSK_MANE_FORM", "KLINKLANG", "AGGRON", "AGGRON_SHADOW_FORM", "AGGRON_MEGA", "GENESECT", "SCIZOR",
+        # "SCIZOR_SHADOW_FORM", "SCIZOR_MEGA", "DIALGA", "DIALGA_ORIGIN_FORM", "EXCADRILL", "MELMETAL", "KARTANA",
+
+        # [Water]
+        # "KYOGRE", "KYOGRE_SHADOW_FORM", "KYOGRE_PRIMAL",  # Permanent (non-legacy moves)
+        # "FERALIGATR", "FERALIGATR_SHADOW_FORM",  # Water Gun is exclusive
+        # "PRIMARINA", "INTELEON", "PALKIA", "PALKIA_SHADOW_FORM", "PALKIA_ORIGIN_FORM", "VOLCANION", "WISHIWASHI_SCHOOL_FORM",
+        # "URSHIFU_RAPID_STRIKE_FORM", "SHARPEDO", "SHARPEDO_SHADOW_FORM", "SHARPEDO_MEGA",
+        # "SAMUROTT_HISUIAN_FORM",
+        # # Obsolete: "GYARADOS", "GYARADOS_SHADOW_FORM", "GYARADOS_MEGA",
     ],
 }

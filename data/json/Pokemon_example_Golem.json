@@ -1,0 +1,208 @@
+{
+  'pokemonId': 'GOLEM',
+  'type': 'POKEMON_TYPE_ROCK',
+  'type2': 'POKEMON_TYPE_GROUND',
+  'stats': {
+    'baseStamina': 190,
+    'baseAttack': 211,
+    'baseDefense': 198
+  },
+  'quickMoves': [
+    'ROCK_THROW_FAST',
+    'MUD_SLAP_FAST',
+    'MUD_SHOT_FAST'
+  ],
+  'cinematicMoves': [
+    'EARTHQUAKE',
+    'STONE_EDGE',
+    'ANCIENT_POWER',
+    'ROCK_BLAST',
+    'RETURN'
+  ],
+  'pokedexHeightM': 1.4,
+  'pokedexWeightKg': 300.0,
+  'parentPokemonId': 'GRAVELER',
+  'heightStdDev': 0.175,
+  'weightStdDev': 37.5,
+  'familyId': 'FAMILY_GEODUDE',
+  'thirdMove': {
+    'stardustToUnlock': 10000,
+    'candyToUnlock': 25
+  },
+  'movesets': [
+    {
+      'quickMove': 'ROCK_THROW_FAST',
+      'cinematicMove': 'EARTHQUAKE'
+    },
+    {
+      'quickMove': 'ROCK_THROW_FAST',
+      'cinematicMove': 'STONE_EDGE'
+    },
+    {
+      'quickMove': 'ROCK_THROW_FAST',
+      'cinematicMove': 'ANCIENT_POWER'
+    },
+    {
+      'quickMove': 'ROCK_THROW_FAST',
+      'cinematicMove': 'ROCK_BLAST'
+    },
+    {
+      'quickMove': 'ROCK_THROW_FAST',
+      'cinematicMove': 'RETURN'
+    },
+    {
+      'quickMove': 'MUD_SLAP_FAST',
+      'cinematicMove': 'EARTHQUAKE'
+    },
+    {
+      'quickMove': 'MUD_SLAP_FAST',
+      'cinematicMove': 'STONE_EDGE'
+    },
+    {
+      'quickMove': 'MUD_SLAP_FAST',
+      'cinematicMove': 'ANCIENT_POWER'
+    },
+    {
+      'quickMove': 'MUD_SLAP_FAST',
+      'cinematicMove': 'ROCK_BLAST'
+    },
+    {
+      'quickMove': 'MUD_SLAP_FAST',
+      'cinematicMove': 'RETURN'
+    },
+    {
+      'quickMove': 'MUD_SHOT_FAST',
+      'cinematicMove': 'EARTHQUAKE',
+      'legacyDate': '20170216'
+    },
+    {
+      'quickMove': 'MUD_SHOT_FAST',
+      'cinematicMove': 'STONE_EDGE',
+      'legacyDate': '20170216'
+    },
+    {
+      'quickMove': 'MUD_SHOT_FAST',
+      'cinematicMove': 'ANCIENT_POWER',
+      'legacyDate': '20170216'
+    },
+    {
+      'quickMove': 'MUD_SHOT_FAST',
+      'cinematicMove': 'RETURN',
+      'legacyDate': '20170216'
+    }
+  ],
+  'pokedex': {
+    'pokemonId': 'GOLEM',
+    'pokemonNum': 76,
+    'gen': 'GEN_1'
+  },
+  'tmMovesets': [
+    {
+      'quickMove': 'ROCK_THROW_FAST',
+      'cinematicMove': 'EARTHQUAKE'
+    },
+    {
+      'quickMove': 'ROCK_THROW_FAST',
+      'cinematicMove': 'STONE_EDGE'
+    },
+    {
+      'quickMove': 'ROCK_THROW_FAST',
+      'cinematicMove': 'ANCIENT_POWER'
+    },
+    {
+      'quickMove': 'ROCK_THROW_FAST',
+      'cinematicMove': 'ROCK_BLAST'
+    },
+    {
+      'quickMove': 'ROCK_THROW_FAST',
+      'cinematicMove': 'RETURN'
+    },
+    {
+      'quickMove': 'MUD_SLAP_FAST',
+      'cinematicMove': 'EARTHQUAKE'
+    },
+    {
+      'quickMove': 'MUD_SLAP_FAST',
+      'cinematicMove': 'STONE_EDGE'
+    },
+    {
+      'quickMove': 'MUD_SLAP_FAST',
+      'cinematicMove': 'ANCIENT_POWER'
+    },
+    {
+      'quickMove': 'MUD_SLAP_FAST',
+      'cinematicMove': 'ROCK_BLAST'
+    },
+    {
+      'quickMove': 'MUD_SLAP_FAST',
+      'cinematicMove': 'RETURN'
+    },
+    {
+      'quickMove': 'MUD_SHOT_FAST',
+      'cinematicMove': 'EARTHQUAKE',
+      'legacyDate': '20170216'
+    },
+    {
+      'quickMove': 'MUD_SHOT_FAST',
+      'cinematicMove': 'STONE_EDGE',
+      'legacyDate': '20170216'
+    },
+    {
+      'quickMove': 'MUD_SHOT_FAST',
+      'cinematicMove': 'ANCIENT_POWER',
+      'legacyDate': '20170216'
+    },
+    {
+      'quickMove': 'MUD_SHOT_FAST',
+      'cinematicMove': 'ROCK_BLAST',
+      'legacyDate': '20170216'
+    },
+    {
+      'quickMove': 'MUD_SHOT_FAST',
+      'cinematicMove': 'RETURN',
+      'legacyDate': '20170216'
+    }
+  ],
+  'currentMovesets': [
+    {
+      'quickMove': 'ROCK_THROW_FAST',
+      'cinematicMove': 'EARTHQUAKE'
+    },
+    {
+      'quickMove': 'ROCK_THROW_FAST',
+      'cinematicMove': 'STONE_EDGE'
+    },
+    {
+      'quickMove': 'ROCK_THROW_FAST',
+      'cinematicMove': 'ANCIENT_POWER'
+    },
+    {
+      'quickMove': 'ROCK_THROW_FAST',
+      'cinematicMove': 'ROCK_BLAST'
+    },
+    {
+      'quickMove': 'ROCK_THROW_FAST',
+      'cinematicMove': 'RETURN'
+    },
+    {
+      'quickMove': 'MUD_SLAP_FAST',
+      'cinematicMove': 'EARTHQUAKE'
+    },
+    {
+      'quickMove': 'MUD_SLAP_FAST',
+      'cinematicMove': 'STONE_EDGE'
+    },
+    {
+      'quickMove': 'MUD_SLAP_FAST',
+      'cinematicMove': 'ANCIENT_POWER'
+    },
+    {
+      'quickMove': 'MUD_SLAP_FAST',
+      'cinematicMove': 'ROCK_BLAST'
+    },
+    {
+      'quickMove': 'MUD_SLAP_FAST',
+      'cinematicMove': 'RETURN'
+    }
+  ]
+}

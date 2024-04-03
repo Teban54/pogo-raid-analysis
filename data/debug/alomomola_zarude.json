@@ -1,0 +1,174 @@
+{
+  'pokemonId': 'ZARUDE',
+  'byMove': [
+    {
+      'move1': 'BITE_FAST',
+      'move2': 'RETURN',
+      'result': {
+        'totalCombatTime': 176379,
+        'power': 0.9908869917354104,
+        'effectiveCombatTime': 176379,
+        'potions': 16.333499999999997,
+        'overallRating': 0.9908869917354104,
+        'numSims': 200,
+        'deaths': 1,
+        'effectiveDeaths': 1.0,
+        'tdo': 162.335,
+        'estimator': 0.99089414,
+        'tdi': 2171.152879209702,
+        'summary': {},
+        'kills': 1
+      }
+    },
+    {
+      'move1': 'BITE_FAST',
+      'move2': 'DARK_PULSE',
+      'result': {
+        'totalCombatTime': 171838,
+        'power': 0.9653668679155024,
+        'effectiveCombatTime': 171838,
+        'potions': 15.67000000000001,
+        'overallRating': 0.9653668679155024,
+        'numSims': 200,
+        'deaths': 1,
+        'effectiveDeaths': 1.0,
+        'tdo': 155.7,
+        'estimator': 0.96538335,
+        'tdi': 2269.8839082119807,
+        'summary': {},
+        'kills': 1
+      }
+    },
+    {
+      'move1': 'BITE_FAST',
+      'move2': 'ENERGY_BALL',
+      'result': {
+        'totalCombatTime': 136630,
+        'power': 0.7674812640103781,
+        'effectiveCombatTime': 136630,
+        'potions': 12.422500000000007,
+        'overallRating': 0.7674812640103781,
+        'numSims': 200,
+        'deaths': 1,
+        'effectiveDeaths': 1.0,
+        'tdo': 123.225,
+        'estimator': 0.7675858,
+        'tdi': 2930.2859464342205,
+        'summary': {},
+        'kills': 1
+      }
+    },
+    {
+      'move1': 'VINE_WHIP_FAST',
+      'move2': 'DARK_PULSE',
+      'result': {
+        'totalCombatTime': 133390,
+        'power': 0.7493436679927448,
+        'effectiveCombatTime': 133390,
+        'potions': 12.397250000000009,
+        'overallRating': 0.7493436679927448,
+        'numSims': 200,
+        'deaths': 1,
+        'effectiveDeaths': 1.0,
+        'tdo': 122.9725,
+        'estimator': 0.7493864,
+        'tdi': 2879.342944902912,
+        'summary': {},
+        'kills': 1
+      }
+    },
+    {
+      'move1': 'VINE_WHIP_FAST',
+      'move2': 'RETURN',
+      'result': {
+        'totalCombatTime': 127879,
+        'power': 0.7184181599310174,
+        'effectiveCombatTime': 127879,
+        'potions': 11.9325,
+        'overallRating': 0.7184181599310174,
+        'numSims': 200,
+        'deaths': 1,
+        'effectiveDeaths': 1.0,
+        'tdo': 118.325,
+        'estimator': 0.7184217,
+        'tdi': 2987.0336382939395,
+        'summary': {},
+        'kills': 1
+      }
+    },
+    {
+      'move1': 'BITE_FAST',
+      'move2': 'POWER_WHIP',
+      'result': {
+        'totalCombatTime': 117802,
+        'power': 0.6617577395458439,
+        'effectiveCombatTime': 117802,
+        'potions': 10.744250000000008,
+        'overallRating': 0.6617577395458438,
+        'numSims': 200,
+        'deaths': 1,
+        'effectiveDeaths': 0.965,
+        'tdo': 109.835,
+        'estimator': 0.661813,
+        'tdi': 3382.6110081002644,
+        'summary': {}
+      }
+    },
+    {
+      'move1': 'VINE_WHIP_FAST',
+      'move2': 'ENERGY_BALL',
+      'result': {
+        'totalCombatTime': 110500,
+        'power': 0.6207203659322088,
+        'effectiveCombatTime': 110500,
+        'potions': 10.236999999999993,
+        'overallRating': 0.6207203659322088,
+        'numSims': 200,
+        'deaths': 1,
+        'effectiveDeaths': 0.78,
+        'tdo': 122.4725,
+        'estimator': 0.6207867,
+        'tdi': 3523.255563189669,
+        'summary': {}
+      }
+    },
+    {
+      'move1': 'VINE_WHIP_FAST',
+      'move2': 'POWER_WHIP',
+      'result': {
+        'totalCombatTime': 92350,
+        'power': 0.518819667449447,
+        'effectiveCombatTime': 92350,
+        'potions': 8.660250000000001,
+        'overallRating': 0.518819667449447,
+        'numSims': 200,
+        'deaths': 1,
+        'tdo': 173.205,
+        'estimator': 0.5188253,
+        'tdi': 4222.596216036503,
+        'summary': {}
+      }
+    }
+  ],
+  'cp': 3833,
+  'total': {
+    'combatTime': 92350,
+    'numLosses': 200,
+    'power': 0.518819667449447,
+    'effectiveCombatTime': 92350,
+    'potions': 8.660250000000001,
+    'overallRating': 0.518819667449447,
+    'numSims': '1600',
+    'numResults': 1,
+    'tdo': 173.205,
+    'estimator': 0.5188253,
+    'tdi': 4222.596216036503,
+    'deaths': 1
+  },
+  'stats': {
+    'attack': 15,
+    'defense': 15,
+    'stamina': 15,
+    'level': '40'
+  }
+}

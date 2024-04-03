@@ -28,7 +28,7 @@ async def get_pokebattler_metadata(metadata_name, write_file=False):
             data/json/<metadata_name>.json
     :return: Requested JSON data as Python object
     """
-    data = await do_http_request(f"https://fight-beta.pokebattler.com/{metadata_name}")
+    data = await do_http_request(f"{POKEBATTLER_SERVER}{metadata_name}")
     if write_file:
         write_json_to_file(data, f"data/json/{metadata_name}.json")
     return data
@@ -76,6 +76,7 @@ async def get_pokebattler_raid_counters(raid_boss=None, raid_boss_codename=None,
         "includeShadow": attacker_criteria_multi.pokebattler_shadow(),
         "includeMegas": attacker_criteria_multi.pokebattler_mega(),
         "randomAssistants": "-1",
+        # "primalAssistants": "KYOGRE_PRIMAL",  # TEMPORARY_PRIMAL (another edit below)
         "friendLevel": battle_settings.friendship_code,
         "attackerTypes": "POKEMON_TYPE_ALL" if not attacker_types else attacker_types  # ["POKEMON_TYPE_ICE","POKEMON_TYPE_FIRE"]
     }
@@ -91,11 +92,11 @@ async def get_pokebattler_raid_counters(raid_boss=None, raid_boss_codename=None,
     # &weatherCondition=CLEAR&dodgeStrategy=DODGE_REACTION_TIME&aggregation=AVERAGE
     # &includeMegas=true&randomAssistants=-1&numMegas=0#raid-estimator
     if trainer_id:
-        url = f'https://fight-beta.pokebattler.com/raids/defenders/{raid_boss_codename}/' \
+        url = f'{POKEBATTLER_SERVER}raids/defenders/{raid_boss_codename}/' \
               f'levels/{raid_tier}/attackers/users/{trainer_id}/' \
               f'strategies/{battle_settings.attack_strategy_code}/DEFENSE_RANDOM_MC'
     else:
-        url = f'https://fight-beta.pokebattler.com/raids/defenders/{raid_boss_codename}/' \
+        url = f'{POKEBATTLER_SERVER}raids/defenders/{raid_boss_codename}/' \
               f'levels/{raid_tier}/attackers/levels/{attacker_level}/' \
               f'strategies/{battle_settings.attack_strategy_code}/DEFENSE_RANDOM_MC'
 
@@ -104,11 +105,13 @@ async def get_pokebattler_raid_counters(raid_boss=None, raid_boss_codename=None,
         if type(v) is bool:
             payload[k] = str(v)
 
+    # print(url)
+    # print(payload)
     return await do_http_request(url, payload)
 
 
 async def get_pokebattler_single_battle(attacker=None, attacker_codename=None,
-                                        attacker_fast_move=None, attacker_charged_move=None, attacker_ivs="15/15/15",
+                                        attacker_fast_move=None, attacker_charged_move=None, attacker_ivs="15\\15\\15",
                                         raid_boss=None, raid_boss_codename=None, raid_tier="Tier 5",
                                         raid_boss_fast_move="RANDOM", raid_boss_charged_move="RANDOM",
                                         attacker_level=40,
@@ -122,7 +125,7 @@ async def get_pokebattler_single_battle(attacker=None, attacker_codename=None,
             if an attacker Pokemon object is not provided.
     :param str attacker_fast_move: Fast move code name, e.g. "MUD_SLAP_FAST".
     :param str attacker_charged_move: Charged move code name, e.g. "EARTH_POWER".
-    :param str attacker_ivs: IVs of the attacker, in "atk/def/hp" format.
+    :param str attacker_ivs: IVs of the attacker, in "atk\\def\\hp" format.
     :param raid_boss: RaidBoss object.
     :param str raid_boss_codename: Code name of the raid boss (e.g. "LANDORUS_THERIAN_FORM"),
             if a RaidBoss object is not provided.
@@ -146,7 +149,7 @@ async def get_pokebattler_single_battle(attacker=None, attacker_codename=None,
         battle_settings = battle_settings.indiv_settings[0]
 
     # Parse IVs from my format (15/15/15) to Pokebattler format (FFF)
-    ivs = [int(x) for x in attacker_ivs.split('/')]
+    ivs = [int(x) for x in attacker_ivs.split('\\')]
     ivs_pokebattler = '{}{}{}'.format(
         chr(ord('A') + ivs[0] - 10) if ivs[0] >= 10 else str(ivs[0]),
         chr(ord('A') + ivs[1] - 10) if ivs[1] >= 10 else str(ivs[1]),
@@ -163,6 +166,7 @@ async def get_pokebattler_single_battle(attacker=None, attacker_codename=None,
         #"includeShadow": attacker_criteria_multi.pokebattler_shadow(),
         #"includeMegas": attacker_criteria_multi.pokebattler_mega(),
         "randomAssistants": "-1",
+        # "primalAssistants": "KYOGRE_PRIMAL",  # TEMPORARY_PRIMAL (another edit above)
         "friendLevel": battle_settings.friendship_code,
         #"attackerTypes": "POKEMON_TYPE_ALL" if not attacker_types else attacker_types  # ["POKEMON_TYPE_ICE","POKEMON_TYPE_FIRE"]
         "includeDetails": include_details,
@@ -191,7 +195,7 @@ async def get_pokebattler_single_battle(attacker=None, attacker_codename=None,
     #           f'levels/{raid_tier}/attackers/users/{trainer_id}/' \
     #           f'strategies/{battle_settings.attack_strategy_code}/DEFENSE_RANDOM_MC'
     # else:
-    url = f'https://fight-beta.pokebattler.com/fights/attackers/{attacker_codename}/' \
+    url = f'{POKEBATTLER_SERVER}fights/attackers/{attacker_codename}/' \
           f'quickMoves/{attacker_fast_move}/cinMoves/{attacker_charged_move},MOVE_NONE/' \
           f'levels/{attacker_level}/ivs/{ivs_pokebattler}/' \
           f'defenders/{raid_boss_codename}/' \
