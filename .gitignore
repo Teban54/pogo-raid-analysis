@@ -1,7 +1,7 @@
 # Ignore pokebattler files
 level_40
 .DS_Store
-.idea
+.idea/
 data/counters/(B*
 data/counters/(D*
 data/counters/(E*
