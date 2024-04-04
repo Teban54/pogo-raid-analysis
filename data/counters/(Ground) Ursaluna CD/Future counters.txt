@@ -1,0 +1,84 @@
+Now, but missing from Pokebattler: Ursaluna/Shadow, Shadow Golurk
+
+Future Pokemon: Mudsdale, (Zygarde)
+
+Future shadows: Shadow Groudon, Shadow Garchomp, Shadow Excadrill, Shadow Rhyperior, Shadow Krookodile (Shadow Landorus-T)
+
+Future megas: Mega Swampert, Mega Camerupt, Mega Garchomp, (Primal Groudon)
+
+Better regular moves: Ursaluna/Shadow (MS/MS/EP), Groudon/Shadow/Primal (EP), Excadrill/Shadow (EP), Rhyperior/Shadow (EP), Mamoswine/Shadow(EP), Krookodile/Shadow (EP), Landorus-T (EP), Mudsdale (EP), Golem (EP), Mega Steelix (Mud-Slap/EP), Mega Camerupt (Mud-Slap), Swampert/Mega (EP)
+
+Signature moves: Groudon (PB), Landorus-T
+
+GamePress only: Zygarde, Shadow Landorus-T, Primal Groudon (EP/PB)
+
+
+(Zygarde no ground fast move)
+
+
+            ("URSALUNA", "TACKLE_FAST", "HIGH_HORSEPOWER"),
+            ("URSALUNA", "ROCK_SMASH_FAST", "HIGH_HORSEPOWER"),
+            ("URSALUNA", "MUD_SLAP_FAST", "HIGH_HORSEPOWER"),
+            ("URSALUNA", "MUD_SHOT_FAST", "HIGH_HORSEPOWER"),
+            ("URSALUNA", "COUNTER_FAST", "HIGH_HORSEPOWER"),
+            ("URSALUNA_SHADOW_FORM", "TACKLE_FAST", "HIGH_HORSEPOWER"),
+            ("URSALUNA_SHADOW_FORM", "ROCK_SMASH_FAST", "HIGH_HORSEPOWER"),
+            ("URSALUNA_SHADOW_FORM", "MUD_SLAP_FAST", "HIGH_HORSEPOWER"),
+            ("URSALUNA_SHADOW_FORM", "MUD_SHOT_FAST", "HIGH_HORSEPOWER"),
+            ("URSALUNA_SHADOW_FORM", "COUNTER_FAST", "HIGH_HORSEPOWER"),
+            ("URSALUNA", "TACKLE_FAST", "EARTH_POWER"),
+            ("URSALUNA", "ROCK_SMASH_FAST", "EARTH_POWER"),
+            ("URSALUNA", "MUD_SLAP_FAST", "EARTH_POWER"),
+            ("URSALUNA", "MUD_SHOT_FAST", "EARTH_POWER"),
+            ("URSALUNA", "COUNTER_FAST", "EARTH_POWER"),
+            ("URSALUNA_SHADOW_FORM", "TACKLE_FAST", "EARTH_POWER"),
+            ("URSALUNA_SHADOW_FORM", "ROCK_SMASH_FAST", "EARTH_POWER"),
+            ("URSALUNA_SHADOW_FORM", "MUD_SLAP_FAST", "EARTH_POWER"),
+            ("URSALUNA_SHADOW_FORM", "MUD_SHOT_FAST", "EARTH_POWER"),
+            ("URSALUNA_SHADOW_FORM", "COUNTER_FAST", "EARTH_POWER"),
+            ("GOLURK_SHADOW_FORM", "MUD_SLAP_FAST", "EARTH_POWER"),
+            ("MUDSDALE", "MUD_SLAP_FAST", "EARTHQUAKE"),
+            ("MUDSDALE", "MUD_SLAP_FAST", "EARTH_POWER"),
+            ("GROUDON", "MUD_SHOT_FAST", "EARTH_POWER"),
+            ("GROUDON", "MUD_SHOT_FAST", "PRECIPICE_BLADES"),
+            ("GROUDON_SHADOW_FORM", "MUD_SHOT_FAST", "EARTHQUAKE"),
+            ("GROUDON_SHADOW_FORM", "MUD_SHOT_FAST", "EARTH_POWER"),
+            ("GROUDON_SHADOW_FORM", "MUD_SHOT_FAST", "PRECIPICE_BLADES"),
+            ("GARCHOMP_SHADOW_FORM", "MUD_SHOT_FAST", "EARTH_POWER"),
+            ("GARCHOMP_MEGA", "MUD_SHOT_FAST", "EARTH_POWER"),
+            ("EXCADRILL", "MUD_SLAP_FAST", "EARTH_POWER"),
+            ("EXCADRILL", "MUD_SHOT_FAST", "EARTH_POWER"),
+            ("EXCADRILL", "METAL_CLAW_FAST", "EARTH_POWER"),
+            ("EXCADRILL_SHADOW_FORM", "MUD_SLAP_FAST", "DRILL_RUN"),
+            ("EXCADRILL_SHADOW_FORM", "MUD_SHOT_FAST", "DRILL_RUN"),
+            ("EXCADRILL_SHADOW_FORM", "METAL_CLAW_FAST", "DRILL_RUN"),
+            ("EXCADRILL_SHADOW_FORM", "MUD_SLAP_FAST", "EARTH_POWER"),
+            ("EXCADRILL_SHADOW_FORM", "MUD_SHOT_FAST", "EARTH_POWER"),
+            ("EXCADRILL_SHADOW_FORM", "METAL_CLAW_FAST", "EARTH_POWER"),
+            ("RHYPERIOR", "MUD_SLAP_FAST", "EARTH_POWER"),
+            ("RHYPERIOR_SHADOW_FORM", "MUD_SLAP_FAST", "EARTHQUAKE"),
+            ("RHYPERIOR_SHADOW_FORM", "MUD_SLAP_FAST", "EARTH_POWER"),
+            ("KROOKODILE", "MUD_SLAP_FAST", "EARTH_POWER"),
+            ("KROOKODILE_SHADOW_FORM", "MUD_SLAP_FAST", "EARTHQUAKE"),
+            ("KROOKODILE_SHADOW_FORM", "MUD_SLAP_FAST", "EARTH_POWER"),
+            ("SWAMPERT", "MUD_SHOT_FAST", "EARTH_POWER"),
+            ("SWAMPERT_SHADOW_FORM", "MUD_SHOT_FAST", "EARTH_POWER"),
+            ("SWAMPERT_MEGA", "MUD_SHOT_FAST", "EARTHQUAKE"),
+            ("SWAMPERT_MEGA", "MUD_SHOT_FAST", "EARTH_POWER"),
+            ("CAMERUPT_MEGA", "MUD_SLAP_FAST", "EARTH_POWER"),
+            ("CAMERUPT_MEGA", "INCINERATE_FAST", "EARTH_POWER"),
+            ("CAMERUPT_MEGA", "ROCK_SMASH_FAST", "EARTH_POWER"),
+            ("MAMOSWINE", "MUD_SLAP_FAST", "EARTH_POWER"),
+            ("MAMOSWINE_SHADOW_FORM", "MUD_SLAP_FAST", "EARTH_POWER"),
+            ("LANDORUS_THERIAN_FORM", "MUD_SHOT_FAST", "EARTH_POWER"),
+            ("GOLEM", "MUD_SLAP_FAST", "EARTH_POWER"),
+            ("GOLEM_SHADOW_FORM", "MUD_SLAP_FAST", "EARTH_POWER"),
+            ("STEELIX_MEGA", "MUD_SLAP_FAST", "EARTHQUAKE"),
+            ("STEELIX_MEGA", "MUD_SLAP_FAST", "EARTH_POWER"),
+            ("CAMERUPT_MEGA", "EMBER_FAST", "EARTH_POWER"),
+
+
+"URSALUNA", "URSALUNA_SHADOW_FORM", "MUDSDALE", "GROUDON", "GROUDON_SHADOW_FORM", "EXCADRILL", "RHYPERIOR", "KROOKODILE", "KROOKODILE_SHADOW_FORM", "SWAMPERT", "SWAMPERT_SHADOW_FORM", "SWAMPERT_MEGA", "CAMERUPT_MEGA", "MAMOSWINE", "MAMOSWINE_SHADOW_FORM", "LANDORUS_THERIAN_FORM", "GOLEM", "GOLEM_SHADOW_FORM", "STEELIX_MEGA", "EXCADRILL_SHADOW_FORM"
+
+
+pve, raid attackers, ground types, ground meta, ground pve, ground raid pokemon, ursaluna, community day, teddiursa, high horsepower, garchomp,

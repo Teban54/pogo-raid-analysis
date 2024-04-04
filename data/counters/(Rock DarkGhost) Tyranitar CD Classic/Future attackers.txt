@@ -1,0 +1,47 @@
+[Dark/Ghost]
+
+Future Pokemon: Aegislash (can't), Hisuian Zoroark (SC,H/SB,NS), Hisuian Typhlosion (SC/SB), Hisuian Samurott (SP,S/DP,NS), Ash Greninja (can't), Dhelmise, Lunala, Dawn Wings Necrozma, Marshadow, Blacephalon, Polteageist, Grimmsnarl, Cursola, Dragapult, Urshifu Single Strike, Spectrier, Calyrex Shadow Rider, Meowscarada (B,SP/NS,FP,DP), Ceruledge (A,SC,H/SS,NS,SB), Mabosstiff (S,B/P,C,DP), Annihilape (SC/SP,NS,SB), Kingambit (S,SP/NS,FP,DP), Brute Bonnet (SP/P,DP,C), Flutter Mane (A,H/SB), Iron Jugulis (S/C,DP), Gholdengo (A,H/NS,SB), Chien-Pao (SP,S/P,NS,DP,C), Chi-Yu (S/P,DP,C), Roaring Moon (B,S/NS,DP,C)
+
+Future shadows: Shadow Gengar (Lick and Shadow Claw), Shadow Chandelure, Shadow Hydreigon, Shadow Giratina-O, Shadow Darkrai
+
+Future megas: Mega Mewtwo Y, Mega Tyranitar, Mega Sharpedo, Mega Sableye (ignored in ASE)
+
+Other Brutal Swing users: Gyarados (Mega), Tyranitar (& Shadow, Mega), Absol (& Mega), Krookodile, Greninja (& Ash), Incineroar, Zarude
+
+Better non-BS regular moves: Tyranitar (Snarl/Foul Play or Brutal Swing; & Shadow, Mega), Darkrai (Foul Play), Aegislash Blade (Shadow Claw), Lunala (Shadow Claw or Hex), Spectrier (Hex), Calyrex Shadow Rider (Hex), Urshifu Single Strike (Snarl/Foul Play), Honchkrow (Foul Play, & Shadow)
+
+Signature moves (Dark): Darkrai, Incineroar, Zoroark, Pangoro, Hoopa (Unbound), Grimmsnarl, Urshifu Single Strike, Hisuian Samurott, Kingambit, Chien-Pao & Chi-Yu, "Mabosstiff & Roaring Moon" (Jaw Lock)
+* Use Brutal Swing to compare
+
+Signature moves (Ghost): Decidueye, Hisuian Typhlosion, Hisuian Zoroark, Lunala, Marsahdow, Calyrex Shadow Rider, Annihilape
+* Use Shadow Force and Shadow Ball to compare, but most already have Shadow Ball (H/SF<H/SB), so Shadow Force is practically ignored
+
+GamePress only: Aegislash, Hisuian Zoroark (SC/SB, H/SB), Hisuian Typhlosion (SC/SB, & Shadow), Ash Greninja, Shadow Giratina-O, Meowscarada (B/FP), Ceruledge (SC/SB, H/SB), Mabosstiff (S/DP), Annihilape (SC/SB), Kingambit (S/FP, S/DP), Brute Bonnet (SP/DP), Flutter Mane (H/SB, A/SB), Iron Jugulis (S/DP), Gholdengo (H/SB), Chien-Pao (S/DP, S/C, S/BS), Chi-Yu (S/DP, S/C, S/BS), Roaring Moon (S/DP, B/C)
+* Hisuian Samurott is too weak to show up
+* Ignored most GP-only signature moves except Chi-Yu and Chien-Pao
+
+
+
+------------------------------------------
+
+[Rock]
+
+Future Pokemon: Stonjourner (RT/RS, RT/MB), Stakataka (RT/MB, SD/MB, SD/RS), Kleavor (SD/RS,RT,RB,SE & Shadow), Glimmora (RT,SD/AP,RS,PG,RT,RB,SE), Iron Thorns (RT/RT,RS,SE,RB,PG)
+
+Future shadows: Rhyperior, Rampardos, Gigalith, Terrakion //Archeops
+
+Future megas: Mega Tyranitar, Mega Diancie (RT/RS)
+
+Better regular moves: Tyranitar (Rock Slide, RT/RS, & Shadow/Mega), Rhyperior (Rollout and/or Meteor Beam, & Shadow), Archeops (Rock Throw, Rock Slide and/or Meteor Beam), Aerodactyl (Meteor Beam, & Shadow/Mega), Mega Diancie (RT/MB), Nihilego (Meteor Beam), Hisuian Arcanine (Rock Throw)
+
+* Ignored a few from Gigalith article: Omastar (Meteor Beam, Rollout/MB, & Shadow), Kabutops (Rollout/Meteor Beam, & Shadow), Armaldo (Smack Down/Meteor Beam, & Shadow), Golem (Rock Slide), Lycanroc Midday (Rock Slide)
+
+Signature moves: Rampardos (Head Smash, & Shadow), Mega Diancie, Lycanroc, Kleavor (& Shadow)
+* Use Meteor Beam and Rock Wrecker to compare
+
+"Stealth Rock" fast move: Nihilego (also with Meteor Beam)
+* Use Rock Throw and Smack Down to compare
+
+GamePress only: Kleavor (SD/RS, SD/SE, SD/MB, SR/RW, & Shadow), Glimmora (RT/RS), Iron Thorns (RT/RS, RT/SE)
+
+†

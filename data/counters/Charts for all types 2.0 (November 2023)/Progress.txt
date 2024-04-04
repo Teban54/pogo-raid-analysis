@@ -1,0 +1,5 @@
+Not started:
+Dragon, Electric, Fairy, Fighting, Fire, Flying, Grass, Ground, Ice, Poison, Psychic, Rock, Steel, Water
+
+Done:
+Bug, Dark/Ghost
