@@ -1,0 +1,56 @@
+[Fairy]
+Now: Mega Gardevoir
+
+Future Pokemon: Magearna (Lock-On,Rollout,Take Down,Charge Beam,Volt Switch,Zen Headbutt,Hidden Power/DV,DK,PR,DG), Hatterene (C/DG), Grimmsnarl (-/PR), Alcremie (C/DG), Zacian Crown (MC,Snarl,QA,FF/PR), Enamorus-I (FW/DK,DG,Mb,DV,PR), Flutter Mane (C/DG,Mb,DV,DK), Iron Valiant (Fury Cutter,Psycho Cut,Low Kick,Charge Beam,Hex,Magical Leaf,Zen Headbutt,Shadow Claw,Poison Jab/DG,Mb)
+
+Future shadows: Shadow Togekiss
+
+Future megas: Mega Mawile (FW/PR), Mega Audino, Mega Diancie (Rock Throw,Tackle/Mb)
+
+Better/alternative regular moves: Togekiss (Fairy Wind), Florges (Charm,Dazzling Gleam), Sylveon (Fairy Wind), Xerneas (Play Rough), Mega Diancie (Charm,Play Rough), Primarina (Dazzling Gleam,Play Rough), Tapu Koko (Fairy Wind), Tapu Lele (Charm/Dazzling Gleam,Play Rough)
+
+
+Better hypothetical fast moves:
+- Pokemon lacking fast moves: Diancie, Xerneas, Tapus, Magearna, Grimmsnarl, Zacian, Iron Valiant
+- Geomancy: Xerneas (signature)
+  - It, Misty Terrain and Misty Explosion are only moves for Xerneas
+- Misty Terrain (status): Xerneas, Magearna, Grimmsnarl, Zacian, Iron Valiant, (Gardevoir)
+- Misty Explosion: Diancie, Xerneas, Magearna, (Gardevoir)
+- Nature's Madness: Tapus (signature)
+  - Only move for Tapu Koko and Bulu
+- Spirit Break: Grimmsnarl (ex-signature), Iron Valiant
+
+(Other status moves)
+- Aromatic Mist: Tapu Lele
+- Crafty Shield: Magearna
+
+* Use Fairy Wind to simulate all
+
+
+Signature moves: Xerneas (Geomancy), Magearna (Fleur Cannon), Grimmsnarl (Spirit Break), Enamorus-I (Springtide Storm)
+* Ignored (no good charged move options, fast move already examined above)
+
+GamePress only: Enamorus-I (FW/PR,Mb), Flutter Mane (C/DG,Mb), Iron Valiant (FW/DG,Mb)
+
+
+
+[Psychic]
+Now: Mega Gardevoir
+
+Future Pokemon: Ultra Necrozma (C/Pc,PC/FS), Necrozma DW/DM (C/Pc,PC/FS), Necrozma (C/Pc), Calyrex Shadow Rider (C/Pc), Darmanitan Zen (skipped because no fast move), Hatterene (C/Pc), Armarouge (-/Ps,Pb,Pc: skipped)
+
+Future shadows: Shadow Espeon
+
+Future megas: Mega Mewtwo Y, Mega Gallade, Mega Medicham, Mega Metagross
+
+Better regular moves: Deoxys N/A (Psychic), Galarian Articuno (Psychic), Tapu Lele (Psychic), Azelf (Psychic), Meloetta Aria (Psychic), Darmanitan Zen (Extrasensory)
+
+Signature moves: Deoxys N/A (improved Psycho Boost), Hoopa Confined, Necrozma forms, Hatterene, Armarouge
+* Use Psystrike to compare
+
+GamePress only: 
+
+
+
+
+†

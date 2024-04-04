@@ -1,0 +1,23 @@
+[Steel]
+Now: Melmetal (DIB)
+
+Future Pokemon: Necrozma Dusk Mane (MC/IH,GB,FC -> MC/IH), Magearna (VS,LO/IH,HS,FC,GB -> LO/HS), Zacian Crown (MC/IH), Zamazenta Crown (MC/IH), Duraludon (MC/FC), Aegislash Blade (GP only, no fast move), Origin Dialga (GP only), Kingambit (MC/IH,FC -> MC/IH) (GP only), Iron Treads (-/IH,HS,FC) (GP only), Hisuian Goodra (IT/IH,HS,FC) (GP only)
+
+Future shadows: Shadow Dialga, Shadow Excadrill, Shadow Genesect (GP only)
+
+Future megas: Meta Metagross, Mega Lucario, Mega Mawile (ignored because no fast move and bad stats)
+
+Better regular moves: Lucario (MM) (Shadow/Mega), Solgaleo (MC/IH), Heatran (MC/IH)
+
+Signature moves: Solgaleo/DM Necrozma, Gholdengo (no fast move), Klinklang (no fast move), Aegislash (no fast move, GP only), Revavroom (no fast move, GP only)
+* Use DIB, MM and Doom Desire
+* Do Gholdengo and Solgaleo/DMN only
+
+Meteor Mash clone what-if: Aggron (Shadow/Mega), Solgaleo, Necrozma Dusk Mane, Genesect, Scizor (Shadow/Mega), Dialga, Excadrill, Melmetal, Kartana (with RL and PC)
+
+Fast move what-if: Melmetal, Gholdengo
+* REQUIRES Steel Beam (Gholdengo) or Iron Defense to be a fast move
+* Unlikely, since Steel Beam has debuff effects, and Iron Defense is status (raises defense)
+
+GamePress only: 
+
