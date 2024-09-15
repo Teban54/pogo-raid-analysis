@@ -6,7 +6,7 @@ Parameters.
 # ----------------- Input/Output -----------------
 
 
-POKEBATTLER_SERVER = "https://fight-beta.pokebattler.com/"  # End with /
+POKEBATTLER_SERVER = "https://fight.pokebattler.com/"  # End with /
 JSON_DATA_PATH = "data/json/"
 COUNTERS_DATA_PATH = "data/counters/"
 OUTPUTS_DATA_PATH = "data/outputs/"
